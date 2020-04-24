@@ -1,7 +1,7 @@
 # April
 
 ### 1. 프로젝트명
-    - Groupware
+    - April Groupware
    
     
 ### 2. 팀원 / 팀장
@@ -21,7 +21,10 @@
 
 ### 4. WBS
 ![April_WBS](https://github.com/HYKim8/April/blob/master/aprilPrj/src/main/webapp/WEB-INF/doc/April_WBS.png "April_WBS")
+
 ### 5. 개발아키텍쳐 : MVC
+![April_WBS](https://github.com/HYKim8/April/blob/master/aprilPrj/src/main/webapp/WEB-INF/doc/April_MVC.png "April_MVC")
+
 ### 6. 개발 목록
 ### 7. 단위테스트
 ### 8. 통합테스트
