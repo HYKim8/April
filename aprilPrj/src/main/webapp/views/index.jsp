@@ -12,7 +12,7 @@
   * since 2009.01.06
   *
   * Copyright (C) 2009 by KandJang  All right reserved.
-  */
+  *
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
