@@ -34,7 +34,7 @@ import com.april.groupware.attendance.service.UserUpdateVO;
 import com.april.groupware.cmn.DTO;
 
 /**
- * @author JIEUN
+ * @author JIEUN 
  *
  */
 @Repository

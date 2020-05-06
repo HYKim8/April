@@ -21,7 +21,7 @@ package com.april.groupware.attendance.service;
 import com.april.groupware.cmn.DTO;
 
 /**
- * @author JIEUN
+ * @author JIEUN 
  *
  */
 public class UserUpdateVO extends DTO {

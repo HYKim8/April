@@ -219,7 +219,7 @@ public class ReserveDaoImple implements ReserveDao {
 		//Query(SQL) 수행
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("SELECT rsv_no,    \n");
+		sb.append("SELECT rsv_no,    \n"); 
 		sb.append("    rsv_day,      \n");
 		sb.append("    rsv_st_time,  \n");
 		sb.append("    rsv_end_time, \n");

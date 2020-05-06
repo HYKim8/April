@@ -14,7 +14,7 @@ import com.april.groupware.cmn.DTO;
 public interface UserDao {
 	/**
 	 * 
-	 * Method Name:doInsert
+	 * Method Name:doInsert 
 	 * 작성일: 2020. 5. 2.
 	 * 작성자: JIEUN
 	 * 설명:

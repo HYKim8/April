@@ -25,7 +25,7 @@ import com.april.groupware.cmn.DTO;
  *
  */
 public class ReservationVO extends DTO {
-	/**예약 번호*/
+	/**예약 번호*/ 
 	private String rsvNo;
 	/**예약일*/
 	private String rsvDay;

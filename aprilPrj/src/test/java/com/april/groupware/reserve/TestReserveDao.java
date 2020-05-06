@@ -41,7 +41,7 @@ import com.april.groupware.reserve.service.ReservationVO;
 import com.april.groupware.reserve.service.ReserveDao;
 
 /**
- * @author JIEUN
+ * @author JIEUN 
  *
  */
 @WebAppConfiguration
