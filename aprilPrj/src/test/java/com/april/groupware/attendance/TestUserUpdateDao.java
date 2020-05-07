@@ -89,7 +89,7 @@ public class TestUserUpdateDao {
 		
 		int flag = 0;
 		
-		user01.setUserPassword("123");
+		user01.setPassword("123");
 		flag = dao.doUpdate(user01);
 	}
 	

@@ -26,23 +26,23 @@ import com.april.groupware.cmn.DTO;
  */
 public class UserUpdateVO extends DTO {
 	/**아이디*/
-	private String userId;
+	private String id;
 	/**비밀번호*/
-	private String userPassword;
+	private String password;
 	/**부서명*/
-	private String deptName;
+	private String deptNm;
 	/**부서코드*/
-	private String deptCode;
+	private String deptCd;
 	/**상위 부서코드*/
-	private String parentDeptCode;
+	private String parentDeptCd;
 	/**권한*/
-	private String authority;
+	private String auth;
 	/**이름*/
-	private String userName;
+	private String name;
 	/**직급*/
 	private String position;
 	/**휴대폰 번호*/
-	private String cellPhone;
+	private String mobile;
 	/**이메일 주소*/
 	private String email;
 	/**주소*/
@@ -50,7 +50,7 @@ public class UserUpdateVO extends DTO {
 	/**입사일*/
 	private String hiredate;
 	/**생년월일*/
-	private String birthday;
+	private String birth;
 	/**휴가일수*/
 	private String vacationCnt;
 	/**병역*/
@@ -69,9 +69,9 @@ public class UserUpdateVO extends DTO {
 	private String ext;
 	/**사진 확장자*/
 	private String fileSize;
-	/**등록자*/
+	/**작성자*/
 	private String regId;
-	/**등록일*/
+	/**작성일*/
 	private String regDate;
 	/**수정자*/
 	private String modId;
@@ -82,25 +82,24 @@ public class UserUpdateVO extends DTO {
 		
 	}
 
-	public UserUpdateVO(String userId, String userPassword, String deptName, String deptCode, String parentDeptCode,
-			String authority, String userName, String position, String cellPhone, String email, String address,
-			String hiredate, String birthday, String vacationCnt, String militaryYN, String dspsnYN, String grade,
-			String orgFileName, String modFileName, String imgPath, String ext, String fileSize, String regId,
-			String regDate, String modId, String modDate) {
+	public UserUpdateVO(String id, String password, String deptNm, String deptCd, String parentDeptCd, String auth,
+			String name, String position, String mobile, String email, String address, String hiredate, String birth,
+			String vacationCnt, String militaryYN, String dspsnYN, String grade, String orgFileName, String modFileName,
+			String imgPath, String ext, String fileSize, String regId, String regDate, String modId, String modDate) {
 		super();
-		this.userId = userId;
-		this.userPassword = userPassword;
-		this.deptName = deptName;
-		this.deptCode = deptCode;
-		this.parentDeptCode = parentDeptCode;
-		this.authority = authority;
-		this.userName = userName;
+		this.id = id;
+		this.password = password;
+		this.deptNm = deptNm;
+		this.deptCd = deptCd;
+		this.parentDeptCd = parentDeptCd;
+		this.auth = auth;
+		this.name = name;
 		this.position = position;
-		this.cellPhone = cellPhone;
+		this.mobile = mobile;
 		this.email = email;
 		this.address = address;
 		this.hiredate = hiredate;
-		this.birthday = birthday;
+		this.birth = birth;
 		this.vacationCnt = vacationCnt;
 		this.militaryYN = militaryYN;
 		this.dspsnYN = dspsnYN;
@@ -116,60 +115,60 @@ public class UserUpdateVO extends DTO {
 		this.modDate = modDate;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getId() {
+		return id;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getUserPassword() {
-		return userPassword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getDeptName() {
-		return deptName;
+	public String getDeptNm() {
+		return deptNm;
 	}
 
-	public void setDeptName(String deptName) {
-		this.deptName = deptName;
+	public void setDeptNm(String deptNm) {
+		this.deptNm = deptNm;
 	}
 
-	public String getDeptCode() {
-		return deptCode;
+	public String getDeptCd() {
+		return deptCd;
 	}
 
-	public void setDeptCode(String deptCode) {
-		this.deptCode = deptCode;
+	public void setDeptCd(String deptCd) {
+		this.deptCd = deptCd;
 	}
 
-	public String getParentDeptCode() {
-		return parentDeptCode;
+	public String getParentDeptCd() {
+		return parentDeptCd;
 	}
 
-	public void setParentDeptCode(String parentDeptCode) {
-		this.parentDeptCode = parentDeptCode;
+	public void setParentDeptCd(String parentDeptCd) {
+		this.parentDeptCd = parentDeptCd;
 	}
 
-	public String getAuthority() {
-		return authority;
+	public String getAuth() {
+		return auth;
 	}
 
-	public void setAuthority(String authority) {
-		this.authority = authority;
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getName() {
+		return name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getPosition() {
@@ -180,12 +179,12 @@ public class UserUpdateVO extends DTO {
 		this.position = position;
 	}
 
-	public String getCellPhone() {
-		return cellPhone;
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setCellPhone(String cellPhone) {
-		this.cellPhone = cellPhone;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
 	public String getEmail() {
@@ -212,12 +211,12 @@ public class UserUpdateVO extends DTO {
 		this.hiredate = hiredate;
 	}
 
-	public String getBirthday() {
-		return birthday;
+	public String getBirth() {
+		return birth;
 	}
 
-	public void setBirthday(String birthday) {
-		this.birthday = birthday;
+	public void setBirth(String birth) {
+		this.birth = birth;
 	}
 
 	public String getVacationCnt() {
@@ -326,14 +325,13 @@ public class UserUpdateVO extends DTO {
 
 	@Override
 	public String toString() {
-		return "UserUpdateVO [userId=" + userId + ", userPassword=" + userPassword + ", deptName=" + deptName
-				+ ", deptCode=" + deptCode + ", parentDeptCode=" + parentDeptCode + ", authority=" + authority
-				+ ", userName=" + userName + ", position=" + position + ", cellPhone=" + cellPhone + ", email=" + email
-				+ ", address=" + address + ", hiredate=" + hiredate + ", birthday=" + birthday + ", vacationCnt="
-				+ vacationCnt + ", militaryYN=" + militaryYN + ", dspsnYN=" + dspsnYN + ", grade=" + grade
-				+ ", orgFileName=" + orgFileName + ", modFileName=" + modFileName + ", imgPath=" + imgPath + ", ext="
-				+ ext + ", fileSize=" + fileSize + ", regId=" + regId + ", regDate=" + regDate + ", modId=" + modId
-				+ ", modDate=" + modDate + ", toString()=" + super.toString() + "]";
+		return "UserUpdateVO [id=" + id + ", password=" + password + ", deptNm=" + deptNm + ", deptCd=" + deptCd
+				+ ", parentDeptCd=" + parentDeptCd + ", auth=" + auth + ", name=" + name + ", position=" + position
+				+ ", mobile=" + mobile + ", email=" + email + ", address=" + address + ", hiredate=" + hiredate
+				+ ", birth=" + birth + ", vacationCnt=" + vacationCnt + ", militaryYN=" + militaryYN + ", dspsnYN="
+				+ dspsnYN + ", grade=" + grade + ", orgFileName=" + orgFileName + ", modFileName=" + modFileName
+				+ ", imgPath=" + imgPath + ", ext=" + ext + ", fileSize=" + fileSize + ", regId=" + regId + ", regDate="
+				+ regDate + ", modId=" + modId + ", modDate=" + modDate + ", toString()=" + super.toString() + "]";
 	}
 
 }

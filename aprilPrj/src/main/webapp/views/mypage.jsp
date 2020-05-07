@@ -491,7 +491,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">이름 <span class="text-danger"></span>
+                                            <label class="col-lg-4 col-form-label" for="val-username">이름 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="val-username" name="val-username" placeholder="">
@@ -557,6 +557,51 @@
                                             <label class="col-lg-4 col-form-label" for="">주소 <span class=""></span>
                                             </label>
                                             <div class="col-lg-6">
+                                                <input type="text" class="form-control" id="" name="" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="">최종 학력 <span class=""></span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <select class="form-control" id="val-skill" name="val-skill">
+                                                    <option value="고졸">고졸</option>
+                                                    <option value="전문대">전문학사</option>
+                                                    <option value="학사">학사</option>
+                                                    <option value="석사">석사</option>
+                                                    <option value="박사">박사</option>
+                                                </select>
+                                                <input type="text" class="form-control" id="" name="" placeholder="학교명">
+                                                <input type="text" class="form-control" id="" name="" placeholder="계열 및 전공학과명">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="">병역 <span class=""></span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                            	<label>
+                                            		<input type="radio" name="military" value="1">
+                                            		예
+                                            	</label>
+                                            	<label>
+                                            		<input type="radio" name="military" value="0">
+                                            		아니요
+                                            	</label>
+                                                <input type="text" class="form-control" id="" name="" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="">장애 여부<span class=""></span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                            	<label>
+                                            		<input type="radio" name="disabled" value="1">
+                                            		예
+                                            	</label>
+                                            	<label>
+                                            		<input type="radio" name="disabled" value="0">
+                                            		아니요
+                                            	</label>
                                                 <input type="text" class="form-control" id="" name="" placeholder="">
                                             </div>
                                         </div>

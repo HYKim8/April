@@ -32,7 +32,7 @@
 
 </head>
 
-<body>
+<body onload="realtimeClock()">
 
     <!--*******************
         Preloader start
@@ -434,9 +434,24 @@
                                 </div>
                                 <div class="row">
                                     <div class="text-center col-lg-2 mt-3">
+                                    
+                                    	<!-- 시계 -->
                                     	<table class="table table-bordered verticle-middle">
-                                    		시간
+                                    	<!-- <div class="col-lg-2"> -->
+                                    		<tr>
+	                                    		<td>
+		                                    		<form name="rtcForm">
+														<h5>
+															<input type="text" name="dayInput" class="text-center" size="20" readonly="readonly" style="border:none" /><br/>
+															<input type="text" name="timeInput" class="text-center" size="20" readonly="readonly" style="border:none" />
+														</h5>
+													</form>
+												</td>
+											</tr>
+										<!-- </div> -->
                                     	</table>
+                                    	<!-- //시계 -->
+                                    	
                                         <!-- <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> Create New</a> -->
                                     	<button type="button" class="btn mb-1 btn-outline-primary">출근하기</button><br/>
                                     	<button type="button" class="btn mb-1 btn-outline-primary">퇴근하기</button><br/>
@@ -574,7 +589,46 @@
     <script src="./plugins/moment/moment.min.js"></script>
     <script src="./plugins/fullcalendar/js/fullcalendar.min.js"></script>
     <script src="./js/plugins-init/fullcalendar-init.js"></script>
+	<script type="text/javascript">
+		function realtimeClock() {
+		  document.rtcForm.dayInput.value = getDayStamp();
+		  document.rtcForm.timeInput.value = getTimeStamp();
+		  setTimeout("realtimeClock()", 1000);
+		}
+		
+		function getDayStamp() { // 24시간제
+		  var d = new Date();
+		
+		  var s =
+		    leadingZeros(d.getFullYear(), 4) + '년 ' +
+		    leadingZeros(d.getMonth() + 1, 2) + '월  ' +
+		    leadingZeros(d.getDate(), 2) + '일 ';
 
+		  return s;
+		}
+
+		function getTimeStamp() { // 24시간제
+		  var d = new Date();
+			
+		  var s =
+		    leadingZeros(d.getHours(), 2) + '시 ' +
+		    leadingZeros(d.getMinutes(), 2) + '분 ' +
+		    leadingZeros(d.getSeconds(), 2) + '초';
+
+		  return s;
+		}
+		
+		function leadingZeros(n, digits) {
+		  var zero = '';
+		  n = n.toString();
+		
+		  if (n.length < digits) {
+		    for (i = 0; i < digits - n.length; i++)
+		      zero += '0';
+		  }
+		  return zero + n;
+		}
+	</script>
 </body>
 
 </html>

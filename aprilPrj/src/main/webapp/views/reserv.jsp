@@ -33,7 +33,6 @@
 </head>
 
 <body>
-
     <!--*******************
         Preloader start
     ********************-->
@@ -554,5 +553,4 @@
     <script src="./js/plugins-init/fullcalendar-init.js"></script>
 
 </body>
-
 </html>

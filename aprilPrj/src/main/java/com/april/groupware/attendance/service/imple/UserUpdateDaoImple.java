@@ -48,21 +48,21 @@ public class UserUpdateDaoImple implements UserDao {
 		public UserUpdateVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			UserUpdateVO outData = new UserUpdateVO();
 
-			outData.setUserId(rs.getString("id"));
-			outData.setUserPassword(rs.getString("password"));
-			outData.setDeptName(rs.getString("dept_nm"));
-			outData.setDeptCode(rs.getString("dept_cd"));
-			outData.setParentDeptCode(rs.getString("parent_dept_cd"));
+			outData.setId(rs.getString("id"));
+			outData.setPassword(rs.getString("password"));
+			outData.setDeptNm(rs.getString("dept_nm"));
+			outData.setDeptCd(rs.getString("dept_cd"));
+			outData.setParentDeptCd(rs.getString("parent_dept_cd"));
 			
-			outData.setAuthority(rs.getString("auth"));
-			outData.setUserName(rs.getString("name"));
+			outData.setAuth(rs.getString("auth"));
+			outData.setName(rs.getString("name"));
 			outData.setPosition(rs.getString("position"));
-			outData.setCellPhone(rs.getString("mobile"));
+			outData.setMobile(rs.getString("mobile"));
 			outData.setEmail(rs.getString("email"));
 			
 			outData.setAddress(rs.getString("address"));
 			outData.setHiredate(rs.getString("hire_date"));
-			outData.setBirthday(rs.getString("birth"));
+			outData.setBirth(rs.getString("birth"));
 			outData.setVacationCnt(rs.getString("vacation_cnt"));
 			outData.setMilitaryYN(rs.getString("military_yn"));
 			
@@ -125,8 +125,8 @@ public class UserUpdateDaoImple implements UserDao {
 		LOG.debug("===============================");
 		
 		//inVO.getUserId(), 
-		Object[] args = {inVO.getUserPassword(), 
-				inVO.getCellPhone(), 
+		Object[] args = {inVO.getPassword(), 
+				inVO.getMobile(), 
 				inVO.getEmail(), 
 				inVO.getAddress(), 
 				inVO.getMilitaryYN(), 
@@ -137,8 +137,8 @@ public class UserUpdateDaoImple implements UserDao {
 				inVO.getImgPath(), 
 				inVO.getExt(),
 				inVO.getFileSize(),
-				inVO.getUserId(), 
-				inVO.getUserId()};
+				inVO.getId(), 
+				inVO.getId()};
 		
 		flag = this.jdbcTemplete.update(sb.toString(), args);
 		
@@ -202,10 +202,10 @@ public class UserUpdateDaoImple implements UserDao {
 		LOG.debug("===============================");
 		LOG.debug("=Query(SQL)= : \n"+sb.toString());
 		LOG.debug("===============================");
-		LOG.debug("=Param= : "+inVO.getUserId());
+		LOG.debug("=Param= : "+inVO.getId());
 		LOG.debug("===============================");
 		
-		Object[] args = {inVO.getUserId()};
+		Object[] args = {inVO.getId()};
 		outVO = this.jdbcTemplete.queryForObject(sb.toString(), args, rowMapper);
 		LOG.debug("===============================");
 		LOG.debug("=outVO= : "+outVO);

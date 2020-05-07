@@ -106,7 +106,6 @@ public class ReserveDaoImple implements ReserveDao {
 		LOG.debug("=Query(SQL)= : \n"+sb.toString());
 		LOG.debug("===============================");
 		
-		//inVO.getUserId(), 
 		Object[] args = {inVO.getRsvNo(), 
 				inVO.getRsvDay(), 
 				inVO.getRsvStartTime(), 
@@ -273,11 +272,11 @@ public class ReserveDaoImple implements ReserveDao {
 		StringBuilder whereSb = new StringBuilder();
 		
 		//날짜 검색만 있는 경우
-		if(inVO != null && !(inVO.getSearchStartDate().equals("") && inVO.getSearchEndDate().equals(""))) {
+		if(inVO != null && (!inVO.getSearchStartDate().equals("") && !inVO.getSearchEndDate().equals("")) && inVO.getSearchDiv().equals("")) {
 			whereSb.append("WHERE ? <= t1.rsv_day \n");
 			whereSb.append("AND t1.rsv_day <= ? \n");
 		//검색 조건만 있는 경우
-		} else if(inVO != null && !inVO.getSearchDiv().equals("")) {
+		} else if(inVO != null && !inVO.getSearchDiv().equals("") && (inVO.getSearchStartDate().equals("") && inVO.getSearchEndDate().equals(""))) {
 			if(inVO.getSearchDiv().equals("10")) {
 				whereSb.append("WHERE UPPER(t1.reg_id) LIKE UPPER('%'||?||'%') \n");
 //				whereSb.append("WHERE t1.reg_id LIKE '%'||?||'%' \n");
@@ -339,8 +338,8 @@ public class ReserveDaoImple implements ReserveDao {
 		//Param setting
 		List<Object> listArgs = new ArrayList<Object>();
 		
-		//검색 조건(getSearchDiv)이 있는 경우
-		if(inVO != null & !inVO.getSearchDiv().equals("")) {
+		//검색 조건(getSearchDiv)만 있는 경우
+		if(inVO != null && !inVO.getSearchDiv().equals("") && (inVO.getSearchStartDate().equals("") && inVO.getSearchEndDate().equals(""))) {
 			listArgs.add(inVO.getSearchWord());
 			listArgs.add(inVO.getPageSize());
 			listArgs.add(inVO.getPageNum());
@@ -349,7 +348,7 @@ public class ReserveDaoImple implements ReserveDao {
 			listArgs.add(inVO.getPageNum());
 			listArgs.add(inVO.getSearchWord());
 		//날짜 검색만 있는 경우
-		} else if(inVO != null && !(inVO.getSearchStartDate().equals("") && inVO.getSearchEndDate().equals(""))) {
+		} else if(inVO != null && (!inVO.getSearchStartDate().equals("") && !inVO.getSearchEndDate().equals("")) && inVO.getSearchDiv().equals("")) {
 			listArgs.add(inVO.getSearchStartDate());
 			listArgs.add(inVO.getSearchEndDate());
 			listArgs.add(inVO.getPageSize());
@@ -360,7 +359,7 @@ public class ReserveDaoImple implements ReserveDao {
 			listArgs.add(inVO.getSearchStartDate());
 			listArgs.add(inVO.getSearchEndDate());
 		//날짜 검색과 검색 조건이 있는 경우
-		} else if(inVO != null & !inVO.getSearchDiv().equals("") && !(inVO.getSearchStartDate().equals("") && inVO.getSearchEndDate().equals(""))) {
+		} else if(inVO != null && !inVO.getSearchDiv().equals("") && !(inVO.getSearchStartDate().equals("") && inVO.getSearchEndDate().equals(""))) {
 			listArgs.add(inVO.getSearchStartDate());
 			listArgs.add(inVO.getSearchEndDate());
 			listArgs.add(inVO.getSearchWord());

@@ -16,7 +16,7 @@
  *  Copyright (C) by April All right reserved.
  * </pre>
  */
-package com.april.groupware.reserve;
+package com.april.groupware.attendance;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -36,9 +36,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.april.groupware.admin.service.UserDao;
+import com.april.groupware.attendance.service.AttendanceVO;
 import com.april.groupware.cmn.SearchVO;
 import com.april.groupware.reserve.service.ReservationVO;
-import com.april.groupware.reserve.service.ReserveDao;
 
 /**
  * @author JIEUN 
@@ -47,16 +48,16 @@ import com.april.groupware.reserve.service.ReserveDao;
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-public class TestReserveDao {
-	private final Logger LOG = LoggerFactory.getLogger(TestReserveDao.class);
+public class TestAttendanceDao {
+	private final Logger LOG = LoggerFactory.getLogger(TestAttendanceDao.class);
 	
 	@Autowired
 	WebApplicationContext webApplicationContext;
 	
 	@Autowired
-	ReserveDao dao;
+	UserDao dao;
 	
-	ReservationVO user01;
+	AttendanceVO user01;
 	
 	/**
 	 * Method Name:setUp
@@ -71,7 +72,7 @@ public class TestReserveDao {
 		LOG.debug("WebApplicationContext : "+webApplicationContext);
 		LOG.debug("======================");
 		
-		user01 = new ReservationVO("1","20200428","09","11","1",
+		user01 = new AttendanceVO("1","20200428","09","11","1",
 				"이지은","회의실 예약입니다","0","test", "",
 				"test", "");
 	}
@@ -103,7 +104,7 @@ public class TestReserveDao {
 		
 		int flag = 0;
 		
-		user01.setRsvDay("200401");
+		user01.setLeaveYN("1");;
 		flag = dao.doUpdate(user01);
 	}
 	
