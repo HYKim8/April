@@ -36,9 +36,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.april.groupware.admin.service.UserDao;
 import com.april.groupware.attendance.service.AttendanceVO;
 import com.april.groupware.cmn.SearchVO;
+import com.april.groupware.org.service.UserDao;
 import com.april.groupware.reserve.service.ReservationVO;
 
 /**

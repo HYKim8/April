@@ -29,9 +29,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.april.groupware.admin.service.UserDao;
 import com.april.groupware.attendance.service.UserUpdateVO;
 import com.april.groupware.cmn.DTO;
+import com.april.groupware.org.service.UserDao;
 
 /**
  * @author JIEUN 
