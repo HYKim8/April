@@ -263,8 +263,8 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                          <ul aria-expanded="false">
-                            <li><a href="./index.jsp">Admin page</a></li>
-                            <li><a href="./org_mng.jsp">org crud</a></li>
+                            <li><a href="./admin_dashboard.jsp">Admin page</a></li>
+                            <li><a href="./admin_organization.jsp">org data</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -921,96 +921,80 @@
                                 <div class="form-validation">
                                     <form class="form-valide" action="#" method="post">
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-username">Username <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" >아이디 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-username" name="val-username" placeholder="Enter a username..">
+                                                <input type="text" class="form-control" id="id" name="id" placeholder="아이디 입력하세요">
+                                            </div>
+                                        </div>
+                                       
+                                        <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" >패스워드 <span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="password" class="form-control" id="password" name="password" placeholder="패스워드 입력하세요">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-email">Email <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" >패스워드 확인 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-email" name="val-email" placeholder="Your valid email..">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-password">Password <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="val-password" name="val-password" placeholder="Choose a safe one..">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-confirm-password">Confirm Password <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="val-confirm-password" name="val-confirm-password" placeholder="..and confirm it!">
+                                                <input type="password" class="form-control" id="password_check" name="password_check" placeholder="패스워드 확인하세요">
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-skill">Best Skill <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label">부서명 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <select class="form-control" id="val-skill" name="val-skill">
-                                                    <option value="">Please select</option>
-                                                    <option value="html">HTML</option>
-                                                    <option value="css">CSS</option>
-                                                    <option value="javascript">JavaScript</option>
-                                                    <option value="angular">Angular</option>
-                                                    <option value="angular">React</option>
-                                                    <option value="vuejs">Vue.js</option>
-                                                    <option value="ruby">Ruby</option>
-                                                    <option value="php">PHP</option>
-                                                    <option value="asp">ASP.NET</option>
-                                                    <option value="python">Python</option>
-                                                    <option value="mysql">MySQL</option>
+                                                <select class="form-control" id="dept_nm" name="dept_nm">
+                                                    <option value="">부서 선택</option>
+                                                    <option value="00001">경영지원</option>
+                                                    <option value="00002">서비스지원본부</option>
+                                                    <option value="00003">연구소</option>
+                                                    <option value="00004">컨설팅사업본부</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-currency">Currency <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label">권한 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-currency" name="val-currency" placeholder="$21.60">
+                                                <select class="form-control" id="auth" name="auth">
+                                                    <option value="">권한 선택</option>
+                                                    <option value="1">사용자</option>
+                                                    <option value="9">결재자</option>
+                                                </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-website">Website <span class="text-danger">*</span>
+                                        
+                                        
+                                         <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" >직급 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-website" name="val-website" placeholder="http://example.com">
+                                                <select class="form-control" id="position" name="position">
+                                                    <option value="">직급 선택</option>
+                                                    <option value="1">사원</option>
+                                                    <option value="2">과장</option>
+                                                    <option value="2">차장</option>
+                                                    <option value="3">부장</option>
+                                                    <option value="4">이사</option>
+                                                    <option value="5">대표이사</option>
+                                                </select>
                                             </div>
                                         </div>
+                                        
+                                        
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-phoneus">Phone (US) <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="val-currency">입사일 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-phoneus" name="val-phoneus" placeholder="212-999-0000">
+                                                <input type="text" class="form-control" id="hrie_date" name="hrie_date" placeholder="ex) 20200508">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-digits">Digits <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-digits" name="val-digits" placeholder="5">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-number">Number <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-number" name="val-number" placeholder="5.0">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-range">Range [1, 5] <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="val-range" name="val-range" placeholder="4">
-                                            </div>
-                                        </div>
+                                   
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label"><a href="#">Terms &amp; Conditions</a>  <span class="text-danger">*</span>
                                             </label>

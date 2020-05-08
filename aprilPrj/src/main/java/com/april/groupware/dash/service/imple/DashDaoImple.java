@@ -16,7 +16,7 @@
  *  Copyright (C) by April All right reserved.
  * </pre>
  */
-package com.april.groupware.attendance.service.imple;
+package com.april.groupware.dash.service.imple;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,24 +29,25 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.april.groupware.attendance.service.UserDao;
-import com.april.groupware.attendance.service.UserUpdateVO;
 import com.april.groupware.cmn.DTO;
+import com.april.groupware.dash.service.DashDao;
+import com.april.groupware.org.service.OrgDao;
+import com.april.groupware.org.service.OrgVO;
 
 /**
- * @author JIEUN 
+ * @author JUHEE 
  *
  */
 @Repository
-public class UserUpdateDaoImple implements UserDao {
-	private final Logger LOG = LoggerFactory.getLogger(UserUpdateDaoImple.class); //LOG
+public class DashDaoImple implements DashDao {
+	private final Logger LOG = LoggerFactory.getLogger(DashDaoImple.class); //LOG
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplete; //JdbcTemplate
 	
-	private RowMapper<UserUpdateVO> rowMapper = new RowMapper<UserUpdateVO>() {
-		public UserUpdateVO mapRow(ResultSet rs, int rowNum) throws SQLException {
-			UserUpdateVO outData = new UserUpdateVO();
+	private RowMapper<OrgVO> rowMapper = new RowMapper<OrgVO>() {
+		public OrgVO mapRow(ResultSet rs, int rowNum) throws SQLException {
+			OrgVO outData = new OrgVO();
 
 			outData.setId(rs.getString("id"));
 			outData.setPassword(rs.getString("password"));
@@ -86,20 +87,22 @@ public class UserUpdateDaoImple implements UserDao {
 		}
 	};
 	
-	public UserUpdateDaoImple() {
+	public DashDaoImple() {
 		
 	}
 	
 	@Override
 	public int doInsert(DTO dto) {
 		int flag = 0;
+		
+		
 		return 0;
 	}
 
 	@Override
 	public int doUpdate(DTO dto) {
 		int flag = 0;
-		UserUpdateVO inVO = (UserUpdateVO) dto;
+		OrgVO inVO = (OrgVO) dto;
 		
 		//Query(SQL) 수행
 		StringBuilder sb = new StringBuilder();
@@ -161,8 +164,8 @@ public class UserUpdateDaoImple implements UserDao {
 	@Override
 	public DTO doSelectOne(DTO dto) {
 		int flag = 0;
-		UserUpdateVO inVO = (UserUpdateVO) dto; //파라미터
-		UserUpdateVO outVO = null; //리턴 값
+		OrgVO inVO = (OrgVO) dto; //파라미터
+		OrgVO outVO = null; //리턴 값
 		
 		//Query(SQL) 수행
 		StringBuilder sb = new StringBuilder();

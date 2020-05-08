@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.april.groupware.org.service;
+package com.april.groupware.attendance.service;
 
 import java.util.List;
 

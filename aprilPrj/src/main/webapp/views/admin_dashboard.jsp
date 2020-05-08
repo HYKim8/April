@@ -63,7 +63,7 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.jsp">
+                <a href="admin_dashboard.jsp">
                     <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
@@ -273,8 +273,8 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./index.jsp">Admin page</a></li>
-                            <li><a href="./org_mng.jsp">org crud</a></li>
+                            <li><a href="./admin_dashboard.jsp">Admin page</a></li>
+                            <li><a href="./admin_organization.jsp">org data</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">

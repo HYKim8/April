@@ -16,7 +16,8 @@
  *  Copyright (C) by April All right reserved.
  * </pre>
  */
-package com.april.groupware.attendance;
+
+package com.april.groupware.org;
 
 import org.junit.After;
 import org.junit.Before;
@@ -30,32 +31,32 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
-
-import com.april.groupware.attendance.service.UserDao;
-import com.april.groupware.attendance.service.UserUpdateVO;
-
+import com.april.groupware.org.service.OrgDao;
+import com.april.groupware.org.service.OrgVO;
 /**
- * @author JIEUN 
+ * @author JUHEE
  *
  */
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"file:src/main/webapp/WEB-INF/spring/root-context.xml", "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
-public class TestUserUpdateDao {
-	private final Logger LOG = LoggerFactory.getLogger(TestUserUpdateDao.class);
+@ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/root-context.xml", 
+								    "file:src/main/webapp/WEB-INF/spring/appServlet/servlet-context.xml"})
+public class TestOrgDao {
+	private final Logger LOG = LoggerFactory.getLogger(TestOrgDao.class);
 	
 	@Autowired
 	WebApplicationContext webApplicationContext;
 	
-	@Autowired
-	UserDao dao;
+	@Autowired 
+	OrgDao dao;
 	
-	UserUpdateVO user01;
+	OrgVO user01;
 	
 	/**
 	 * Method Name:setUp
 	 * 작성일: 2020. 5. 2.
-	 * 작성자: JIEUN
+	 * 
+	 * 작성자: JUHEE
 	 * 설명:
 	 * @throws java.lang.Exception
 	 */
@@ -65,10 +66,10 @@ public class TestUserUpdateDao {
 		LOG.debug("WebApplicationContext : "+webApplicationContext);
 		LOG.debug("======================");
 		
-//		user01 = new UserUpdateVO("kimjh","1234","이름","20200202","부서명","직급","1","1","1","학력",
+//		user01 = new OrgVO("kimjh","1234","이름","20200202","부서명","직급","1","1","1","학력",
 //				"원본파일명","수정파일명","이미지경로","ext","0","email","20200202","012-345-6789","주소",
 //				"test","1234","test","1234");
-		user01 = new UserUpdateVO(
+		user01 = new OrgVO(
 				"kimjh","1234","부서명","1","1",
 				"1","이름","직급","012-345-6789","email",
 				"주소","20200202","20200202","1","1",
@@ -80,17 +81,7 @@ public class TestUserUpdateDao {
 	@Test
 	@Ignore
 	public void doUpdate() {
-		//1.삭제
-		//2.단건 입력
-		//3.단건 입력 user01 수정
-		//3.1.update 호출
-		//3.2.단건 조회 user01
-		//4.비교 : 단건 입력 user01 수정 == 단건조회 user01
-		
-		int flag = 0;
-		
-		user01.setPassword("123");
-		flag = dao.doUpdate(user01);
+
 	}
 	
 	@Test
@@ -102,7 +93,7 @@ public class TestUserUpdateDao {
 		//4.입력 data, 조회 data 비교
 		
 		//3.단건 조회
-		UserUpdateVO userVO = (UserUpdateVO) dao.doSelectOne(user01);
+		OrgVO OrgVO = (OrgVO) dao.doSelectOne(user01);
 	}
 	
 	/**
