@@ -30,6 +30,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.april.groupware.cmn.DTO;
+import com.april.groupware.login.service.LoginDao;
 import com.april.groupware.org.service.OrgDao;
 import com.april.groupware.org.service.OrgVO;
 
@@ -38,7 +39,7 @@ import com.april.groupware.org.service.OrgVO;
  *
  */
 @Repository
-public class LoginDaoImple implements OrgDao {
+public class LoginDaoImple implements LoginDao {
 	private final Logger LOG = LoggerFactory.getLogger(LoginDaoImple.class); //LOG
 	
 	@Autowired
