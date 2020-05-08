@@ -56,7 +56,7 @@ public class TestOrgDao {
 	 * Method Name:setUp
 	 * 작성일: 2020. 5. 2.
 	 * 
-	 * 작성자: JIEUN
+	 * 작성자: JUHEE
 	 * 설명:
 	 * @throws java.lang.Exception
 	 */
