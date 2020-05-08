@@ -1,5 +1,5 @@
 package com.april.groupware.org;
 
-public class AdminController {
+public class OrgController {
 	//^^*1
 }
