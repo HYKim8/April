@@ -14,7 +14,7 @@ public class UserVO extends DTO {
 	
 	
 	public UserVO() {}
-
+ 
 
 	public UserVO(String id, String name, String dept_Nm, String position) {
 		super();

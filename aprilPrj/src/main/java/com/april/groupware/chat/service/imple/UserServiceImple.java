@@ -20,7 +20,7 @@ public class UserServiceImple implements UserService {
 	@Autowired
 	private UserDao userdao;
 	
-	
+	 
 	
 	//JDBCTemplate
 	@Autowired
