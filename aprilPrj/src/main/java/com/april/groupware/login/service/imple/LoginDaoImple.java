@@ -16,7 +16,7 @@
  *  Copyright (C) by April All right reserved.
  * </pre>
  */
-package com.april.groupware.org.service.imple;
+package com.april.groupware.login.service.imple;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,8 +38,8 @@ import com.april.groupware.org.service.OrgVO;
  *
  */
 @Repository
-public class UserDaoImple implements OrgDao {
-	private final Logger LOG = LoggerFactory.getLogger(UserDaoImple.class); //LOG
+public class LoginDaoImple implements OrgDao {
+	private final Logger LOG = LoggerFactory.getLogger(LoginDaoImple.class); //LOG
 	
 	@Autowired
 	private JdbcTemplate jdbcTemplete; //JdbcTemplate
@@ -86,7 +86,7 @@ public class UserDaoImple implements OrgDao {
 		}
 	};
 	
-	public UserDaoImple() {
+	public LoginDaoImple() {
 		
 	}
 	
