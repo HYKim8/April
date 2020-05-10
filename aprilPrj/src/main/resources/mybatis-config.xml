@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <!-- 전통적인 데이터베이스 칼럼명 형태인 A_COLUMN을 CamelCase형태의 자바 프로퍼티명 형태인 aColumn으로 자동으로 매핑하도록 함 -->
+        <setting name="mapUnderscoreToCamelCase" value="false"/>
+    </settings>
+    
+    <!-- Type 별칭  : parameterType="com.sist.ehr.board.service.BoardVO"-->
+    <typeAliases>
+        <typeAlias type="com.april.groupware.nboard.service.NBoardVO" alias="NBoardVO"/>
+        <typeAlias type="com.april.groupware.cmn.SearchVO" alias="SearchVO"/>
+    </typeAliases>
+    
+    
+
+</configuration>
