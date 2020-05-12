@@ -16,18 +16,17 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<!-- mybatis -->   
-    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate"
-       destroy-method="clearCache">
-       <constructor-arg index="0" ref="sqlSessionFactoryBean"></constructor-arg>
-    </bean> 
-        
-    <!-- mybatis config파일 read : SqlSessionFactoryBean-->
-    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
-       <property name="configLocation" value="classpath:mybatis-config.xml" />
-       <property name="mapperLocations" value="classpath:mappers/**/*.xml" />
-       <property name="dataSource"  ref="dataSource"/>
-    </bean>
+<!-- mybatis -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+		<constructor-arg index="0" ref="sqlSessionFactoryBean"></constructor-arg>
+	</bean>
+
+	<!-- mybatis-config 파일 Read -->
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+		<property name="mapperLocations" value="classpath:mappers/**/*.xml"></property>
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
 	
 	<!-- JDBC Transaction/Connection -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -66,3 +65,4 @@
 	</bean>
 	
 </beans>
+
