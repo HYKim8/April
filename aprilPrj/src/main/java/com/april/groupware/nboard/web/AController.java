@@ -1,4 +1,4 @@
-package com.april.groupware.nboard;
+package com.april.groupware.nboard.web;
 
 public class AController {
 	//^^*
