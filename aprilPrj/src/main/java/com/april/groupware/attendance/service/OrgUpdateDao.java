@@ -11,7 +11,7 @@ import com.april.groupware.cmn.DTO;
  * @author SIST
  *
  */
-public interface UserDao {
+public interface OrgUpdateDao {
 	/**
 	 * 
 	 * Method Name:doInsert 
@@ -77,5 +77,7 @@ public interface UserDao {
 	 * @return
 	 */
 	public List<?> doRetrieve(DTO dto);
+
+	public void doDeleteAll();
 
 }
