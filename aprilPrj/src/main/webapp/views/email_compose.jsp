@@ -27,7 +27,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-
 </head>
 
 <body>
@@ -430,16 +429,22 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="email-left-box">
-                                <a href="email-compose.html" class="btn btn-primary btn-block">메일 쓰기</a>
-                                <a href="email-composeVacation.html" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
+                                <a href="email_compose.jsp" onclick="exitPage();" class="btn btn-primary btn-block">메일 쓰기</a>
+                                <a href="email_composeVacation.jsp" onclick="exitPage();" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="email_inbox.jsp" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 메일함</b> <span class="badge badge-primary badge-sm float-right m-t-5">198</span> </a>
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함</a>  
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-star-o font-18 align-middle mr-2"></i>Important <span class="badge badge-danger badge-sm float-right m-t-5">47</span> </a>
+                                    	<a href="email_inbox.jsp" onclick="exitPage();" class="list-group-item border-0 text-primary p-r-0">
+                                    		<i class="fa fa-inbox font-18 align-middle mr-2"></i> 
+                                    		<b>받은 메일함</b> 
+                                    		<span class="badge badge-primary badge-sm float-right m-t-5">198</span> 
+                                    	</a>
+                                        <a href="email_sentbox.jsp" onclick="exitPage();" class="list-group-item border-0 p-r-0">
+                                        	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함
+                                        </a>  
+                                        <a href="#" onclick="exitPage();" class="list-group-item border-0 p-r-0"><i class="fa fa-star-o font-18 align-middle mr-2"></i>Important <span class="badge badge-danger badge-sm float-right m-t-5">47</span> </a>
                                         <!-- 
                                         <a href="#" class="list-group-item border-0 p-r-0"><i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a>
                                          -->
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a>
+                                        <a href="#" onclick="exitPage();" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a>
                                     </div>
                                     <!-- 
                                     <h5 class="mt-5 m-b-10">카테고리</h5>
@@ -455,7 +460,7 @@
                                     <div class="toolbar" role="toolbar">
                                     	<div class="btn-group m-b-20">
 	                                        <button id="mailSend_btn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button"><i class="fa fa-paper-plane m-r-5"></i> 보내기</button>
-	                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"><i class="ti-close m-r-5 f-s-12"></i> 다시 쓰기</button>
+	                                        <button id="rewrite_btn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"><i class="ti-close m-r-5 f-s-12"></i> 다시 쓰기</button>
                                     	</div>
                                     	<!-- 
                                     	<div class="btn-group m-b-20">
@@ -490,7 +495,7 @@
                                         <form action="#">
                                             <div class="form-group">
                                             	<h5 class="m-b-20">받는 사람 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="checkMe">&nbsp;&nbsp;나에게</h5> 
-                                                <input type="text" id="recipient" value="" class="form-control bg-transparent" placeholder=" 받는 사람">
+                                                <input type="text" id="recipient" name="recipient" value="" class="form-control bg-transparent" placeholder=" 받는 사람">
                                                 <input type="hidden" id="sender" value="김민지" class="form-control bg-transparent" placeholder=" 보내는 사람">
                                                 <input type="hidden" id="senderId" value="kimmj" class="form-control bg-transparent" placeholder=" 보내는 사람ID">
                                             </div>
@@ -570,113 +575,151 @@
 
 	<script type="text/javascript">
 
+	//--전역 변수--
+	//받는 사람
+	var recipient;
+	//참조
+	var recipient_add;
+	//제목
+	var title;
+	//첨부파일
+	var fileUp;
+	//내용
+	var contents;
+	//보내는 사람(나중에 session하면 다시 코딩)
+	var sender;
+	//보내는 사람 ID
+	var senderId; 
+	//카테고리
+	var category = "mail";
+	//삭제 여부
+	var disableYn = "N";
+	//Read
+	var read = "0";
+	//--전역 변수 끝--
+	
+	//--이 화면에서 나가기 function Start
+	function exitPage(){
+		if(!confirm("이 화면에서 나가시겠습니까?")) return; 
+	}
+	//--이 화면에서 나가기 function End
+	
 	//--checkbox(나에게) 클릭시 이벤트 발생 Start
-		$("#checkMe").change(function(){
-			if($("#checkMe").is(":checked")){
-				//alert("checkbox check!");
-				$("#recipient").val("김민지");
-			}else{
-				//alert("checkbox uncheck!");
-				$("#recipient").val("");
-			}
-		});
+	$("#checkMe").change(function(){
+		if($("#checkMe").is(":checked")){
+			//alert("checkbox check!");
+			$("#recipient").val("김민지");
+		}else{
+			//alert("checkbox uncheck!");
+			$("#recipient").val("");
+		}
+	});
 	//--checkbox(나에게) 클릭시 이벤트 발생 End
+	
+	//--다시쓰기 Btn Start
+	$("#rewrite_btn").on("click",function(){
 
+		if(!confirm("다시 작성하시겠습니까?")) return;
+
+		$("#recipient").val("");
+		$("#recipient_add").val("");
+		$("#title").val("");
+		//파일은 나중에 코딩
+		//$("#fileUp").val("");
+		$("#contents").val("");
+
+		alert("초기화 되었습니다.");		
+	});	
+	//--다시쓰기 Btn End
+	
 	//--메일 보내기 Btn Start
-		$("#mailSend_btn").on("click",function(){
-			//받는 사람 
-			var recipient = $("#recipient").val().trim();
-			if(null==recipient || recipient.length<1){
-				$("#recipient").focus();
-				alert("받는 사람을 입력하세요.");
+	$("#mailSend_btn").on("click",function(){
+		//받는 사람 
+		recipient = $("#recipient").val().trim();
+		if(null==recipient || recipient.length<1){
+			$("#recipient").focus();
+			alert("받는 사람을 입력하세요.");
+			return;
+		}
+
+		//참조
+		recipient_add = $("#recipient_add").val().trim();
+		console.log("recipient_add"+recipient_add);
+		if(recipient_add !== "" || recipient_add.length>1){
+			//참조값이 있으면 ,붙이고 recipient값으로 넘겨주기
+			recipient = recipient+","+recipient_add;
+			console.log("recipient"+recipient);
+		}
+
+		//제목
+		title = $("#title").val().trim();
+		if(null==title || title.length<1){
+			if(confirm("'제목 없음'으로 보내겠습니까?")){
+				title = "제목 없음";
+			}else{
+				$("#title").focus();
 				return;
 			}
+		}
 
-			//참조
-			var recipient_add = $("#recipient_add").val().trim();
-				console.log("recipient_add"+recipient_add);
-			if(recipient_add !== "" || recipient_add.length>1){
-				//참조값이 있으면 ,붙이고 recipient값으로 넘겨주기
-				recipient = recipient+","+recipient_add;
-				console.log("recipient"+recipient);
+		//첨부파일
+		fileUp = $("#fileUp").val().trim();
+
+		//내용
+		contents = $("#contents").val();
+		if(null==contents || contents.length<1){
+			if(confirm("'내용 없음'으로 보내겠습니까?")){
+				contents = "내용 없음";
+			}else{
+				$("#contents").focus();
+				return;
 			}
+		}
 
-			//제목
-			var title = $("#title").val().trim();
-			if(null==title || title.length<1){
-				if(confirm("'제목 없음'으로 보내겠습니까?")){
-					title = "제목 없음";
+		//보내는 사람(나중에 session하면 다시 코딩)
+		sender = $("#sender").val().trim();
+		senderId = $("#senderId").val().trim();
+
+		if(false==confirm("메일을 전송하시겠습니까?")) return;
+
+		//ajax
+		$.ajax({
+			type:"POST",
+			url:"${pageContext.request.contextPath }/mail/do_insert.do",
+			dataType:"html", 
+			data:{"recipient":recipient,
+				  "title":title,
+				  "fileId":fileUp,
+				  "contents":contents,
+				  "sender":sender,
+				  "senderId":senderId,
+				  "category":category,
+				  "disableYn":disableYn,
+				  "read":read
+			},
+			success:function(data){ //성공
+				//{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
+				//alert(data);
+
+				var jData = JSON.parse(data);
+				if(null != jData && jData.msgId=="1"){
+					alert(jData.msgMsg);
+					//메일 목록 화면으로 이동
+					location.replace('email_inbox.jsp'); 
 				}else{
-					$("#title").focus();
-					return;
+					alert(jData.msgMsg);
 				}
-			}
-
-			//첨부파일
-			var fileUp = $("#fileUp").val().trim();
-
-			//내용
-			var contents = $("#contents").val();
-			if(null==contents || contents.length<1){
-				if(confirm("'내용 없음'으로 보내겠습니까?")){
-					contents = "내용 없음";
-				}else{
-					$("#contents").focus();
-					return;
-				}
-			}
-
-			//보내는 사람(나중에 session하면 다시 코딩)
-			var sender = $("#sender").val().trim();
-			var senderId = $("#senderId").val().trim();
-
-			//카테고리
-			var category = "mail";
-			//삭제 여부
-			var disableYn = "N";
-			//Read
-			var read = "0";
-	
-			if(false==confirm("메일을 전송하시겠습니까?")) return;
-
-			//ajax
-			$.ajax({
-				type:"POST",
-				url:"${pageContext.request.contextPath }/mail/do_insert.do",
-				dataType:"html", 
-				data:{"recipient":recipient,
-					  "title":title,
-					  "fileId":fileUp,
-					  "contents":contents,
-					  "sender":sender,
-					  "senderId":senderId,
-					  "category":category,
-					  "disableYn":disableYn,
-					  "read":read
-				},
-				success:function(data){ //성공
-					//{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
-					//alert(data);
-
-					var jData = JSON.parse(data);
-					if(null != jData && jData.msgId=="1"){
-						alert(jData.msgMsg);
-						//메일 목록 화면으로 이동
-						location.replace('email_inbox.jsp'); 
-					}else{
-						alert(jData.msgMsg);
-					}
-				},
-				error:function(xhr,status,error){
-					//{"msgId":"0","msgMsg":"삭제 실패.","num":0,"totalCnt":0}
-					alert("error:"+error);
-				},
-				complete:function(data){
-				
-				}   
+			},
+			error:function(xhr,status,error){
+				//{"msgId":"0","msgMsg":"삭제 실패.","num":0,"totalCnt":0}
+				alert("error:"+error);
+			},
+			complete:function(data){
 			
-			});//--ajax
-		});
+			}   
+		
+		});//--ajax
+	});
 	//--메일 보내기 Btn End
 
 	</script>
