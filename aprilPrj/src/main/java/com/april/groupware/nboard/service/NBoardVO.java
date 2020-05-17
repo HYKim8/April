@@ -141,6 +141,23 @@ public class NBoardVO extends DTO {
 				+ readCnt + ", regId=" + regId + ", modId=" + modId + ", regDate=" + regDate + ", modDate=" + modDate
 				+ ", toString()=" + super.toString() + "]";
 	}
+	
+	public NBoardVO(String nbCategory, String nbTitle, String nbContents, String noticeYn, String popupYn,
+			String fileId, int readCnt, String regId, String modId, String regDate, String modDate) {
+		super();
+		this.nbCategory = nbCategory;
+		this.nbTitle = nbTitle;
+		this.nbContents = nbContents;
+		this.noticeYn = noticeYn;
+		this.popupYn = popupYn;
+		this.fileId = fileId;
+		this.readCnt = readCnt;
+		this.regId = regId;
+		this.modId = modId;
+		this.regDate = regDate;
+		this.modDate = modDate;
+	
+	}
 
 	public NBoardVO(int nbNo, String nbCategory, String nbTitle, String nbContents, String noticeYn, String popupYn,
 			String fileId, int readCnt, String regId, String modId, String regDate, String modDate) {

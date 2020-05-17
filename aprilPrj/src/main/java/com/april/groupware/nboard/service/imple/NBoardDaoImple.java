@@ -72,13 +72,11 @@ public class NBoardDaoImple implements NBoardDao {
 		
 		StringBuilder  sb=new StringBuilder();
 		sb.append(" INSERT INTO noticeboard (  \n");
-		sb.append("     nb_no,                 \n");
 		sb.append("     nb_category,           \n");
 		sb.append("     nb_title,              \n");
 		sb.append("     nb_contents,           \n");
 		sb.append("     reg_id                 \n");
 		sb.append(" ) VALUES (                 \n");
-		sb.append("     board_seq.NEXTVAL,     \n");
 		sb.append("     ?,                     \n");
 		sb.append("     ?,                     \n");
 		sb.append("     ?,                     \n");
@@ -339,5 +337,5 @@ public class NBoardDaoImple implements NBoardDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 }
