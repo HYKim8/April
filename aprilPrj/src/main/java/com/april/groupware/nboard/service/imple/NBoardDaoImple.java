@@ -62,7 +62,28 @@ public class NBoardDaoImple implements NBoardDao {
 	
 	@Override
 	public int doUpdateReadCnt(DTO dto) {
-		return 0;
+		int flag = 0;
+		NBoardVO inVO = (NBoardVO) dto;
+		
+		StringBuilder  sb=new StringBuilder();
+		sb.append("UPDATE noticeboard								  \n"); 
+		sb.append("     SET read_cnt = (SELECT NVL(MAX(read_cnt),0)+1 \n"); 
+		sb.append("                     FROM noticeboard                    \n"); 
+		sb.append("                     WHERE nb_no = ?)              \n"); 
+		sb.append("     WHERE nb_no = ?                               \n");
+		
+		//Query수행
+		LOG.debug("==============================");
+		LOG.debug("=Query=\n"+sb.toString());
+		LOG.debug("=Param=\n"+inVO.toString());
+		Object[] args= {inVO.getNbNo(),
+						inVO.getNbNo()
+		};
+		flag = this.jdbcTemplate.update(sb.toString(), args);
+		LOG.debug("=flag= "+flag);
+		LOG.debug("==============================");
+		return flag;
+
 	}
 
 	@Override
