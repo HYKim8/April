@@ -80,6 +80,7 @@ private final Logger  LOG = LoggerFactory.getLogger(TestNBoardController.class);
 	
 	//목록조회
 	@Test
+	@Ignore
 	public void doRetrieve()  throws Exception {
 		//1.전체삭제
 		//2.3건입력
