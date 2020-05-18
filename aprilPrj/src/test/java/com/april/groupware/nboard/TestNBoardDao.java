@@ -45,7 +45,7 @@ public class TestNBoardDao {
 	
 	//전체삭제, 등록, 단건조회, 수정
 	@Test
-	//@Ignore
+	@Ignore
 	public void addAndGet() {
 		//1.전체 삭제		
 		//2.추가		
@@ -79,7 +79,7 @@ public class TestNBoardDao {
 	
 	//목록조회
 	@Test
-	//@Ignore
+	@Ignore
 	public void doRetrieve() {
 		//삭제
 		dao.doDeleteAll();
@@ -99,7 +99,7 @@ public class TestNBoardDao {
 	
 	//단건삭제
 	@Test
-	//@Ignore
+//	@Ignore
 	public void doDelete() {
 		//1.전체 삭제		
 		dao.doDeleteAll();
@@ -111,19 +111,19 @@ public class TestNBoardDao {
 		assertThat(flag, is(3));
 		
 		NBoardVO vsVO = (NBoardVO) dao.doSelectOneTitle(nboard01);
-		
-		//3. 단건 삭제
+//		
+//		//3. 단건 삭제
 		dao.doDelete(vsVO);
 	}
 	
 	
 	//등록
 	@Test
-	//@Ignore
+	@Ignore
 	public void doInsert() {
 		
 		//1. 삭제
-//		dao.doDeleteAll();
+		dao.doDeleteAll();
 		
 		//2. 입력
 		int flag = dao.doInsert(nboard01);
@@ -136,10 +136,10 @@ public class TestNBoardDao {
 		assertThat(flag, is(3));
 		
 		//3. 조회
-//		NBoardVO vsVO  = (NBoardVO) dao.doSelectOneTitle(nboard01);
-//		LOG.debug("-------------------------");
-//		LOG.debug("-vsVO : " + vsVO);
-//		LOG.debug("-------------------------");
+		NBoardVO vsVO  = (NBoardVO) dao.doSelectOneTitle(nboard01);
+		LOG.debug("-------------------------");
+		LOG.debug("-vsVO : " + vsVO);
+		LOG.debug("-------------------------");
 
 	}
 	
