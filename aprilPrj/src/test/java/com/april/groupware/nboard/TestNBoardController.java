@@ -211,22 +211,23 @@ private final Logger  LOG = LoggerFactory.getLogger(TestNBoardController.class);
 	
 	//단건조회
 	@Test
-	@Ignore
+//	@Ignore
 	public void doSelectOne() throws Exception {
 		dao.doDeleteAll();
 		
 		int flag = dao.doInsert(boardList.get(0));
 		assertThat(flag, is(1));
 		
-		NBoardVO nbNo = (NBoardVO) dao.doSelectOneTitle(boardList.get(0));
+		NBoardVO boardId = (NBoardVO) dao.doSelectOneTitle(boardList.get(0));
 		LOG.debug("======doSelectOne()===============");
-		LOG.debug("=NBoardVO="+nbNo);
+		LOG.debug("=NBoardVO="+boardId);
 		LOG.debug("=====================");
 		
 		//url+param
 		MockHttpServletRequestBuilder  createMesage 
 				= MockMvcRequestBuilders.get("/nboard/do_selectone.do")
-		.param("nbTitle", nbNo.getNbTitle());		
+					.param("nbNo", boardId.getNbNo()+"");		
+		LOG.debug("=======nbNo==="+boardId.getNbNo());
 
 		ResultActions  resultActions = mockMvc.perform(createMesage)
 				.andExpect(status().is2xxSuccessful())	
@@ -260,6 +261,7 @@ private final Logger  LOG = LoggerFactory.getLogger(TestNBoardController.class);
 				.andReturn()
 				.getResponse().getContentAsString();
 		LOG.debug("========add()=============");
+		
 		LOG.debug("=result="+result);
 		LOG.debug("=====================");
 		
