@@ -45,7 +45,7 @@ public class TestNBoardDao {
 	
 	//전체삭제, 등록, 단건조회, 수정
 	@Test
-	@Ignore
+//	@Ignore
 	public void addAndGet() {
 		//1.전체 삭제		
 		//2.추가		
@@ -65,6 +65,7 @@ public class TestNBoardDao {
 		//3.단건조회:board01		
 		NBoardVO vsVO = (NBoardVO) dao.doSelectOneTitle(nboard01);
 		//4.수정		
+		vsVO.setNbCategory("new");
 		vsVO.setNbTitle(vsVO.getNbTitle()+"_U");
 		vsVO.setNbContents(vsVO.getNbContents()+"_U");
 		vsVO.setRegId("update_user");
@@ -99,7 +100,7 @@ public class TestNBoardDao {
 	
 	//단건삭제
 	@Test
-//	@Ignore
+	@Ignore
 	public void doDelete() {
 		//1.전체 삭제		
 		dao.doDeleteAll();
