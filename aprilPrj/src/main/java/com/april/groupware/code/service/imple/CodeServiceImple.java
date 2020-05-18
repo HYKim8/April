@@ -1,22 +1,22 @@
-package com.april.groupware.code.imple;
+package com.april.groupware.code.service.imple;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import com.april.groupware.cmn.DTO;
 import com.april.groupware.code.service.CodeDao;
 import com.april.groupware.code.service.CodeService;
 
-@Repository
+@Service
 public class CodeServiceImple implements CodeService {
-	Logger LOG = LoggerFactory.getLogger(CodeServiceImple.class);
+	Logger LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	CodeDao dao;
+	CodeDao  dao;
 	
 	@Override
 	public List<?> doRetrieve(DTO dto) {
