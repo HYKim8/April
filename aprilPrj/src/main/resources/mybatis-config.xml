@@ -24,6 +24,7 @@
 		<typeAlias type="com.april.groupware.reserve.service.ReservationVO" alias="ReservationVO"/>
 		<typeAlias type="com.april.groupware.nboard.service.NBoardVO" alias="NBoardVO"/>
         <typeAlias type="com.april.groupware.mail.service.MailVO" alias="MailVO"/>
+        <typeAlias type="com.april.groupware.chat.service.ChatVO" alias="ChatVO"/>
     </typeAliases>
 
 </configuration>

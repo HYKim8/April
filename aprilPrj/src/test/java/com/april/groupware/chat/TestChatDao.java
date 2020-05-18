@@ -19,8 +19,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.april.groupware.chat.service.UserDao;
-import com.april.groupware.chat.service.UserVO;
+import com.april.groupware.chat.service.ChatDao;
+import com.april.groupware.chat.service.ChatVO;
 import com.april.groupware.cmn.SearchVO;
 
 @WebAppConfiguration
@@ -34,11 +34,11 @@ public class TestChatDao {
 	WebApplicationContext webApplicationContext;
 
 	@Autowired
-	UserDao dao;
+	ChatDao dao;
 
-	UserVO user01;
-	UserVO user02;
-	UserVO user03;
+	ChatVO user01;
+	ChatVO user02;
+	ChatVO user03;
 
 	@Before
 	public void setUp() throws Exception {
@@ -46,9 +46,9 @@ public class TestChatDao {
 		LOG.debug("^WebApplicationContext^" + webApplicationContext);
 		LOG.debug("^^^^^^^^^^^^^^^^");
 
-		user01 = new UserVO("id01", "영업", "김사원", "사원");
-		user02 = new UserVO("id02", "개발", "김대리", "대리");
-		user03 = new UserVO("id03", "개발", "김과장", "과장");
+		user01 = new ChatVO("id01", "영업", "김사원", "사원");
+		user02 = new ChatVO("id02", "개발", "김대리", "대리");
+		user03 = new ChatVO("id03", "개발", "김과장", "과장");
 	}
 
 //---------------------------------------------------	
@@ -57,9 +57,9 @@ public class TestChatDao {
 	public void doRetrieve() {
 		// Str searchDiv, Str searchWord, int pageSize, int pageNum, Str searchStartDate, Str searchEndDate
 		SearchVO inVO = new SearchVO("20", "", 10, 1, "", "");
-		List<UserVO> list = (List<UserVO>) dao.doRetrieve(inVO);
+		List<ChatVO> list = (List<ChatVO>) dao.doRetrieve(inVO);
 
-		for (UserVO outVO : list) {
+		for (ChatVO outVO : list) {
 			LOG.debug(outVO.toString());
 		}
 
@@ -72,7 +72,7 @@ public class TestChatDao {
 	@Test
 	public void doSelectOne() {
 
-		UserVO userVO = (UserVO) dao.doSelectOne(user02);
+		ChatVO userVO = (ChatVO) dao.doSelectOne(user02);
 		
 	}
 //---------------------------------------------------	
