@@ -19,7 +19,7 @@ public class CodeDaoImple implements CodeDao {
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
 	
-	private final String NAME_SPACE="com.sist.ehr.code";
+	private final String NAME_SPACE="com.april.groupware.code";
 	
 	@Override
 	public List<?> doRetrieve(DTO dto) {
