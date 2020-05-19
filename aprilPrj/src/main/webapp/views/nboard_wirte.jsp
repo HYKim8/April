@@ -17,6 +17,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="/views//common/common.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -450,14 +454,33 @@
                                 </div>
                                     <!-- // 상단공지 / 팝업 -->
                                     <div class="compose-content mt-5">
-                                        <form action="#">
-                                            <div class="form-group">
-                                                                                                        제목 
-                                               <input type="text" class="form-control bg-transparent" placeholder=" Subject">
+                                        <form action="${hContext}/nboard/do_retrieve.do" name="mngFrm" id="mngFrm" method="post">
+                                        <!-- 카테고리 -->
+                                        <div>
+                                         <select id="category" name="category" style="font-size: 14px; color:white; background-color: #7571f9; padding: 7px; width: 150px">
+                                            <option value="">카테고리</option>
+                                            <option value="중요 공지">중요 공지</option>
+                                            <option value="April 소식">April 소식</option>
+                                            <option value="IT 뉴스">IT 뉴스</option>
+                                            <option value="식단표">식단표</option>
+                                            <option value="분실물">분실물</option>
+                                         </select>
+                                         </div>
+                                         
+                                        <!-- // 카테고리 -->
+                                                                                                제목                                                    
+                                          <input type="text" class="form-control bg-transparent"
+                                                      id="nbTitle" name="nbTitle" placeholder="제목을 입력하세요." value="${vo.nbTitle }">
                                             </div>
                                             <div class="form-group">
                                                                                                             내용
-                                                <textarea class="textarea_editor form-control bg-light" rows="15" placeholder="Enter text ..."></textarea>
+                                                <textarea class="textarea_editor form-control bg-light" rows="15" 
+                                                          placeholder="내용을 입력하세요." name="nbContents" id="nbContents">${vo.nbContents}</textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                                                                        작성자 
+                                               <input type="text" class="form-control bg-transparent" placeholder="작성자"
+                                                      id="regId" name="regId" placeholder="제목을 입력하세요." value="${vo.regId }">
                                             </div>
                                         </form>
                                         <!-- 첨부파일 -->
@@ -487,8 +510,12 @@
                                         
                                     </div>
                                     <div class="text-center m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button"><i class="fa fa-paper-plane m-r-5"></i> 글 등록</button>
-                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"><i class="ti-close m-r-5 f-s-12"></i> 작성 취소</button>
+                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+                                                type="button" id="insert_btn">
+                                                <i class="fa fa-paper-plane m-r-5"></i> 글 등록</button>
+                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"
+                                                onclick="goRetrieve();" id="list_btn">
+                                                <i class="ti-close m-r-5 f-s-12"></i> 작성 취소</button>
                                     </div>
                                 </div>
                             </div>
@@ -522,12 +549,99 @@
     <!--**********************************
         Scripts
     ***********************************-->
+    
+     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+    <script src="${hContext}/resources/js/jquery-migrate-1.4.1.js"></script>
+    
     <script src="plugins/common/common.min.js"></script>
     <script src="js/custom.min.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/gleek.js"></script>
     <script src="js/styleSwitcher.js"></script>
+    
+    <script type="text/javascript">
+    function goRetrieve(){
+            location.href="${hContext}/nboard/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=";
+            //location.href="${hContext}/nboard/nboard_list.jsp";
+        }
 
-</body>
+        $("#insert_btn").on("click",function(){
+
+        	//category 카테고리 미입력시
+        	var category = document.getElementById("category")  
+        	//alert('선택된 옵션 value 값=' + category.options[category.selectedIndex].value);  
+
+            var ckCategory = $("select[name=category] option:selected").val();
+            if(null==ckCategory || ckCategory.length<=1){
+                $("#category").focus();
+                alert("카테고리를 선택하세요.");
+                return;
+             }
+
+                	
+            //nbTitle 제목 미입력시 
+        	var nbTitle = $("#nbTitle").val().trim();
+            if(null==nbTitle || nbTitle.length<=1){
+               $("#nbTitle").focus();
+               alert("제목을 입력하세요.");
+               return;
+            }
+
+            //nbContents 내용 미입력시 
+            var nbContents = $("#nbContents").val().trim();
+            if(null==nbContents || nbContents.length<=1){
+               $("#nbContents").focus();
+               alert("내용을 입력하세요.");
+               return;
+            }
+
+            //regId 작성자 미입력시 
+            var regId = $("#regId").val().trim();
+            if(null==regId || regId.length<=1){
+               $("#regId").focus();
+               alert("아이디를 입력하세요.");
+               return;
+            }
+
+            if(false==confirm("등록하시겠습니까?")) return;
+            
+          //ajax
+            $.ajax({
+               type:"POST",
+               url:"${hContext }/nboard/do_insert.do",
+               dataType:"html", 
+               data:{"nbCategory":category.options[category.selectedIndex].value,
+                     "nbTitle":nbTitle,
+            	     "nbContents":nbContents,
+            	     "regId":regId
+               },
+               success:function(data){ //성공
+                  //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
+                  //alert(data);
+
+                  var jData = JSON.parse(data);
+                  if(null != jData && jData.msgId=="1"){
+                     alert(jData.msgMsg);
+                     //목록 화면으로 이동
+                     goRetrieve();
+                  }else{
+                     alert(jData.msgMsg);
+                  }
+               },
+               error:function(xhr,status,error){
+                  //{"msgId":"0","msgMsg":"삭제 실패.","num":0,"totalCnt":0}
+                  alert("error:"+error);
+               },
+               complete:function(data){
+               
+               }   
+            
+            });//--ajax  
+         }); //--insert_btn
+
+        	
+        </script>
+    </body>
 
 </html>
