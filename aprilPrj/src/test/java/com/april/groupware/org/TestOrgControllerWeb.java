@@ -62,10 +62,10 @@ public class TestOrgControllerWeb {
 		LOG.debug("*********************");
 		userList = Arrays.asList(
 				new OrgVO(
-					    "kimjh4","1234","부서명","1","1",
+					    "king004","1234","부서명","1","1",
 					    "1","이름","직급","012-345-6789","email",
 					    "주소","20200202","20200202","1","1",
-					    "1","학력","원본파일명","수정파일명","이미지경로",
+					    "1","학력","원본파일명","수정파일명",
 					    "ext","0",
 					    "test","1234","test","1234")
 				);
@@ -92,17 +92,18 @@ public class TestOrgControllerWeb {
 	                     ;
 	                     
 	            ResultActions  resultActions = mockMvc.perform(createMesage)
-	                  .andExpect(status().is2xxSuccessful())   
-	                  .andExpect(model().attributeExists("list"))
-	                  .andExpect(model().attributeExists("vo"))
-	                  .andExpect(model().attributeExists("totalCnt"))
+	            		.andExpect(status().is2xxSuccessful())	
+	    				.andExpect(model().attributeExists("searchList"))
+	    				.andExpect(model().attributeExists("list"))
+	    				.andExpect(model().attributeExists("vo"))
+	    				.andExpect(model().attributeExists("totalCnt"))
 	                  ;
 	            
 	               String result = resultActions.andDo(print())
 	                     .andReturn()
 	                     .getResponse().getContentAsString();
 	               LOG.debug("=====================");
-	               LOG.debug("=result="+result);
+	               LOG.debug("=result★="+result);
 	               LOG.debug("=====================");
 	         }
 	
@@ -192,8 +193,7 @@ public class TestOrgControllerWeb {
 				.param("dspsnYN", userList.get(0).getDspsnYN())
 				.param("grade", userList.get(0).getGrade())
 				.param("orgFileName", userList.get(0).getOrgFileName())
-				.param("modFileName", userList.get(0).getModFileName())
-				.param("imgPath", userList.get(0).getImgPath())
+				.param("saveFileName", userList.get(0).getSaveFileName())
 				.param("ext", userList.get(0).getExt())
 				.param("fileSize", userList.get(0).getFileSize())
 				.param("regId", userList.get(0).getRegId())
@@ -237,10 +237,6 @@ public class TestOrgControllerWeb {
 		LOG.debug("=result= : "+result);
 		LOG.debug("======================");
 	}
-	
-	
-	
-	
 	
 	@Test
 	

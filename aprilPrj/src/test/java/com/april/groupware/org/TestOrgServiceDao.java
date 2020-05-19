@@ -74,14 +74,14 @@ public class TestOrgServiceDao {
 		LOG.debug("WebApplicationContext : "+webApplicationContext);
 		LOG.debug("======================");
 		
-//		user01 = new OrgVO("kimjh","1234","이름","20200202","부서명","직급","1","1","1","학력",
+//				user01 = new OrgVO("kimjh","1234","이름","20200202","부서명","직급","1","1","1","학력",
 //				"원본파일명","수정파일명","이미지경로","ext","0","email","20200202","012-345-6789","주소",
 //				"test","1234","test","1234");
 		insertUser = new OrgVO(
-				"kimjh11","1234","부서명","1","1",
+				"king001","1234","부서명","1","1",
 				"1","이름","직급","012-345-6789","email",
 				"주소","20200202","20200202","1","1",
-				"1","학력","원본파일명","수정파일명","이미지경로",
+				"1","학력","원본파일명","수정파일명",
 				"ext","0",
 				"test","1234","test","1234");
 		
@@ -103,6 +103,7 @@ public class TestOrgServiceDao {
 	
 	
 	@Test
+	
 	public void addAndGet() {
 		//1.전체 삭제		
 		//2.추가		
@@ -141,7 +142,7 @@ public class TestOrgServiceDao {
 		//3.목록조회:3건
 		SearchVO  searchVO=new SearchVO(10,1,"10","kimjh");
 		List<OrgVO> list =   (List<OrgVO>) dao.doRetrieve(searchVO);
-		assertThat(list.size(), is(3));
+		assertThat(list.size(), is(5));
 		for(OrgVO vo: list) {
 			LOG.debug("doRetrieve:"+vo.toString());
 		}

@@ -34,7 +34,8 @@
 		           B.REG_ID   as regId,
 		           CASE TO_CHAR(B.reg_date,'YYYY/MM/DD') WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') 
 		                                                 THEN TO_CHAR(SYSDATE,'HH24:MI') 
-		           ELSE TO_CHAR(B.reg_date,'YYYY/MM/DD') END regDate,
+		          										 ELSE TO_CHAR(B.reg_date,'YYYY/MM/DD') 
+		           END regDate,
 		           B.rnum as num
 		    FROM(
 		        SELECT ROWNUM AS rnum,a.*
@@ -84,8 +85,7 @@
 				    dspsn_yn,
 				    grade,
 				    org_file_nm,
-				    mod_file_nm,
-				    img_path,
+				    save_file_nm,
 				    ext,
 				    file_size,
 				    reg_id,
@@ -111,8 +111,7 @@
 					#{dspsnYN},
 					#{grade},
 					#{orgFileName},
-					#{modFileName},
-					#{imgPath},
+					#{saveFileName},
 					#{ext},
 					#{fileSize},
 					#{regId},
@@ -165,8 +164,7 @@
 		    dspsn_yn 		AS dspsnYN,        										
 		    grade,           										
 		    org_file_nm 	AS orgFileName,     										
-		    mod_file_nm 	AS modFileName,     										
-		    img_path 		AS imgPath,        										
+		    save_file_nm 	AS saveFileName,     																			
 		    ext,             										
 		    file_size 		AS fileSize,       										
 		    reg_id 			AS regId,          										
@@ -182,7 +180,7 @@
 	    <![CDATA[
 		  DELETE FROM organization WHERE id = #{id}
 		]]>
-   </delete>
+	</delete>
     
     
 </mapper>
