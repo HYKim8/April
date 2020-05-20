@@ -21,6 +21,8 @@ package com.april.groupware.attendance;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.text.ParseException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -75,7 +77,7 @@ public class TestAttendanceDao {
 
 	@Test
 //	@Ignore
-	public void addAndGet() {
+	public void addAndGet() throws ParseException {
 		//삭제
 		int flag = dao.doDelete(user01);
 //		assertThat(flag, is(1));
@@ -87,7 +89,7 @@ public class TestAttendanceDao {
 		//수정
 //		user01.setLeaveYN("1");;	
 //		flag = dao.doUpdate(user01);
-		flag = dao.leaveUpdate(user01);
+		flag = dao.doLeaveUpdate(user01);
 		assertThat(flag, is(1));
 		
 		AttendanceVO userVO = (AttendanceVO) dao.doSelectOne(user01);
@@ -97,7 +99,7 @@ public class TestAttendanceDao {
 	
 	@Test
 	@Ignore
-	public void doInsert() {
+	public void doInsert() throws ParseException {
 		//1.삭제
 		//2.단건 입력
 		//3.단건 입력 user01 수정

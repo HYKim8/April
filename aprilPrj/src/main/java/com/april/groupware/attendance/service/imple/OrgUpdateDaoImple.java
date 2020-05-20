@@ -18,8 +18,6 @@
  */
 package com.april.groupware.attendance.service.imple;
 
-
-
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -28,8 +26,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.april.groupware.attendance.service.OrgUpdateVO;
 import com.april.groupware.attendance.service.OrgUpdateDao;
+import com.april.groupware.attendance.service.OrgUpdateVO;
 import com.april.groupware.cmn.DTO;
 
 /**
@@ -41,7 +39,7 @@ public class OrgUpdateDaoImple implements OrgUpdateDao {
 	private final Logger LOG = LoggerFactory.getLogger(OrgUpdateDaoImple.class); //LOG
 	
 	//namespace : 상수
-	private final String NAMESPACE = "com.april.groupware.attendance.service";
+	private final String NAMESPACE = "com.april.groupware.attendance";
 	
 	@Autowired
 	SqlSessionTemplate sqlSessionTemplate;
@@ -109,19 +107,19 @@ public class OrgUpdateDaoImple implements OrgUpdateDao {
 		//Param
 		OrgUpdateVO inVO = (OrgUpdateVO) dto;
 		LOG.debug("=====================");
-		LOG.debug("=inVO= : "+inVO);
+		LOG.debug("=doUpdate inVO= : "+inVO);
 		LOG.debug("=====================");
 		
 		//SQL-Query
 		String statement = NAMESPACE+".orgDoUpdate";
 		LOG.debug("=====================");
-		LOG.debug("=statement= : "+statement);
+		LOG.debug("=doUpdate statement= : "+statement);
 		LOG.debug("=====================");
 		
 		//Call
 		int flag = this.sqlSessionTemplate.update(statement, inVO);
 		LOG.debug("=====================");
-		LOG.debug("=flag= : "+flag);
+		LOG.debug("=doUpdate flag= : "+flag);
 		LOG.debug("=====================");
 		
 		return flag;
@@ -212,19 +210,19 @@ public class OrgUpdateDaoImple implements OrgUpdateDao {
 		//Param
 		OrgUpdateVO inVO = (OrgUpdateVO) dto;
 		LOG.debug("=====================");
-		LOG.debug("=inVO= : "+inVO);
+		LOG.debug("=doSelectOne inVO= : "+inVO);
 		LOG.debug("=====================");
 		
 		//SQL-Query
 		String statement = NAMESPACE+".orgDoSelectOne";
 		LOG.debug("=====================");
-		LOG.debug("=statement= : "+statement);
+		LOG.debug("=doSelectOne statement= : "+statement);
 		LOG.debug("=====================");
 		
 		//Call
 		OrgUpdateVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
 		LOG.debug("=====================");
-		LOG.debug("=outVO= : "+outVO);
+		LOG.debug("=doSelectOne outVO= : "+outVO);
 		LOG.debug("=====================");
 		
 		return outVO;

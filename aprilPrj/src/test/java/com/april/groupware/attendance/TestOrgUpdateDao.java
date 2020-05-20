@@ -70,18 +70,19 @@ public class TestOrgUpdateDao {
 //				"test","1234","test","1234");
 		
 		user01 = new OrgUpdateVO(
-				"kimjh","1234","부서명","1","1",
+				"kimjh1","1234","부서명","1","1",
 				"1","이름","직급","012-345-6789","email",
 				"주소","20200202","20200202","1","1",
-				"1","학력","원본파일명","수정파일명","이미지경로",
+				"1","학력","원본파일명","수정파일명",
 				"ext",0,
 				"test","1234","test","1234");
 	}
 
 	@Test
-//	@Ignore
+	@Ignore
 	public void updateAndGet() {
 		user01.setPassword("123");
+		user01.setAddress("할수있는거");
 		
 		int flag = dao.doUpdate(user01);
 		
@@ -118,7 +119,7 @@ public class TestOrgUpdateDao {
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	public void doSelectOne() {
 		//1.삭제
 		//2.입력

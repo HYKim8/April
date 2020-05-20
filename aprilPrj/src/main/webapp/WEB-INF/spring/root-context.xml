@@ -16,7 +16,7 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-<!-- mybatis -->
+	<!-- mybatis -->
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
 		<constructor-arg index="0" ref="sqlSessionFactoryBean"></constructor-arg>
 	</bean>
@@ -26,6 +26,14 @@
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
 		<property name="mapperLocations" value="classpath:mappers/**/*.xml"></property>
 		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<!-- FileUpload: -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	   <property name="defaultEncoding" value="UTF-8" />
+	   <!-- Upload Size: 1024*1024*50: "5242880‬0" -->
+	   <property name="maxUploadSize" value="52428800" />     
+	   <property name="maxInMemorySize" value="52428800" />
 	</bean>
 	
 	<!-- JDBC Transaction/Connection -->
