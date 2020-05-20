@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.april.groupware.cmn.DTO;
+import com.april.groupware.cmn.SearchVO;
 import com.april.groupware.mail.service.MailDao;
 import com.april.groupware.mail.service.MailVO;
 
@@ -33,18 +34,21 @@ public class MailDaoImple implements MailDao {
 	RowMapper<MailVO> rowMapper = new RowMapper<MailVO>() {
 		public MailVO mapRow(ResultSet rs, int rowNum) throws SQLException {
 			MailVO outData = new MailVO();
+			outData.setMailId(rs.getString("mail_id"));
 			outData.setCategory(rs.getString("category"));
-			outData.setTitle(rs.getString("title"));
-			outData.setSenDate(rs.getString("sen_date"));
 			outData.setSender(rs.getString("sender"));
 			outData.setSenderId(rs.getString("sender_id"));
-			outData.setRecipient(rs.getString("recipient"));
-			outData.setRecipientId(rs.getString("recipient_id"));
+			outData.setSenDate(rs.getString("sen_date"));
+			outData.setTitle(rs.getString("title"));
 			outData.setFileId(rs.getString("file_id"));
 			outData.setContents(rs.getString("contents"));
+			outData.setRecipient(rs.getString("recipient"));
+			outData.setRecipientId(rs.getString("recipient_id"));
+			outData.setRecDate(rs.getString("rec_date"));
+			outData.setDisableYn(rs.getString("disable_yn"));
+			outData.setRead(rs.getString("read"));
 			return outData;
 		}
-
 	};
 	
 	public MailDaoImple() {}
@@ -73,50 +77,62 @@ public class MailDaoImple implements MailDao {
 		LOG.debug("=====MailDaoImple [doInsert] End======");
 		return flag;
 	}
-
 	
 	@Override
 	public int doUpdate(DTO dto) {
-		
 		return 0;
 	}
 
 	@Override
 	public DTO doSelectOne(DTO dto) {
 		MailVO inVO = (MailVO) dto;
-		MailVO outVO = null;
 		
-		StringBuilder  sb=new StringBuilder();
-		sb.append("SELECT e.category,									\n");
-		sb.append("	   e.title,                                         \n");
-		sb.append("	   DECODE(TO_CHAR(sen_date, 'YYYY/MM/DD'),TO_CHAR(SYSDATE, 'YYYY/MM/DD'),TO_CHAR(sen_date,'HH24:MI:SS'),TO_CHAR(sen_date,'YYYY/MM/DD HH24:MI:SS')) sen_date,\n");
-		sb.append("	   e.sender,                                        \n");
-		sb.append("	   e.sender_id,                                     \n");
-		sb.append("	   r.recipient,                                      \n");
-		sb.append("	   r.recipient_id,                                   \n");
-		sb.append("	   e.file_id,                                       \n");
-		sb.append("	   e.contents	                                    \n");
-		sb.append("FROM email e INNER JOIN recipient r                  \n");
-		sb.append("ON e.mail_id = r.mail_id                             \n");
-		sb.append("WHERE r.mail_seq = ?                                 \n");
-		sb.append("AND   e.mail_id = ?                                  \n");
-		sb.append("AND	  r.receiver_id = ?                             \n");
+		LOG.debug("=====MailDaoImple [doInsert] Start======");
+		LOG.debug("** inVO : "+inVO);
 		
-		//Query수행
-		LOG.debug("=====MailDaoImple [doSelectOne] Start======");
-		LOG.debug("** Query :\n"+sb.toString());
-		LOG.debug("** Param :\n"+inVO.toString());
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doSelectOne";
+		LOG.debug("** statement : "+statement);
 		
-//		Object[] args = {inVO.getMailSeq()
-//				,inVO.getMailId()
-//				,inVO.getReceiverId()};
+		MailVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("** outVO : "+outVO);
+		
+		return outVO;
+		
+		
+		
+		
+//		MailVO inVO = (MailVO) dto;
+//		MailVO outVO = null;
 //		
+//		StringBuilder  sb=new StringBuilder();
+//		sb.append("SELECT mail_id as mailId,									\n");
+//		sb.append(" 	  category,									\n");
+//		sb.append("	      title,                                         \n");
+//		sb.append("	      DECODE(TO_CHAR(rec_date, 'YYYY/MM/DD'),TO_CHAR(SYSDATE, 'YYYY/MM/DD'),TO_CHAR(rec_date,'HH24:MI:SS'),TO_CHAR(rec_date,'YYYY/MM/DD HH24:MI:SS')) as recDate,\n");
+//		sb.append("	      sender,                                        \n");
+//		sb.append("	      sender_id as senderID,                                     \n");
+//		sb.append("	      recipient,                                      \n");
+//		sb.append("	      recipient_id as recipientId,                                   \n");
+//		sb.append("	      file_id as fileId,                                       \n");
+//		sb.append("	      contents,	                                    \n");
+//		sb.append("	      disable_yn as	disableYn                                    \n");
+//		sb.append("FROM email 							                  \n");
+//		sb.append("WHERE mail_id = ?                                 \n");
+//		
+//		///Query수행
+//		LOG.debug("=====MailDaoImple [doSelectOne] Start======");
+//		LOG.debug("** Query : "+sb.toString());
+//		LOG.debug("** Param : "+inVO.getMailId());
+//		
+//		Object []args = {inVO.getMailId()};
 //		outVO = this.jdbcTemplate.queryForObject(sb.toString()
 //				,args
 //				,rowMapper); 
 //		LOG.debug("** outVO : "+outVO);
-//		LOG.debug("=====MailDaoImple [doInsert] End======");
-		return outVO;
+//		LOG.debug("=====MailDaoImple [doSelectOne] End======");
+//		
+//		return outVO;
 	}
 	
 	/**
@@ -177,14 +193,192 @@ public class MailDaoImple implements MailDao {
 
 	@Override
 	public List<?> doRetrieve(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		SearchVO inVO = (SearchVO) dto;
+		
+		LOG.debug("=====MailDaoImple [doRetrieve] Start======");
+		
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doRetrieve";
+		LOG.debug("** statement : "+statement);
+		
+		List<MailVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
+		LOG.debug("** outList : "+outList);
+		
+		LOG.debug("=====MailDaoImple [doRetrieve] End======");
+		
+		return outList;
+		
+//		SearchVO  inVO= (SearchVO) dto;
+//		//검색구분
+//		  //ID : 10
+//		  //이름: 20
+//		//검색어
+//		//StringBuilder whereSb=new StringBuilder();
+//		
+////		if(null !=inVO && !"".equals(inVO.getSearchDiv())) {
+////			if(inVO.getSearchDiv().equals("10")) {
+////				whereSb.append("AND recipient_id like '%' || ? ||'%'   \n"); //?에 들어갈꺼 searchWord
+////			}else if(inVO.getSearchDiv().equals("20")) {
+////				whereSb.append("AND name like '%' || ? ||'%'   \n");
+////			}
+////		}
+//		
+//		
+//		StringBuilder sb=new StringBuilder();
+//		sb.append("SELECT T1.*,T2.*                                              \n");
+//		sb.append("FROM(                                                         \n");
+//		sb.append("    SELECT  B.mail_id,                                           \n");
+//		sb.append("            B.category,                                           \n");
+//		sb.append("            B.sender,                                         \n");
+//		sb.append("            B.sender_id,                                        \n");
+//		sb.append("            B.title,                                          \n");
+//		sb.append("            B.file_id,                                      \n");
+//		sb.append("            DECODE(TO_CHAR(rec_date, 'YYYY/MM/DD'),TO_CHAR(SYSDATE, 'YYYY/MM/DD'),TO_CHAR(rec_date,'HH24:MI:SS'),TO_CHAR(rec_date,'YYYY/MM/DD HH24:MI:SS')) rec_date,\n");
+//		sb.append("            B.disable_yn,                                           \n");
+//		sb.append("            B.read,                                           \n");
+//		sb.append("            rnum                                              \n");		
+//		sb.append("    FROM(                                                     \n");
+//		sb.append("        SELECT ROWNUM rnum,                                   \n");
+//		sb.append("               A.*                                            \n");
+//		sb.append("        FROM (                                                \n");
+//		sb.append("            SELECT *                                          \n");
+//		sb.append("            FROM email                                    \n");
+//		sb.append("            WHERE rec_date  > '1900/01/01'                      \n");
+//
+//		sb.append("            --검색조건                                                                               \n");
+//		//--검색----------------------------------------------------------------------
+//		//sb.append(whereSb.toString());
+//		sb.append("AND recipient_id like '%' || ? ||'%'   \n");
+//		//--검색----------------------------------------------------------------------	
+//		sb.append("            ORDER BY TO_CHAR(rec_date,'YYYYMMDD HH24:MI:SS')  DESC                             \n");
+//		sb.append("        )A --10                                               \n");
+//		//sb.append("        WHERE ROWNUM <= (&PAGE_SIZE*(&PAGE_NUM-1)+&PAGE_SIZE) \n");
+//		sb.append("        WHERE ROWNUM <= (?*(?-1)+?) \n");
+//		sb.append("    )B --1                                                    \n");
+//		//sb.append("    WHERE B.RNUM >= (&PAGE_SIZE*(&PAGE_NUM-1)+1)              \n");
+//		sb.append("    WHERE B.RNUM >= (?*(?-1)+1)              \n");
+//		sb.append("    )T1 CROSS JOIN                                            \n");
+//		sb.append("    (                                                         \n");
+//		sb.append("    SELECT count(*) total_cnt                                 \n");
+//		sb.append("    FROM email                                            \n");
+//		sb.append("    WHERE rec_date  > '1900/01/01'                              \n");
+//		sb.append("    --검색조건                                                   \n");
+//		//--검색----------------------------------------------------------------------
+//		//sb.append(whereSb.toString());
+//		sb.append("AND recipient_id like '%' || ? ||'%'   \n");
+//		//--검색----------------------------------------------------------------------
+//		sb.append("    )T2  														\n");
+//
+//		//param 
+//		List<Object> listArg = new ArrayList<Object>();
+//		
+//		
+//		//param set
+//		listArg.add(inVO.getSearchWord());
+//		listArg.add(inVO.getPageSize());
+//		listArg.add(inVO.getPageNum());
+//		listArg.add(inVO.getPageSize());
+//		listArg.add(inVO.getPageSize());
+//		listArg.add(inVO.getPageNum());				
+//		listArg.add(inVO.getSearchWord());
+//		
+////		if(null !=inVO && !"".equals(inVO.getSearchDiv())) {
+////			listArg.add(inVO.getSearchWord());
+////			listArg.add(inVO.getPageSize());
+////			listArg.add(inVO.getPageNum());
+////			listArg.add(inVO.getPageSize());
+////			listArg.add(inVO.getPageSize());
+////			listArg.add(inVO.getPageNum());				
+////			listArg.add(inVO.getSearchWord());
+////			
+////		}else {
+////			listArg.add(inVO.getPageSize());
+////			listArg.add(inVO.getPageNum());
+////			listArg.add(inVO.getPageSize());
+////			listArg.add(inVO.getPageSize());
+////			listArg.add(inVO.getPageNum());			
+////		}
+//		List<MailVO> retList = this.jdbcTemplate.query(sb.toString(), listArg.toArray(), rowMapper);
+//		LOG.debug("query \n"+sb.toString());
+//		LOG.debug("param:"+listArg);
+//		return retList;
 	}
 
 	@Override
 	public List<?> getAll(DTO dto) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int doUpdateDisable(DTO dto) {
+		
+		MailVO inVO = (MailVO) dto;
+		
+		LOG.debug("=====MailDaoImple [doUpdateDisable] Start======");
+		
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doUpdateDisable";
+		LOG.debug("** statement : "+statement);
+		
+		inVO.setDisableYn("Y");
+		
+		int  flag = this.sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("** flag : "+flag);
+		
+		LOG.debug("=====MailDaoImple [doUpdateDisable] End======");
+		
+		return flag;
+		
+//----------mybatis 쓰기 전
+//		int flag = 0;
+//		MailVO inVO = (MailVO) dto;
+//		StringBuilder sb=new StringBuilder();
+//		sb.append(" UPDATE email	         \n");
+//		sb.append(" SET disable_yn = ?		   \n");
+//		sb.append(" WHERE                    \n");
+//		sb.append("     mail_id = ?             \n");
+//		
+//		LOG.debug("==============================");
+//		LOG.debug("=Query=\n"+sb.toString());
+//		LOG.debug("=Param= "+inVO.toString());
+//		
+//		inVO.setDisableYn("Y");
+//		
+//		Object[] args= {inVO.getDisableYn()
+//						,inVO.getMailId()};
+//		flag = this.jdbcTemplate.update(sb.toString(), args);
+//		LOG.debug("=flag= "+flag);
+//		LOG.debug("==============================");
+//		return flag;
+	}
+
+	@Override
+	public int doUpdateRead(DTO dto) {
+		
+		MailVO inVO = (MailVO) dto;
+		
+		LOG.debug("=====MailDaoImple [doUpdateRead] Start======");
+		
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doUpdateRead";
+		LOG.debug("** statement : "+statement);
+		
+		inVO.setRead("9");
+		
+		int  flag = this.sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("** flag : "+flag);
+		
+		LOG.debug("=====MailDaoImple [doUpdateRead] End======");
+		
+		return flag;
+		
 	}
 
 

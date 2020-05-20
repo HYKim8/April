@@ -21,6 +21,20 @@ public interface MailService {
 	public int doUpdate(DTO dto);
 	
 	/**
+	 * disable 수정   
+	 * @param dto
+	 * @return int
+	 */
+	public int doUpdateDisable(DTO dto);
+	
+	/**
+	 * read 수정   
+	 * @param dto
+	 * @return int
+	 */
+	public int doUpdateRead(DTO dto);
+	
+	/**
 	 * 단건조회
 	 * @param dto
 	 * @return DTO

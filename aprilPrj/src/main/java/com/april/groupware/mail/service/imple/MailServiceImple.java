@@ -62,6 +62,7 @@ public class MailServiceImple implements MailService {
 
 	@Override
 	public DTO doSelectOne(DTO dto) {
+		mailDao.doUpdateRead(dto);
 		return mailDao.doSelectOne(dto);
 	}
 
@@ -77,7 +78,17 @@ public class MailServiceImple implements MailService {
 
 	@Override
 	public List<?> doRetrieve(DTO dto) {
-		return null;
+		return mailDao.doRetrieve(dto);
+	}
+
+	@Override
+	public int doUpdateDisable(DTO dto) {
+		return mailDao.doUpdateDisable(dto);
+	}
+
+	@Override
+	public int doUpdateRead(DTO dto) {
+		return mailDao.doUpdateRead(dto);
 	}
 
 	

@@ -16,6 +16,9 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set  var="aprilContext" value="${pageContext.request.contextPath }"></c:set> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,11 +27,14 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>메일</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${aprilContext}/views/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${aprilContext}/views/css/style.css" rel="stylesheet">
 </head>
-
+<%
+    // 인코딩
+    request.setCharacterEncoding("euc-kr");
+%>
 <body>
 
     <!--*******************
@@ -57,10 +63,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <b class="logo-abbr"><img src="${aprilContext}/views/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="${aprilContext}/views/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img src="${aprilContext}/views/images/logo-text.png" alt="">
                     </span>
                 </a>
             </div>
@@ -108,7 +114,7 @@
                                     <ul>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${aprilContext}/views/images/avatar/1.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Saiful Islam</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -118,7 +124,7 @@
                                         </li>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${aprilContext}/views/images/avatar/2.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Adam Smith</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -128,7 +134,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${aprilContext}/views/images/avatar/3.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Barak Obama</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -138,7 +144,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${aprilContext}/views/images/avatar/4.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Hilari Clinton</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -219,7 +225,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="${aprilContext}/views/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -285,7 +291,7 @@
                     </li>
                     <li class="nav-label">Apps</li>
                     <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                        <a class="has-arrow" href="javascript:doRetrieve();" aria-expanded="false">
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">메일</span>
                         </a>
                         <!-- 
@@ -417,7 +423,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Apps</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">메일</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:doRetrieve();">메일</a></li>
                     </ol>
                 </div>
             </div>
@@ -429,15 +435,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="email-left-box">
-                                <a href="email_compose.jsp" onclick="exitPage();" class="btn btn-primary btn-block">메일 쓰기</a>
-                                <a href="email_composeVacation.jsp" onclick="exitPage();" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
+                                <a href="${aprilContext}/views/email_compose.jsp" onclick="exitPage();" class="btn btn-primary btn-block">메일 쓰기</a>
+                                <a href="${aprilContext}/views/email_composeVacation.jsp" onclick="exitPage();" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="email_inbox.jsp" onclick="exitPage();" class="list-group-item border-0 text-primary p-r-0">
+                                    	<a href="${aprilContext}/views/email_inbox.jsp" onclick="exitPage();" class="list-group-item border-0 text-primary p-r-0">
                                     		<i class="fa fa-inbox font-18 align-middle mr-2"></i> 
                                     		<b>받은 메일함</b> 
                                     		<span class="badge badge-primary badge-sm float-right m-t-5">198</span> 
                                     	</a>
-                                        <a href="email_sentbox.jsp" onclick="exitPage();" class="list-group-item border-0 p-r-0">
+                                        <a href="${aprilContext}/views/email_sentbox.jsp" onclick="exitPage();" class="list-group-item border-0 p-r-0">
                                         	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함
                                         </a>  
                                         <a href="#" onclick="exitPage();" class="list-group-item border-0 p-r-0"><i class="fa fa-star-o font-18 align-middle mr-2"></i>Important <span class="badge badge-danger badge-sm float-right m-t-5">47</span> </a>
@@ -495,7 +501,7 @@
                                         <form action="#">
                                             <div class="form-group">
                                             	<h5 class="m-b-20">받는 사람 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="checkMe">&nbsp;&nbsp;나에게</h5> 
-                                                <input type="text" id="recipient" name="recipient" value="" class="form-control bg-transparent" placeholder=" 받는 사람">
+                                                <input type="text" id="recipient" name="recipient" value="${vo.sender}" class="form-control bg-transparent" placeholder=" 받는 사람">
                                                 <input type="hidden" id="sender" value="김민지" class="form-control bg-transparent" placeholder=" 보내는 사람">
                                                 <input type="hidden" id="senderId" value="kimmj" class="form-control bg-transparent" placeholder=" 보내는 사람ID">
                                             </div>
@@ -505,7 +511,7 @@
                                             </div>
                                             <div class="form-group">
                                             	<h5 class="m-b-20">제목</h5>
-                                                <input type="text" id="title" class="form-control bg-transparent" placeholder=" 제목">
+                                                <input type="text" id="title" value="${vo.title}" class="form-control bg-transparent" placeholder=" 제목">
                                             </div>
                                             <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부 파일</h5>
                                             <div class="form-group">
@@ -514,7 +520,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <textarea id="contents" class="textarea_editor form-control bg-light" rows="15" ></textarea>
+                                                <textarea id="contents" class="textarea_editor form-control bg-light" rows="15" ><c:out value="${vo.contents}"/></textarea>
                                             </div>
                                         </form>
                                         <!-- 
@@ -567,11 +573,11 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="${aprilContext}/views/plugins/common/common.min.js"></script>
+    <script src="${aprilContext}/views/js/custom.min.js"></script>
+    <script src="${aprilContext}/views/js/settings.js"></script>
+    <script src="${aprilContext}/views/js/gleek.js"></script>
+    <script src="${aprilContext}/views/js/styleSwitcher.js"></script>
 
 	<script type="text/javascript">
 
@@ -598,9 +604,17 @@
 	var read = "0";
 	//--전역 변수 끝--
 	
+	//--받은 메일함 클릭시 function Start
+	function doRetrieve(){
+    	var searchWord = "honggd01";
+    	location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+searchWord;
+    }
+	//--받은 메일함 클릭시 function End
+	
 	//--이 화면에서 나가기 function Start
 	function exitPage(){
-		if(!confirm("이 화면에서 나가시겠습니까?")) return; 
+		if(!confirm("이 화면에서 나가시겠습니까?")) return;
+		doRetrieve();
 	}
 	//--이 화면에서 나가기 function End
 	
@@ -705,7 +719,7 @@
 				if(null != jData && jData.msgId=="1"){
 					alert(jData.msgMsg);
 					//메일 목록 화면으로 이동
-					location.replace('email_inbox.jsp'); 
+					location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+"honggd01"; 
 				}else{
 					alert(jData.msgMsg);
 				}
