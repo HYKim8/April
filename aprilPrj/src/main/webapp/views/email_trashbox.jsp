@@ -11,7 +11,7 @@
   * author 실행환경 개발팀
   * since 2009.01.06
   *
-  * http://localhost:8080/groupware/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=honggd01
+  * http://localhost:8080/groupware/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord=honggd01
   *
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
@@ -54,7 +54,7 @@ totalCnt = (Integer) request.getAttribute("totalCnt");
 
 //paging (StringUtil render참고)
 //int maxNum_i, int currPageNoIn_i, int rowsPerPage_i, int bottomCount_i, String url_i, String scriptName_i
-String url = H_PATH + "/mail/do_retrieve.do"; //H_PATH: common.jsp에 있음(ehr)
+String url = H_PATH + "/mail/do_retrieveTrash.do"; //H_PATH: common.jsp에 있음(ehr)
 String scriptName = "doSearchPage";
 int maxNum = 0; //총글수
 int currPageNo = 1; //현재 페이지
@@ -499,7 +499,7 @@ if (search != null) {
                                         <a href="#" class="list-group-item border-0 p-r-0"><i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a>
                                          -->
 										<a href="#" class="list-group-item border-0 p-r-0"><i
-											class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a>
+											class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
 									</div>
 									<!-- 
                                     <h5 class="mt-5 m-b-10">카테고리</h5>
@@ -512,32 +512,20 @@ if (search != null) {
                                      -->
 								</div>
 								<div class="email-right-box">
-									<div role="toolbar" class="toolbar">
-										<div class="btn-group">
-											<button type="button" id="resend_btn" class="btn btn-light">
-												<i class="fa fa-mail-reply font-18 align-middle mr-2"></i>답장
-											</button>
-											<button type="button" id="delete_btn" class="btn btn-light">
-												<i class="fa fa-trash font-18 align-middle mr-2"></i>삭제
-											</button>
-											<button type="button" class="btn btn-light">
-												<i class="fa fa-mail-forward font-18 align-middle mr-2"></i>전달
-											</button>
-											<button type="button" id="read" class="btn btn-light">
-												<i class="fa fa-envelope-open font-18 align-middle mr-2"></i>읽음
-											</button>
-											<!-- 
-                                        	<button aria-expanded="false" data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button">More <span class="caret m-l-5"></span>
-                                            </button>
-                                            <div class="dropdown-menu"><span class="dropdown-header">More Option :</span>  
-                                            	<a href="javascript: void(0);" class="dropdown-item">Mark as Unread</a>  
-                                            	<a href="javascript: void(0);" class="dropdown-item">Add to Tasks</a>  
-                                            	<a href="javascript: void(0);" class="dropdown-item">Add Star</a>  
-                                            	<a href="javascript: void(0);" class="dropdown-item">Mute</a>
-                                            </div>
-                                        	 -->
-										</div>
-									</div>
+									<div class="toolbar" role="toolbar">
+                                    	<div role="toolbar" class="toolbar">
+                                    		<div class="media mb-4 mt-1">
+	                                            <div class="media-body">
+	                                                <h2 class="m-0 text-primary"><b>휴지통</b></h2>
+	                                            </div>
+                                        	</div>
+	                                        <!-- <div class="btn-group">
+	                                        	<button type="button" id="reSend_btn" class="btn btn-light"><i class="fa fa-mail-reply font-18 align-middle mr-2"></i>답장</button>
+	                                        	<button type="button" id="delete_btn" class="btn btn-light"><i class="fa fa-trash font-18 align-middle mr-2"></i>삭제</button>
+	                                        	<button type="button" class="btn btn-light"><i class="fa fa-mail-forward font-18 align-middle mr-2"></i>전달</button>
+	                                        </div> -->
+	                                    </div>
+                                    </div>
 									<hr>
 									<div class="email-list m-t-15">
 										<form action="" name="mailFrm">
@@ -976,8 +964,12 @@ if (search != null) {
 	<script type="text/javascript">
 		function doRetrieve() {
 			var searchWord = "honggd01";
-			location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="
-					+ searchWord;
+			location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+ searchWord;
+		}
+
+		function goTrash() {
+			var searchWord = "honggd01";
+			location.href = "${aprilContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+ searchWord;
 		}
 
 		function doSearchPage(url,no){
@@ -1009,175 +1001,6 @@ if (search != null) {
 		});
 		//--메일 list 중 하나 선택했을 때 메일 읽기 페이지로 넘어가는 기능 End
 
-		//--삭제 btn Start
-		$("#delete_btn").on("click",function() {
-			var checkbox = document
-					.getElementsByName("checkbox");
-			var checkLength = checkbox.length;
-			//console.log("checkbox.value : "+checkbox.value);
-
-			if (!confirm("선택한 메일을 삭제하시겠습니까?"))
-				return;
-
-			var cnt = 0;
-			var cntCh = 0;
-			for (var i = 0; i < checkLength; i++) {
-				if (checkbox[i].checked == true) {
-					var mailId = checkbox[i].value;
-					console.log("mailId : " + mailId);
-					cntCh += 1;
-
-					//ajax
-					$.ajax({
-						type : "POST",
-						url : "${pageContext.request.contextPath }/mail/do_updateDisable.do",
-						dataType : "html",
-						async : false,
-						data : {
-							"mailId" : mailId
-						},
-						success : function(data) { //성공
-							//{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
-							//alert(data);
-
-							var jData = JSON.parse(data);
-							if (null != jData&& jData.msgId == "1") {
-								//alert(data);
-								cnt += 1;
-							} else {
-
-							}
-						},
-						error : function(xhr, status,error) {
-							//{"msgId":"0","msgMsg":"삭제 실패.","num":0,"totalCnt":0}
-							alert("error:" + error);
-						},
-						complete : function(data) {
-
-						}
-
-					});//--ajax
-				}//--if
-			}//--for
-
-			if (cntCh == 0) {//선택된 게 없을 때
-				alert("삭제할 메일을 선택해 주십시오.");
-				return;
-			}
-
-			//console.log("cnt : "+cnt);
-			//console.log("cntCh : "+cntCh);
-			if (cnt == cntCh) {
-				alert(cnt + "건의 메일이 삭제되었습니다.");
-			} else {
-				alert("삭제 실패하였습니다.");
-			}
-
-			//현재 페이지 새로 고침
-			window.location.reload();
-
-		});
-		//--삭제 btn End
-
-		//--답장 btn Start
-		$("#resend_btn").on("click",function() {
-			var checkbox = document
-					.getElementsByName("checkbox");
-			var checkLength = checkbox.length;
-			var cnt = 0; //체크된 개수 셀 변수
-			var checkMailId; //체크된 값 불러오기
-			for (var i = 0; i < checkLength; i++) {
-				if (checkbox[i].checked == true) {
-					cnt += 1;
-					checkMailId = checkbox[i].value;
-					console.log("checkMailId : " + checkMailId);
-				}
-			}
-			if (cnt == 1) {
-				if (!confirm("선택하신 메일을 답장하시겠습니까?"))
-					return;
-				location.href = "${aprilContext}/mail/do_selectOneResend.do?mailId="
-						+ checkMailId;
-			} else if (cnt > 1) {
-				alert("하나의 메일만 선택해 주세요.");
-				return;
-			} else {
-				alert("답장할 메일을 선택해 주세요.");
-				return;
-			}
-
-		});
-		//--답장 btn End
-
-		//--읽음 btn Start
-		$("#read").on("click",function() {
-			var checkbox = document.getElementsByName("checkbox");
-			var checkLength = checkbox.length;
-	
-			if (!confirm("읽음 처리 하시겠습니까?"))
-				return;
-	
-			var cnt = 0;
-			var cntCh = 0;
-			for (var i = 0; i < checkLength; i++) {
-				if (checkbox[i].checked == true) {
-					var mailId = checkbox[i].value;
-					//var evelope = "evelope"+i;
-					console.log("mailId : " + mailId);
-					cntCh += 1;
-	
-					//ajax
-					$.ajax({
-						type : "POST",
-						url : "${pageContext.request.contextPath }/mail/do_updateRead.do",
-						dataType : "html",
-						async : false,
-						data : {
-							"mailId" : mailId
-						},
-						success : function(data) { //성공
-							//{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
-							//alert(data);
-
-							var jData = JSON.parse(data);
-							if (null != jData&& jData.msgId == "1") {
-								//alert(data);
-								cnt += 1;
-								//documnet.getElementById('evelope'+i).setAttribute('class','fa fa-envelope-open font-18 align-middle mr-10');
-							} else {
-
-							}
-						},
-						error : function(xhr, status,error) {
-							//{"msgId":"0","msgMsg":"삭제 실패.","num":0,"totalCnt":0}
-							alert("error:" + error);
-						},
-						complete : function(data) {
-
-						}
-
-					});//--ajax
-				}//--if
-			}//--for
-	
-			if (cntCh == 0) {//선택된 게 없을 때
-				alert("읽음 처리 할 메일을 선택해 주십시오.");
-				return;
-			}
-	
-			//console.log("cnt : "+cnt);
-			//console.log("cntCh : "+cntCh);
-			if (cnt == cntCh) {
-				alert(cnt + "건의 메일이 읽음 처리 되었습니다.");
-			} else {
-				alert("읽음 처리 실패하였습니다.");
-			}
-	
-			//현재 페이지 새로 고침
-			window.location.reload();
-	
-		});
-		//--읽음 btn End
 	</script>
 
 </body>

@@ -45,7 +45,7 @@
 	WHERE name = #{recipient} 
     </select>
     
-    <!-- 메일 목록 조회 -->
+    <!-- 받은 메일 목록 조회 -->
     <select id="doRetrieve" parameterType="SearchVO" resultType="MailVO">
     SELECT T1.*,T2.*                                            
 	FROM(                                                       
@@ -82,6 +82,86 @@
 	    --검색조건                                                  
 		AND recipient_id like '%' || #{searchWord} ||'%'
 		AND disable_yn = 'N'   
+	    )T2
+    </select>
+    
+    <!-- 보낸 메일 목록 조회 -->
+    <select id="doRetrieveSent" parameterType="SearchVO" resultType="MailVO">
+    SELECT T1.*,T2.*                                            
+	FROM(                                                       
+	    SELECT  B.mail_id as mailId,                                      
+	            B.category,
+	            B.recipient,
+	            B.recipient_id as recipientId,                                     
+	            B.sender,                                       
+	            B.sender_id as senderId,                                    
+	            B.title,                                        
+	            B.file_id as fileId,                                    
+	            DECODE(TO_CHAR(B.rec_date, 'YYYY/MM/DD'),TO_CHAR(SYSDATE, 'YYYY/MM/DD'),TO_CHAR(B.rec_date,'HH24:MI:SS'),TO_CHAR(B.rec_date,'YYYY/MM/DD HH24:MI:SS')) as recDate,
+	            B.disable_yn as disableYn,                              
+	            B.read,                                    
+	            rnum as num                                      
+	    FROM(                                              
+	        SELECT ROWNUM rnum,                            
+	               A.*                                     
+	        FROM (                                         
+	            SELECT *                                   
+	            FROM email                                 
+	            WHERE 1=1             
+	            --검색조건                                                                             
+				AND sender_id like '%' || #{searchWord} ||'%'
+	            ORDER BY TO_CHAR(rec_date,'YYYYMMDD HH24:MI:SS')  DESC                          
+	        )A --10                                               
+	        WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize} *(#{pageNum} - 1) + #{pageSize})
+	    )B --1                         
+	    WHERE B.RNUM <![CDATA[ >= ]]> (#{pageSize}*(#{pageNum}-1)+1)    
+	    )T1 CROSS JOIN                 
+	    (                              
+	    SELECT count(*) totalCnt     
+	    FROM email                     
+	    WHERE 1=1
+	    --검색조건                                                  
+		AND sender_id like '%' || #{searchWord} ||'%'
+	    )T2
+    </select>
+    
+    <!-- 휴지통 목록 조회 -->
+    <select id="doRetrieveTrash" parameterType="SearchVO" resultType="MailVO">
+    SELECT T1.*,T2.*                                            
+	FROM(                                                       
+	    SELECT  B.mail_id as mailId,                                      
+	            B.category,                                     
+	            B.sender,                                       
+	            B.sender_id as senderId,                                    
+	            B.title,                                        
+	            B.file_id as fileId,                                    
+	            DECODE(TO_CHAR(B.rec_date, 'YYYY/MM/DD'),TO_CHAR(SYSDATE, 'YYYY/MM/DD'),TO_CHAR(B.rec_date,'HH24:MI:SS'),TO_CHAR(B.rec_date,'YYYY/MM/DD HH24:MI:SS')) as recDate,
+	            B.disable_yn as disableYn,                              
+	            B.read,                                    
+	            rnum as num                                      
+	    FROM(                                              
+	        SELECT ROWNUM rnum,                            
+	               A.*                                     
+	        FROM (                                         
+	            SELECT *                                   
+	            FROM email                                 
+	            WHERE 1=1             
+	            --검색조건                                                                             
+				AND recipient_id like '%' || #{searchWord} ||'%'
+				AND disable_yn = 'Y'
+	            ORDER BY TO_CHAR(rec_date,'YYYYMMDD HH24:MI:SS')  DESC                          
+	        )A --10                                               
+	        WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize} *(#{pageNum} - 1) + #{pageSize})
+	    )B --1                         
+	    WHERE B.RNUM <![CDATA[ >= ]]> (#{pageSize}*(#{pageNum}-1)+1)    
+	    )T1 CROSS JOIN                 
+	    (                              
+	    SELECT count(*) totalCnt     
+	    FROM email                     
+	    WHERE 1=1
+	    --검색조건                                                  
+		AND recipient_id like '%' || #{searchWord} ||'%'
+		AND disable_yn = 'Y'   
 	    )T2
     </select>
     

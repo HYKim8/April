@@ -65,6 +65,11 @@ public class MailServiceImple implements MailService {
 		mailDao.doUpdateRead(dto);
 		return mailDao.doSelectOne(dto);
 	}
+	
+	@Override
+	public DTO doSelectOneSent(DTO dto) {
+		return mailDao.doSelectOne(dto);
+	}
 
 	@Override
 	public DTO doSelectUserId(DTO dto) {
@@ -91,6 +96,14 @@ public class MailServiceImple implements MailService {
 		return mailDao.doUpdateRead(dto);
 	}
 
+	@Override
+	public List<?> doRetrieveSent(DTO dto) {
+		return mailDao.doRetrieveSent(dto);
+	}
 	
+	@Override
+	public List<?> doRetrieveTrash(DTO dto) {
+		return mailDao.doRetrieveTrash(dto);
+	}
 
 }

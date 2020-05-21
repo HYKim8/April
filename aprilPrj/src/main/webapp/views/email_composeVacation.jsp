@@ -500,12 +500,15 @@
                                             	<h5 class="m-b-20">제목</h5>
                                                 <input type="text" class="form-control bg-transparent" placeholder=" 제목">
                                             </div>
+                                            <!-- 
                                             <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부 파일</h5>
                                             <div class="form-group">
                                                 <div class="fallback">
                                                     <input class="l-border-1" name="file" type="file" multiple="multiple">
                                                 </div>
                                             </div>
+                                             -->
+                                            
                                             <div class="form-group">
                                                 <textarea class="textarea_editor form-control bg-light" rows="15" placeholder="Enter text ..."></textarea>
                                             </div>

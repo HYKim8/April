@@ -19,6 +19,7 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set  var="aprilContext" value="${pageContext.request.contextPath }"></c:set> 
+<c:set  var="aprilContext" value="${pageContext.request.contextPath }"></c:set> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,11 +31,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="${aprilContext}/views/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="${aprilContext}/views/css/style.css" rel="stylesheet">
+
 </head>
-<%
-    // 인코딩
-    request.setCharacterEncoding("euc-kr");
-%>
+
 <body>
 
     <!--*******************
@@ -423,7 +422,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Apps</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:doRetrieve();">메일</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">메일</a></li>
                     </ol>
                 </div>
             </div>
@@ -435,22 +434,16 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="email-left-box">
-                                <a href="${aprilContext}/views/email_compose.jsp" onclick="exitPage();" class="btn btn-primary btn-block">메일 쓰기</a>
-                                <a href="${aprilContext}/views/email_composeVacation.jsp" onclick="exitPage();" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
+                                <a href="${aprilContext}/views/email_compose.jsp" class="btn btn-primary btn-block">메일 쓰기</a>
+                                <a href="${aprilContext}/views/email_composeVacation.jsp" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="${aprilContext}/views/email_inbox.jsp" onclick="exitPage();" class="list-group-item border-0 text-primary p-r-0">
-                                    		<i class="fa fa-inbox font-18 align-middle mr-2"></i> 
-                                    		<b>받은 메일함</b> 
-                                    		<span class="badge badge-primary badge-sm float-right m-t-5">198</span> 
-                                    	</a>
-                                        <a href="${aprilContext}/views/email_sentbox.jsp" onclick="exitPage();" class="list-group-item border-0 p-r-0">
-                                        	<i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함
-                                        </a>  
-                                        <a href="#" onclick="exitPage();" class="list-group-item border-0 p-r-0"><i class="fa fa-star-o font-18 align-middle mr-2"></i>Important <span class="badge badge-danger badge-sm float-right m-t-5">47</span> </a>
+                                    	<a href="${aprilContext}/views/email_inbox.jsp" onclick="javascript:doRetrieve();" class="list-group-item border-0 p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 메일함</b> <span class="badge badge-primary badge-sm float-right m-t-5">198</span> </a>
+                                        <a href="${aprilContext}/views/email_sentbox.jsp" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함</a>  
+                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-star-o font-18 align-middle mr-2"></i>Important <span class="badge badge-danger badge-sm float-right m-t-5">47</span> </a>
                                         <!-- 
                                         <a href="#" class="list-group-item border-0 p-r-0"><i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a>
                                          -->
-                                        <a href="#" onclick="exitPage();" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a>
+                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a>
                                     </div>
                                     <!-- 
                                     <h5 class="mt-5 m-b-10">카테고리</h5>
@@ -464,73 +457,54 @@
                                 </div>
                                 <div class="email-right-box">
                                     <div class="toolbar" role="toolbar">
-                                    	<div class="btn-group m-b-20">
-	                                        <button id="mailSend_btn" class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" type="button"><i class="fa fa-paper-plane m-r-5"></i> 보내기</button>
-	                                        <button id="rewrite_btn" class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"><i class="ti-close m-r-5 f-s-12"></i> 다시 쓰기</button>
-                                    	</div>
-                                    	<!-- 
-                                    	<div class="btn-group m-b-20">
-                                            <button type="button" class="btn btn-light"><i class="fa fa-archive"></i></button>
-                                            <button type="button" class="btn btn-light"><i class="fa fa-exclamation-circle"></i></button>
-                                            <button type="button" class="btn btn-light"><i class="fa fa-trash"></i></button>
-                                        </div>
-                                        <div class="btn-group m-b-20">
-                                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"><i class="fa fa-folder"></i>  <b class="caret m-l-5"></b>
-                                            </button>
-                                            <div class="dropdown-menu"><span class="dropdown-header">Move to</span>  <a class="dropdown-item" href="javascript: void(0);">Social</a>  <a class="dropdown-item" href="javascript: void(0);">Promotions</a>  <a class="dropdown-item" href="javascript: void(0);">Updates</a> 
-                                                <a class="dropdown-item" href="javascript: void(0);">Forums</a>
-                                            </div>
-                                        </div>
-                                        <div class="btn-group m-b-20">
-                                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"><i class="fa fa-tag"></i>  <b class="caret m-l-5"></b>
-                                            </button>
-                                            <div class="dropdown-menu"><span class="dropdown-header">Label as:</span>  <a class="dropdown-item" href="javascript: void(0);">Updates</a>  <a class="dropdown-item" href="javascript: void(0);">Social</a>  <a class="dropdown-item" href="javascript: void(0);">Promotions</a> 
-                                                <a class="dropdown-item" href="javascript: void(0);">Forums</a>
-                                            </div>
-                                        </div>
-                                        <div class="btn-group m-b-20">
-                                            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">More <span class="caret m-l-5"></span>
-                                            </button>
-                                            <div class="dropdown-menu"><span class="dropdown-header">More Option :</span>  <a class="dropdown-item" href="javascript: void(0);">Mark as Unread</a>  <a class="dropdown-item" href="javascript: void(0);">Add to Tasks</a>  <a class="dropdown-item"
-                                                href="javascript: void(0);">Add Star</a>  <a class="dropdown-item" href="javascript: void(0);">Mute</a>
-                                            </div>
-                                        </div>
-                                    	 -->
+                                    	<div role="toolbar" class="toolbar">
+                                    		<div class="media mb-4 mt-1">
+	                                            <div class="media-body">
+	                                                <h2 class="m-0 text-primary"><b>보낸 메일함</b></h2>
+	                                            </div>
+                                        	</div>
+	                                        <!-- <div class="btn-group">
+	                                        	<button type="button" id="reSend_btn" class="btn btn-light"><i class="fa fa-mail-reply font-18 align-middle mr-2"></i>답장</button>
+	                                        	<button type="button" id="delete_btn" class="btn btn-light"><i class="fa fa-trash font-18 align-middle mr-2"></i>삭제</button>
+	                                        	<button type="button" class="btn btn-light"><i class="fa fa-mail-forward font-18 align-middle mr-2"></i>전달</button>
+	                                        </div> -->
+	                                    </div>
                                     </div>
+                                    <hr>
                                     <div class="compose-content mt-5">
-                                           <div class="form-group">
-                                           	<h5 class="m-b-20">받는 사람 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="checkMe">&nbsp;&nbsp;나에게</h5> 
-                                               <input type="text" id="recipient" name="recipient" value="${vo.sender}" class="form-control bg-transparent" placeholder=" 받는 사람">
-                                               <input type="hidden" id="sender" value="김민지" class="form-control bg-transparent" placeholder=" 보내는 사람">
-                                               <input type="hidden" id="senderId" value="kimmj" class="form-control bg-transparent" placeholder=" 보내는 사람ID">
-                                           </div>
-                                           <div class="form-group">
-                                           	<h5 class="m-b-20">참조</h5>
-                                               <input type="text" id="recipient_add" class="form-control bg-transparent" placeholder=" 참조">
-                                           </div>
-                                           <div class="form-group">
-                                           	<h5 class="m-b-20">제목</h5>
-                                               <input type="text" id="title" value="${vo.title}" class="form-control bg-transparent" placeholder=" 제목">
-                                           </div>
-                                           <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부 파일</h5>
-                                           <hr>
-										   <form class="form-horizontal" action="${hContext}/file/do_insert.do" method="post" enctype="multipart/form-data">
-											   <div class="form-group">
-												   <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">File1</label>
-												   <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-													   <input type="file" class="form-control" name="file01" placeholder="파일01">
-												   </div>
-											   </div>
-										   </form>
-										   <hr>
-                                           <!-- <div class="form-group">
-                                               <div class="fallback">
-                                                   <input class="l-border-1" id="fileUp" name="file" type="file" multiple="multiple">
-                                               </div>
-                                           </div> -->
-                                           <div class="form-group">
-                                               <textarea id="contents" class="textarea_editor form-control bg-light" rows="15" ><c:out value="${vo.contents}"/></textarea>
-                                           </div>
+                                        <form action="" id="readFrm" method="get">
+                                        	<input type="hidden" id="mailId" name="mailId" value="${vo.mailId}">
+                                        	<input type="hidden" id="sender" name="sender" value="${vo.sender}">
+                                        	<input type="hidden" id="recipient" name="recipient" value="${vo.recipient}">
+                                        	<input type="hidden" id="contents" name="contents" value="${vo.contents}">
+                                        	<input type="hidden" id="title" name="title" value="${vo.title}">
+                                        	<div class="media mb-4 mt-1">
+	                                            <div class="media-body"><span class="float-right"><c:out value="${vo.recDate}"></c:out></span>
+	                                                <h2 class="m-0 text-primary"><c:out value="${vo.title}" /></h2>
+	                                            </div>
+                                        	</div>
+                                            <div class="form-group">
+                                            	<h5 class="m-b-20">보낸 사람 &nbsp;&nbsp;&nbsp;&nbsp;</h5> 
+                                                <input type="text" id="sender" value="${vo.sender}" class="form-control bg-transparent" readonly="readonly">
+                                            </div>
+                                            <div class="form-group">
+                                            	<h5 class="m-b-20">받는 사람</h5>
+                                                <input type="text" id="recipient" value="${vo.recipient}" class="form-control bg-transparent" readonly="readonly">
+                                            </div>
+                                            <h6 class="p-t-15"><i class="fa fa-download mb-2"></i> 첨부파일 <span>(3)</span></h6>
+	                                        <div class="row m-b-30">
+	                                            <div class="col-auto"><a href="#" class="text-muted">My-Photo.png</a>
+	                                            </div>
+	                                            <div class="col-auto"><a href="#" class="text-muted">My-File.docx</a>
+	                                            </div>
+	                                            <div class="col-auto"><a href="#" class="text-muted">My-Resume.pdf</a>
+	                                            </div>
+	                                        </div>
+	                                        <hr>
+                                            <div class="form-group">
+                                                <textarea id="contents" class="textarea_editor form-control bg-light" rows="15" readonly="readonly"><c:out value="${vo.contents}" /></textarea>
+                                            </div>
+                                        </form>
                                         <!-- 
                                         <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> Attatchment</h5>
                                         <form action="#" class="dropzone">
@@ -586,138 +560,38 @@
     <script src="${aprilContext}/views/js/settings.js"></script>
     <script src="${aprilContext}/views/js/gleek.js"></script>
     <script src="${aprilContext}/views/js/styleSwitcher.js"></script>
+    
+    <script type="text/javascript">
 
-	<script type="text/javascript">
-
-	//--전역 변수--
-	//받는 사람
-	var recipient;
-	//참조
-	var recipient_add;
-	//제목
-	var title;
-	//첨부파일
-	var fileUp;
-	//내용
-	var contents;
-	//보내는 사람(나중에 session하면 다시 코딩)
-	var sender;
-	//보내는 사람 ID
-	var senderId; 
-	//카테고리
-	var category = "mail";
-	//삭제 여부
-	var disableYn = "N";
-	//Read
-	var read = "0";
-	//--전역 변수 끝--
-	
-	//--받은 메일함 클릭시 function Start
+    //--받은 메일함 클릭시 function Start
 	function doRetrieve(){
     	var searchWord = "honggd01";
     	location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+searchWord;
     }
 	//--받은 메일함 클릭시 function End
 	
-	//--이 화면에서 나가기 function Start
-	function exitPage(){
-		if(!confirm("이 화면에서 나가시겠습니까?")) return;
-		doRetrieve();
-	}
-	//--이 화면에서 나가기 function End
-	
-	//--checkbox(나에게) 클릭시 이벤트 발생 Start
-	$("#checkMe").change(function(){
-		if($("#checkMe").is(":checked")){
-			//alert("checkbox check!");
-			$("#recipient").val("김민지");
-		}else{
-			//alert("checkbox uncheck!");
-			$("#recipient").val("");
-		}
+	//--답장 btn Start
+	$("#reSend_btn").on("click",function(){
+
+		if(!confirm("답장하시겠습니까?")) return;
+
+		var mailId = $("#mailId").val();
+		location.href = "${aprilContext}/mail/do_selectOneResend.do?mailId="+mailId;
+		
 	});
-	//--checkbox(나에게) 클릭시 이벤트 발생 End
+	//--답장 btn End
 	
-	//--다시쓰기 Btn Start
-	$("#rewrite_btn").on("click",function(){
-
-		if(!confirm("다시 작성하시겠습니까?")) return;
-
-		$("#recipient").val("");
-		$("#recipient_add").val("");
-		$("#title").val("");
-		//파일은 나중에 코딩
-		//$("#fileUp").val("");
-		$("#contents").val("");
-
-		alert("초기화 되었습니다.");		
-	});	
-	//--다시쓰기 Btn End
-	
-	//--메일 보내기 Btn Start
-	$("#mailSend_btn").on("click",function(){
-		//받는 사람 
-		recipient = $("#recipient").val().trim();
-		if(null==recipient || recipient.length<1){
-			$("#recipient").focus();
-			alert("받는 사람을 입력하세요.");
-			return;
-		}
-
-		//참조
-		recipient_add = $("#recipient_add").val().trim();
-		console.log("recipient_add"+recipient_add);
-		if(recipient_add !== "" || recipient_add.length>1){
-			//참조값이 있으면 ,붙이고 recipient값으로 넘겨주기
-			recipient = recipient+","+recipient_add;
-			console.log("recipient"+recipient);
-		}
-
-		//제목
-		title = $("#title").val().trim();
-		if(null==title || title.length<1){
-			if(confirm("'제목 없음'으로 보내겠습니까?")){
-				title = "제목 없음";
-			}else{
-				$("#title").focus();
-				return;
-			}
-		}
-
-		//첨부파일
-		fileUp = $("#fileUp").val().trim();
-
-		//내용
-		contents = $("#contents").val();
-		if(null==contents || contents.length<1){
-			if(confirm("'내용 없음'으로 보내겠습니까?")){
-				contents = "내용 없음";
-			}else{
-				$("#contents").focus();
-				return;
-			}
-		}
-
-		//보내는 사람(나중에 session하면 다시 코딩)
-		sender = $("#sender").val().trim();
-		senderId = $("#senderId").val().trim();
-
-		if(false==confirm("메일을 전송하시겠습니까?")) return;
+	//--삭제 btn Start
+	$("#delete_btn").on("click",function(){
+		if(!confirm("삭제하시겠습니까?")) return;
+		var mailId = $("#mailId").val();
 
 		//ajax
 		$.ajax({
 			type:"POST",
-			url:"${pageContext.request.contextPath }/mail/do_insert.do",
+			url:"${pageContext.request.contextPath }/mail/do_updateDisable.do",
 			dataType:"html", 
-			data:{"recipient":recipient,
-				  "title":title,
-				  "fileId":fileUp,
-				  "contents":contents,
-				  "sender":sender,
-				  "senderId":senderId,
-				  "category":category,
-				  "disableYn":disableYn,
-				  "read":read
+			data:{"mailId":mailId
 			},
 			success:function(data){ //성공
 				//{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
@@ -727,7 +601,7 @@
 				if(null != jData && jData.msgId=="1"){
 					alert(jData.msgMsg);
 					//메일 목록 화면으로 이동
-					location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+"honggd01"; 
+					doRetrieve();
 				}else{
 					alert(jData.msgMsg);
 				}
@@ -742,9 +616,10 @@
 		
 		});//--ajax
 	});
-	//--메일 보내기 Btn End
-
-	</script>
+	//--삭제 btn End
+	
+	
+    </script>
 
 </body>
 

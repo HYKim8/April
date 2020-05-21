@@ -56,11 +56,25 @@ public interface MailDao {
 	public int doDelete(DTO dto);
 	
 	/**
-	 * 목록조회
+	 * 받은 메일 목록조회
 	 * @param dto
 	 * @return
 	 */
 	public List<?> doRetrieve(DTO dto);
+	
+	/**
+	 * 보낸 메일 목록조회
+	 * @param dto
+	 * @return
+	 */
+	public List<?> doRetrieveSent(DTO dto);
+	
+	/**
+	 * 휴지통 목록조회
+	 * @param dto
+	 * @return
+	 */
+	public List<?> doRetrieveTrash(DTO dto);
 	   
 	/**
 	 * 전체 조회

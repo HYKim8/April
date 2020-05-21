@@ -82,6 +82,75 @@ public class MailDaoImple implements MailDao {
 	public int doUpdate(DTO dto) {
 		return 0;
 	}
+	
+	@Override
+	public int doUpdateDisable(DTO dto) {
+		
+		MailVO inVO = (MailVO) dto;
+		
+		LOG.debug("=====MailDaoImple [doUpdateDisable] Start======");
+		
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doUpdateDisable";
+		LOG.debug("** statement : "+statement);
+		
+		inVO.setDisableYn("Y");
+		
+		int  flag = this.sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("** flag : "+flag);
+		
+		LOG.debug("=====MailDaoImple [doUpdateDisable] End======");
+		
+		return flag;
+		
+//----------mybatis 쓰기 전
+//		int flag = 0;
+//		MailVO inVO = (MailVO) dto;
+//		StringBuilder sb=new StringBuilder();
+//		sb.append(" UPDATE email	         \n");
+//		sb.append(" SET disable_yn = ?		   \n");
+//		sb.append(" WHERE                    \n");
+//		sb.append("     mail_id = ?             \n");
+//		
+//		LOG.debug("==============================");
+//		LOG.debug("=Query=\n"+sb.toString());
+//		LOG.debug("=Param= "+inVO.toString());
+//		
+//		inVO.setDisableYn("Y");
+//		
+//		Object[] args= {inVO.getDisableYn()
+//						,inVO.getMailId()};
+//		flag = this.jdbcTemplate.update(sb.toString(), args);
+//		LOG.debug("=flag= "+flag);
+//		LOG.debug("==============================");
+//		return flag;
+	}
+
+	@Override
+	public int doUpdateRead(DTO dto) {
+		
+		MailVO inVO = (MailVO) dto;
+		
+		LOG.debug("=====MailDaoImple [doUpdateRead] Start======");
+		
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doUpdateRead";
+		LOG.debug("** statement : "+statement);
+		
+		inVO.setRead("9");
+		
+		int  flag = this.sqlSessionTemplate.update(statement, inVO);
+		LOG.debug("** flag : "+flag);
+		
+		LOG.debug("=====MailDaoImple [doUpdateRead] End======");
+		
+		return flag;
+		
+	}
 
 	@Override
 	public DTO doSelectOne(DTO dto) {
@@ -305,6 +374,26 @@ public class MailDaoImple implements MailDao {
 //		LOG.debug("param:"+listArg);
 //		return retList;
 	}
+	
+	@Override
+	public List<?> doRetrieveSent(DTO dto) {
+		SearchVO inVO = (SearchVO) dto;
+		
+		LOG.debug("=====MailDaoImple [doRetrieveSent] Start======");
+		
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doRetrieveSent";
+		LOG.debug("** statement : "+statement);
+		
+		List<MailVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
+		LOG.debug("** outList : "+outList);
+		
+		LOG.debug("=====MailDaoImple [doRetrieveSent] End======");
+		
+		return outList;
+	}
 
 	@Override
 	public List<?> getAll(DTO dto) {
@@ -313,72 +402,23 @@ public class MailDaoImple implements MailDao {
 	}
 
 	@Override
-	public int doUpdateDisable(DTO dto) {
+	public List<?> doRetrieveTrash(DTO dto) {
+SearchVO inVO = (SearchVO) dto;
 		
-		MailVO inVO = (MailVO) dto;
-		
-		LOG.debug("=====MailDaoImple [doUpdateDisable] Start======");
-		
-		LOG.debug("** inVO : "+inVO);
-		
-		// namespace+id = com.sist.ehr.board.doInsert 
-		String statement = NAMESPACE+".doUpdateDisable";
-		LOG.debug("** statement : "+statement);
-		
-		inVO.setDisableYn("Y");
-		
-		int  flag = this.sqlSessionTemplate.update(statement, inVO);
-		LOG.debug("** flag : "+flag);
-		
-		LOG.debug("=====MailDaoImple [doUpdateDisable] End======");
-		
-		return flag;
-		
-//----------mybatis 쓰기 전
-//		int flag = 0;
-//		MailVO inVO = (MailVO) dto;
-//		StringBuilder sb=new StringBuilder();
-//		sb.append(" UPDATE email	         \n");
-//		sb.append(" SET disable_yn = ?		   \n");
-//		sb.append(" WHERE                    \n");
-//		sb.append("     mail_id = ?             \n");
-//		
-//		LOG.debug("==============================");
-//		LOG.debug("=Query=\n"+sb.toString());
-//		LOG.debug("=Param= "+inVO.toString());
-//		
-//		inVO.setDisableYn("Y");
-//		
-//		Object[] args= {inVO.getDisableYn()
-//						,inVO.getMailId()};
-//		flag = this.jdbcTemplate.update(sb.toString(), args);
-//		LOG.debug("=flag= "+flag);
-//		LOG.debug("==============================");
-//		return flag;
-	}
-
-	@Override
-	public int doUpdateRead(DTO dto) {
-		
-		MailVO inVO = (MailVO) dto;
-		
-		LOG.debug("=====MailDaoImple [doUpdateRead] Start======");
+		LOG.debug("=====MailDaoImple [doRetrieveTrash] Start======");
 		
 		LOG.debug("** inVO : "+inVO);
 		
 		// namespace+id = com.sist.ehr.board.doInsert 
-		String statement = NAMESPACE+".doUpdateRead";
+		String statement = NAMESPACE+".doRetrieveTrash";
 		LOG.debug("** statement : "+statement);
 		
-		inVO.setRead("9");
+		List<MailVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
+		LOG.debug("** outList : "+outList);
 		
-		int  flag = this.sqlSessionTemplate.update(statement, inVO);
-		LOG.debug("** flag : "+flag);
+		LOG.debug("=====MailDaoImple [doRetrieveTrash] End======");
 		
-		LOG.debug("=====MailDaoImple [doUpdateRead] End======");
-		
-		return flag;
-		
+		return outList;
 	}
 
 

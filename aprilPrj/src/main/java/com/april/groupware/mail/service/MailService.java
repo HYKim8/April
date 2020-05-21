@@ -42,6 +42,13 @@ public interface MailService {
 	public DTO doSelectOne(DTO dto);
 	
 	/**
+	 * 보낸 메일 단건조회
+	 * @param dto
+	 * @return DTO
+	 */
+	public DTO doSelectOneSent(DTO dto);
+	
+	/**
 	 * ORGANIZATION 테이블에서 Id 조회
 	 * @param dto
 	 * @return
@@ -56,11 +63,25 @@ public interface MailService {
 	public int doDelete(DTO dto);
 	
 	/**
-	 * 목록조회
+	 * 받은 메일 목록조회
 	 * @param dto
 	 * @return
 	 */
 	public List<?> doRetrieve(DTO dto);
+	
+	/**
+	 * 보낸 메일 목록조회
+	 * @param dto
+	 * @return
+	 */
+	public List<?> doRetrieveSent(DTO dto);
+	
+	/**
+	 * 휴지통 목록조회
+	 * @param dto
+	 * @return
+	 */
+	public List<?> doRetrieveTrash(DTO dto);
 	
 
 }

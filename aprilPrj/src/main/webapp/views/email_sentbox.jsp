@@ -11,11 +11,62 @@
   * author 실행환경 개발팀
   * since 2009.01.06
   *
+  * http://localhost:8080/groupware/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=kimmj
+  *
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.april.groupware.cmn.StringUtil"%>
+<%@page import="com.april.groupware.cmn.SearchVO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/views/common/common.jsp"%>
+<c:set var="aprilContext" value="${pageContext.request.contextPath }"></c:set>
+<%
+	//페이지 사이즈
+String pageSize = "10";
+
+//페이지 num
+String pageNum = "1";
+
+//검색구분
+String searchDiv = "";
+
+//검색어
+String searchWord = "kimmj";
+
+SearchVO search = (SearchVO) request.getAttribute("vo");
+if (search != null) {
+	pageSize = String.valueOf(search.getPageSize());
+	pageNum = String.valueOf(search.getPageNum());
+	searchDiv = String.valueOf(search.getSearchDiv());
+	searchWord = String.valueOf(search.getSearchWord());
+
+}
+//out.print("search: "+search);
+
+int totalCnt = 0;
+totalCnt = (Integer) request.getAttribute("totalCnt");
+//out.print("**totalCnt**"+totalCnt);
+
+//paging (StringUtil render참고)
+//int maxNum_i, int currPageNoIn_i, int rowsPerPage_i, int bottomCount_i, String url_i, String scriptName_i
+String url = H_PATH + "/mail/do_retrieveSent.do"; //H_PATH: common.jsp에 있음(ehr)
+String scriptName = "doSearchPage";
+int maxNum = 0; //총글수
+int currPageNo = 1; //현재 페이지
+int rowPerPage = 10;
+int bottomCount = 7; //바닥에 보여지는 글 수
+
+if (search != null) {
+	currPageNo = search.getPageNum();
+	rowPerPage = search.getPageSize();
+	maxNum = totalCnt;
+}
+//--//paging
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,9 +75,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>메일</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${aprilContext}/views/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${aprilContext}/views/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -57,11 +108,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                <a href="${aprilContext}/views/index.html">
+                    <b class="logo-abbr"><img src="${aprilContext}/views/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="${aprilContext}/views/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img src="${aprilContext}/views/images/logo-text.png" alt="">
                     </span>
                 </a>
             </div>
@@ -109,7 +160,7 @@
                                     <ul>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${aprilContext}/views/images/avatar/1.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Saiful Islam</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -119,7 +170,7 @@
                                         </li>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${aprilContext}/views/images/avatar/2.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Adam Smith</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -129,7 +180,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${aprilContext}/views/images/avatar/3.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Barak Obama</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -139,7 +190,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${aprilContext}/views/images/avatar/4.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Hilari Clinton</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -220,23 +271,23 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="${aprilContext}/views/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="${aprilContext}/views/app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
-                                            <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
+                                            <a href="${aprilContext}/views/email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
                                         </li>
                                         
-                                        <hr class="my-2">
+                                        <hr class="my-2"/>
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="${aprilContext}/views/page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="${aprilContext}/views/page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -261,7 +312,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
+                            <li><a href="${aprilContext}/views/index.html">Home 1</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -270,18 +321,18 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Blank</a></li>
-                            <li><a href="./layout-one-column.html">One Column</a></li>
-                            <li><a href="./layout-two-column.html">Two column</a></li>
-                            <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-                            <li><a href="./layout-vertical.html">Vertical</a></li>
-                            <li><a href="./layout-horizontal.html">Horizontal</a></li>
-                            <li><a href="./layout-boxed.html">Boxed</a></li>
-                            <li><a href="./layout-wide.html">Wide</a></li>
+                            <li><a href="${aprilContext}/views/layout-blank.html">Blank</a></li>
+                            <li><a href="${aprilContext}/views/layout-one-column.html">One Column</a></li>
+                            <li><a href="${aprilContext}/views/layout-two-column.html">Two column</a></li>
+                            <li><a href="${aprilContext}/views/layout-compact-nav.html">Compact Nav</a></li>
+                            <li><a href="${aprilContext}/views/layout-vertical.html">Vertical</a></li>
+                            <li><a href="${aprilContext}/views/layout-horizontal.html">Horizontal</a></li>
+                            <li><a href="${aprilContext}/views/layout-boxed.html">Boxed</a></li>
+                            <li><a href="${aprilContext}/views/layout-wide.html">Wide</a></li>
                             
                             
-                            <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                            <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
+                            <li><a href="${aprilContext}/views/layout-fixed-header.html">Fixed Header</a></li>
+                            <li><a href="${aprilContext}/views/layout-fixed-sidebar.html">Fixed Sidebar</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Apps</li>
@@ -295,8 +346,8 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
+                            <li><a href="${aprilContext}/views/app-profile.html">Profile</a></li>
+                            <li><a href="${aprilContext}/views/app-calender.html">Calender</a></li>
                         </ul>
                     </li>
                     <li>
@@ -304,12 +355,12 @@
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
-                            <li><a href="./chart-morris.html">Morris</a></li>
-                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
-                            <li><a href="./chart-chartist.html">Chartist</a></li>
-                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
-                            <li><a href="./chart-peity.html">Peity</a></li>
+                            <li><a href="${aprilContext}/views/chart-flot.html">Flot</a></li>
+                            <li><a href="${aprilContext}/views/chart-morris.html">Morris</a></li>
+                            <li><a href="${aprilContext}/views/chart-chartjs.html">Chartjs</a></li>
+                            <li><a href="${aprilContext}/views/chart-chartist.html">Chartist</a></li>
+                            <li><a href="${aprilContext}/views/chart-sparkline.html">Sparkline</a></li>
+                            <li><a href="${aprilContext}/views/chart-peity.html">Peity</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">UI Components</li>
@@ -318,22 +369,22 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Accordion</a></li>
-                            <li><a href="./ui-alert.html">Alert</a></li>
-                            <li><a href="./ui-badge.html">Badge</a></li>
-                            <li><a href="./ui-button.html">Button</a></li>
-                            <li><a href="./ui-button-group.html">Button Group</a></li>
-                            <li><a href="./ui-cards.html">Cards</a></li>
-                            <li><a href="./ui-carousel.html">Carousel</a></li>
-                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                            <li><a href="./ui-list-group.html">List Group</a></li>
-                            <li><a href="./ui-media-object.html">Media Object</a></li>
-                            <li><a href="./ui-modal.html">Modal</a></li>
-                            <li><a href="./ui-pagination.html">Pagination</a></li>
-                            <li><a href="./ui-popover.html">Popover</a></li>
-                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="./ui-tab.html">Tab</a></li>
-                            <li><a href="./ui-typography.html">Typography</a></li>
+                            <li><a href="${aprilContext}/views/ui-accordion.html">Accordion</a></li>
+                            <li><a href="${aprilContext}/views/ui-alert.html">Alert</a></li>
+                            <li><a href="${aprilContext}/views/ui-badge.html">Badge</a></li>
+                            <li><a href="${aprilContext}/views/ui-button.html">Button</a></li>
+                            <li><a href="${aprilContext}/views/ui-button-group.html">Button Group</a></li>
+                            <li><a href="${aprilContext}/views/ui-cards.html">Cards</a></li>
+                            <li><a href="${aprilContext}/views/ui-carousel.html">Carousel</a></li>
+                            <li><a href="${aprilContext}/views/ui-dropdown.html">Dropdown</a></li>
+                            <li><a href="${aprilContext}/views/ui-list-group.html">List Group</a></li>
+                            <li><a href="${aprilContext}/views/ui-media-object.html">Media Object</a></li>
+                            <li><a href="${aprilContext}/views/ui-modal.html">Modal</a></li>
+                            <li><a href="${aprilContext}/views/ui-pagination.html">Pagination</a></li>
+                            <li><a href="${aprilContext}/views/ui-popover.html">Popover</a></li>
+                            <li><a href="${aprilContext}/views/ui-progressbar.html">Progressbar</a></li>
+                            <li><a href="${aprilContext}/views/ui-tab.html">Tab</a></li>
+                            <li><a href="${aprilContext}/views/ui-typography.html">Typography</a></li>
                         <!-- </ul>
                     </li>
                     <li>
@@ -341,14 +392,14 @@
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>
                         <ul aria-expanded="false"> -->
-                            <li><a href="./uc-nestedable.html">Nestedable</a></li>
-                            <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
-                            <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
-                            <li><a href="./uc-toastr.html">Toastr</a></li>
+                            <li><a href="${aprilContext}/views/uc-nestedable.html">Nestedable</a></li>
+                            <li><a href="${aprilContext}/views/uc-noui-slider.html">Noui Slider</a></li>
+                            <li><a href="${aprilContext}/views/uc-sweetalert.html">Sweet Alert</a></li>
+                            <li><a href="${aprilContext}/views/uc-toastr.html">Toastr</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="widgets.html" aria-expanded="false">
+                        <a href="${aprilContext}/views/widgets.html" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Widget</span>
                         </a>
                     </li>
@@ -358,11 +409,11 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
-                            <li><a href="./form-step.html">Step Form</a></li>
-                            <li><a href="./form-editor.html">Editor</a></li>
-                            <li><a href="./form-picker.html">Picker</a></li>
+                            <li><a href="${aprilContext}/views/form-basic.html">Basic Form</a></li>
+                            <li><a href="${aprilContext}/views/form-validation.html">Form Validation</a></li>
+                            <li><a href="${aprilContext}/views/form-step.html">Step Form</a></li>
+                            <li><a href="${aprilContext}/views/form-editor.html">Editor</a></li>
+                            <li><a href="${aprilContext}/views/form-picker.html">Picker</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Table</li>
@@ -371,8 +422,8 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
+                            <li><a href="${aprilContext}/views/table-basic.html" aria-expanded="false">Basic Table</a></li>
+                            <li><a href="${aprilContext}/views/table-datatable.html" aria-expanded="false">Data Table</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Pages</li>
@@ -381,16 +432,16 @@
                             <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./page-login.html">Login</a></li>
-                            <li><a href="./page-register.html">Register</a></li>
-                            <li><a href="./page-lock.html">Lock Screen</a></li>
+                            <li><a href="${aprilContext}/views/page-login.html">Login</a></li>
+                            <li><a href="${aprilContext}/views/page-register.html">Register</a></li>
+                            <li><a href="${aprilContext}/views/page-lock.html">Lock Screen</a></li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
                                 <ul aria-expanded="false">
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
+                                    <li><a href="${aprilContext}/views/page-error-404.html">Error 404</a></li>
+                                    <li><a href="${aprilContext}/views/page-error-403.html">Error 403</a></li>
+                                    <li><a href="${aprilContext}/views/page-error-400.html">Error 400</a></li>
+                                    <li><a href="${aprilContext}/views/page-error-500.html">Error 500</a></li>
+                                    <li><a href="${aprilContext}/views/page-error-503.html">Error 503</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -423,16 +474,18 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="email-left-box">
-                                	<a href="email-compose.html" class="btn btn-primary btn-block">메일 쓰기</a>
-                                	<a href="email-composeVacation.html" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
+                                	<a href="${aprilContext}/views/email-compose.html" class="btn btn-primary btn-block">메일 쓰기</a>
+                                	<a href="${aprilContext}/views/email-composeVacation.html" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="email-inbox.html" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은 메일함</b> <span class="badge badge-primary badge-sm float-right m-t-5">198</span> </a>
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함</a>  
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-star-o font-18 align-middle mr-2"></i>Important <span class="badge badge-danger badge-sm float-right m-t-5">47</span> </a>
+                                    	<a href="${aprilContext}/views/email-inbox.html" class="list-group-item border-0 p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> 
+	                                    	<b>받은 메일함</b> 
+	                                    	<span class="badge badge-primary badge-sm float-right m-t-5">198</span> 
+                                    	</a>
+                                        <a href="#" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함</a>  
                                         <!-- 
                                         <a href="#" class="list-group-item border-0 p-r-0"><i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a>
                                          -->
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>Trash</a>
+                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
                                     <!-- 
                                     <h5 class="mt-5 m-b-10">카테고리</h5>
@@ -446,309 +499,72 @@
                                 </div>
                                 <div class="email-right-box">
                                     <div role="toolbar" class="toolbar">
-                                        <div class="btn-group">
+                                    	<!-- <div class="btn-group">
                                         	<button type="button" class="btn btn-light"><i class="fa fa-mail-reply font-18 align-middle mr-2"></i>답장</button>
                                         	<button type="button" class="btn btn-light"><i class="fa fa-trash font-18 align-middle mr-2"></i>삭제</button>
                                         	<button type="button" class="btn btn-light"><i class="fa fa-mail-forward font-18 align-middle mr-2"></i>전달</button>
                                         	<button type="button" class="btn btn-light"><i class="fa fa-envelope-open font-18 align-middle mr-2"></i>읽음</button>
-                                        	<!-- 
                                         	<button aria-expanded="false" data-toggle="dropdown" class="btn btn-dark dropdown-toggle" type="button">More <span class="caret m-l-5"></span>
                                             </button>
-                                            <div class="dropdown-menu"><span class="dropdown-header">More Option :</span>  
-                                            	<a href="javascript: void(0);" class="dropdown-item">Mark as Unread</a>  
-                                            	<a href="javascript: void(0);" class="dropdown-item">Add to Tasks</a>  
-                                            	<a href="javascript: void(0);" class="dropdown-item">Add Star</a>  
-                                            	<a href="javascript: void(0);" class="dropdown-item">Mute</a>
-                                            </div>
-                                        	 -->
-                                            
-                                        </div>
+                                    	</div> -->
+										<table class="table table-striped table-bordered sung">
+										<!-- hidden-sm hidden-xs 숨기기 -->
+											<thead class="bg-primary" style="text-align: center; color:white;">
+												<th width="15%" style="">작성일</th>
+												<th width="10%" >수신자</th>
+												<th width="55%">제목</th>
+												<th width="10%">읽음 여부</th>
+											</thead>
+										</table>
                                     </div>
+                                    <hr>
                                     <div class="email-list m-t-15">
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk2">
-                                                        <label class="toggle" for="chk2"></label>
-                                                    </div>
-                                                    <span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk3">
-                                                        <label class="toggle" for="chk3"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk4">
-                                                        <label class="toggle" for="chk4"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk5">
-                                                        <label class="toggle" for="chk5"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk6">
-                                                        <label class="toggle" for="chk6"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk7">
-                                                        <label class="toggle" for="chk7"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk8">
-                                                        <label class="toggle" for="chk8"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message unread">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk9">
-                                                        <label class="toggle" for="chk9"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message unread">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk10">
-                                                        <label class="toggle" for="chk10"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk11">
-                                                        <label class="toggle" for="chk11"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk12">
-                                                        <label class="toggle" for="chk12"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk13">
-                                                        <label class="toggle" for="chk13"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk14">
-                                                        <label class="toggle" for="chk14"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message unread">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk15">
-                                                        <label class="toggle" for="chk15"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk16">
-                                                        <label class="toggle" for="chk16"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk17">
-                                                        <label class="toggle" for="chk17"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk18">
-                                                        <label class="toggle" for="chk18"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Ingredia Nutrisha, A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk19">
-                                                        <label class="toggle" for="chk19"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message unread">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk20">
-                                                        <label class="toggle" for="chk20"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                        <div class="message">
-                                            <a href="email-read.html">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="email-checkbox">
-                                                        <input type="checkbox" id="chk21">
-                                                        <label class="toggle" for="chk21"></label>
-                                                    </div><span class="star-toggle ti-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <div class="subject">Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of</div>
-                                                    <div class="date">11:49 am</div>
-                                                </div>
-                                            </a>
-                                        </div>
+                                    	<form action="" name="mailFrm">
+											<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum}" />
+											<input type="hidden" id="searchWord" name="searchWord"value="kimmj" />
+											<table id="listTable" class="table table-striped table-bordered">
+												
+												<tbody>
+													<c:choose>
+														<c:when test="${list.size()>0 }">
+															<c:forEach var="vo" items="${list}">
+																<tr style="text-align: center;">
+																	<td width="15%"><c:out value="${vo.recDate}"></c:out></td>
+																	<td width="10%"><c:out value="${vo.recipient}"></c:out></td>
+																	<td width="55%" style="text-align: left;"><c:out value="${vo.title}"></c:out></td>
+																	<td width="10%">
+																		<c:choose>
+																				<c:when test="${vo.read =='9'}">
+																					<c:out value="읽음"></c:out>
+																				</c:when>
+																				<c:otherwise>
+																					<c:out value="읽지 않음"></c:out>
+																				</c:otherwise>
+																		</c:choose>
+																	</td>
+																	<td style="display: none;"><c:out value="${vo.mailId}" />
+																		<input type="hidden" id="mailId" name="mailId" value="${vo.mailId}" />
+																	</td>
+																</tr>
+															</c:forEach>
+														</c:when>
+														<c:otherwise>
+															<tr>
+																<td class="text-center">No data found.</td>
+															</tr>
+														</c:otherwise>
+													</c:choose>
+												</tbody>
+											</table>
+										</form>
                                     </div>
                                     <!-- panel -->
-                                    <div class="row">
+                                    <!-- pagenation -->
+									<div class="text-center">
+										<%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName)%>
+									</div>
+									<!--// pagenation -->
+                                    <!-- <div class="row">
                                         <div class="col-7">
                                             <div class="text-left">1 - 20 of 568</div>
                                         </div>
@@ -760,7 +576,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -793,11 +609,44 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="${aprilContext}/views/plugins/common/common.min.js"></script>
+    <script src="${aprilContext}/views/js/custom.min.js"></script>
+    <script src="${aprilContext}/views/js/settings.js"></script>
+    <script src="${aprilContext}/views/js/gleek.js"></script>
+    <script src="${aprilContext}/views/js/styleSwitcher.js"></script>
+    
+    <script type="text/javascript">
+
+    function doSearchPage(url,no){
+        var frm = document.mailFrm;
+        frm.pageNum.value= no;
+        frm.action= url;
+        console.log("no: "+no);
+        console.log("url: "+url);
+        frm.submit();
+    }
+    
+    //--메일 list 중 하나 선택했을 때 메일 읽기 페이지로 넘어가는 기능 Start
+	$("#listTable").on("click","tr",function() {
+		//console.log("haha #listTable>tbody");
+		var trs = $(this);
+		var tds = trs.children();
+		var mailId = tds.eq(4).text();
+		console.log("mailId = " + mailId);
+		location.href = "${aprilContext}/mail/do_selectOneSent.do?mailId="+ mailId;
+
+		//console.log("mailId = "+mailId);
+		//$("#mailIdInput").val(mailId);
+		//var frm = document.mailFrm;
+		//console.log("mailIdInput.val() = "+$("#mailIdInput").val());
+		////frm.mailId.value = mailId;
+		//frm.action="${aprilContext}/mail/do_selectOne.do?mailId="+mailId;
+		//frm.submit();
+
+	});
+	//--메일 list 중 하나 선택했을 때 메일 읽기 페이지로 넘어가는 기능 End
+	
+    </script>
 
 </body>
 
