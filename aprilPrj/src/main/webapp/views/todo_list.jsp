@@ -1,7 +1,7 @@
 <%--
   /**
   * Class Name : 
-  * Description : 
+  * Description :  http://localhost:8080/groupware/todo/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=
   * Modification Information
   *
   *   수정일                   수정자                      수정내용
@@ -14,12 +14,80 @@
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
 --%>
+<%@page import="com.april.groupware.cmn.StringUtil"%>
+<%@page import="com.april.groupware.cmn.SearchVO"%>
+<%@page import="com.april.groupware.code.service.CodeVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/views/common/common.jsp"%>
+<%
+		//페이지 사이즈
+	String pageSize = "10";
+	
+	//페이지 num
+	String pageNum = "1";
+	
+	//검색구분
+	String searchDiv = "";
+	
+	//검색어
+	String searchWord = "";
+	
+	SearchVO search = (SearchVO) request.getAttribute("vo");
+	if (null != search) {
+		pageSize = String.valueOf(search.getPageSize());
+		pageNum = String.valueOf(search.getPageNum());
+		searchDiv = search.getSearchDiv();
+		searchWord = search.getSearchWord();
+	}
+	//out.print("search:"+search);
+	
+	List<CodeVO> searchList = (List<CodeVO>) request.getAttribute("searchList");
+	//out.print("searchList:"+searchList);
+	/*     for(CodeVO vo:searchList){
+	    	out.print(vo.toString()+"<br/>");
+	    } */
+	
+	//pageSizeList
+	List<CodeVO> pageSizeList = (List<CodeVO>) request.getAttribute("pageSizeList");
+	//out.print("pageSizeList:"+pageSizeList);
+	/*     for(CodeVO vo:pageSizeList){
+	        out.print(vo.toString()+"<br/>");
+	    }   */
+	
+	int totalCnt = 0;
+	
+	totalCnt = (Integer) request.getAttribute("totalCnt");
+	//out.print("totalCnt:"+totalCnt);
+
+    //paging
+    String url = H_PATH+"/todo/do_retrieve.do";
+    String scriptName = "doSeachPage";
+    int maxNum =0;//총글수
+    int currPageNo=1;//현재페이지 
+    int rowPerPage=10;
+    int bottomCount=5;//바닫에 page
+    
+    if(null !=search){
+    	currPageNo = search.getPageNum();
+    	rowPerPage = search.getPageSize();
+    	maxNum     = totalCnt;
+    }
+    //--paging
+    
+    	
+
+
+%>
+ 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -27,7 +95,12 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Custom Stylesheet -->
+    <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+
+<!-- 부트스트랩 -->
+<link href="${hContext}/resources/css/bootstrap.min.css"
+	rel="stylesheet">
 
 </head>
 
@@ -59,10 +132,10 @@
         <div class="nav-header">
             <div class="brand-logo">
                 <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                    <b class="logo-abbr"><img src="${hContext}/views/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="${hContext}/views/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img src="${hContext}/views/images/logo-text.png" alt="">
                     </span>
                 </a>
             </div>
@@ -110,7 +183,7 @@
                                     <ul>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/1.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Saiful Islam</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -120,7 +193,7 @@
                                         </li>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/2.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Adam Smith</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -130,7 +203,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/3.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Barak Obama</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -140,7 +213,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/4.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Hilari Clinton</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -221,7 +294,7 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="${hContext}/views/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
@@ -411,123 +484,82 @@
         <!--**********************************
             Content body start
         ***********************************-->
-        <div class="content-body">
+       <!-- div container -->
+	<div class="container">
+		<!-- div title -->
+		<div class="page-header">
+			<h1>게시판 목록</h1>
+		</div>
+		<!--// div title -->
+		<!-- 검색영역 -->
+		<div class="row">
+			<div class="col-md-12 text-right">
+				<form action="${hContext}/todo/do_retrieve.do" name="searchFrm"
+					method="get" class="form-inline">
+					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
+					<input type="hidden"   name="id" id="id" />
+					<div class="form-group">
+						<%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
+						<%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%>
+						<input type="text" class="form-control input-sm" id="searchWord"
+							name="searchWord" placeholder="검색어"  value="${vo.searchWord }">
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<button type="button" onclick="javascript:doRetrieve();"
+							class="btn btn-primary btn-sm">조회</button>
+						<button type="button" onclick="javascript:doInsertView();" class="btn btn-primary btn-sm">등록</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!--// 검색영역 -->
 
-            <div class="row page-titles mx-0">
-                <div class="col p-md-0">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-                    </ol>
-                </div>
-            </div>
-            <!-- row -->
+		<!-- Grid영역 -->
+		<div class="table-responsive">
+			<table class="table table-striped table-bordered sung" id="listTable">
+				<!-- hidden-sm hidden-xs 숨기기 -->
+				<thead class="bg-primary">
+					<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs ">부서명</th>
+					<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">프로젝트 명</th>
+					<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1">고객사</th>
+					<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs  ">작성자</th>
+					<th class="text-center col-lg-1 col-md-1 hidden-sm hidden-xs ">작성일</th>
+					<th style="display: none;">id</th>
+				</thead>
+				<tbody>
+					<c:choose>   
+						<c:when test="${list.size()>0 }">
+							<c:forEach var="vo" items="${list }">
+								<tr>
+									<td class="text-center hidden-sm hidden-xs"><c:out
+											value="${vo.deptNm }" /></td>
+									<td class="text-left"><c:out value="${vo.pTitle }" /></td>
+									<td class="text-center"><c:out value="${vo.customer }" /></td>
+									<td class="text-center hidden-sm hidden-xs  "><c:out
+											value="${vo.regId }" /></td>
+									<td class="text-right hidden-sm hidden-xs"><c:out
+											value="${vo.regDate }" /></td>
+									<td style="display: none;"><c:out value="${vo.id }" /></td>
+								</tr>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							<tr>
+								<td class="text-center">No data found.</td>
+							</tr>
+						</c:otherwise>
+					</c:choose>
 
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-validation">
-                                    <form class="form-valide" action="#" method="post">
-                                       <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="id">아이디 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="id" name="id" placeholder="Your valid id..">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for=customer>고객사 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="customer" name="customer" placeholder="Choose a customer..">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-skill">프로젝트 타입 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <select class="form-control" id="P_TYPE" name="P_TYPE">
-                                                     <option value="">프로젝트 타입 선택</option>
-                                                    <option value="area">main</option>
-                                                    <option value="area">sub</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="p_title">프로젝트 명<span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="p_title" name="p_title" placeholder="Enter a title">
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="contents">내용 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <textarea class="form-control" id="task_contents" name="task_contents" rows="5" placeholder="What would you like to see?"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-skill">지역 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <select class="form-control" id="area" name="area">
-                                                    <option value="">지역 선택</option>
-                                                    <option value="area">서울</option>
-                                                    <option value="area">부산</option>
-                                                    <option value="area">충남</option>
-                                                    <option value="area">경기</option>
-                                                    <option value="area">충북</option>
-                                                    <option value="area">강원</option>
-                                                    <option value="area">전남</option>
-                                                    <option value="area">전북</option>
-                                                    <option value="area">제주</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-skill">부서 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <select class="form-control" id="dept_nm" name="dept_nm">
-                                                    <option value="">부서 선택</option>
-                                                    <option value="html">인사</option>
-                                                    <option value="css">IT센터운영팀</option>
-                                                    <option value="javascript">금융회계팀</option>
-                                                    <option value="angular">경영진단팀</option>
-                                                    <option value="angular">정보보안팀</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                       <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-skill">근무형태 <span class="text-danger">*</span>
-                                            </label>
-                                            <div class="col-lg-6">
-                                                <select class="form-control" id="working_form" name="working_form">
-                                                    <option value="">근무 선택</option>
-                                                    <option value="html">내근</option>
-                                                    <option value="css">외근</option>
-                                                    <option value="css">휴가</option>
-                                                    <option value="css">병가</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-lg-8 ml-auto">
-                                                <button type="submit" class="btn btn-primary">수정</button>
-                                                <button type="submit" class="btn btn-primary">취소</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- #/ container -->
+				</tbody>
+			</table>
+		</div>
+		<!--// Grid영역 -->
+		<!-- pagenation -->
+	<div class="text-center">
+			<%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
+		</div>
+		<!--// pagenation --> 
+	</div>
+	<!--// div container -->
         </div>
         <!--**********************************
             Content body end
@@ -553,15 +585,85 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="${hContext}/views/plugins/common/common.min.js"></script>
+    <script src="${hContext}/views/js/custom.min.js"></script>
+    <script src="${hContext}/views/js/settings.js"></script>
+    <script src="${hContext}/views/js/gleek.js"></script>
+    <script src="${hContext}/views/js/styleSwitcher.js"></script>
 
-    <script src="./plugins/validation/jquery.validate.min.js"></script>
-    <script src="./plugins/validation/jquery.validate-init.js"></script>
+    <script src="${hContext}/views/plugins/tables/js/jquery.dataTables.min.js"></script>
+    <script src="${hContext}/views/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="${hContext}/views/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
 
+	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+	<script src="${hContext}/views/resources/js/jquery-migrate-1.4.1.js"></script>
+	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
+	<script src="${hContext}/views/resources/js/bootstrap.min.js">
+		
+	</script>
+	<script type="text/javascript">
+        //등록으로 화면 이동.
+	    function doInsertView() {
+	        console.log("doInsertView");
+	        console.log("")
+	        var frm = document.searchFrm;
+	        frm.action = "${hContext}/todo/do_insert_view.do";
+	        frm.submit();
+	    }
+    	
+        function doSeachPage(url,no){
+            console.log("#url:"+url);
+            console.log("#no:" + no);
+            
+            var frm = document.searchFrm;
+            frm.pageNum.value = no;
+            frm.action = url;
+            frm.submit();
+
+        }
+	
+		function doRetrieve() {
+			//console.log("doRetrieve");
+			var frm = document.searchFrm;
+			frm.pageNum.value = "1";
+			frm.action = "${hContext}/todo/do_retrieve.do";
+			frm.submit();
+		}
+
+		$("#searchWord").on("keypress", function(e) {
+			console.log("#searchWord");
+			console.log("#searchWord:" + e.which);
+			if (e.which == 13) {
+				doRetrieve();
+			}
+
+		});
+
+	    $("#listTable>tbody").on("click","tr",function(){
+	   // $(".sung").on("click",function(){
+	    	//console.log("sung #listTable>tbody");
+            var trs = $(this);
+            var tds = trs.children();
+            var id = tds.eq(5).text();
+            console.log("id:"+id);
+	    	//board/do_selectone.do
+            var frm = document.searchFrm;
+            frm.id.value = id;
+            frm.action = "${hContext}/todo/do_selectone.do";
+            frm.submit();
+            
+           /*  get location.href="getURL"            
+            location.href="${hContext}/todo/do_selectone.do?id="+id; */
+	    	
+		});
+  
+
+		
+	</script>
 </body>
-
 </html>
+
+
+
+
+

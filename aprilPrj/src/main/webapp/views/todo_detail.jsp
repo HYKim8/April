@@ -20,9 +20,8 @@
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/views/common/common.jsp"%>
-
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -33,7 +32,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
-
 
 </head>
 
@@ -435,19 +433,19 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-                                    <form class="form-valide" action="${hContext}/todo/do_insert.do" name="mngFrm" id="mngFrm" method="post">
+                                    <form class="form-valide" action="${hContext}/todo/do_retrieve.do"  name="mngFrm" method="post">
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="id">아이디 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="id" name="id" value="${vo.id }" placeholder="아이디를 입력하세요" >
+                                                <input type="text" class="form-control" id="id" name="id"  value="${vo.id }" placeholder="아이디">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="val-skill">부서 <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="deptNm">부서 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <select class="form-control" id="deptNm" name="deptNm" value="${vo.deptNm }">
+                                                <select class="form-control" id="deptNm" name="deptNm" value="${vo.deptNm }" placeholder="부서명">
                                                     <option value="">부서 선택</option>
                                                     <option value="인사">인사</option>
                                                     <option value="IT">IT</option>
@@ -456,7 +454,7 @@
                                             </div>
                                         </div>
                                          <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for=pTitle>프로젝트 명 <span class="text-danger" >*</span>
+                                            <label class="col-lg-4 col-form-label" for=pTitle>프로젝트 명 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
                                                 <input type="text" class="form-control" id="pTitle" name="pTitle" value="${vo.pTitle }" placeholder="프로젝트 명을 입력하세요" >
@@ -466,7 +464,7 @@
                                             <label class="col-lg-4 col-form-label" for="val-skill">프로젝트 타입 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <select class="form-control" id="pType" name="pType" value="${vo.pType }">
+                                             <select class="form-control" id="pType" name="pType" value="${vo.pType }">
                                                      <option value="">프로젝트 타입 선택</option>
                                                     <option value="main">main</option>
                                                     <option value="sub">sub</option>
@@ -513,13 +511,14 @@
                                                 </select>
                                             </div>
                                         </div>
-   								</form>                                        
-                                       <div class="row text-centert">
-                                       <label for="pTitle" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
-									   <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-										   <input  type="submit" class="btn btn-primary btn-sm" value="등록" id="insert_btn" />
-									   </div>
-									 </div>
+                                        <div class="row text-right">
+										    <label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
+										    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+												<input  type="button" class="btn btn-primary btn-sm" value="수정" id="update_btn" />
+												<input  type="button" class="btn btn-primary btn-sm" value="삭제" id="delete_btn" />
+											</div>
+										</div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -560,94 +559,87 @@
 
     <script src="./plugins/validation/jquery.validate.min.js"></script>
     <script src="./plugins/validation/jquery.validate-init.js"></script>
-	
-	
-	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
+
+
+
+
+<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
      <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="${hContext}/resources/js/jquery-migrate-1.4.1.js"></script>
-    <!-- jQuery validator -->
-    <script src="${hContext}/resources/js/jquery.validate.js"></script>    
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
     <script src="${hContext}/resources/js/bootstrap.min.js"> </script>
-	<script src="${hContext}/resources/js/jquery-migrate-1.4.1.js"></script>
     <script type="text/javascript">
-
-	
-
-	    function goRetrieve(){
-	    	location.href="${hContext}/views/todo_list.jsp";
-	    }
     
-		 $("#insert_btn").on("click",function(){
-				var id = $("#id").val().trim();
-	            if(null == id || id.length<=1){
-	            	$("#id").focus();
-	                alert("아이디를 입력하세요.");
-	                return;
-	            }
-	        	
-	        	var deptNm = $("#deptNm").val().trim();
-	            if(null == deptNm || deptNm.length<=1){
-	                $("#deptNm").focus();
-	                alert("부서명을 선택하세요.");
-	                return;
-	            }        	
-	        	var pTitle = $("#pTitle").val().trim();
-	            if(null == pTitle || pTitle.length <=1){
-	                $("#pTitle").focus();
-	                alert("프로젝트 명을 입력하세요.");
-	                return;
-	            }         	
-	        	var pType = $("#pType").val().trim();
-	            if(null == pType || pType.length<=1){
-	                $("#pType").focus();
-	                alert("프로젝트 타입을 선택하세요.");
-	                return;
-	            }
-	            var customer = $("#customer").val().trim();
-	            if(null == customer || customer.length<=1){
-	                $("#customer").focus();
-	                alert("고객사를 입력하세요.");
-	                return;
-	            }
-	            var taskContents = $("#taskContents").val().trim();
-	            if(null == taskContents || taskContents.length<=1){
-	                $("#taskContents").focus();
-	                alert("내용을 입력하세요.");
-	                return;
-	            }
-	            var area = $("#area").val().trim();
-	            if(null == area || area.length<=1){
-	                $("#area").focus();
-	                alert("근무 지역을 입력하세요.");
-	                return;
-	            }
-	            var workingForm = $("#workingForm").val().trim();
-	            if(null == workingForm || workingForm.length<=1){
-	                $("#workingForm").focus();
-	                alert("근무 형태를 입력하세요.");
-	                return;
-	            }
-	 
-            if(false==confirm("등록 하시겠습니까?"))return;
+        function goRetrieve(){
+        	location.href="${hContext}/views/todo_list.jsp";
+        }
 
-
-	        
+        $("#update_btn").on("click",function(){
+        	var id = $("#id").val().trim();
+            if(null == id || id.length<=1){
+            	$("#id").focus();
+                alert("아이디를 입력하세요.");
+                return;
+            }
+        	
+        	var deptNm = $("#deptNm").val().trim();
+            if(null == deptNm || deptNm.length<=1){
+                $("#deptNm").focus();
+                alert("부서명을 선택하세요.");
+                return;
+            }        	
+        	var pTitle = $("#pTitle").val().trim();
+            if(null == pTitle || pTitle.length <=1){
+                $("#pTitle").focus();
+                alert("프로젝트 명을 입력하세요.");
+                return;
+            }         	
+        	var pType = $("#pType").val().trim();
+            if(null == pType || pType.length<=1){
+                $("#pType").focus();
+                alert("프로젝트 타입을 선택하세요.");
+                return;
+            }
+            var customer = $("#customer").val().trim();
+            if(null == customer || customer.length<=1){
+                $("#customer").focus();
+                alert("고객사를 입력하세요.");
+                return;
+            }
+            var taskContents = $("#taskContents").val().trim();
+            if(null == taskContents || taskContents.length<=1){
+                $("#taskContents").focus();
+                alert("내용을 입력하세요.");
+                return;
+            }
+            var area = $("#area").val().trim();
+            if(null == area || area.length<=1){
+                $("#area").focus();
+                alert("근무 지역을 입력하세요.");
+                return;
+            }
+            var workingForm = $("#workingForm").val().trim();
+            if(null == workingForm || workingForm.length<=1){
+                $("#workingForm").focus();
+                alert("근무 형태를 입력하세요.");
+                return;
+            }
+            
+            if(false==confirm("수정 하시겠습니까?"))return;
 
             $.ajax({
                        type:"POST",
-                       url:"${hContext}/todo/do_insert.do",
+                       url:"${hContext}/todo/do_update.do",
                        dataType:"html", 
                        data:{
-                                "id":id,
-                                "deptNm":deptNm,
-                                "pTitle":pTitle,
-                                "pType":pType,
-                                "customer":customer,
-                                "taskContents":taskContents,
-                                "area":area,
-                                "workingForm":workingForm
-                                
+	                    	   "id":id,
+	                           "deptNm":deptNm,
+	                           "pTitle":pTitle,
+	                           "pType":pType,
+	                           "customer":customer,
+	                           "taskContents":taskContents,
+	                           "area":area,
+	                           "workingForm":workingForm
                             },
                        success:function(data){ //성공
                         //alert(data);
@@ -671,12 +663,54 @@
                    }   
                    
            });//--ajax
+            
 
+               
+        	
+        });
+        
+        
+        $("#delete_btn").on("click",function(){
+            console.log("delete_btn");
+            var id = $("#id").val().trim();
+            console.log("id:"+id);
+
+            if(false==confirm("삭제 하시겠습니까?"))return;
+
+            $.ajax({
+	            	   type:"POST",
+	            	   url:"${hContext}/todo/do_delete.do",
+	            	   dataType:"html", 
+	            	   data:{"id":id  },
+            	   success:function(data){ //성공
+            		    //alert(data);
+            		    //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
+            		    var jData = JSON.parse(data);
+            		    if(null !=jData && jData.msgId=="1"){
+            		        alert(jData.msgMsg);
+            		        //목록화면으로 이동
+            		        goRetrieve();
+                		}else{
+                			alert(jData.msgMsg);
+                			
+                    	}
+            	   
+            	   },
+            	   error:function(xhr,status,error){
+            		   alert("error:"+error);
+            	   },
+            	   complete:function(data){
+            	   
+            	   }   
+            	   
+           });//--ajax
         });
 
-
-
-    </script>   
-</body>
-
+    </script>    
+    
+  </body>
 </html>
+
+
+
+
