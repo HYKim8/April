@@ -20,7 +20,7 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="/views//common/common.jsp"%>
+<%@ include file="/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -478,8 +478,8 @@
                                                           placeholder="내용을 입력하세요." name="nbContents" id="nbContents">${vo.nbContents}</textarea>
                                             </div>
                                             <div class="form-group">
-                                                                                                        작성자 
-                                               <input type="text" class="form-control bg-transparent" placeholder="작성자"
+                                                                                                        등록자 
+                                               <input type="text" class="form-control bg-transparent" placeholder="등록자"
                                                       id="regId" name="regId" placeholder="제목을 입력하세요." value="${vo.regId }">
                                             </div>
                                         </form>
@@ -562,7 +562,7 @@
     
     <script type="text/javascript">
     function goRetrieve(){
-            location.href="${hContext}/nboard/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=";
+            location.href="${hContext}/nboard/do_retrieve.do?pageNum=1&nbNo=&pageSize=10&searchDiv=&searchWord=";
             //location.href="${hContext}/nboard/nboard_list.jsp";
         }
 

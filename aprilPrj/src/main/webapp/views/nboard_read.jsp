@@ -17,6 +17,10 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ include file="/views/common/common.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,11 +28,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <title>전사게시판_상세페이지</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${hContext}/views/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${hContext}/views/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -59,11 +63,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                <a href="${hContext}/views/index.html">
+                    <b class="logo-abbr"><img src="${hContext}/views/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="${hContext}/views/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img src="${hContext}/views/images/logo-text.png" alt="">
                     </span>
                 </a>
             </div>
@@ -110,7 +114,7 @@
                                     <ul>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/1.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Saiful Islam</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -120,7 +124,7 @@
                                         </li>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/2.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Adam Smith</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -130,7 +134,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/3.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Barak Obama</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -140,7 +144,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/4.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Hilari Clinton</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -221,23 +225,23 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="${hContext}/views/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="${hContext}/views/app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
-                                            <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
+                                            <a href="${hContext}/views/email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
                                         </li>
                                         
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="${hContext}/views/page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="${hContext}/views/page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -262,7 +266,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
+                            <li><a href="${hContext}/views/index.html">Home 1</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -271,18 +275,18 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Blank</a></li>
-                            <li><a href="./layout-one-column.html">One Column</a></li>
-                            <li><a href="./layout-two-column.html">Two column</a></li>
-                            <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-                            <li><a href="./layout-vertical.html">Vertical</a></li>
-                            <li><a href="./layout-horizontal.html">Horizontal</a></li>
-                            <li><a href="./layout-boxed.html">Boxed</a></li>
-                            <li><a href="./layout-wide.html">Wide</a></li>
+                            <li><a href="${hContext}/views/layout-blank.html">Blank</a></li>
+                            <li><a href="${hContext}/views/views/layout-one-column.html">One Column</a></li>
+                            <li><a href="${hContext}/views/views/layout-two-column.html">Two column</a></li>
+                            <li><a href="${hContext}/views/views/layout-compact-nav.html">Compact Nav</a></li>
+                            <li><a href="${hContext}/views/layout-vertical.html">Vertical</a></li>
+                            <li><a href="${hContext}/views/layout-horizontal.html">Horizontal</a></li>
+                            <li><a href="${hContext}/views/layout-boxed.html">Boxed</a></li>
+                            <li><a href="${hContext}/views/layout-wide.html">Wide</a></li>
                             
                             
-                            <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                            <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
+                            <li><a href="${hContext}/views/layout-fixed-header.html">Fixed Header</a></li>
+                            <li><a href="${hContext}/views/layout-fixed-sidebar.html">Fixed Sidebar</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Apps</li>
@@ -291,9 +295,9 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
+                            <li><a href="${hContext}/views/email-inbox.html">Inbox</a></li>
+                            <li><a href="${hContext}/views/email-read.html">Read</a></li>
+                            <li><a href="${hContext}/views/email-compose.html">Compose</a></li>
                         </ul>
                     </li>
                     <li>
@@ -301,8 +305,8 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
+                            <li><a href="${hContext}/views/app-profile.html">Profile</a></li>
+                            <li><a href="${hContext}/views/app-calender.html">Calender</a></li>
                         </ul>
                     </li>
                     <li>
@@ -310,12 +314,12 @@
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
-                            <li><a href="./chart-morris.html">Morris</a></li>
-                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
-                            <li><a href="./chart-chartist.html">Chartist</a></li>
-                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
-                            <li><a href="./chart-peity.html">Peity</a></li>
+                            <li><a href="${hContext}/views/chart-flot.html">Flot</a></li>
+                            <li><a href="${hContext}/views/chart-morris.html">Morris</a></li>
+                            <li><a href="${hContext}/views/chart-chartjs.html">Chartjs</a></li>
+                            <li><a href="${hContext}/views/chart-chartist.html">Chartist</a></li>
+                            <li><a href="${hContext}/views/chart-sparkline.html">Sparkline</a></li>
+                            <li><a href="${hContext}/views/chart-peity.html">Peity</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">UI Components</li>
@@ -324,22 +328,22 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Accordion</a></li>
-                            <li><a href="./ui-alert.html">Alert</a></li>
-                            <li><a href="./ui-badge.html">Badge</a></li>
-                            <li><a href="./ui-button.html">Button</a></li>
-                            <li><a href="./ui-button-group.html">Button Group</a></li>
-                            <li><a href="./ui-cards.html">Cards</a></li>
-                            <li><a href="./ui-carousel.html">Carousel</a></li>
-                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                            <li><a href="./ui-list-group.html">List Group</a></li>
-                            <li><a href="./ui-media-object.html">Media Object</a></li>
-                            <li><a href="./ui-modal.html">Modal</a></li>
-                            <li><a href="./ui-pagination.html">Pagination</a></li>
-                            <li><a href="./ui-popover.html">Popover</a></li>
-                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="./ui-tab.html">Tab</a></li>
-                            <li><a href="./ui-typography.html">Typography</a></li>
+                            <li><a href="${hContext}/views/ui-accordion.html">Accordion</a></li>
+                            <li><a href="${hContext}/views/ui-alert.html">Alert</a></li>
+                            <li><a href="${hContext}/views/ui-badge.html">Badge</a></li>
+                            <li><a href="${hContext}/views/ui-button.html">Button</a></li>
+                            <li><a href="${hContext}/views/ui-button-group.html">Button Group</a></li>
+                            <li><a href="${hContext}/views/ui-cards.html">Cards</a></li>
+                            <li><a href="${hContext}/views/ui-carousel.html">Carousel</a></li>
+                            <li><a href="${hContext}/views/ui-dropdown.html">Dropdown</a></li>
+                            <li><a href="${hContext}/views/ui-list-group.html">List Group</a></li>
+                            <li><a href="${hContext}/views/ui-media-object.html">Media Object</a></li>
+                            <li><a href="${hContext}/views/ui-modal.html">Modal</a></li>
+                            <li><a href="${hContext}/views/ui-pagination.html">Pagination</a></li>
+                            <li><a href="${hContext}/views/ui-popover.html">Popover</a></li>
+                            <li><a href="${hContext}/views/ui-progressbar.html">Progressbar</a></li>
+                            <li><a href="${hContext}/views/ui-tab.html">Tab</a></li>
+                            <li><a href="${hContext}/views/ui-typography.html">Typography</a></li>
                         <!-- </ul>
                     </li>
                     <li>
@@ -347,14 +351,14 @@
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>
                         <ul aria-expanded="false"> -->
-                            <li><a href="./uc-nestedable.html">Nestedable</a></li>
-                            <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
-                            <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
-                            <li><a href="./uc-toastr.html">Toastr</a></li>
+                            <li><a href="${hContext}/views/uc-nestedable.html">Nestedable</a></li>
+                            <li><a href="${hContext}/views/uc-noui-slider.html">Noui Slider</a></li>
+                            <li><a href="${hContext}/views/uc-sweetalert.html">Sweet Alert</a></li>
+                            <li><a href="${hContext}/views/uc-toastr.html">Toastr</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="widgets.html" aria-expanded="false">
+                        <a href="${hContext}/views/widgets.html" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Widget</span>
                         </a>
                     </li>
@@ -364,11 +368,11 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
-                            <li><a href="./form-step.html">Step Form</a></li>
-                            <li><a href="./form-editor.html">Editor</a></li>
-                            <li><a href="./form-picker.html">Picker</a></li>
+                            <li><a href="${hContext}/views/form-basic.html">Basic Form</a></li>
+                            <li><a href="${hContext}/views/form-validation.html">Form Validation</a></li>
+                            <li><a href="${hContext}/views/form-step.html">Step Form</a></li>
+                            <li><a href="${hContext}/views/form-editor.html">Editor</a></li>
+                            <li><a href="${hContext}/views/form-picker.html">Picker</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Table</li>
@@ -377,8 +381,8 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
+                            <li><a href="${hContext}/views/table-basic.html" aria-expanded="false">Basic Table</a></li>
+                            <li><a href="${hContext}/views/table-datatable.html" aria-expanded="false">Data Table</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Pages</li>
@@ -387,16 +391,16 @@
                             <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./page-login.html">Login</a></li>
-                            <li><a href="./page-register.html">Register</a></li>
-                            <li><a href="./page-lock.html">Lock Screen</a></li>
+                            <li><a href="${hContext}/views/page-login.html">Login</a></li>
+                            <li><a href="${hContext}/views/page-register.html">Register</a></li>
+                            <li><a href="${hContext}/views/page-lock.html">Lock Screen</a></li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
                                 <ul aria-expanded="false">
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
+                                    <li><a href="${hContext}/views/page-error-404.html">Error 404</a></li>
+                                    <li><a href="${hContext}/views/page-error-403.html">Error 403</a></li>
+                                    <li><a href="${hContext}/views/page-error-400.html">Error 400</a></li>
+                                    <li><a href="${hContext}/views/page-error-500.html">Error 500</a></li>
+                                    <li><a href="${hContext}/views/page-error-503.html">Error 503</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -435,41 +439,46 @@
                                 <div class="email-box">
                                     <div class="toolbar" role="toolbar">
                                         <div class="btn-group" style="float:right;">
-                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">글번호 000</span>
-                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">조회수 000</span>
+                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+                                                 class="label label-pill label-danger"
+                                                 value="삭제(관리자)" id="delete_btn" name="delete_btn" />
+                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+                                                 class="label label-pill label-danger"
+                                                 value="수정(관리자)" id="update_btn" onClick="window.location.reload()" />
+                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
+                                                 id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
+                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+                                                 value="조회수 ${vo.readCnt }"  readonly="readonly" id="readCnt" name="readCnt"/>
                                           <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
-                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">글목록</span>
+                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+                                                 value="글 목록" id="list_btn" onclick="goRetrieve();" />
                                         </div>
                                     </div>
+                                    <!-- 게시글 내용 영역 -->
+                                    <form>
                                     <div class="read-content">
                                     <div class="media mb-4 mt-1">
                                             <div class="media" style="display: flex; padding-right: 1em;">
-                                                <span class="badge badge-danger px-2">중요 공지</span>
+                                                ${vo.nbCategory }
                                             </div>
-                                            <div class="media-body" style="margin: 0; padding: 0;">
-                                                <h4 class="m-0 text-primary">제목 : 회의실 노트북 비밀번호 변경작업 안내(04월 30일 16시~18시)</h4>
+                                                <div class="media-body" style="margin: 0; padding: 0;">
+                                                    <h4 class="m-0 text-primary" style="font-weight: bolder;">${vo.nbTitle }</h4>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="media pt-3">
-                                            <img class="mr-3 rounded-circle" src="images/avatar/1.jpg">
+                                            <img class="mr-3 rounded-circle" src="${hContext}/views/images/avatar/1.jpg">
                                             <div class="media-body">
-                                                <h5 class="m-b-3">작성자</h5>
-                                                <p class="m-b-2">작성일</p>
+                                                <h5 class="m-b-3">등록자 ${vo.regId }</h5>
+                                                <p class="m-b-2">등록일 ${vo.regDate }</p>
                                             </div>
                                             
                                         </div>
+                                      </form>
+                                      <!-- // 게시글 내용 영역 -->
                                         <hr>
                                         
-                                        <h5 class="m-b-15">내용이 입력된 공간입니다.</h5>
-                                        <p><strong>Ingredia Nutrisha,</strong> A collection of textile samples lay spread out on the table - Samsa was a travelling salesman - and above it there hung a picture</p>
-                                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of
-                                            Grammar.
-                                        </p>
-                                        <p>Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet.
-                                            Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero,
-                                            sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar,</p>
-                                        <h5 class="m-b-5 p-t-15">Kind Regards</h5>
-                                        <p>Mr Smith</p>
+                                        <h5 class="m-b-15">${vo.nbContents }</h5>
                                         <hr>
                                         <h6 class="p-t-15"><i class="fa fa-download mb-2"></i> Attachments <span>(3)</span></h6>
                                         <div class="row m-b-30">
@@ -495,7 +504,7 @@
                                             <table>
                                                 <tr>
                                                     <td>
-                                                    <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                                    <img class="mr-3 circle-rounded" src="${hContext}/views/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                                     </td>
                                                     <td width="1500px">
                                                    <textarea class="form-control h-150px" rows="2" id="comment"></textarea>
@@ -518,7 +527,7 @@
                             <div class="card-body">
                              <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글</span>
                                 <div class="media media-reply">
-                                    <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                    <img class="mr-3 circle-rounded" src="${hContext}/views/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                     <div class="media-body">
                                         <div class="d-sm-flex justify-content-between mb-2">
                                             <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
@@ -526,15 +535,15 @@
                                         
                                         <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
                                         <ul>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/2.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/3.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/4.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/1.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/2.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/3.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/4.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/1.jpg" alt=""></li>
                                         </ul>
                                 </div>
                             </div>
                             <div class="media media-reply">
-                                    <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                    <img class="mr-3 circle-rounded" src="${hContext}/views/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                     <div class="media-body">
                                         <div class="d-sm-flex justify-content-between mb-2">
                                             <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
@@ -542,10 +551,10 @@
                                         
                                         <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
                                         <ul>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/2.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/3.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/4.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/1.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/2.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/3.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/4.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/1.jpg" alt=""></li>
                                         </ul>
                                 </div>
                             </div>
@@ -583,12 +592,120 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="${hContext}/views/plugins/common/common.min.js"></script>
+    <script src="${hContext}/views/js/custom.min.js"></script>
+    <script src="${hContext}/views/js/settings.js"></script>
+    <script src="${hContext}/views/js/gleek.js"></script>
+    <script src="${hContext}/views/js/styleSwitcher.js"></script>
+    <script type="text/javascript">
+    function goRetrieve(){
+        location.href="${hContext}/nboard/do_retrieve.do?pageNum=1&nbNo=&pageSize=10&searchDiv=&searchWord=";
+        //location.href="${hContext}/nboard/nboard_list.jsp";
+    }
 
+    // 수정하기 - 관리자만 보여짐
+    $("#update_btn").on("click",function(){
+            var nbNo = $("#nbNo").val().trim();
+            if(null == nbNo || nbNo.length<=1){
+                $("#nbNo").focus();
+                alert("아이디를 입력하세요.");
+                return;
+            }
+            
+            var nbTitle = $("#nbTitle").val().trim();
+            if(null == nbTitle || nbTitle.length<=1){
+                $("#nbTitle").focus();
+                alert("제목을 입력하세요.");
+                return;
+            }           
+            var nbContents = $("#nbContents").val().trim();
+            if(null == nbContents || nbContents.length <=1){
+                $("#nbContents").focus();
+                alert("내용을 입력하세요.");
+                return;
+            }           
+            var regId = $("#regId").val().trim();
+            if(null == regId || regId.length<=1){
+                $("#regId").focus();
+                alert("아이디를 입력하세요.");
+                return;
+            }
+            
+            if(false==confirm("수정 하시겠습니까?"))return;
+
+            $.ajax({
+                       type:"POST",
+                       url:"${hContext}/board/do_update.do",
+                       dataType:"html", 
+                       data:{
+                                "nbNo":nbNo,  
+                                "nbTitle":nbTitle,
+                                "nbContents":nbContents,
+                                "regId":regId
+                            },
+                       success:function(data){ //성공
+                        //alert(data);
+                        //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
+                        var jData = JSON.parse(data);
+                        if(null !=jData && jData.msgId=="1"){
+                            alert(jData.msgMsg);
+                            //목록화면으로 이동
+                            goRetrieve();
+                        }else{
+                            alert(jData.msgMsg);
+                            
+                        }
+                   
+                   },
+                   error:function(xhr,status,error){
+                       alert("error:"+error);
+                   },
+                   complete:function(data){
+                   
+                   }   
+                   
+           });//--ajax
+        });
+        
+
+    // 삭제하기 - 관리자만 보여짐
+    $("#delete_btn").on("click",function(){
+        console.log("delete_btn");
+        var nbNo = $("#nbNo").val();
+        console.log("nbNo : "+nbNo);
+
+        if(false==confirm("삭제 하시겠습니까?"))return;
+
+        $.ajax({
+                   type:"POST",
+                   url:"${hContext}/nboard/do_delete.do",
+                   dataType:"html", 
+                   data:{"nbNo":nbNo  },
+               success:function(data){ //성공
+                    //alert(data);
+                    //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
+                    var jData = JSON.parse(data);
+                    if(null !=jData && jData.msgId=="1"){
+                        alert(jData.msgMsg);
+                        //목록화면으로 이동
+                        goRetrieve();
+                    }else{
+                        alert(jData.msgMsg);
+                        
+                    }
+               
+               },
+               error:function(xhr,status,error){
+                   alert("error:"+error);
+               },
+               complete:function(data){
+               
+               }   
+               
+       });//--ajax
+    });
+
+    </script>
 </body>
 
 </html>

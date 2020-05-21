@@ -90,7 +90,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		LOG.debug("1.2=================");
 		//조회결과 화면 전달
 		model.addAttribute("totalCnt", totalCnt);
-		return "board/board_list";// "/board/board_list.jsp
+		return "views/nboard_list";// "/board/board_list.jsp
 	}
 	
 	//수정
@@ -186,6 +186,16 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		
 		return "views/nboard_read"; // views/nboard_read.jsp
 	}
+	
+	//등록화면으로 이동
+//	@RequestMapping(value = "nboard/do_insert_view.do",method = RequestMethod.GET)
+//	public String doInsertView(Locale locale) {
+//		
+//		LOG.debug("1=================");
+//		LOG.debug("1=views/nboard_write");
+//		LOG.debug("1=================");
+//		return "views/nboard_write";
+//	}
 	
 	//등록
 	@RequestMapping(value = "nboard/do_insert.do",method = RequestMethod.POST

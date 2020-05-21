@@ -60,7 +60,7 @@
                 )T1
         NATURAL JOIN
         (
-            SELECT COUNT(*) total_cnt
+            SELECT COUNT(*) totalCnt
             FROM noticeboard         
             WHERE 1=1                
              --검색조건
@@ -107,8 +107,8 @@
                 read_cnt as readCnt,
                 reg_id as regId,
                 mod_id as modId,
-                TO_CHAR(reg_date,'YYYY/MM/DD HH24MISS') regDate,
-                TO_CHAR(mod_date,'YYYY/MM/DD HH24MISS') modDate
+                TO_CHAR(reg_date,'YYYY/MM/DD HH24:MI:SS') regDate,
+                TO_CHAR(mod_date,'YYYY/MM/DD HH24:MI:SS') modDate
          FROM NOTICEBOARD
 		WHERE nb_title like '%' || #{nbTitle} || '%'
 	</select>  

@@ -1,12 +1,13 @@
 <%--
   /**
-  * Class Name : 
-  * Description : 
+  * Class Name : nboard_list.jsp
+  * Description : 전사 게시판 목록
+    http://localhost:8080/groupware/nboard/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=
   * Modification Information
+  *
   *
   *   수정일                   수정자                      수정내용
   *  -------    --------    ---------------------------
-  *  2020. 5. 7.            최초 생성
   *
   * author 실행환경 개발팀
   * since 2009.01.06
@@ -14,9 +15,71 @@
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
 --%>
-
+<%@page import="com.april.groupware.cmn.StringUtil"%>
+<%@page import="com.april.groupware.cmn.SearchVO"%>
+<%@page import="com.april.groupware.code.service.CodeVO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ include file="/views/common/common.jsp"%>
+<%
+        //페이지 사이즈
+    String pageSize = "10";
+    
+    //페이지 num
+    String pageNum = "1";
+    
+    //검색구분
+    String searchDiv = "";
+    
+    //검색어
+    String searchWord = "";
+    
+    SearchVO search = (SearchVO) request.getAttribute("vo");
+    if (null != search) {
+        pageSize = String.valueOf(search.getPageSize());
+        pageNum = String.valueOf(search.getPageNum());
+        searchDiv = search.getSearchDiv();
+        searchWord = search.getSearchWord();
+    }
+    out.print("search:"+search);
+    
+    List<CodeVO> searchList = (List<CodeVO>) request.getAttribute("searchList");
+    //out.print("searchList:"+searchList);
+    /*     for(CodeVO vo:searchList){
+            out.print(vo.toString()+"<br/>");
+        } */
+    
+    //pageSizeList
+    List<CodeVO> pageSizeList = (List<CodeVO>) request.getAttribute("pageSizeList");
+    //out.print("pageSizeList:"+pageSizeList);
+    /*     for(CodeVO vo:pageSizeList){
+            out.print(vo.toString()+"<br/>");
+        }   */
+    
+    int totalCnt = 0;
+    
+    totalCnt = (Integer) request.getAttribute("totalCnt");
+    out.print("totalCnt:"+totalCnt);
+
+    //paging
+    String url = H_PATH+"/nboard/do_retrieve.do";
+    String scriptName = "doSeachPage";
+    int maxNum =0;//총글수
+    int currPageNo=1;//현재페이지 
+    int rowPerPage=10;
+    int bottomCount=5;//바닥에 page
+    
+    if(null !=search){
+        currPageNo = search.getPageNum();
+        rowPerPage = search.getPageSize();
+        maxNum     = totalCnt;
+    }
+    //--paging
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,9 +89,9 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${hContext}/views/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${hContext}/views/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -59,11 +122,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                <a href="${hContext}/views/index.html">
+                    <b class="logo-abbr"><img src="${hContext}/views/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="${hContext}/views/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img src="${hContext}/views/images/logo-text.png" alt="">
                     </span>
                 </a>
             </div>
@@ -111,7 +174,7 @@
                                     <ul>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/1.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Saiful Islam</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -121,7 +184,7 @@
                                         </li>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/2.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Adam Smith</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -131,7 +194,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/3.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Barak Obama</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -141,7 +204,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/4.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Hilari Clinton</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -222,23 +285,23 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="${hContext}/views/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="${hContext}/views/app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
-                                            <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
+                                            <a href="${hContext}/views/email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
                                         </li>
                                         
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="${hContext}/views/page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="${hContext}/views/page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -263,7 +326,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
+                            <li><a href="${hContext}/views/index.html">Home 1</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -272,18 +335,18 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Blank</a></li>
-                            <li><a href="./layout-one-column.html">One Column</a></li>
-                            <li><a href="./layout-two-column.html">Two column</a></li>
-                            <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-                            <li><a href="./layout-vertical.html">Vertical</a></li>
-                            <li><a href="./layout-horizontal.html">Horizontal</a></li>
-                            <li><a href="./layout-boxed.html">Boxed</a></li>
-                            <li><a href="./layout-wide.html">Wide</a></li>
+                            <li><a href="${hContext}/views/layout-blank.html">Blank</a></li>
+                            <li><a href="${hContext}/views/layout-one-column.html">One Column</a></li>
+                            <li><a href="${hContext}/views/layout-two-column.html">Two column</a></li>
+                            <li><a href="${hContext}/views/layout-compact-nav.html">Compact Nav</a></li>
+                            <li><a href="${hContext}/views/layout-vertical.html">Vertical</a></li>
+                            <li><a href="${hContext}/views/layout-horizontal.html">Horizontal</a></li>
+                            <li><a href="${hContext}/views/layout-boxed.html">Boxed</a></li>
+                            <li><a href="${hContext}/views/layout-wide.html">Wide</a></li>
                             
                             
-                            <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                            <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
+                            <li><a href="${hContext}/views/layout-fixed-header.html">Fixed Header</a></li>
+                            <li><a href="${hContext}/views/layout-fixed-sidebar.html">Fixed Sidebar</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Apps</li>
@@ -292,9 +355,9 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
+                            <li><a href="${hContext}/views/email-inbox.html">Inbox</a></li>
+                            <li><a href="${hContext}/views/email-read.html">Read</a></li>
+                            <li><a href="${hContext}/views/email-compose.html">Compose</a></li>
                         </ul>
                     </li>
                     <li>
@@ -302,8 +365,8 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
+                            <li><a href="${hContext}/views/app-profile.html">Profile</a></li>
+                            <li><a href="${hContext}/views/app-calender.html">Calender</a></li>
                         </ul>
                     </li>
                     <li>
@@ -311,9 +374,9 @@
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
-                            <li><a href="./chart-morris.html">Morris</a></li>
-                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
+                            <li><a href="${hContext}/views/chart-flot.html">Flot</a></li>
+                            <li><a href="${hContext}/views/chart-morris.html">Morris</a></li>
+                            <li><a href="${hContext}/views/chart-chartjs.html">Chartjs</a></li>
                             <li><a href="./chart-chartist.html">Chartist</a></li>
                             <li><a href="./chart-sparkline.html">Sparkline</a></li>
                             <li><a href="./chart-peity.html">Peity</a></li>
@@ -393,11 +456,11 @@
                             <li><a href="./page-lock.html">Lock Screen</a></li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
                                 <ul aria-expanded="false">
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
+                                    <li><a href="${hContext}/views/page-error-404.html">Error 404</a></li>
+                                    <li><a href="${hContext}/views/page-error-403.html">Error 403</a></li>
+                                    <li><a href="${hContext}/views/page-error-400.html">Error 400</a></li>
+                                    <li><a href="${hContext}/views//page-error-500.html">Error 500</a></li>
+                                    <li><a href="${hContext}/views/page-error-503.html">Error 503</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -437,92 +500,82 @@
                                 </div>
         <!-- 검색영역 -->
         <div class="row">
-            <div class="col-md-12">
-                <form action="" class="form-inline" style="text-align: center;">
-                        <button style="margin-right:0.5em; text-align:center; height: 40px; align-self: right;" class="btn mb-1 btn-light" type="button" disabled="disabled">총 글 수 000개</button>
-                        <select class="form-control input-sm" style="height: 10px;">
-                            <option>10</option>
-                            <option>20</option>
-                            <option>50</option>
-                            <option>100</option>
-                        </select>
-                        <select class="form-control input-sm" style="height: 10px;">
-                            <option>전체</option>
-                            <option>ID</option>
-                            <option>제목</option>
-                        </select>
-                        <input type="text" style="height: 10px;" class="form-control input-sm"  
-                        id="searchWord" name="searchWord" placeholder="검색어">
+            <div class="col-md-12"> 
+                <form action="${hContext}/nboard/do_retrieve.do" class="form-inline" style="text-align: center;" 
+                        name="searchFrm" method="get">
+                    <input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
+                    <input type="hidden" name="nbNo" id="nbNo" />
+                        <button style="margin-right:0.5em; text-align:center; height: 40px; align-self: right;" class="btn mb-1 btn-light" type="button" disabled="disabled">총 글 수 ${totalCnt }개</button>
+                        <div class="form-group">
+                        <%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
+                        &nbsp;&nbsp;
+                        <%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%>
+                        &nbsp;&nbsp;
+                        <input type="text" style="height: 12px;" class="form-control input-sm"  
+                        id="searchWord" name="searchWord" placeholder="검색어" value="${vo.searchWord }">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
-                        <button style="margin-right:0.5em; text-align:center; height: 40px;" class="btn mb-1 btn-light" type="button">조회</button> 
-                        <button style="margin-right:0.5em; text-align:center; height: 40px;" class="btn mb-1 btn-light" type="button">등록</button>                
-                        <button style="margin-right:0.5em; text-align:center; height: 40px;" class="btn mb-1 btn-danger" type="button">게시글 작성(관리자)</button>
-                        
+                        <button style="margin-right:0.5em; text-align:center; height: 40px;" 
+                                class="btn mb-1 btn-light" type="button" onclick="doRetrieve();">조회</button> 
+                        <button style="margin-right:0.5em; text-align:center; height: 40px;" 
+                                class="btn mb-1 btn-danger" type="button" 
+                                onclick="doInsertView();">게시글 작성(관리자)</button>
+                     </div>  
                 </form>
             </div>
         </div>
-                                        
-                                                
-                                            
         <!--// 검색영역 -->
 
-                                    <!-- 게시글 목록 -->
-                                     <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th width="120">글번호</th>
-                                                <th width="150">분류</th>
-                                                <th width="800">제목</th>
-                                                <th>작성자</th>
-                                                <th>작성일</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <th>1</th>
-                                                <td><span class="badge badge-danger px-2">중요 공지</span>
-                                                <td>Kolor Tea Shirt For Man</td>
-                                                </td>
-                                                <td class="color-primary">$21.56</td>
-                                                <td>yyyy/mm/dd</td>
-                                            </tr>
-                                            <tr>
-                                                <th>2</th>
-                                                <td><span class="badge badge-primary px-2">분실물</span>
-                                                <td>Kolor Tea Shirt For Women</td>
-                                                </td>
-                                                <td class="color-success">$55.32</td>
-                                                <td>yyyy/mm/dd</td>
-                                            </tr>
-                                            <tr>
-                                                <th>3</th>
-                                                <td><span class="badge badge-success px-2">전사자료</span>
-                                                <td>Blue Backpack For Baby</td>
-                                                </td>
-                                                <td class="color-danger">$14.85</td>
-                                                <td>yyyy/mm/dd</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="bootstrap-pagination">
-                                    <nav>
-                                        <ul class="pagination justify-content-center">
-                                            <li class="page-item"><a class="page-link" href="#" tabindex="-1">&laquo;</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">1</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a>
-                                            </li>
-                                            <li class="page-item"><a class="page-link" href="#">&raquo;</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                 <!-- //게시글 목록 -->
+           <!-- 게시글 목록 -->
+         <div class="table-responsive">
+           <table class="table" id="listTable">
+               <thead>
+                   <tr>
+                       <th width="120">글번호</th>
+                       <th width="150">분류</th>
+                       <th class="text-center" width="800">제목</th>
+                       <th class="text-center">등록자</th>
+                       <th class="text-center">등록일</th>
+                       <th class="text-center">조회수</th>
+                   </tr>
+               </thead>
+               <tbody>
+                    <c:choose>
+                        <c:when test="${list.size()>0 }">
+                            <c:forEach var="vo" items="${list }">
+                                <tr>
+                                    <td class="text-left hidden-sm hidden-xs"><c:out
+                                            value="${vo.nbNo }" /></td>
+                                    <td class="text-left"><c:out value="${vo.nbCategory }" /></td>
+                                    <td class="text-left"><c:out value="${vo.nbTitle }" /></td>
+                                    <td class="text-center"><c:out value="${vo.regId }" /></td>
+                                    <td class="text-center hidden-sm hidden-xs  "><c:out
+                                            value="${vo.regDate }" /></td>
+                                    <td class="text-right hidden-sm hidden-xs"><c:out
+                                            value="${vo.readCnt }" /></td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td class="text-center">No data found.</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
+
+                </tbody>
+             </table>
+         </div>
+        <!-- pagenation -->
+            <nav>
+                 <ul class="pagination justify-content-center">
+                    <div class="text-center">
+			            <%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
+			        </div>
+                 </ul>
+             </nav> 
+         <!--// pagenation -->
+         <!-- </div> -->
+          <!-- //게시글 목록 -->
                                                              
                             </div>
                         </div>
@@ -556,12 +609,67 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
+    <script src="${hContext}/views/plugins/common/common.min.js"></script>
+    <script src="${hContext}/views/js/custom.min.js"></script>
+    <script src="${hContext}/views/js/settings.js"></script>
+    <script src="${hContext}/views/js/gleek.js"></script>
+    <script src="${hContext}/views/js/styleSwitcher.js"></script>
+    <script type="text/javascript">
 
+    //등록으로 화면 이동.
+        function doInsertView() {
+            console.log("doInsertView");
+            location.href='${hContext}/views/nboard_wirte.jsp';
+        }
+
+        function doSeachPage(url,no){
+            console.log("#url:"+url);
+            console.log("#no:" + no);
+            
+            var frm = document.searchFrm;
+            frm.pageNum.value = no;
+            frm.action = url;
+            frm.submit();
+
+        }
+
+        function doRetrieve() {
+            console.log("doRetrieve");
+            var frm = document.searchFrm;
+            frm.pageNum.value = "1";
+            frm.action = "${hContext}/nboard/do_retrieve.do";
+            frm.submit();
+        }
+
+        $("#searchWord").on("keypress", function(e) {
+            console.log("#searchWord");
+            console.log("#searchWord:" + e.which);
+            if (e.which == 13) {
+                doRetrieve();
+            }
+        });
+
+        //selecOne
+        $("#listTable>tbody").on("click","tr",function(){
+            // $(".sung").on("click",function(){
+                 //console.log("sung #listTable>tbody");
+                 var trs = $(this);
+                 var tds = trs.children();
+                 var nbNo = tds.eq(0).text();
+                 console.log("nbNo:"+nbNo);
+                 //board/do_selectone.do
+                 var frm = document.searchFrm;
+                 frm.nbNo.value = nbNo;
+                 frm.action = "${hContext}/nboard/do_selectone.do";
+                 frm.submit();
+                 
+                 //get location.href="getURL"            
+                 //location.href="${hContext}/nboard/do_selectone.do?nbNo="+nbNo;
+                 
+             });
+
+        
+    </script>
 </body>
 
 </html>
