@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.april.groupware.todo.service">
+<mapper namespace="com.april.groupware.todo">
     	
      <!-- 검색조건 
         10: 등록자ID
@@ -12,7 +12,7 @@
     <sql id="baseCondition">
         <choose>
             <when test="'10' == searchDiv">
-                AND reg_id like '%' || #{searchWord} || '%'
+                AND id like '%' || #{searchWord} || '%'
             </when>
             <when test="'20' == searchDiv">
                 AND p_title like '%' || #{searchWord} || '%'
@@ -31,8 +31,8 @@
 		           B.dept_nm as deptNm,
 		           B.p_title as pTitle,
 		           B.p_type as pType,
-		           B.task_contents as taskContents,
 		           B.customer,
+		           B.task_contents as taskContents,
 		           B.area,
 		           B.working_form as workingForm,
 		           B.mod_id   as modId,
@@ -87,18 +87,18 @@
 		    task_contents = #{taskContents},
 		    area =    #{area},
 		    working_form =   #{workingForm},
-		    mod_id =  #{modId},
+		    mod_id =  #{id, jdbcType=VARCHAR},
 		    mod_date =  sysdate
 		WHERE id = #{id}  
     </update>
 
-<sql id="boardColumns">
+<sql id="todoColumns">
             id,
             dept_nm as deptNm,
             p_title as pTitle,
             p_type as pType,
-            task_contents as taskContents,
             customer,
+            task_contents as taskContents,
             area,
             working_form as workingForm,
             mod_id   as modId,
@@ -109,15 +109,15 @@
 <!-- 단건조회 : title-board_id -->
     <select id="doSelectOneTitle" parameterType="TodoVO" resultType="TodoVO">
         SELECT
-            <include refid="boardColumns"/>
+            <include refid="todoColumns"/>
         FROM todo
-        WHERE ID like  '%' || #{id} || '%'
+        WHERE id like  '%' || #{id} || '%'
     </select>
     
     <!-- 단건조회 -->
     <select id="doSelectOne" parameterType="TodoVO" resultType="TodoVO">
 		SELECT
-		    <include refid="boardColumns"/>
+		    <include refid="todoColumns"/>
 		FROM todo
 		WHERE id = #{id}
     </select>
@@ -147,11 +147,9 @@
 	        #{taskContents },
 	        #{area },
 	        #{workingForm },
-	        #{regId },
-	        #{modId },
-	        #{modDate }
-	            
-		        
+	        #{id , jdbcType=VARCHAR},
+	        #{id , jdbcType=VARCHAR},
+	        sysdate
 		)
 	</insert>
 	
