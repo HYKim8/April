@@ -500,16 +500,15 @@
                                 </div>
         <!-- 검색영역 -->
         <div class="row">
-            <div class="col-md-12"> 
+            <div class="col-md-12">
                 <form action="${hContext}/nboard/do_retrieve.do" class="form-inline" style="text-align: center;" 
                         name="searchFrm" method="get">
                     <input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
                     <input type="hidden" name="nbNo" id="nbNo" />
                         <button style="margin-right:0.5em; text-align:center; height: 40px; align-self: right;" class="btn mb-1 btn-light" type="button" disabled="disabled">총 글 수 ${totalCnt }개</button>
                         <div class="form-group">
-                  <%--       <%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
-                        <%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%> --%>
-                        &nbsp;&nbsp;
+                        <%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>&nbsp;&nbsp;
+                        <%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%>&nbsp;&nbsp;
                         <input type="text" style="height: 12px;" class="form-control input-sm"  
                         id="searchWord" name="searchWord" placeholder="검색어" value="${vo.searchWord }">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
@@ -518,7 +517,7 @@
                         <button style="margin-right:0.5em; text-align:center; height: 40px;" 
                                 class="btn mb-1 btn-danger" type="button" 
                                 onclick="doInsertView();">게시글 작성(관리자)</button>
-                     </div>  
+                     </div>   
                 </form>
             </div>
         </div>

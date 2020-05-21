@@ -52,7 +52,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
 		search.setSearchWord(StringUtil.nvl(search.getSearchWord().trim()));
 		
-		LOG.debug("1=================");
+		LOG.debug("1=====NBoardContoller=doRetrieve===========");
 		LOG.debug("1=param="+search);
 		LOG.debug("1=================");
 		//검색조건 화면으로 전달.
@@ -85,7 +85,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 			totalCnt = list.get(0).getTotalCnt();
 		}
 		
-		LOG.debug("1.2=================");
+		LOG.debug("1.2======NBoardContoller=doRetrieve===========");
 		LOG.debug("1.2=totalCnt="+totalCnt);
 		LOG.debug("1.2=================");
 		//조회결과 화면 전달
@@ -97,10 +97,17 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 	@RequestMapping(value = "nboard/do_update.do",method = RequestMethod.POST
 			,produces = "application/json; charset=UTF-8")
 	@ResponseBody
-	public String doUpdate(NBoardVO  board,Locale locale) {
-		LOG.debug("1=================");
+	public String doUpdate(NBoardVO  board,Locale locale,Model model,SearchVO  search) {
+		LOG.debug("1===NBoardContoller=수정=============");
 		LOG.debug("1=param="+board);
 		LOG.debug("1=================");
+		
+		List<NBoardVO> list = (List<NBoardVO>) this.boardService.doRetrieve(search);
+		//조회결과 화면 전달
+		model.addAttribute("list", list);
+		for(NBoardVO vo:list) {
+			LOG.debug("1.1=out="+vo);
+		}
 				
 		if( 0 == board.getNbNo()) {		
 
@@ -121,9 +128,11 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		
 		Gson gson=new Gson();
 		String jsonStr = gson.toJson(message);
-		LOG.debug("1.2=================");
+		LOG.debug("1.2==NBoardContoller= 수정 ==============");
 		LOG.debug("1.2=jsonStr="+jsonStr);
-		LOG.debug("1.2=================");		
+		LOG.debug("1.2=================");
+		
+		
 		return jsonStr;
 	}
 	
@@ -133,7 +142,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 	@ResponseBody
 	public String doDelete(NBoardVO  board,Locale locale) {
 		//param board_id
-		LOG.debug("1=================");
+		LOG.debug("1======NBoardContoller==doDelete=========");
 		LOG.debug("1=param="+board);
 		LOG.debug("1=================");
 		
@@ -157,7 +166,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		Gson gson=new Gson();
 		String gsonStr = gson.toJson(message);
 		
-		LOG.debug("1=================");
+		LOG.debug("1======NBoardContoller==doDelete=========");
 		LOG.debug("1=gsonStr="+gsonStr);
 		LOG.debug("1=================");	
 		
@@ -165,11 +174,11 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		return gsonStr;
 	}
 	
-	//단건조회
+	//단건조회 - 상세페이지 조회
 	@RequestMapping(value = "nboard/do_selectone.do",method = RequestMethod.GET)
 	public String doSelectOne(NBoardVO  board,Locale locale,Model model) {
 		//param NbNo
-		LOG.debug("1=================");
+		LOG.debug("1=====NBoardContoller=doSelectOne===========");
 		LOG.debug("1=param="+board);
 		LOG.debug("1=================");
 		
@@ -179,7 +188,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		}
 		
 		NBoardVO  outVO =(NBoardVO) this.boardService.doSelectOne(board);
-		LOG.debug("1.1.=================");
+		LOG.debug("1.1.======NBoardContoller=doSelectOne==========");
 		LOG.debug("1.1=outVO="+outVO);
 		LOG.debug("1.1=================");	
 		model.addAttribute("vo", outVO);
@@ -187,14 +196,36 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		return "views/nboard_read"; // views/nboard_read.jsp
 	}
 	
-	//등록화면으로 이동
-//	@RequestMapping(value = "nboard/do_insert_view.do",method = RequestMethod.GET)
-//	public String doInsertView(Locale locale) {
+	//단건조회 - 수정페이지 이동 http://localhost:8080/groupware/nboard/do_selectone_update.do?nbNo=1041&readCnt=%EC%A1%B0%ED%9A%8C%EC%88%98+83
+		@RequestMapping(value = "nboard/do_selectone_update.do",method = RequestMethod.GET)
+		public String doSelectOneUpdate(NBoardVO  board,Locale locale,Model model) {
+			//param NbNo
+			LOG.debug("1=====NBoardContoller=doSelectOneUpdate===========");
+			LOG.debug("1=param="+board);
+			LOG.debug("1=================");
+			
+			if( 0 == board.getNbNo()) {		
+
+				throw new IllegalArgumentException("nbNo를 확인 하세요.");			
+			}
+			
+			NBoardVO  outVO =(NBoardVO) this.boardService.doSelectOne(board);
+			LOG.debug("1.1.==NBoardContoller=doSelectOneUpdate==============");
+			LOG.debug("1.1=outVO="+outVO);
+			LOG.debug("1.1=================");	
+			model.addAttribute("vo", outVO);
+			
+			return "views/nboard_read_update"; // views/nboard_read.jsp
+		}
+	
+	//수정화면으로 이동
+//	@RequestMapping(value = "nboard/do_update_view.do",method = RequestMethod.GET)
+//	public String doUpdateView(Locale locale) {
 //		
 //		LOG.debug("1=================");
-//		LOG.debug("1=views/nboard_write");
+//		LOG.debug("1=views/nboard_read_update");
 //		LOG.debug("1=================");
-//		return "views/nboard_write";
+//		return "views/nboard_read_update";// nboard_read_update.jsp
 //	}
 	
 	//등록
@@ -202,7 +233,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 			,produces = "application/json; charset=UTF-8")
 	@ResponseBody
 	public String doInsert(NBoardVO nboard,Locale locale) {
-		LOG.debug("1=================");
+		LOG.debug("1====NBoardContoller=doInsert============");
 		LOG.debug("1=param="+nboard);
 		LOG.debug("1=================");
 		
@@ -220,7 +251,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		
 		Gson gson=new Gson();
 		String jsonStr = gson.toJson(message);
-		LOG.debug("1.2=================");
+		LOG.debug("1.2====NBoardContoller=doInsert============");
 		LOG.debug("1.2=jsonStr="+jsonStr);
 		LOG.debug("1.2=================");		
 		return jsonStr;

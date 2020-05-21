@@ -434,6 +434,7 @@
             </div>
                 <div class="row">
                     <div class="col-lg-12">
+                    <form name="searchFrm" id="searchFrm" method="get">
                         <div class="card">
                             <div class="card-body">
                                 <div class="email-box">
@@ -443,25 +444,27 @@
                                                  class="label label-pill label-danger"
                                                  value="삭제(관리자)" id="delete_btn" name="delete_btn" />
                                           <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
-                                                 class="label label-pill label-danger"
-                                                 value="수정(관리자)" id="update_btn" onClick="window.location.reload()" />
+                                                 class="label label-pill label-danger" value="수정(관리자)"
+                                                 id="update_btn" name="update_btn" />
                                           <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
                                                  id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
                                           <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
-                                                 value="조회수 ${vo.readCnt }"  readonly="readonly" id="readCnt" name="readCnt"/>
+                                                 value="${vo.readCnt }"  readonly="readonly" id="readCnt" name="readCnt"/>
                                           <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
                                           <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
                                                  value="글 목록" id="list_btn" onclick="goRetrieve();" />
                                         </div>
                                     </div>
                                     <!-- 게시글 내용 영역 -->
-                                    <form>
+                                    
                                     <div class="read-content">
                                     <div class="media mb-4 mt-1">
                                             <div class="media" style="display: flex; padding-right: 1em;">
+                                            <%-- <input type="hidden" id="nbCategory" value="${vo.nbCategory }"/> --%>
                                                 ${vo.nbCategory }
                                             </div>
                                                 <div class="media-body" style="margin: 0; padding: 0;">
+                                                 <%-- <input type="hidden" id="nbTitle" value="${vo.nbTitle }"/> --%>
                                                     <h4 class="m-0 text-primary" style="font-weight: bolder;">${vo.nbTitle }</h4>
                                                 </div>
                                             </div>
@@ -469,16 +472,18 @@
                                         <div class="media pt-3">
                                             <img class="mr-3 rounded-circle" src="${hContext}/views/images/avatar/1.jpg">
                                             <div class="media-body">
+	                                            <%-- <input type="hidden" id="regId" value="${vo.regId }"/>
+	                                            <input type="hidden" id="regDate" value="${vo.regDate }"/> --%>
                                                 <h5 class="m-b-3">등록자 ${vo.regId }</h5>
                                                 <p class="m-b-2">등록일 ${vo.regDate }</p>
                                             </div>
-                                            
+                                            <!-- 수정시 수정자 아이디/수정일 -->
                                         </div>
-                                      </form>
+                                                <p class="m-b-2" > 수정자 ${vo.modId } 수정일 ${vo.modDate }</p>
                                       <!-- // 게시글 내용 영역 -->
                                         <hr>
-                                        
-                                        <h5 class="m-b-15">${vo.nbContents }</h5>
+                                         <input type="hidden" id="nbContents" value="${vo.nbContents }"/>
+                                       <h5 class="m-b-15">${vo.nbContents }</h5>
                                         <hr>
                                         <h6 class="p-t-15"><i class="fa fa-download mb-2"></i> Attachments <span>(3)</span></h6>
                                         <div class="row m-b-30">
@@ -492,6 +497,7 @@
                                     </div>
                                 </div>
                             </div>
+                                      </form>
                         </div>
                         <!--div 댓글 작성 -->
                         <div class="col-lg-12">
@@ -598,80 +604,43 @@
     <script src="${hContext}/views/js/gleek.js"></script>
     <script src="${hContext}/views/js/styleSwitcher.js"></script>
     <script type="text/javascript">
+    //목록 화면으로 이동
     function goRetrieve(){
         location.href="${hContext}/nboard/do_retrieve.do?pageNum=1&nbNo=&pageSize=10&searchDiv=&searchWord=";
         //location.href="${hContext}/nboard/nboard_list.jsp";
     }
 
-    // 수정하기 - 관리자만 보여짐
+   //수정 화면으로 이동
+    /* function doUpdateView() {
+    	console.log("doUpdateView");
+        var nbNo = ${vo.nbNo };
+        console.log("nbNo : " + nbNo);
+        var frm = document.searchFrm;
+        frm.nbNo.value = nbNo;
+        frm.action = "${hContext}/nboard/do_selectone_update.do";
+        frm.submit();
+    } */
+    
+  //수정 화면으로 이동
     $("#update_btn").on("click",function(){
-            var nbNo = $("#nbNo").val().trim();
-            if(null == nbNo || nbNo.length<=1){
-                $("#nbNo").focus();
-                alert("아이디를 입력하세요.");
-                return;
-            }
-            
-            var nbTitle = $("#nbTitle").val().trim();
-            if(null == nbTitle || nbTitle.length<=1){
-                $("#nbTitle").focus();
-                alert("제목을 입력하세요.");
-                return;
-            }           
-            var nbContents = $("#nbContents").val().trim();
-            if(null == nbContents || nbContents.length <=1){
-                $("#nbContents").focus();
-                alert("내용을 입력하세요.");
-                return;
-            }           
-            var regId = $("#regId").val().trim();
-            if(null == regId || regId.length<=1){
-                $("#regId").focus();
-                alert("아이디를 입력하세요.");
-                return;
-            }
-            
-            if(false==confirm("수정 하시겠습니까?"))return;
-
-            $.ajax({
-                       type:"POST",
-                       url:"${hContext}/board/do_update.do",
-                       dataType:"html", 
-                       data:{
-                                "nbNo":nbNo,  
-                                "nbTitle":nbTitle,
-                                "nbContents":nbContents,
-                                "regId":regId
-                            },
-                       success:function(data){ //성공
-                        //alert(data);
-                        //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
-                        var jData = JSON.parse(data);
-                        if(null !=jData && jData.msgId=="1"){
-                            alert(jData.msgMsg);
-                            //목록화면으로 이동
-                            goRetrieve();
-                        }else{
-                            alert(jData.msgMsg);
-                            
-                        }
-                   
-                   },
-                   error:function(xhr,status,error){
-                       alert("error:"+error);
-                   },
-                   complete:function(data){
-                   
-                   }   
-                   
-           });//--ajax
-        });
-        
+	    	var nbNo = ${vo.nbNo };
+	    	var readCnt = ${vo.readCnt };
+	        console.log("nbNo:"+nbNo);
+	        console.log("readCnt:"+readCnt);
+             var frm = document.searchFrm;
+             frm.nbNo.value = nbNo;
+             frm.action = "${hContext}/nboard/do_selectone_update.do";
+             frm.submit();
+             
+             
+         });
+    
 
     // 삭제하기 - 관리자만 보여짐
     $("#delete_btn").on("click",function(){
         console.log("delete_btn");
-        var nbNo = $("#nbNo").val();
+        var nbNo = ${vo.nbNo };
+        //var nbNo = $("#nbNo").val();
         console.log("nbNo : "+nbNo);
 
         if(false==confirm("삭제 하시겠습니까?"))return;

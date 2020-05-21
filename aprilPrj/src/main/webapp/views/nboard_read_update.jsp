@@ -1,12 +1,12 @@
 <%--
   /**
-  * Class Name : 
-  * Description : 
+  * Class Name : nboard_read_update.jsp
+  * Description : 관리자만 접근 가능 - 게시판 상세페이지 수정
   * Modification Information
   *
   *   수정일                   수정자                      수정내용
   *  -------    --------    ---------------------------
-  *  2020. 5. 7.            최초 생성
+  *  2020. 5. 21.            최초 생성
   *
   * author 실행환경 개발팀
   * since 2009.01.06
@@ -28,11 +28,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <title>전사게시판_상세페이지</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${hContext}/views/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${hContext}/views/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -63,11 +63,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
-                    <b class="logo-abbr"><img src="images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="./images/logo-compact.png" alt=""></span>
+                <a href="${hContext}/views/index.html">
+                    <b class="logo-abbr"><img src="${hContext}/views/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="${hContext}/views/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="images/logo-text.png" alt="">
+                        <img src="${hContext}/views/images/logo-text.png" alt="">
                     </span>
                 </a>
             </div>
@@ -109,13 +109,12 @@
                             <div class="drop-down animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-heading d-flex justify-content-between">
                                     <span class="">3 New Messages</span>  
-                                    
                                 </div>
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/1.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/1.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Saiful Islam</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -125,7 +124,7 @@
                                         </li>
                                         <li class="notification-unread">
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/2.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/2.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Adam Smith</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -135,7 +134,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/3.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/3.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Barak Obama</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -145,7 +144,7 @@
                                         </li>
                                         <li>
                                             <a href="javascript:void()">
-                                                <img class="float-left mr-3 avatar-img" src="images/avatar/4.jpg" alt="">
+                                                <img class="float-left mr-3 avatar-img" src="${hContext}/views/images/avatar/4.jpg" alt="">
                                                 <div class="notification-content">
                                                     <div class="notification-heading">Hilari Clinton</div>
                                                     <div class="notification-timestamp">08 Hours ago</div>
@@ -226,23 +225,23 @@
                         <li class="icons dropdown">
                             <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
                                 <span class="activity active"></span>
-                                <img src="images/user/1.png" height="40" width="40" alt="">
+                                <img src="${hContext}/views/images/user/1.png" height="40" width="40" alt="">
                             </div>
                             <div class="drop-down dropdown-profile   dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li>
-                                            <a href="app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
+                                            <a href="${hContext}/views/app-profile.html"><i class="icon-user"></i> <span>Profile</span></a>
                                         </li>
                                         <li>
-                                            <a href="email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
+                                            <a href="${hContext}/views/email-inbox.html"><i class="icon-envelope-open"></i> <span>Inbox</span> <div class="badge gradient-3 badge-pill badge-primary">3</div></a>
                                         </li>
                                         
                                         <hr class="my-2">
                                         <li>
-                                            <a href="page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
+                                            <a href="${hContext}/views/page-lock.html"><i class="icon-lock"></i> <span>Lock Screen</span></a>
                                         </li>
-                                        <li><a href="page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
+                                        <li><a href="${hContext}/views/page-login.html"><i class="icon-key"></i> <span>Logout</span></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -267,7 +266,7 @@
                             <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
+                            <li><a href="${hContext}/views/index.html">Home 1</a></li>
                             <!-- <li><a href="./index-2.html">Home 2</a></li> -->
                         </ul>
                     </li>
@@ -276,18 +275,18 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Blank</a></li>
-                            <li><a href="./layout-one-column.html">One Column</a></li>
-                            <li><a href="./layout-two-column.html">Two column</a></li>
-                            <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-                            <li><a href="./layout-vertical.html">Vertical</a></li>
-                            <li><a href="./layout-horizontal.html">Horizontal</a></li>
-                            <li><a href="./layout-boxed.html">Boxed</a></li>
-                            <li><a href="./layout-wide.html">Wide</a></li>
+                            <li><a href="${hContext}/views/layout-blank.html">Blank</a></li>
+                            <li><a href="${hContext}/views/views/layout-one-column.html">One Column</a></li>
+                            <li><a href="${hContext}/views/views/layout-two-column.html">Two column</a></li>
+                            <li><a href="${hContext}/views/views/layout-compact-nav.html">Compact Nav</a></li>
+                            <li><a href="${hContext}/views/layout-vertical.html">Vertical</a></li>
+                            <li><a href="${hContext}/views/layout-horizontal.html">Horizontal</a></li>
+                            <li><a href="${hContext}/views/layout-boxed.html">Boxed</a></li>
+                            <li><a href="${hContext}/views/layout-wide.html">Wide</a></li>
                             
                             
-                            <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                            <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
+                            <li><a href="${hContext}/views/layout-fixed-header.html">Fixed Header</a></li>
+                            <li><a href="${hContext}/views/layout-fixed-sidebar.html">Fixed Sidebar</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Apps</li>
@@ -296,9 +295,9 @@
                             <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
+                            <li><a href="${hContext}/views/email-inbox.html">Inbox</a></li>
+                            <li><a href="${hContext}/views/email-read.html">Read</a></li>
+                            <li><a href="${hContext}/views/email-compose.html">Compose</a></li>
                         </ul>
                     </li>
                     <li>
@@ -306,8 +305,8 @@
                             <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
+                            <li><a href="${hContext}/views/app-profile.html">Profile</a></li>
+                            <li><a href="${hContext}/views/app-calender.html">Calender</a></li>
                         </ul>
                     </li>
                     <li>
@@ -315,12 +314,12 @@
                             <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
-                            <li><a href="./chart-morris.html">Morris</a></li>
-                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
-                            <li><a href="./chart-chartist.html">Chartist</a></li>
-                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
-                            <li><a href="./chart-peity.html">Peity</a></li>
+                            <li><a href="${hContext}/views/chart-flot.html">Flot</a></li>
+                            <li><a href="${hContext}/views/chart-morris.html">Morris</a></li>
+                            <li><a href="${hContext}/views/chart-chartjs.html">Chartjs</a></li>
+                            <li><a href="${hContext}/views/chart-chartist.html">Chartist</a></li>
+                            <li><a href="${hContext}/views/chart-sparkline.html">Sparkline</a></li>
+                            <li><a href="${hContext}/views/chart-peity.html">Peity</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">UI Components</li>
@@ -329,22 +328,22 @@
                             <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Accordion</a></li>
-                            <li><a href="./ui-alert.html">Alert</a></li>
-                            <li><a href="./ui-badge.html">Badge</a></li>
-                            <li><a href="./ui-button.html">Button</a></li>
-                            <li><a href="./ui-button-group.html">Button Group</a></li>
-                            <li><a href="./ui-cards.html">Cards</a></li>
-                            <li><a href="./ui-carousel.html">Carousel</a></li>
-                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                            <li><a href="./ui-list-group.html">List Group</a></li>
-                            <li><a href="./ui-media-object.html">Media Object</a></li>
-                            <li><a href="./ui-modal.html">Modal</a></li>
-                            <li><a href="./ui-pagination.html">Pagination</a></li>
-                            <li><a href="./ui-popover.html">Popover</a></li>
-                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="./ui-tab.html">Tab</a></li>
-                            <li><a href="./ui-typography.html">Typography</a></li>
+                            <li><a href="${hContext}/views/ui-accordion.html">Accordion</a></li>
+                            <li><a href="${hContext}/views/ui-alert.html">Alert</a></li>
+                            <li><a href="${hContext}/views/ui-badge.html">Badge</a></li>
+                            <li><a href="${hContext}/views/ui-button.html">Button</a></li>
+                            <li><a href="${hContext}/views/ui-button-group.html">Button Group</a></li>
+                            <li><a href="${hContext}/views/ui-cards.html">Cards</a></li>
+                            <li><a href="${hContext}/views/ui-carousel.html">Carousel</a></li>
+                            <li><a href="${hContext}/views/ui-dropdown.html">Dropdown</a></li>
+                            <li><a href="${hContext}/views/ui-list-group.html">List Group</a></li>
+                            <li><a href="${hContext}/views/ui-media-object.html">Media Object</a></li>
+                            <li><a href="${hContext}/views/ui-modal.html">Modal</a></li>
+                            <li><a href="${hContext}/views/ui-pagination.html">Pagination</a></li>
+                            <li><a href="${hContext}/views/ui-popover.html">Popover</a></li>
+                            <li><a href="${hContext}/views/ui-progressbar.html">Progressbar</a></li>
+                            <li><a href="${hContext}/views/ui-tab.html">Tab</a></li>
+                            <li><a href="${hContext}/views/ui-typography.html">Typography</a></li>
                         <!-- </ul>
                     </li>
                     <li>
@@ -352,14 +351,14 @@
                             <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
                         </a>
                         <ul aria-expanded="false"> -->
-                            <li><a href="./uc-nestedable.html">Nestedable</a></li>
-                            <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
-                            <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
-                            <li><a href="./uc-toastr.html">Toastr</a></li>
+                            <li><a href="${hContext}/views/uc-nestedable.html">Nestedable</a></li>
+                            <li><a href="${hContext}/views/uc-noui-slider.html">Noui Slider</a></li>
+                            <li><a href="${hContext}/views/uc-sweetalert.html">Sweet Alert</a></li>
+                            <li><a href="${hContext}/views/uc-toastr.html">Toastr</a></li>
                         </ul>
                     </li>
                     <li>
-                        <a href="widgets.html" aria-expanded="false">
+                        <a href="${hContext}/views/widgets.html" aria-expanded="false">
                             <i class="icon-badge menu-icon"></i><span class="nav-text">Widget</span>
                         </a>
                     </li>
@@ -369,11 +368,11 @@
                             <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
-                            <li><a href="./form-step.html">Step Form</a></li>
-                            <li><a href="./form-editor.html">Editor</a></li>
-                            <li><a href="./form-picker.html">Picker</a></li>
+                            <li><a href="${hContext}/views/form-basic.html">Basic Form</a></li>
+                            <li><a href="${hContext}/views/form-validation.html">Form Validation</a></li>
+                            <li><a href="${hContext}/views/form-step.html">Step Form</a></li>
+                            <li><a href="${hContext}/views/form-editor.html">Editor</a></li>
+                            <li><a href="${hContext}/views/form-picker.html">Picker</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Table</li>
@@ -382,8 +381,8 @@
                             <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
+                            <li><a href="${hContext}/views/table-basic.html" aria-expanded="false">Basic Table</a></li>
+                            <li><a href="${hContext}/views/table-datatable.html" aria-expanded="false">Data Table</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Pages</li>
@@ -392,16 +391,16 @@
                             <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./page-login.html">Login</a></li>
-                            <li><a href="./page-register.html">Register</a></li>
-                            <li><a href="./page-lock.html">Lock Screen</a></li>
+                            <li><a href="${hContext}/views/page-login.html">Login</a></li>
+                            <li><a href="${hContext}/views/page-register.html">Register</a></li>
+                            <li><a href="${hContext}/views/page-lock.html">Lock Screen</a></li>
                             <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
                                 <ul aria-expanded="false">
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
+                                    <li><a href="${hContext}/views/page-error-404.html">Error 404</a></li>
+                                    <li><a href="${hContext}/views/page-error-403.html">Error 403</a></li>
+                                    <li><a href="${hContext}/views/page-error-400.html">Error 400</a></li>
+                                    <li><a href="${hContext}/views/page-error-500.html">Error 500</a></li>
+                                    <li><a href="${hContext}/views/page-error-503.html">Error 503</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -429,32 +428,36 @@
             <!-- row -->
 
             <div class="container-fluid">
+            <div class="bootstrap-label">
+            <div class="toolbar" role="toolbar">
+              <span style="font-size:1.7em; text-align:center; line-height:30px; height: 40px; width: 150px;" class="label label-info" >전사게시판</span>
+            </div>
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="card-title">
-                                  <h4>전사 게시판 - 게시글 작성</h4><hr/>
-                                </div>
                                 <div class="email-box">
-                                <!-- 상단공지 / 팝업 -->
-                                        <div class="basic-form">
-                                    <form>
-                                        <div class="form-group">
-                                            <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" value="">상단 공지 설정</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" value="">메인 화면 팝업 설정</label>
-                                            </div>
+                                    <div class="toolbar" role="toolbar">
+                                        <div class="btn-group" style="float:right;">
+                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+                                                 class="label label-pill label-danger"
+                                                 value="삭제(관리자)" id="delete_btn" name="delete_btn" />
+                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+                                                 class="label label-pill label-danger"
+                                                 value="수정(관리자)" id="update_btn" onClick="window.location.reload()" />
+                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
+                                                 id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
+                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+                                                 value="조회수 ${vo.readCnt }"  readonly="readonly" id="readCnt" name="readCnt"/>
+                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
+                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+                                                 value="글 목록" id="list_btn" onclick="goRetrieve();" />
                                         </div>
-                                    </form>
-                                </div>
-                                    <!-- // 상단공지 / 팝업 -->
-                                    <div class="compose-content mt-5">
-                                        <form action="${hContext}/nboard/do_retrieve.do" name="mngFrm" id="mngFrm" method="post">
+                                    </div>
+                                    <!-- 게시글 내용 영역 -->
+                                    <form>
+                                    <div class="read-content">
+                                    <div class="media mb-4 mt-1">
                                         <!-- 카테고리 -->
                                         <div>
                                          <select id="category" name="category" style="font-size: 14px; color:white; background-color: #7571f9; padding: 7px; width: 150px">
@@ -466,60 +469,54 @@
                                             <option value="분실물">분실물</option>
                                          </select>
                                          </div>
-                                                                                 <!-- // 카테고리 -->
-                                                                                                제목                                                    
-                                          <input type="text" class="form-control bg-transparent"
-                                                      id="nbTitle" name="nbTitle" placeholder="제목을 입력하세요." value="${vo.nbTitle }">
-                                            </div>
-                                            <div class="form-group">
-                                                                                                            내용
-                                                <textarea class="textarea_editor form-control bg-light" rows="15" 
-                                                          placeholder="내용을 입력하세요." name="nbContents" id="nbContents">${vo.nbContents}</textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                                                                        등록자 
-                                               <input type="text" class="form-control bg-transparent" placeholder="등록자"
-                                                      id="regId" name="regId" placeholder="제목을 입력하세요." value="${vo.regId }">
-                                            </div>
-                                        </form>
-                                        <!-- 첨부파일 -->
-                                        <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일</h5>
-                                        <form action="#" class="dropzone">
-                                            <div class="form-group">
-                                                <div class="fallback">
-                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
+                                         &nbsp;&nbsp;
+                                    
+                                            <%-- <div class="media" style="display: flex; padding-right: 1em;">
+                                                ${vo.nbCategory }
+                                            </div> --%>
+                                                <div class="media-body" style="margin: 0; padding: 0;">
+                                                    <input type="text" class="form-control m-0 text-primary" style="font-weight: bolder;"
+                                                    value="${vo.nbTitle }" placeholder="수정할 제목을 입력하세요"/>
                                                 </div>
                                             </div>
-                                        </form>
-                                        <form action="#" class="dropzone">
-                                            <div class="form-group">
-                                                <div class="fallback">
-                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
-                                                </div>
+                                        </div>
+                                        <div class="media pt-3">
+                                            <img class="mr-3 rounded-circle" src="${hContext}/views/images/avatar/1.jpg">
+                                            <div class="media-body">
+                                                <h5 class="m-b-3"> 등록 : ${vo.regId } </h5>
+                                                <p class="m-b-2"> 등록일 : ${vo.regDate }</p>
                                             </div>
-                                        </form>
-                                        <form action="#" class="dropzone">
-                                            <div class="form-group">
-                                                <div class="fallback">
-                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
-                                                </div>
+                                        </div>
+	                                            <!-- 수정시 수정자 아이디/수정일 -->
+	                                            <p class="m-b-2" > 수정자 ${vo.modId } 수정일 ${vo.modDate }</p>
+                                        <hr>
+                                        <div class="form-group">
+								           <label for="contents" class="col-sm-2 control-label">수정 내용</label>
+								           <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+								             <textarea class="form-control" name="contents" id="contents" rows="15" 
+								             placeholder="수정 내용">${vo.nbContents}</textarea>
+								           </div>
+								         </div> 
+                                        <hr>
+                                        <h6 class="p-t-15"><i class="fa fa-download mb-2"></i> Attachments <span>(3)</span></h6>
+                                        <div class="row m-b-30">
+                                            <div class="col-auto"><a href="#" class="text-muted">My-Photo.png</a>
                                             </div>
-                                        </form>
-                                        <!-- // 첨부파일 -->
-                                        
-                                    </div>
-                                    <div class="text-center m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
-                                                type="button" id="insert_btn">
-                                                <i class="fa fa-paper-plane m-r-5"></i> 글 등록</button>
-                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"
-                                                onclick="goRetrieve();" id="list_btn">
-                                                <i class="ti-close m-r-5 f-s-12"></i> 작성 취소</button>
+                                            <div class="col-auto"><a href="#" class="text-muted">My-File.docx</a>
+                                            </div>
+                                            <div class="col-auto"><a href="#" class="text-muted">My-Resume.pdf</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                      </form>
+                                      <!-- // 게시글 내용 영역 -->
+                        
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
             <!-- #/ container -->
@@ -548,99 +545,119 @@
     <!--**********************************
         Scripts
     ***********************************-->
-    
-     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-    <script src="${hContext}/resources/js/jquery-migrate-1.4.1.js"></script>
-    
-    <script src="plugins/common/common.min.js"></script>
-    <script src="js/custom.min.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/gleek.js"></script>
-    <script src="js/styleSwitcher.js"></script>
-    
+    <script src="${hContext}/views/plugins/common/common.min.js"></script>
+    <script src="${hContext}/views/js/custom.min.js"></script>
+    <script src="${hContext}/views/js/settings.js"></script>
+    <script src="${hContext}/views/js/gleek.js"></script>
+    <script src="${hContext}/views/js/styleSwitcher.js"></script>
     <script type="text/javascript">
     function goRetrieve(){
-            location.href="${hContext}/nboard/do_retrieve.do?pageNum=1&nbNo=&pageSize=10&searchDiv=&searchWord=";
-            //location.href="${hContext}/nboard/nboard_list.jsp";
-        }
+        location.href="${hContext}/nboard/do_retrieve.do?pageNum=1&nbNo=&pageSize=10&searchDiv=&searchWord=";
+        //location.href="${hContext}/nboard/nboard_list.jsp";
+    }
 
-        $("#insert_btn").on("click",function(){
+    // 수정하기 - 관리자만 보여짐
+    $("#update_btn").on("click",function(){
 
-        	//category 카테고리 미입력시
-        	var category = document.getElementById("category")  
-        	//alert('선택된 옵션 value 값=' + category.options[category.selectedIndex].value);  
+	    	//category 카테고리 미입력시
+	        var category = document.getElementById("category")  
+	
+	        var ckCategory = $("select[name=category] option:selected").val();
+	        if(null==ckCategory || ckCategory.length<=1){
+	            $("#category").focus();
+	            alert("카테고리를 선택하세요.");
+	            return;
+	         }
 
-            var ckCategory = $("select[name=category] option:selected").val();
-            if(null==ckCategory || ckCategory.length<=1){
-                $("#category").focus();
-                alert("카테고리를 선택하세요.");
+                
+            var nbTitle = $("#nbTitle").val().trim();
+            if(null == nbTitle || nbTitle.length<=1){
+                $("#nbTitle").focus();
+                alert("제목을 입력하세요.");
                 return;
-             }
-
-                	
-            //nbTitle 제목 미입력시 
-        	var nbTitle = $("#nbTitle").val().trim();
-            if(null==nbTitle || nbTitle.length<=1){
-               $("#nbTitle").focus();
-               alert("제목을 입력하세요.");
-               return;
-            }
-
-            //nbContents 내용 미입력시 
+            }           
             var nbContents = $("#nbContents").val().trim();
-            if(null==nbContents || nbContents.length<=1){
-               $("#nbContents").focus();
-               alert("내용을 입력하세요.");
-               return;
-            }
+            if(null == nbContents || nbContents.length <=1){
+                $("#nbContents").focus();
+                alert("내용을 입력하세요.");
+                return;
+            }           
+                        
+            if(false==confirm("수정 하시겠습니까?"))return;
 
-            //regId 작성자 미입력시 
-            var regId = $("#regId").val().trim();
-            if(null==regId || regId.length<=1){
-               $("#regId").focus();
-               alert("아이디를 입력하세요.");
-               return;
-            }
-
-            if(false==confirm("등록하시겠습니까?")) return;
-            
-          //ajax
             $.ajax({
-               type:"POST",
-               url:"${hContext }/nboard/do_insert.do",
-               dataType:"html", 
-               data:{"nbCategory":category.options[category.selectedIndex].value,
-                     "nbTitle":nbTitle,
-            	     "nbContents":nbContents,
-            	     "regId":regId
-               },
-               success:function(data){ //성공
-                  //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
-                  //alert(data);
+                       type:"POST",
+                       url:"${hContext}/nboard/do_update.do",
+                       dataType:"html", 
+                       data:{
+                    	        "nbCategory":category.options[category.selectedIndex].value,
+                                "nbTitle":nbTitle,
+                                "nbContents":nbContents
+                            },
+                       success:function(data){ //성공
+                        //alert(data);
+                        //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
+                        var jData = JSON.parse(data);
+                        if(null !=jData && jData.msgId=="1"){
+                            alert(jData.msgMsg);
+                            //목록화면으로 이동
+                            goRetrieve();
+                        }else{
+                            alert(jData.msgMsg);
+                            
+                        }
+                   
+                   },
+                   error:function(xhr,status,error){
+                       alert("error:"+error);
+                   },
+                   complete:function(data){
+                   
+                   }   
+                   
+           });//--ajax
+        });
+        
 
-                  var jData = JSON.parse(data);
-                  if(null != jData && jData.msgId=="1"){
-                     alert(jData.msgMsg);
-                     //목록 화면으로 이동
-                     goRetrieve();
-                  }else{
-                     alert(jData.msgMsg);
-                  }
+    // 삭제하기 - 관리자만 보여짐
+    $("#delete_btn").on("click",function(){
+        console.log("delete_btn");
+        var nbNo = ${vo.nbNo };
+        //var nbNo = $("#nbNo").val();
+        console.log("nbNo : "+nbNo);
+
+        if(false==confirm("삭제 하시겠습니까?"))return;
+
+        $.ajax({
+                   type:"POST",
+                   url:"${hContext}/",
+                   dataType:"html", 
+                   data:{"nbNo":nbNo  },
+               success:function(data){ //성공
+                    //alert(data);
+                    //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
+                    var jData = JSON.parse(data);
+                    if(null !=jData && jData.msgId=="1"){
+                        alert(jData.msgMsg);
+                        //목록화면으로 이동
+                        goRetrieve();
+                    }else{
+                        alert(jData.msgMsg);
+                        
+                    }
+               
                },
                error:function(xhr,status,error){
-                  //{"msgId":"0","msgMsg":"삭제 실패.","num":0,"totalCnt":0}
-                  alert("error:"+error);
+                   alert("error:"+error);
                },
                complete:function(data){
                
                }   
-            
-            });//--ajax  
-         }); //--insert_btn
+               
+       });//--ajax
+    });
 
-        	
-        </script>
-    </body>
+    </script>
+</body>
 
 </html>
