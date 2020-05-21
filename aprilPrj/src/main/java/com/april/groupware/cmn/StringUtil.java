@@ -21,10 +21,13 @@ package com.april.groupware.cmn;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.april.groupware.code.service.CodeVO;
 
 /**
  * 모든 메소드는 static method
@@ -161,6 +164,48 @@ public class StringUtil {
 		html.append("</table>   \n");
 		
 		return html.toString();
+	}
+	
+	/**
+	 * list,selectBoxName,selectNm,allYN
+	 *Method Name:makeSelectBox
+	 *작성일: 2020. 5. 19.
+	 *작성자: 양은영
+	 *설명:
+	 *@return
+	 */
+	public static String makeSelectBox(List<CodeVO> list
+			                           ,String selectBoxNm
+			                           ,String selectNm
+			                           ,boolean allYn
+			                           ) {
+		StringBuilder  sb=new StringBuilder();
+		sb.append("<select  class=\"form-control input-sm\" name='"+selectBoxNm+"' id='"+selectBoxNm+"' >\n");
+		
+		//전체
+		if(allYn==true) {
+			sb.append("<option value=''>전체</option>\n");
+		}
+		
+		//for
+		if(null !=list) {
+			for(CodeVO vo :list) {
+				sb.append("\t\t<option value='"+vo.getCodeId()+"'  ");
+				if(selectNm.equals(vo.getCodeId())) {
+					sb.append("selected");
+				}
+				
+				sb.append(">");
+				sb.append(vo.getCodeNm());
+				sb.append("</option>\n");
+			}
+		}
+		sb.append("</select> \n");
+		
+		LOG.debug("===========================");
+		LOG.debug(sb.toString());
+		LOG.debug("===========================");
+		return sb.toString();
 	}
 	
 	/**
