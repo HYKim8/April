@@ -575,7 +575,7 @@
 	
 
 	    function goRetrieve(){
-	    	location.href="${hContext}/views/todo_list.jsp";
+	    	location.href="${hContext}/views/todo.jsp";
 	    }
     
 		 $("#insert_btn").on("click",function(){

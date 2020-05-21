@@ -100,7 +100,7 @@
 
 <!-- 부트스트랩 -->
 <link href="${hContext}/resources/css/bootstrap.min.css"
-	rel="stylesheet">
+	rel="stylesheet"> 
 
 </head>
 
@@ -499,8 +499,8 @@
 					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
 					<input type="hidden"   name="id" id="id" />
 					<div class="form-group">
-						<%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
-						<%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%>
+					<%-- 	<%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
+						<%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%> --%>
 						<input type="text" class="form-control input-sm" id="searchWord"
 							name="searchWord" placeholder="검색어"  value="${vo.searchWord }">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

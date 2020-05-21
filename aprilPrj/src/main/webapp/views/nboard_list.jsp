@@ -507,9 +507,8 @@
                     <input type="hidden" name="nbNo" id="nbNo" />
                         <button style="margin-right:0.5em; text-align:center; height: 40px; align-self: right;" class="btn mb-1 btn-light" type="button" disabled="disabled">총 글 수 ${totalCnt }개</button>
                         <div class="form-group">
-                        <%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
-                        &nbsp;&nbsp;
-                        <%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%>
+                  <%--       <%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
+                        <%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%> --%>
                         &nbsp;&nbsp;
                         <input type="text" style="height: 12px;" class="form-control input-sm"  
                         id="searchWord" name="searchWord" placeholder="검색어" value="${vo.searchWord }">
