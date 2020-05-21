@@ -441,10 +441,7 @@
                                         <div class="btn-group" style="float:right;">
                                           <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
                                                  class="label label-pill label-danger"
-                                                 value="삭제(관리자)" id="delete_btn" name="delete_btn" />
-                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
-                                                 class="label label-pill label-danger"
-                                                 value="수정(관리자)" id="update_btn" onClick="window.location.reload()" />
+                                                 value="수정(관리자)" id="update_btn" />
                                           <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
                                                  id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
                                           <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
@@ -476,7 +473,8 @@
                                             </div> --%>
                                                 <div class="media-body" style="margin: 0; padding: 0;">
                                                     <input type="text" class="form-control m-0 text-primary" style="font-weight: bolder;"
-                                                    value="${vo.nbTitle }" placeholder="수정할 제목을 입력하세요"/>
+                                                    value="${vo.nbTitle }" placeholder="수정할 제목을 입력하세요"
+                                                    id="nbTitle" name="nbTitle"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -493,7 +491,7 @@
                                         <div class="form-group">
 								           <label for="contents" class="col-sm-2 control-label">수정 내용</label>
 								           <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-								             <textarea class="form-control" name="contents" id="contents" rows="15" 
+								             <textarea class="form-control" name="nbContents" id="nbContents" rows="15" 
 								             placeholder="수정 내용">${vo.nbContents}</textarea>
 								           </div>
 								         </div> 
@@ -569,7 +567,6 @@
 	            return;
 	         }
 
-                
             var nbTitle = $("#nbTitle").val().trim();
             if(null == nbTitle || nbTitle.length<=1){
                 $("#nbTitle").focus();
@@ -581,7 +578,8 @@
                 $("#nbContents").focus();
                 alert("내용을 입력하세요.");
                 return;
-            }           
+            }    
+            var nbNo =  ${vo.nbNo };      
                         
             if(false==confirm("수정 하시겠습니까?"))return;
 
@@ -590,6 +588,7 @@
                        url:"${hContext}/nboard/do_update.do",
                        dataType:"html", 
                        data:{
+                    	        "nbNo":nbNo,
                     	        "nbCategory":category.options[category.selectedIndex].value,
                                 "nbTitle":nbTitle,
                                 "nbContents":nbContents
@@ -618,44 +617,6 @@
            });//--ajax
         });
         
-
-    // 삭제하기 - 관리자만 보여짐
-    $("#delete_btn").on("click",function(){
-        console.log("delete_btn");
-        var nbNo = ${vo.nbNo };
-        //var nbNo = $("#nbNo").val();
-        console.log("nbNo : "+nbNo);
-
-        if(false==confirm("삭제 하시겠습니까?"))return;
-
-        $.ajax({
-                   type:"POST",
-                   url:"${hContext}/",
-                   dataType:"html", 
-                   data:{"nbNo":nbNo  },
-               success:function(data){ //성공
-                    //alert(data);
-                    //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
-                    var jData = JSON.parse(data);
-                    if(null !=jData && jData.msgId=="1"){
-                        alert(jData.msgMsg);
-                        //목록화면으로 이동
-                        goRetrieve();
-                    }else{
-                        alert(jData.msgMsg);
-                        
-                    }
-               
-               },
-               error:function(xhr,status,error){
-                   alert("error:"+error);
-               },
-               complete:function(data){
-               
-               }   
-               
-       });//--ajax
-    });
 
     </script>
 </body>

@@ -37,18 +37,18 @@ public class NBoardDaoImple implements NBoardDao {
 	public int doUpdateReadCnt(DTO dto) {
 		NBoardVO inVO = (NBoardVO) dto;
 		
-		LOG.debug("1=doUpdateReadCnt=============================");
+		LOG.debug("1= DapImple doUpdateReadCnt=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.sist.ehr.board.doInsert 
 		String statement = NAMESPACE+".doUpdateReadCnt";
-		LOG.debug("2=doUpdateReadCnt=============================");
+		LOG.debug("2= DapImple doUpdateReadCnt=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		int  flag = this.sqlSessionTemplate.update(statement, inVO);
-		LOG.debug("3=doUpdateReadCnt=============================");
+		LOG.debug("3= DapImple doUpdateReadCnt=============================");
 		LOG.debug("3=flag="+flag);
 		LOG.debug("3==============================");			
 		
@@ -59,18 +59,18 @@ public class NBoardDaoImple implements NBoardDao {
 	public int doInsert(DTO dto) {
 		NBoardVO inVO = (NBoardVO) dto;
 		
-		LOG.debug("1=doInsert=============================");
+		LOG.debug("1= DapImple doInsert=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nboard.doInsert 
 		String statement = NAMESPACE+".doInsert";
-		LOG.debug("2=doInsert=============================");
+		LOG.debug("2= DapImple doInsert=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		int  flag = this.sqlSessionTemplate.insert(statement, inVO);
-		LOG.debug("3=doInsert=============================");
+		LOG.debug("3= DapImple doInsert=============================");
 		LOG.debug("3=flag="+flag);
 		LOG.debug("3==============================");			
 		
@@ -81,18 +81,18 @@ public class NBoardDaoImple implements NBoardDao {
 	public int doUpdate(DTO dto) {
 		NBoardVO inVO = (NBoardVO) dto;
 		
-		LOG.debug("1=doUpdate=============================");
+		LOG.debug("1= DapImple doUpdate=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nboard.doUpdate  
 		String statement = NAMESPACE+".doUpdate";
-		LOG.debug("2=doUpdate=============================");
+		LOG.debug("2= DapImple doUpdate=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		int  flag = this.sqlSessionTemplate.update(statement, inVO);
-		LOG.debug("3=doUpdate=============================");
+		LOG.debug("3= DapImple doUpdate=============================");
 		LOG.debug("3=flag="+flag);
 		LOG.debug("3==============================");			
 		
@@ -103,18 +103,18 @@ public class NBoardDaoImple implements NBoardDao {
 	public DTO doSelectOne(DTO dto) {
 		NBoardVO inVO = (NBoardVO) dto;
 		
-		LOG.debug("1=doSelectOne=============================");
+		LOG.debug("1= DapImple doSelectOne=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nboard.doSelectOne 
 		String statement = NAMESPACE+".doSelectOne";
-		LOG.debug("2=doSelectOne=============================");
+		LOG.debug("2= DapImple doSelectOne=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		NBoardVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
-		LOG.debug("3=doSelectOne=============================");
+		LOG.debug("3= DapImple doSelectOne=============================");
 		LOG.debug("3=outVO="+outVO);
 		LOG.debug("3==============================");			
 		
@@ -125,18 +125,18 @@ public class NBoardDaoImple implements NBoardDao {
 	public DTO doSelectOneTitle(DTO dto) {
 		NBoardVO inVO = (NBoardVO) dto;
 		
-		LOG.debug("1=doSelectOneTitle=============================");
+		LOG.debug("1= DapImple doSelectOneTitle=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nboard.doSelectOneTitle 
 		String statement = NAMESPACE+".doSelectOneTitle";
-		LOG.debug("2=doSelectOneTitle=============================");
+		LOG.debug("2= DapImple doSelectOneTitle=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		NBoardVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
-		LOG.debug("3=doSelectOneTitle=============================");
+		LOG.debug("3= DapImple doSelectOneTitle=============================");
 		LOG.debug("3=outVO="+outVO);
 		LOG.debug("3==============================");			
 		
@@ -147,18 +147,18 @@ public class NBoardDaoImple implements NBoardDao {
 	public int doDelete(DTO dto) {
 		NBoardVO inVO = (NBoardVO) dto;
 		
-		LOG.debug("1=doDelete=============================");
+		LOG.debug("1= DapImple doDelete=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nboard.doDelete 
 		String statement = NAMESPACE+".doDelete";
-		LOG.debug("2=doDelete=============================");
+		LOG.debug("2= DapImple doDelete=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		int  flag = this.sqlSessionTemplate.delete(statement, inVO);
-		LOG.debug("3=doDelete=============================");
+		LOG.debug("3= DapImple doDelete=============================");
 		LOG.debug("3=flag="+flag);
 		LOG.debug("3==============================");			
 		
@@ -167,19 +167,19 @@ public class NBoardDaoImple implements NBoardDao {
 	
 	//전체 삭제
 	public void doDeleteAll() {
-		LOG.debug("1=doDeleteAll=============================");
+		LOG.debug("1= DapImple doDeleteAll=============================");
 		LOG.debug("1=");
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nboard.doInsert 
 		//com.sist.ehr.board.doDeleteAll
 		String statement = NAMESPACE+".doDeleteAll";
-		LOG.debug("2=doDeleteAll=============================");
+		LOG.debug("2= DapImple doDeleteAll=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		int  flag = this.sqlSessionTemplate.delete(statement);
-		LOG.debug("3=doDeleteAll=============================");
+		LOG.debug("3= DapImple doDeleteAll=============================");
 		LOG.debug("3=flag="+flag);
 		LOG.debug("3==============================");	
 	}
@@ -196,18 +196,18 @@ public class NBoardDaoImple implements NBoardDao {
 	public List<?> doRetrieve(DTO dto) {
 		SearchVO inVO = (SearchVO) dto;
 		
-		LOG.debug("1=doRetrieve=============================");
+		LOG.debug("1= DapImple doRetrieve=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nboard.doRetrieve 
 		String statement = NAMESPACE+".doRetrieve";
-		LOG.debug("2=doRetrieve=============================");
+		LOG.debug("2= DapImple doRetrieve=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		List<NBoardVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
-		LOG.debug("3=doRetrieve=============================");
+		LOG.debug("3= DapImple doRetrieve=============================");
 		LOG.debug("3=outList="+outList);
 		LOG.debug("3==============================");			
 		
