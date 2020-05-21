@@ -13,7 +13,7 @@ import com.april.groupware.todo.service.TodoVO;
 import com.april.groupware.cmn.DTO;
 
 @Service
-public class BoardServiceImple implements TodoService {
+public class TodoServiceImple implements TodoService {
     private final Logger  LOG = LoggerFactory.getLogger(this.getClass());
     
 	@Autowired
@@ -30,16 +30,6 @@ public class BoardServiceImple implements TodoService {
 		return dao.doUpdate(dto);
 	}
 
-//	@Override
-//	public DTO doSelectOne(DTO dto) {
-//		//조회 countUpdate:cookie에 
-//		dao.doUpdateReadCnt(dto);
-//		
-//		BoardVO outVO = (BoardVO) dao.doSelectOne(dto);
-//		
-//
-//		return outVO;
-//	}
 
 	@Override
 	public int doDelete(DTO dto) {
