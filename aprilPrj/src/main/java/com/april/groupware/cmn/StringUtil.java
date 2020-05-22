@@ -21,8 +21,13 @@ package com.april.groupware.cmn;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +41,28 @@ import com.april.groupware.code.service.CodeVO;
  */
 public class StringUtil {
 	private final static Logger LOG = LoggerFactory.getLogger(StringUtil.class);
+	
+	
+	public static Map<String, String> requestToMap(HttpServletRequest request) {
+		Map paramMap = new HashMap();
+		Map paramHashMap = request.getParameterMap();
+
+		Iterator it = paramHashMap.keySet().iterator();
+
+		while(it.hasNext()){
+			String key = it.next().toString();                          // 키 값 등록
+	        String [] parameters = request.getParameterValues(key);
+	        if(parameters.length>1){
+	        	paramMap.put(key,parameters);
+	        }else{                                                      // 아니면 그냥 저장.
+	            paramMap.put(key,request.getParameter(key));
+
+	        }
+		}
+
+		return paramMap;
+
+	}
 	
 	/**
 	 * UUID
