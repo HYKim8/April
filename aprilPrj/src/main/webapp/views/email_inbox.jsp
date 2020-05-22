@@ -26,7 +26,7 @@
 
 <c:set var="aprilContext" value="${pageContext.request.contextPath }"></c:set>
 <%
-	//페이지 사이즈
+//페이지 사이즈
 String pageSize = "10";
 
 //페이지 num
@@ -154,63 +154,48 @@ if (search != null) {
 				</div>
 				<div class="header-right">
 					<ul class="clearfix">
-						<li class="icons dropdown"><a href="javascript:void(0)"
-							data-toggle="dropdown"> <i class="mdi mdi-email-outline"></i>
-								<span class="badge gradient-1 badge-pill badge-primary">3</span>
-						</a>
-							<div class="drop-down animated fadeIn dropdown-menu">
-								<div
-									class="dropdown-content-heading d-flex justify-content-between">
-									<span class="">3 New Messages</span>
-
-								</div>
-								<div class="dropdown-content-body">
-									<ul>
-										<li class="notification-unread"><a
-											href="javascript:void()"> <img
-												class="float-left mr-3 avatar-img"
-												src="${aprilContext}/views/images/avatar/1.jpg" alt="">
-												<div class="notification-content">
-													<div class="notification-heading">Saiful Islam</div>
-													<div class="notification-timestamp">08 Hours ago</div>
-													<div class="notification-text">Hi Teddy, Just wanted
-														to let you ...</div>
-												</div>
-										</a></li>
-										<li class="notification-unread"><a
-											href="javascript:void()"> <img
-												class="float-left mr-3 avatar-img"
-												src="${aprilContext}/views/images/avatar/2.jpg" alt="">
-												<div class="notification-content">
-													<div class="notification-heading">Adam Smith</div>
-													<div class="notification-timestamp">08 Hours ago</div>
-													<div class="notification-text">Can you do me a
-														favour?</div>
-												</div>
-										</a></li>
-										<li><a href="javascript:void()"> <img
-												class="float-left mr-3 avatar-img"
-												src="${aprilContext}/views/images/avatar/3.jpg" alt="">
-												<div class="notification-content">
-													<div class="notification-heading">Barak Obama</div>
-													<div class="notification-timestamp">08 Hours ago</div>
-													<div class="notification-text">Hi Teddy, Just wanted
-														to let you ...</div>
-												</div>
-										</a></li>
-										<li><a href="javascript:void()"> <img
-												class="float-left mr-3 avatar-img"
-												src="${aprilContext}/views/images/avatar/4.jpg" alt="">
-												<div class="notification-content">
-													<div class="notification-heading">Hilari Clinton</div>
-													<div class="notification-timestamp">08 Hours ago</div>
-													<div class="notification-text">Hello</div>
-												</div>
-										</a></li>
-									</ul>
-
-								</div>
-							</div></li>
+						<!-- 메일 알림 Start -->
+						<li class="icons dropdown">
+							<c:choose>
+								<c:when test="${list.size()>0}">
+									<a href="javascript:void(0)" data-toggle="dropdown"> 
+										<i class="mdi mdi-email-outline"></i>
+										<span class="badge gradient-1 badge-pill badge-primary"><c:out value="${totalCntNotRead}"></c:out></span>
+									</a>
+									<div class="drop-down animated fadeIn dropdown-menu">
+										<div
+											class="dropdown-content-heading d-flex justify-content-between">
+											<span class=""><c:out value="${totalCntNotRead}"></c:out>건의 새로운 메세지</span>
+		
+										</div>
+										<div class="dropdown-content-body">
+											<ul>
+												<c:forEach var="alarm" items="${alarmList}">
+													<c:if test="${alarm.read == '0' }">
+														<li class="notification-unread">
+															<a href="${aprilContext}/mail/do_selectOne.do?mailId=${alarm.mailId}"> 
+																<img class="float-left mr-3 avatar-img" src="${alarm.saveFileName}" alt="">
+																<div class="notification-content">
+																	<div class="notification-heading"><c:out value="${alarm.sender}"></c:out></div>
+																	<div class="notification-timestamp"><c:out value="${alarm.recDate}"></c:out></div>
+																	<div class="notification-text"><c:out value="${alarm.title }"></c:out></div>
+																</div>
+															</a>
+														</li>
+													</c:if>
+												</c:forEach>
+											</ul>
+										</div>
+									</div>
+								</c:when>
+								<c:otherwise>
+									<a href="javascript:void(0)" data-toggle="dropdown"> 
+										<i class="mdi mdi-email-outline"></i>
+									</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<!-- 메일 알림 End -->
 						<li class="icons dropdown"><a href="javascript:void(0)"
 							data-toggle="dropdown"> <i class="mdi mdi-bell-outline"></i>
 								<span class="badge badge-pill gradient-2 badge-primary">3</span>
@@ -1081,8 +1066,7 @@ if (search != null) {
 
 		//--답장 btn Start
 		$("#resend_btn").on("click",function() {
-			var checkbox = document
-					.getElementsByName("checkbox");
+			var checkbox = document.getElementsByName("checkbox");
 			var checkLength = checkbox.length;
 			var cnt = 0; //체크된 개수 셀 변수
 			var checkMailId; //체크된 값 불러오기
@@ -1094,10 +1078,8 @@ if (search != null) {
 				}
 			}
 			if (cnt == 1) {
-				if (!confirm("선택하신 메일을 답장하시겠습니까?"))
-					return;
-				location.href = "${aprilContext}/mail/do_selectOneResend.do?mailId="
-						+ checkMailId;
+				if (!confirm("선택하신 메일을 답장하시겠습니까?")) return;
+				location.href = "${aprilContext}/mail/do_selectOneResend.do?mailId=" + checkMailId;
 			} else if (cnt > 1) {
 				alert("하나의 메일만 선택해 주세요.");
 				return;

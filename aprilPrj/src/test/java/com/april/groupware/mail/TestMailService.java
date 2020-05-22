@@ -21,6 +21,8 @@ package com.april.groupware.mail;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -34,6 +36,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.april.groupware.cmn.SearchVO;
 import com.april.groupware.mail.service.MailService;
 import com.april.groupware.mail.service.MailVO;
 
@@ -63,7 +66,9 @@ public class TestMailService {
 	MailVO mail04;
 
 	/**
-	 * Method Name:setUp 작성일: 2020. 5. 8. 작성자: MINJI 설명:
+	 * Method Name:setUp 
+	 * 작성일: 2020. 5. 8. 
+	 * 작성자: MINJI 설명:
 	 * 
 	 * @throws java.lang.Exception
 	 */
@@ -78,18 +83,19 @@ public class TestMailService {
 //		String read
 
 		// 참조 없는 메일
-		mail01 = new MailVO("", "mail", "김민지", "kimmj", "", "제목01", "", "내용01", "홍길동01", "", "", "N", "0");
-		mail02 = new MailVO("", "mail", "김민지", "kimmj", "", "제목02", "", "내용02", "홍길동02", "", "", "N", "0");
+		mail01 = new MailVO("", "mail", "김민지", "kimmj", "", "제목01", "", "내용01", "홍길동01", "", "", "N", "0","");
+		mail02 = new MailVO("", "mail", "김민지", "kimmj", "", "제목02", "", "내용02", "홍길동02", "", "", "N", "0","");
 		// 참조 있는 메일
-		mail03 = new MailVO("", "mail", "김민지", "kimmj", "", "제목03", "", "내용03", "홍길동01,홍길동02", "", "", "N",
-				"0");
-		mail04 = new MailVO("", "mail", "김민지", "kimmj", "", "제목04", "", "내용04", "홍길동01,홍길동02,홍길동03", "",
-				"", "N", "0");
+		mail03 = new MailVO("", "mail", "김민지", "kimmj", "", "제목03", "", "내용03", "홍길동01,홍길동02", "", "", "N", "0","");
+		mail04 = new MailVO("", "mail", "김민지", "kimmj", "", "제목04", "", "내용04", "홍길동01,홍길동02,홍길동03", "", "", "N", "0","");
 
 	}
 
 	/**
-	 * Method Name:tearDown 작성일: 2020. 5. 8. 작성자: MINJI 설명:
+	 * Method Name:tearDown 
+	 * 작성일: 2020. 5. 8. 
+	 * 작성자: MINJI 
+	 * 설명:
 	 * 
 	 * @throws java.lang.Exception
 	 */
@@ -98,12 +104,15 @@ public class TestMailService {
 	}
 
 	/**
-	 * Method Name : doInsert 작성일: 2020. 5. 14. 작성자: MINJI 설명: 메일 보내기 클릭 시 doInsert
+	 * Method Name : doInsert 
+	 * 작성일: 2020. 5. 14. 
+	 * 작성자: MINJI 
+	 * 설명: 메일 보내기 클릭 시 doInsert
 	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Test
-	//@Ignore
+	@Ignore
 	public void doInsert() {
 		// -----------------------------------
 		// 1. 모두삭제 (이건 나중에 doDelete 만들고 나서)
@@ -117,76 +126,65 @@ public class TestMailService {
 		flag += this.mailService.doInsert(mail03);
 		flag += this.mailService.doInsert(mail04);
 
-//		int flag = this.mailRecService.doInsert(mail01);
-//		flag += this.mailRecService.doInsert(mail02);
-//		flag += this.mailRecService.doInsert(mail03);
-//		flag += this.mailRecService.doInsert(mail04);
-
 		// 3. 값 확인
 		assertThat(flag, is(7));
 	}
 
 	/**
-	 * Method Name : doSelectOne 작성일: 2020. 5. 8. 작성자: MINJI 설명: 메일 단건 조회 (List에서
-	 * 클릭했을 시)
+	 * Method Name : doRetrieve 
+	 * 작성일: 2020. 5. 16. 
+	 * 작성자: MINJI 
+	 * 설명: 메일 목록 조회
+	 * 
+	 * @throws java.lang.Exception
+	 */
+	@Test
+	@Ignore
+	public void doRetrieve() {
+		// 검색
+		//String searchDiv, String searchWord, int pageSize, int pageNum
+		//SearchVO inVO = new SearchVO("", "honggd02", 10, 1);
+//		List<MailVO> list = (List<MailVO>) mailService.doRetrieve(inVO);
+//
+//		for (MailVO outVO : list) {
+//			LOG.debug(outVO.toString());
+//		}
+//
+//		assertThat(list.size(), is(3));
+	}
+	
+	/**
+	 * Method Name : doSelectOne 
+	 * 작성일: 2020. 5. 18. 
+	 * 작성자: MINJI 
+	 * 설명: 메일 단건 조회
 	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Test
 	@Ignore
 	public void doSelectOne() {
-		// MailRecipientVO inVO = new
-		// MailRecipientVO("M200508_01","","이상무","leesm","","","","","M200508_01_R1","홍길동","honggd","","","0");
-//		MailVO inVO = new MailVO("","","김민지","kimmj","","","","","정진우","jungjw","","","0");
-//		MailVO outVO = (MailVO) this.mailService.doSelectOne(inVO);
-//		LOG.debug("=================Test doSelectOne Start===================");
-//		LOG.debug("=outVO="+outVO);
-//		LOG.debug("=================Test doSelectOne End===================");
-
+		MailVO inVO = new MailVO("M20200515_39", "", "", "", "", "", "", "", "", "", "", "", "","");
+		MailVO outVO = (MailVO) mailService.doSelectOne(inVO);
+		LOG.debug("=doSelectOne=");
+		LOG.debug("=outVO="+outVO);
+		LOG.debug("=doSelectOne=");
 	}
-
+	
 	/**
-	 * Method Name : doDelete 작성일: 2020. 5. 8. 작성자: MINJI 설명: 메일 삭제
+	 * Method Name : doSelectOne 
+	 * 작성일: 2020. 5. 19. 
+	 * 작성자: MINJI 
+	 * 설명: disableYN Update
 	 * 
 	 * @throws java.lang.Exception
 	 */
 	@Test
-	@Ignore
-	public void doDelete() {
-
-		// 1. 삭제할 메일
-		// String mail_seq, String mail_id, String receiver, String receiver_id, String
-		// rec_date
-		// RecipientVO recipientVO = new
-		// RecipientVO("M200508_01_R1","M200508_01","홍길동","honggd","");
-//		RecipientVO recipientVO01 = new RecipientVO("M200508_04_R5","M200508_04","김정우","honggd","");
-//		RecipientVO recipientVO02 = new RecipientVO("M200508_04_R6","M200508_04","이동혁","honggd","");
-//		RecipientVO recipientVO03 = new RecipientVO("M200508_04_R7","M200508_04","정재현","honggd","");
-
-		// 2. 단건 삭제
-//		int flag = this.mailRecService.doDelete(recipientVO01);
-//		flag += this.mailRecService.doDelete(recipientVO02);
-//		flag += this.mailRecService.doDelete(recipientVO03);
-
-		// 3. 값 확인
-		// assertThat(flag, is(3));
-
-	}
-
-	@Test
-	public void doRetrieve() {
-
-		// 검색
-		//String searchDiv, String searchWord, int pageSize, int pageNum
-		//int pageSize, int pageNum, String searchDiv, String searchWord
-		//SearchVO inVO = new SearchVO(10, 1, "10", "_124");
-		//List<MailVO> list = (List<MailVO>) this.mailService.doRetrieve(inVO);
-
-//		for (MailVO outVO : list) {
-//			LOG.debug(outVO.toString());
-//		}
-//
-//		assertThat(list.size(), is(3));
+	//@Ignore
+	public void doUpdateDisable() {
+		MailVO inVO = new MailVO("M20200515_40", "", "", "", "", "", "", "", "", "", "", "", "","");
+		int flag = mailService.doUpdateDisable(inVO);
+		assertThat(flag, is(1));
 	}
 
 }

@@ -512,17 +512,17 @@
                                            	<h5 class="m-b-20">제목</h5>
                                                <input type="text" id="title" value="${vo.title}" class="form-control bg-transparent" placeholder=" 제목">
                                            </div>
-                                           <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부 파일</h5>
+                                           <%-- <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부 파일</h5>
                                            <hr>
 										   <form class="form-horizontal" action="${hContext}/file/do_insert.do" method="post" enctype="multipart/form-data">
 											   <div class="form-group">
 												   <label for="inputEmail3" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label">File1</label>
 												   <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-													   <input type="file" class="form-control" name="file01" placeholder="파일01">
+													   <input type="file" id="fileUp" class="form-control" name="file01" placeholder="파일01">
 												   </div>
 											   </div>
 										   </form>
-										   <hr>
+										   <hr> --%>
                                            <!-- <div class="form-group">
                                                <div class="fallback">
                                                    <input class="l-border-1" id="fileUp" name="file" type="file" multiple="multiple">
@@ -666,11 +666,11 @@
 
 		//참조
 		recipient_add = $("#recipient_add").val().trim();
-		console.log("recipient_add"+recipient_add);
+		console.log("recipient_add : "+recipient_add);
 		if(recipient_add !== "" || recipient_add.length>1){
 			//참조값이 있으면 ,붙이고 recipient값으로 넘겨주기
 			recipient = recipient+","+recipient_add;
-			console.log("recipient"+recipient);
+			console.log("recipient : "+recipient);
 		}
 
 		//제목

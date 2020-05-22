@@ -166,10 +166,9 @@ public class MailDaoImple implements MailDao {
 		MailVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
 		LOG.debug("** outVO : "+outVO);
 		
+		LOG.debug("=====MailDaoImple [doSelectOne] End======");
+		
 		return outVO;
-		
-		
-		
 		
 //		MailVO inVO = (MailVO) dto;
 //		MailVO outVO = null;
@@ -397,13 +396,27 @@ public class MailDaoImple implements MailDao {
 
 	@Override
 	public List<?> getAll(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		SearchVO inVO = (SearchVO) dto;
+		
+		LOG.debug("=====MailDaoImple [getAll] Start======");
+		
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doGetAll";
+		LOG.debug("** statement : "+statement);
+		
+		List<MailVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
+		LOG.debug("** outList : "+outList);
+		
+		LOG.debug("=====MailDaoImple [getAll] End======");
+		
+		return outList;
 	}
 
 	@Override
 	public List<?> doRetrieveTrash(DTO dto) {
-SearchVO inVO = (SearchVO) dto;
+		SearchVO inVO = (SearchVO) dto;
 		
 		LOG.debug("=====MailDaoImple [doRetrieveTrash] Start======");
 		
@@ -419,6 +432,25 @@ SearchVO inVO = (SearchVO) dto;
 		LOG.debug("=====MailDaoImple [doRetrieveTrash] End======");
 		
 		return outList;
+	}
+
+	@Override
+	public DTO doSelectImage(DTO dto) {
+		MailVO inVO = (MailVO) dto;
+		
+		LOG.debug("=====MailDaoImple [doSelectImage] Start======");
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doSelectImage";
+		LOG.debug("** statement : "+statement);
+		
+		MailVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("** outVO : "+outVO);
+		
+		LOG.debug("=====MailDaoImple [doSelectImage] End======");
+		
+		return outVO;
 	}
 
 

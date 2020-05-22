@@ -106,4 +106,14 @@ public class MailServiceImple implements MailService {
 		return mailDao.doRetrieveTrash(dto);
 	}
 
+	@Override
+	public List<?> getAll(DTO dto) {
+		return mailDao.getAll(dto);
+	}
+
+	@Override
+	public DTO doSelectImage(DTO dto) {
+		return mailDao.doSelectImage(dto);
+	}
+
 }

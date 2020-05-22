@@ -49,6 +49,13 @@ public interface MailDao {
 	public DTO doSelectUserId(DTO dto);
 	
 	/**
+	 * ORGANIZATION 테이블에서 Image 조회
+	 * @param dto
+	 * @return
+	 */
+	public DTO doSelectImage(DTO dto);
+	
+	/**
 	 * 삭제
 	 * @param dto
 	 * @return int

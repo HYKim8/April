@@ -68,8 +68,9 @@ public class MailController {
 	/**
 	 * Method Name : doRetrieve 
 	 * 작성일: 2020. 5. 16. 
+	 * 수정일: 2020. 5. 22
 	 * 작성자: MINJI 
-	 * 설명: 메일 목록 조회
+	 * 설명: 메일 목록 조회 + 알림 목록 조회
 	 * 
 	 * @throws java.lang.Exception
 	 */
@@ -95,30 +96,46 @@ public class MailController {
 		//검색조건 화면으로 전달.
 		model.addAttribute("vo", search);
 		
-		//TODO: codeTable : 검색조건,페이지 사이즈
-		//검색조건
-//		CodeVO  code=new CodeVO();
-//		code.setCodeTypeId("BOARD_SEARCH");
-//		List<CodeVO> searchList=(List<CodeVO>) this.codeService.doRetrieve(code);
-//		LOG.debug("1.1=searchList="+searchList);
-//		model.addAttribute("searchList", searchList);
-//		
-//		//페이지 사이즈: PAGE_SIZE
-//		code.setCodeTypeId("PAGE_SIZE");
-//		List<CodeVO> pageSizeList=(List<CodeVO>) this.codeService.doRetrieve(code);
-//		LOG.debug("1.1=pageSizeList="+pageSizeList);
-//		model.addAttribute("pageSizeList", pageSizeList);
-		
-		
+		//페이징한 list
 		List<MailVO> list = (List<MailVO>) this.mailService.doRetrieve(search);
+		
 		//조회결과 화면 전달
 		model.addAttribute("list", list);
 		for(MailVO vo:list) {
 			LOG.debug("** list : "+vo);
 		}
 		
+		//알림용 list
+		List<MailVO> alarmList = (List<MailVO>) this.mailService.getAll(search);
+		
+//		//알림용 image
+		String img = "";
+				
+		//안읽은 건수
+		int totalCntNotRead = 0;
+		
+		for(MailVO vo:alarmList) {
+			LOG.debug("** alarmList : "+vo);
+			if(vo.getRead().equals("0")) {
+				LOG.debug("쓰빠껐");
+				totalCntNotRead++;
+				MailVO imgVO = (MailVO)this.mailService.doSelectImage(vo);
+				img = "/groupware/"+ imgVO.getSaveFileName();
+				vo.setSaveFileName(img);
+				LOG.debug("** alarmList(SaveFileName) : "+vo);
+			}
+		}
+		
+		model.addAttribute("alarmList", alarmList);
+		
+		LOG.debug("** totalCntNotRead : "+totalCntNotRead);
+		
+		//조회결과 화면 전달
+		model.addAttribute("totalCntNotRead", totalCntNotRead);
+		
 		//총건수
 		int totalCnt = 0;
+		
 		if(null !=list &&  list.size()>0) {
 			totalCnt = list.get(0).getTotalCnt();
 		}
@@ -126,7 +143,7 @@ public class MailController {
 		
 		//조회결과 화면 전달
 		model.addAttribute("totalCnt", totalCnt);
-		
+
 		LOG.debug("=====MailController [doRetrieve] End=====");
 		
 		return "views/email_inbox";// "/board/board_list.jsp
@@ -413,7 +430,6 @@ public class MailController {
 		return "views/email_trashbox";// "/board/board_list.jsp
 		
 	}
-	
 }
 
 

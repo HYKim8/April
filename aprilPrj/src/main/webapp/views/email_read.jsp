@@ -531,7 +531,7 @@
                                             	<h5 class="m-b-20">받는 사람</h5>
                                                 <input type="text" id="recipient" value="${vo.recipient}" class="form-control bg-transparent" readonly="readonly">
                                             </div>
-                                            <h6 class="p-t-15"><i class="fa fa-download mb-2"></i> 첨부파일 <span>(3)</span></h6>
+                                            <!-- <h6 class="p-t-15"><i class="fa fa-download mb-2"></i> 첨부파일 <span>(3)</span></h6>
 	                                        <div class="row m-b-30">
 	                                            <div class="col-auto"><a href="#" class="text-muted">My-Photo.png</a>
 	                                            </div>
@@ -539,7 +539,7 @@
 	                                            </div>
 	                                            <div class="col-auto"><a href="#" class="text-muted">My-Resume.pdf</a>
 	                                            </div>
-	                                        </div>
+	                                        </div> -->
 	                                        <hr>
                                             <div class="form-group">
                                                 <textarea id="contents" class="textarea_editor form-control bg-light" rows="15" readonly="readonly"><c:out value="${vo.contents}" /></textarea>

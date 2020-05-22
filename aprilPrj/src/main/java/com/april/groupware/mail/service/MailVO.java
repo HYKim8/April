@@ -33,12 +33,14 @@ public class MailVO extends DTO {
 	private String disableYn; // Y: 삭제, N: 삭제 안함
 	/** 읽음 여부 */
 	private String read; // 읽지않음-0, 읽음-9
+	/**수정 사진 경로*/
+	private String saveFileName;
 
 	public MailVO() {}
 
 	public MailVO(String mailId, String category, String sender, String senderId, String senDate, String title,
 			String fileId, String contents, String recipient, String recipientId, String recDate, String disableYn,
-			String read) {
+			String read, String saveFileName) {
 		super();
 		this.mailId = mailId;
 		this.category = category;
@@ -53,6 +55,7 @@ public class MailVO extends DTO {
 		this.recDate = recDate;
 		this.disableYn = disableYn;
 		this.read = read;
+		this.saveFileName = saveFileName;
 	}
 
 	public String getMailId() {
@@ -159,13 +162,23 @@ public class MailVO extends DTO {
 		this.read = read;
 	}
 
+	public String getSaveFileName() {
+		return saveFileName;
+	}
+
+	public void setSaveFileName(String saveFileName) {
+		this.saveFileName = saveFileName;
+	}
+
 	@Override
 	public String toString() {
 		return "MailVO [mailId=" + mailId + ", category=" + category + ", sender=" + sender + ", senderId=" + senderId
 				+ ", senDate=" + senDate + ", title=" + title + ", fileId=" + fileId + ", contents=" + contents
 				+ ", recipient=" + recipient + ", recipientId=" + recipientId + ", recDate=" + recDate + ", disableYn="
-				+ disableYn + ", read=" + read + ", toString()=" + super.toString() + "]";
+				+ disableYn + ", read=" + read + ", saveFileName=" + saveFileName + ", toString()=" + super.toString()
+				+ "]";
 	}
+
 
 
 	

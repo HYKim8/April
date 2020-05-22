@@ -198,4 +198,33 @@
 	    mail_id = #{mailId,jdbcType=VARCHAR}
     </update>
     
+    <!-- getAll(안읽은 것만, 알림용) -->
+    <select id="doGetAll" parameterType="SearchVO" resultType="MailVO">
+    SELECT
+			mail_id as mailId,
+			category,
+			sender,
+			sender_id as senderId,
+			sen_date as senDate,
+			title,
+			file_id as fileId,
+			contents,
+			recipient,
+			recipient_id as recipientId,
+			TO_CHAR(rec_date, 'YYYY/MM/DD HH24:MI:SS') as recDate,
+			disable_yn as disableYn,
+			read
+	FROM	email
+	WHERE	recipient_id like '%' || #{searchWord} ||'%'
+	AND		disable_yn = 'N'
+	AND		TO_CHAR(rec_date,'yyyy/mm/dd hh24:mi:ss') >= TO_CHAR(SYSDATE - (interval '30' minute),'yyyy/mm/dd hh24:mi:ss')
+    </select>
+    
+    <!-- 사진 들고오기 -->
+    <select id="doSelectImage" parameterType="MailVO" resultType="MailVO">
+    SELECT	save_file_nm as saveFileName
+	FROM	organization
+	WHERE 	id = #{senderId,jdbcType=VARCHAR}
+    </select>
+    
 </mapper>
