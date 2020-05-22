@@ -6,7 +6,6 @@ import com.april.groupware.cmn.DTO;
 
 public interface ChatService {
 
-
 	/**
 	 * 단건조회
 	 * @param dto

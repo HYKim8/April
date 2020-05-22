@@ -16,7 +16,7 @@ import com.april.groupware.cmn.DTO;
 @Service
 public class ChatServiceImple implements ChatService {
 	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
-		
+		 
 	@Autowired
 	private ChatDao dao;
 	

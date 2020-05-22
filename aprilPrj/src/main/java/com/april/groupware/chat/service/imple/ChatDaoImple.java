@@ -15,7 +15,7 @@ import com.april.groupware.cmn.SearchVO;
 
 @Repository
 public class ChatDaoImple implements ChatDao {
-
+ 
 	//Logger
 	Logger LOG = LoggerFactory.getLogger(this.getClass());
 		

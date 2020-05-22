@@ -3,7 +3,7 @@ package com.april.groupware.chat.service;
 import com.april.groupware.cmn.DTO;
 
 public class ChatVO extends DTO {
-	
+
 	private String id;
 	/**이름*/
 	private String name;

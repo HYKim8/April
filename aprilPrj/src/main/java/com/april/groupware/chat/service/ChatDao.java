@@ -5,7 +5,7 @@ import java.util.List;
 import com.april.groupware.cmn.DTO;
 
 public interface ChatDao {
-
+ 
 
 	/**
 	 * 단건조회
