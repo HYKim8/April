@@ -15,12 +15,18 @@
   */
 --%>
 
+<%@page import="com.april.groupware.member.service.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/views/common/common.jsp"%>
+<%
+	//session
+	UserVO userInfo = (UserVO) session.getAttribute("user");
+	String auth = userInfo.getAuth();
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -440,27 +446,31 @@
                                 <div class="email-box">
                                     <div class="toolbar" role="toolbar">
                                         <div class="btn-group" style="float:right;">
-                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
-                                                 class="label label-pill label-danger"
-                                                 value="삭제(관리자)" id="delete_btn" name="delete_btn" />
-                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
-                                                 class="label label-pill label-danger" value="수정(관리자)"
-                                                 id="update_btn" name="update_btn" />
-                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
-                                                 id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
-                                          <label style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
-                                                 >조회수 ${vo.readCnt }</label>
-                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
-                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
-                                                 value="글 목록" id="list_btn" onclick="goRetrieve();" />
+                                         <!-- 마지막에 풀기 -->
+                                         <c:choose>
+                                            <c:when test="${9 eq user.auth}">
+	                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+	                                                 class="label label-pill label-danger"
+	                                                 value="삭제(관리자)" id="delete_btn" name="delete_btn" />
+	                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+	                                                 class="label label-pill label-danger" value="수정(관리자)"
+	                                                 id="update_btn" name="update_btn" />
+	                                       </c:when>
+                                         </c:choose>
+	                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
+	                                                 id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
+	                                          <label style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+	                                                 >조회수 ${vo.readCnt }</label>
+	                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
+	                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+	                                                 value="글 목록" id="list_btn" onclick="goRetrieve();" />
                                         </div>
                                     </div>
-                                    <!-- 게시글 내용 영역 -->
                                     
+                                    <!-- 게시글 내용 영역 -->
                                     <div class="read-content">
                                     <div class="media mb-4 mt-1">
                                             <div class="media" style="display: flex; padding-right: 1em;">
-                                            <%-- <input type="hidden" id="nbCategory" value="${vo.nbCategory }"/> --%>
                                                 ${vo.nbCategory }
                                             </div>
                                                 <div class="media-body" style="margin: 0; padding: 0;">
@@ -479,12 +489,17 @@
                                             </div>
                                             <!-- 수정시 수정자 아이디/수정일 -->
                                         </div>
-                                                <p class="m-b-2" > 수정자 ${vo.modId } 수정일 ${vo.modDate }</p>
+                                            <c:choose>
+                                                <c:when test="${vo.modId != null}">     
+                                                    <p class="m-b-2" > 수정자 ${user.deptNm } ${user.position } ${user.name }  수정일 ${vo.modDate }</p>
+                                                </c:when>
+                                             </c:choose>
+                                        <hr>
+                                         <pre><c:out value="${vo.nbContents}" /></pre>
+                                         <%-- <input type="hidden" id="nbContents" value="${vo.nbContents }"/>
+                                       <h5 class="m-b-15">${vo.nbContents }</h5> --%>
+                                        <hr>
                                       <!-- // 게시글 내용 영역 -->
-                                        <hr>
-                                         <input type="hidden" id="nbContents" value="${vo.nbContents }"/>
-                                       <h5 class="m-b-15">${vo.nbContents }</h5>
-                                        <hr>
                                         <h6 class="p-t-15"><i class="fa fa-download mb-2"></i> Attachments <span>(3)</span></h6>
                                         <div class="row m-b-30">
                                             <div class="col-auto"><a href="#" class="text-muted">My-Photo.png</a>

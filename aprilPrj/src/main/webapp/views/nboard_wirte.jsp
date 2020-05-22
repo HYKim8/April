@@ -15,12 +15,18 @@
   */
 --%>
 
+<%@page import="com.april.groupware.member.service.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/views/common/common.jsp"%>
+<%
+    //session
+    UserVO userInfo = (UserVO) session.getAttribute("user");
+    String auth = userInfo.getAuth();
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -437,22 +443,6 @@
                                   <h4>전사 게시판 - 게시글 작성</h4><hr/>
                                 </div>
                                 <div class="email-box">
-                                <!-- 상단공지 / 팝업 -->
-                                        <div class="basic-form">
-                                    <form>
-                                        <div class="form-group">
-                                            <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" value="">상단 공지 설정</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox" class="form-check-input" value="">메인 화면 팝업 설정</label>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                    <!-- // 상단공지 / 팝업 -->
                                     <div class="compose-content mt-5">
                                         <form action="${hContext}/nboard/do_retrieve.do" name="mngFrm" id="mngFrm" method="post">
                                         <!-- 카테고리 -->
@@ -479,7 +469,9 @@
                                             <div class="form-group">
                                                                                                         등록자 
                                                <input type="text" class="form-control bg-transparent" placeholder="등록자"
-                                                      id="regId" name="regId" placeholder="제목을 입력하세요." value="${vo.regId }">
+                                                      id="regId" name="regId" placeholder="등록자를 입력하세요." value="${user.name}" readonly="readonly">
+                                               <%-- <input type="text" class="form-control bg-transparent" placeholder="등록자"
+                                                      id="regId" name="regId" placeholder="등록자를 입력하세요." value="${vo.regId }"> --%>
                                             </div>
                                         </form>
                                         <!-- 첨부파일 -->
@@ -509,12 +501,16 @@
                                         
                                     </div>
                                     <div class="text-center m-t-15">
-                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
-                                                type="button" id="insert_btn">
-                                                <i class="fa fa-paper-plane m-r-5"></i> 글 등록</button>
-                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"
-                                                onclick="goRetrieve();" id="list_btn">
-                                                <i class="ti-close m-r-5 f-s-12"></i> 작성 취소</button>
+                                      <c:choose>
+                                        <c:when test="${9 eq user.auth}">
+	                                        <button class="btn btn-primary m-b-30 m-t-15 f-s-14 p-l-20 p-r-20 m-r-10" 
+	                                                type="button" id="insert_btn">
+	                                                <i class="fa fa-paper-plane m-r-5"></i> 글 등록</button>
+	                                        <button class="btn btn-dark m-b-30 m-t-15 f-s-14 p-l-20 p-r-20" type="button"
+	                                                onclick="goRetrieve();" id="list_btn">
+	                                                <i class="ti-close m-r-5 f-s-12"></i> 작성 취소</button>
+                                        </c:when>
+                                      </c:choose>
                                     </div>
                                 </div>
                             </div>

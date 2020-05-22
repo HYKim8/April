@@ -15,6 +15,7 @@
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
 --%>
+<%@page import="com.april.groupware.member.service.UserVO"%>
 <%@page import="com.april.groupware.cmn.StringUtil"%>
 <%@page import="com.april.groupware.cmn.SearchVO"%>
 <%@page import="com.april.groupware.code.service.CodeVO"%>
@@ -25,7 +26,14 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/views/common/common.jsp"%>
 <%
-        //페이지 사이즈
+    //session
+    /* UserVO userInfo = (UserVO) session.getAttribute("user");
+    String auth = userInfo.getAuth();
+    String id = userInfo.getId();
+    out.print("auth : "+auth + " | ");
+    out.print("id : "+id + " | "); */
+
+    //페이지 사이즈
     String pageSize = "10";
     
     //페이지 num
@@ -44,7 +52,7 @@
         searchDiv = search.getSearchDiv();
         searchWord = search.getSearchWord();
     }
-    out.print("search:"+search);
+    //out.print("search:"+search);
     
     List<CodeVO> searchList = (List<CodeVO>) request.getAttribute("searchList");
     //out.print("searchList:"+searchList);
@@ -62,7 +70,7 @@
     int totalCnt = 0;
     
     totalCnt = (Integer) request.getAttribute("totalCnt");
-    out.print("totalCnt:"+totalCnt);
+    //out.print("totalCnt:"+totalCnt);
 
     //paging
     String url = H_PATH+"/nboard/do_retrieve.do";
@@ -513,10 +521,17 @@
                         id="searchWord" name="searchWord" placeholder="검색어" value="${vo.searchWord }">
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
                         <button style="margin-right:0.5em; text-align:center; height: 40px;" 
-                                class="btn mb-1 btn-light" type="button" onclick="doRetrieve();">조회</button> 
-                        <button style="margin-right:0.5em; text-align:center; height: 40px;" 
-                                class="btn mb-1 btn-danger" type="button" 
-                                onclick="doInsertView();">게시글 작성(관리자)</button>
+                                class="btn mb-1 btn-info" type="button" onclick="doRetrieve();">조회</button> 
+<!--                         <button style="margin-right:0.5em; text-align:center; height: 40px;" 
+                                class="btn mb-1 btn-light" type="button" onclick="doRetrieve();">조회</button>  -->
+                        <!-- 마지막에 풀기 -->
+                        <c:choose>
+                           <c:when test="${9 eq user.auth}">
+                              <button style="margin-right:0.5em; text-align:center; height: 40px;" 
+	                                class="btn mb-1 btn-danger" type="button" 
+	                                onclick="doInsertView();">게시글 작성</button>
+                           </c:when>
+                       </c:choose>
                      </div>   
                 </form>
             </div>
@@ -525,11 +540,12 @@
 
            <!-- 게시글 목록 -->
          <div class="table-responsive">
-           <table class="table" id="listTable">
+           <table class="table header-border table-hover verticle-middle" id="listTable">
+<!--            <table class="table" id="listTable"> -->
                <thead>
                    <tr>
-                       <th width="120">글번호</th>
-                       <th width="150">분류</th>
+                       <th class="text-center" width="120">글번호</th>
+                       <th class="text-center" width="150">분류</th>
                        <th class="text-center" width="800">제목</th>
                        <th class="text-center">등록자</th>
                        <th class="text-center">등록일</th>
@@ -541,15 +557,15 @@
                         <c:when test="${list.size()>0 }">
                             <c:forEach var="vo" items="${list }">
                                 <tr>
-                                    <td class="text-left hidden-sm hidden-xs"><c:out
-                                            value="${vo.nbNo }" /></td>
-                                    <td class="text-left"><c:out value="${vo.nbCategory }" /></td>
+                                    <td class="text-center hidden-sm hidden-xs">
+                                            <c:out value="${vo.nbNo }" /></td>
+                                    <td class="text-center"><c:out value="${vo.nbCategory }" /></td>
                                     <td class="text-left"><c:out value="${vo.nbTitle }" /></td>
                                     <td class="text-center"><c:out value="${vo.regId }" /></td>
-                                    <td class="text-center hidden-sm hidden-xs  "><c:out
-                                            value="${vo.regDate }" /></td>
-                                    <td class="text-right hidden-sm hidden-xs"><c:out
-                                            value="${vo.readCnt }" /></td>
+                                    <td class="text-center hidden-sm hidden-xs  ">
+                                        <c:out value="${vo.regDate }" /></td>
+                                    <td class="text-right hidden-sm hidden-xs">
+                                        <c:out value="${vo.readCnt }" /></td>
                                 </tr>
                             </c:forEach>
                         </c:when>

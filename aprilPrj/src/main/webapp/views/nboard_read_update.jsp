@@ -15,12 +15,18 @@
   */
 --%>
 
+<%@page import="com.april.groupware.member.service.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="/views/common/common.jsp"%>
+<%
+    //session
+    UserVO userInfo = (UserVO) session.getAttribute("user");
+    String auth = userInfo.getAuth();
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -439,16 +445,21 @@
                                 <div class="email-box">
                                     <div class="toolbar" role="toolbar">
                                         <div class="btn-group" style="float:right;">
-                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
-                                                 class="label label-pill label-danger"
-                                                 value="수정(관리자)" id="update_btn" />
-                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
-                                                 id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
-                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
-                                                 value="조회수 ${vo.readCnt }"  readonly="readonly" id="readCnt" name="readCnt"/>
-                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
-                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
-                                                 value="글 목록" id="list_btn" onclick="goRetrieve();" />
+	                                      <!-- 마지막에 풀기 -->
+	                                      <c:choose>
+                                            <c:when test="${9 eq user.auth}">
+	                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+	                                                 class="label label-pill label-danger"
+	                                                 value="수정(관리자)" id="update_btn" />
+	                                        </c:when>
+                                          </c:choose>
+	                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
+	                                                 id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
+	                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+	                                                 value="조회수 ${vo.readCnt }"  readonly="readonly" id="readCnt" name="readCnt"/>
+	                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
+	                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+	                                                 value="글 목록" id="list_btn" onclick="goRetrieve();" />
                                         </div>
                                     </div>
                                     <!-- 게시글 내용 영역 -->
@@ -486,7 +497,8 @@
                                             </div>
                                         </div>
 	                                            <!-- 수정시 수정자 아이디/수정일 -->
-	                                            <p class="m-b-2" > 수정자 ${vo.modId } 수정일 ${vo.modDate }</p>
+	                                            <p class="m-b-2" > 수정자 ${user.deptNm } ${user.position } ${user.name }</p>
+	                                            <input type="text" id="modId" name="modId" value="${user.id }">
                                         <hr>
                                         <div class="form-group">
 								           <label for="contents" class="col-sm-2 control-label">수정 내용</label>
@@ -579,7 +591,9 @@
                 alert("내용을 입력하세요.");
                 return;
             }    
-            var nbNo =  ${vo.nbNo };      
+            var nbNo =  ${vo.nbNo };   
+            //var modId = ${user.id }; modId  
+            var modId = $("#modId").val().trim();  
                         
             if(false==confirm("수정 하시겠습니까?"))return;
 
@@ -591,7 +605,8 @@
                     	        "nbNo":nbNo,
                     	        "nbCategory":category.options[category.selectedIndex].value,
                                 "nbTitle":nbTitle,
-                                "nbContents":nbContents
+                                "nbContents":nbContents,
+                                "modId":modId
                             },
                        success:function(data){ //성공
                         //alert(data);
