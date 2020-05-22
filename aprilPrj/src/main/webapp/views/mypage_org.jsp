@@ -33,7 +33,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="${aprilContext}/views/images/favicon.png">
     <!-- Custom Stylesheet -->
     <link href="${aprilContext}/views/css/style.css" rel="stylesheet">
-
+	
+	<!-- <script src="//code.jquery.com/jquery-3.3.1.min.js"></script> -->
 </head>
 
 <body>
@@ -466,8 +467,6 @@
 	                                	</tr>
 	                                </table> -->
 									
-	                                <!-- TODO : 지우기 -->
-                                	${orgUpdateVO}
                                     <form class="form-valide" action="${aprilContext}/org/do_update.do" name="org_form" method="post" enctype="multipart/form-data">
                                     	<div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="profile">사진 <span class="text-danger"></span>
@@ -478,8 +477,9 @@
                                             		<tr>
                                             			<td>
                                             				<!-- style="width: 150px; height: 180px; color: grey; border: 1px solid grey; dispaly: inline;" -->
-                                            				<!-- TODO saveFileName : ./WEB-INF/file_upload_img/2020/05/20200518183556e4e57f3d2dfe4a09a6315871562752ae.gif  -->
-                                                			<img alt="profile" src="./WEB-INF/file_upload_img/2020/05/20200518183556e4e57f3d2dfe4a09a6315871562752ae.gif" width="150px" height="180px"/>
+                                            				<!-- URL : /groupware/resources/file_upload_img/2020/05/20200521223603e14a31e15955478eab54f34c7a9cd2cd.gif -->
+                                            				<!-- URL 못 불러오면 [Window]-[Preferences]-[Workspace]-"Refresh using native hooks or polling" 체크 -->
+                                                			<img alt="profile" src="${aprilContext}/${orgUpdateVO.saveFileName}" width="150px" height="180px"/>
                                                 		</td>
                                                 		<td>
 															<div id='View_area' style='position:relative; width: 150px; height: 180px; display: inline;'></div>
@@ -489,8 +489,7 @@
                                                 		<td colspan="2">
                                                 			<input type="file" name="profile_after" id="profile_after" onchange="previewImage(this,'View_area')">
                                                 			<!-- TODO : 지우기 -->
-                                                			<input type="text" name="profile_before" id="profile_before" value="${orgUpdateVO.orgFileName}" />
-                                                			<input type="text" name="id" id="id" value="${orgUpdateVO.id}" />
+                                                			<input type="hidden" name="id" id="id" value="${orgUpdateVO.id}" />
                                                 			<!-- TODO : 지우기 -->
                                                 		</td>
                                                 	</tr>
@@ -606,11 +605,11 @@
                                             		군필
                                             	</label>
                                             	<label>
-                                            		<input type="radio" name="military" value="1" <c:if test="${orgUpdateVO.militaryYN == '2'}"> checked="checked"</c:if>>
+                                            		<input type="radio" name="military" value="2" <c:if test="${orgUpdateVO.militaryYN == '2'}"> checked="checked"</c:if>>
                                             		미필
                                             	</label>
                                             	<label>
-                                            		<input type="radio" name="military" value="1" <c:if test="${orgUpdateVO.militaryYN == '3'}"> checked="checked"</c:if>>
+                                            		<input type="radio" name="military" value="3" <c:if test="${orgUpdateVO.militaryYN == '3'}"> checked="checked"</c:if>>
                                             		군면제
                                             	</label>
                                             </div>
@@ -756,7 +755,11 @@
     <script src="${aprilContext}/views/plugins/validation/jquery.validate-init.js"></script>
 	
 	<script type="text/javascript">
-
+		//TODO : id 변수 = 로그인 세션
+		function goAttend() {
+	    	location.href="${aprilContext}/org/do_select_one.do?id=kimjh1";
+	    }
+	
 		//취소-초기화
 		$("#cancel_btn").on("click", function(){
 			console.log("#cancel_btn");
@@ -817,49 +820,92 @@
 	//modDate = modDate;         
 		//정보 수정 버튼
 		$("#update_btn").on("click", function(){
+			//아이디
         	var id = $("#id").val().trim();
-            if(id == null || id.length<=1){
-                console.log("아이디가 없습니다");
-                return;
-            }
         	
-        	var modFileName = $("#profile_after").val().trim();
-        	
-        	var orgFileName = $("#profile_before").val().trim();
+            //if(id == null || id.length<=1){
+            //    console.log("아이디가 없습니다");
+            //    return;
+            //}
 
-			
-        	
-        	
-            if(false==confirm("수정하시겠습니까?")) return;
+            //변경 전 사진
+        	//var orgFileName = $("#profile_before").val();
 
-            $.ajax({
-				processData: false,
-				contentType: false,
-		        type:"POST",
-		        url:"${aprilContext}/org/do_update.do",
-		        dataType:"html", 
-		        data:{
-				    "modFileName": modFileName,  
-				    "orgFileName": orgFileName,
-		        },
-				//성공
-		        success:function(data){ 
-			        //alert(data);
-			        //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
-			        var jData = JSON.parse(data);
-			        if(jData != null && jData.msgId== "1"){
-				        //alert(jData.msgMsg);
-			        } else {
-			            alert(jData.msgMsg);
-			        }
-	            },
-				//에러
-	            error:function(xhr,status,error){
-	            	//alert("error:"+error);
-	            },
-	            complete:function(data){
-	            }   
-			}); //--ajax
+			//변경 후 사진        	
+        	var saveFileName = $("#profile_after").val();
+
+			//패스워드
+			var password = $("#password").val().trim();
+
+			//이메일
+			var email = $("#email").val().trim();
+
+			//휴대폰 번호
+			var mobile = $("#mobile").val().trim();
+
+			//주소
+        	var address = $("#address").val().trim();
+
+			//$("#grade option:selected").val()
+        	//최종 학력
+        	var grade = $("#grade option:selected").val().trim()+","+ $("#grade_sc_name").val().trim()+","+$("#grade_dp_name").val().trim();
+
+        	//$("input[name=radio_agree]:checked").val() = Y
+        	//$(":radio[name=radio_agree]:checked").val() = Y
+        	//$("input:radio[name=radio_agree]:checked").val() = Y
+			//병역 사항
+			//var militaryYN = $(':radio[name="military"]:checked').val();
+			//var militaryYN = $("input[name=military]:checked").val();
+			//var militaryYN = $('input[name="military"]:checked').val();
+			//var militaryYN = $( "input[name=military]:radio" ).val();
+			var militaryYN = $('input[name="military"]:checked').val();
+
+			//장애 여부
+			var dspsnYN = $('input:radio[name="disabled"]:checked').val();
+
+            if(confirm("수정하시겠습니까?") == true) {
+                alert(grade, militaryYN, dspsnYN);
+	            $.ajax({
+					processData: false,
+					contentType: false,
+			        type:"POST",
+			        url:"${aprilContext}/org/do_update.do",
+			        dataType:"html", 
+			        data:{
+					    "id": id,
+					    "orgFileName": orgFileName,  
+					    "saveFileName": saveFileName,
+					    "password": password,
+					    "email": email,
+					    "mobile": mobile,
+					    "address": address,
+					    "grade": grade,
+					    "militaryYN": militaryYN,
+					    "dspsnYN": dspsnYN
+			        },
+					//성공
+			        success:function(data){
+                        //alert(data);
+				        goAttend();
+                
+				        var jData = JSON.parse(data);
+                        if(null != jData && jData.msgId == "1"){
+                            alert(jData.msgMsg);
+                        } else {
+                            alert(jData.msgMsg);
+                        }
+					},
+					//에러
+		            error:function(xhr,status,error){
+		            	alert("error:"+error);
+		            },
+		            complete:function(data){
+		            }   
+				}); //--ajax
+			} else {
+				alert("에러에러에러");
+			}
+
         });
 
 		function previewImage(targetObj, View_area) {
@@ -927,8 +973,7 @@
 						//Safari is not supported FileReader
 					} else { 
 						//alert('not supported FileReader');
-						if (!document.getElementById("sfr_preview_error_"
-								+ View_area)) {
+						if (!document.getElementById("sfr_preview_error_" + View_area)) {
 							var info = document.createElement("p");
 							info.id = "sfr_preview_error_" + View_area;
 							info.innerHTML = "not supported FileReader";
