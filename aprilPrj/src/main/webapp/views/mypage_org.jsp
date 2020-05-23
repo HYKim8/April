@@ -479,7 +479,22 @@
                                             				<!-- style="width: 150px; height: 180px; color: grey; border: 1px solid grey; dispaly: inline;" -->
                                             				<!-- URL : /groupware/resources/file_upload_img/2020/05/20200521223603e14a31e15955478eab54f34c7a9cd2cd.gif -->
                                             				<!-- URL 못 불러오면 [Window]-[Preferences]-[Workspace]-"Refresh using native hooks or polling" 체크 -->
-                                                			<img alt="profile" src="${aprilContext}/${orgUpdateVO.saveFileName}" width="150px" height="180px"/>
+                                            				<%-- <c:choose>
+																<c:when test="${vo.imgFile==null || vo.imgFile.length()==0}">
+																    <img class="card-img rounded-0" style="width:300px; height:300px" src="/Deep/DEEP_View/img/no_image.gif" alt="">
+																</c:when>
+																<c:otherwise>
+																    <img class="card-img rounded-0" style="width:300px; height:300px" src="<c:out value="${vo.imgFile}"></c:out>" alt="">
+															    </c:otherwise>
+															</c:choose> --%>
+															<c:choose>
+																<c:when test="${orgUpdateVO.saveFileName==null || orgUpdateVO.saveFileName.length()==0}">
+																    <img alt="profile" src="${aprilContext}/img_cmn/no_image.gif" width="150px" height="180px"/>
+																</c:when>
+																<c:otherwise>
+		                                                			<img alt="profile" src="${aprilContext}/${orgUpdateVO.saveFileName}" width="150px" height="180px"/>
+															    </c:otherwise>
+															</c:choose>
                                                 		</td>
                                                 		<td>
 															<div id='View_area' style='position:relative; width: 150px; height: 180px; display: inline;'></div>
@@ -593,37 +608,61 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="military">병역 사항 <span class=""></span>
+                                            <label class="col-lg-4 col-form-label" for="militaryYN">병역 사항 <span class=""></span>
                                             </label>
                                             <div class="col-lg-6">
+                                            	<%-- <input type="text" id="military" name="military"/>
+	                                            <select class="form-control" id="military" name="military">
+	                                            	<option value="해당" <c:if test="${orgUpdateVO.militaryYN == '0'}"> selected="selected"</c:if>>
+	                                                    	해당 없음
+	                                                </option>
+	                                            	<option value="군필" <c:if test="${orgUpdateVO.militaryYN == '1'}"> selected="selected"</c:if>>
+	                                                    	군필
+	                                                </option>
+	                                                <option value="미필" <c:if test="${orgUpdateVO.militaryYN == '2'}"> selected="selected"</c:if>>
+	                                                    	미필
+	                                                </option>
+	                                                <option value="군면" <c:if test="${orgUpdateVO.militaryYN == '3'}"> selected="selected"</c:if>>
+	                                                    	군면제
+	                                                </option>
+	                                            </select> --%>
                                             	<label>
-                                            		<input type="radio" name="military" value="0" <c:if test="${orgUpdateVO.militaryYN == '0'}"> checked="checked"</c:if>>
+                                            		<input type="radio" name="militaryYN" value="0" <c:if test="${orgUpdateVO.militaryYN == '0'}"> checked="checked"</c:if>>
                                             		해당 없음
                                             	</label>
                                             	<label>
-                                            		<input type="radio" name="military" value="1" <c:if test="${orgUpdateVO.militaryYN == '1'}"> checked="checked"</c:if>>
+                                            		<input type="radio" name="militaryYN" value="1" <c:if test="${orgUpdateVO.militaryYN == '1'}"> checked="checked"</c:if>>
                                             		군필
                                             	</label>
                                             	<label>
-                                            		<input type="radio" name="military" value="2" <c:if test="${orgUpdateVO.militaryYN == '2'}"> checked="checked"</c:if>>
+                                            		<input type="radio" name="militaryYN" value="2" <c:if test="${orgUpdateVO.militaryYN == '2'}"> checked="checked"</c:if>>
                                             		미필
                                             	</label>
                                             	<label>
-                                            		<input type="radio" name="military" value="3" <c:if test="${orgUpdateVO.militaryYN == '3'}"> checked="checked"</c:if>>
+                                            		<input type="radio" name="militaryYN" value="3" <c:if test="${orgUpdateVO.militaryYN == '3'}"> checked="checked"</c:if>>
                                             		군면제
                                             	</label>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="disabled">장애 여부<span class=""></span>
+                                            <label class="col-lg-4 col-form-label" for="dspsnYN">장애 여부<span class=""></span>
                                             </label>
                                             <div class="col-lg-6">
+                                            	<%--<input type="text" id="disabled" name="disabled"/>
+                                            	<select class="form-control" id="disabled" name="disabled">
+	                                            	<option value="비대상" <c:if test="${orgUpdateVO.dspsnYN == '0'}"> selected="selected"</c:if>>
+	                                                    	비대상
+	                                                </option>
+	                                            	<option value="대상" <c:if test="${orgUpdateVO.dspsnYN == '1'}"> selected="selected"</c:if>>
+	                                                    	대상
+	                                                </option>
+	                                            </select> --%>
                                             	<label>
-                                            		<input type="radio" name="disabled" value="0" <c:if test="${orgUpdateVO.dspsnYN == '0'}"> checked="checked"</c:if>>
+                                            		<input type="radio" name="dspsnYN" value="0" <c:if test="${orgUpdateVO.dspsnYN == '0'}"> checked="checked"</c:if>>
                                             		비대상
                                             	</label>
                                             	<label>
-                                            		<input type="radio" name="disabled" value="1" <c:if test="${orgUpdateVO.dspsnYN == '1'}"> checked="checked"</c:if>>
+                                            		<input type="radio" name="dspsnYN" value="1" <c:if test="${orgUpdateVO.dspsnYN == '1'}"> checked="checked"</c:if>>
                                             		대상
                                             	</label>
                                             </div>
@@ -757,7 +796,7 @@
 	<script type="text/javascript">
 		//TODO : id 변수 = 로그인 세션
 		function goAttend() {
-	    	location.href="${aprilContext}/org/do_select_one.do?id=kimjh1";
+	    	location.href="http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1";
 	    }
 	
 		//취소-초기화
@@ -820,17 +859,18 @@
 	//modDate = modDate;         
 		//정보 수정 버튼
 		$("#update_btn").on("click", function(){
+			//org_form
+			var form = $('form')[0]; //Form data read, 폼 태그 중에 1번째 폼을 불러옴
+	        var formData = new FormData(form);
+		
+			/** */
 			//아이디
         	var id = $("#id").val().trim();
-        	
             //if(id == null || id.length<=1){
             //    console.log("아이디가 없습니다");
             //    return;
             //}
-
-            //변경 전 사진
-        	//var orgFileName = $("#profile_before").val();
-
+            
 			//변경 후 사진        	
         	var saveFileName = $("#profile_after").val();
 
@@ -850,43 +890,50 @@
         	//최종 학력
         	var grade = $("#grade option:selected").val().trim()+","+ $("#grade_sc_name").val().trim()+","+$("#grade_dp_name").val().trim();
 
-        	//$("input[name=radio_agree]:checked").val() = Y
-        	//$(":radio[name=radio_agree]:checked").val() = Y
-        	//$("input:radio[name=radio_agree]:checked").val() = Y
 			//병역 사항
-			//var militaryYN = $(':radio[name="military"]:checked').val();
-			//var militaryYN = $("input[name=military]:checked").val();
-			//var militaryYN = $('input[name="military"]:checked').val();
-			//var militaryYN = $( "input[name=military]:radio" ).val();
-			var militaryYN = $('input[name="military"]:checked').val();
-
+			var militaryYN = $('input[name="militaryYN"]:checked').val();
+				
 			//장애 여부
-			var dspsnYN = $('input:radio[name="disabled"]:checked').val();
+			var dspsnYN = $('input:radio[name="dspsnYN"]:checked').val();
+			
+			//console.log(id);
+			//console.log(password);
+			//console.log(email);
+			//console.log(mobile);
+			//console.log(address);
+			//console.log(grade);
+			//console.log(militaryYN);
+			//console.log(dspsnYN);
+			/** */
 
             if(confirm("수정하시겠습니까?") == true) {
-                alert(grade, militaryYN, dspsnYN);
 	            $.ajax({
+	            	async: false,
+	                cache: false,
 					processData: false,
 					contentType: false,
+					enctype: "multipart/form-data",
 			        type:"POST",
 			        url:"${aprilContext}/org/do_update.do",
 			        dataType:"html", 
-			        data:{
-					    "id": id,
-					    "orgFileName": orgFileName,  
-					    "saveFileName": saveFileName,
-					    "password": password,
-					    "email": email,
-					    "mobile": mobile,
-					    "address": address,
-					    "grade": grade,
-					    "militaryYN": militaryYN,
-					    "dspsnYN": dspsnYN
-			        },
+			        data: formData,
+			        //data:{
+					//    "id": id,
+					//    "password": password,
+					//    "email": email,
+					//    "mobile": mobile,
+					//    "address": address,
+					//    "grade": grade,
+					//    "militaryYN": militaryYN,
+					//    "dspsnYN": dspsnYN
+			        //},
 					//성공
 			        success:function(data){
                         //alert(data);
+                        window.location.href="http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1";
+                        location.href="http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1";
 				        goAttend();
+                        alert("성공");
                 
 				        var jData = JSON.parse(data);
                         if(null != jData && jData.msgId == "1"){
@@ -902,8 +949,6 @@
 		            complete:function(data){
 		            }   
 				}); //--ajax
-			} else {
-				alert("에러에러에러");
 			}
 
         });

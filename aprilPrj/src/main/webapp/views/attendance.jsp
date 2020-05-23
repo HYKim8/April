@@ -15,11 +15,21 @@
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
 --%>
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="aprilContext" value="${pageContext.request.contextPath}"></c:set>
-
+<%
+	Calendar cal = Calendar.getInstance();
+	
+	int year = cal.get(Calendar.YEAR);
+	int month = cal.get(Calendar.MONTH)+1;
+	//int day = cal.get(Calendar.DAY_OF_MONTH);
+	//int hour = cal.get(Calendar.HOUR_OF_DAY);
+	//int min = cal.get(Calendar.MINUTE);
+	//int sec = cal.get(Calendar.SECOND);
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -494,6 +504,12 @@
                                     <!-- end col -->
                                     <!-- TODO -->
                                     <div class="col-md-7">
+                                    <table class="verticle-middle">
+                                    	<tr>
+	                                    	<td><input type="text" id="year" name="year" value="<%=year%>년" size=5 readonly="readonly" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+	                                    	<td><input type="text" id="month" name="month" value="<%=month%>월" size=3 readonly="readonly" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
+	                                    </tr>
+                                    </table>
                                     <table class="table table-bordered table-striped verticle-middle">
 						    		    <!-- hidden-sm hidden-xs 숨기기 -->
 						    			<thead>
@@ -638,7 +654,6 @@
     <script src="${aprilContext}/views/js/settings.js"></script>
     <script src="${aprilContext}/views/js/gleek.js"></script>
     <script src="${aprilContext}/views/js/styleSwitcher.js"></script>
-
     
     <script src="${aprilContext}/views/plugins/jqueryui/js/jquery-ui.min.js"></script>
     <script src="${aprilContext}/views/plugins/moment/moment.min.js"></script>
@@ -649,7 +664,45 @@
 		function goAttend() {
 	    	location.href="${aprilContext}/attend/do_select_one.do?id=kimjh1";
 	    }
-	
+
+		function prevmonth() { //이전 월로 가는 함수
+		    var ymda = document.getElementById("prev");
+		    var yg = document.getElementById("Ymd");
+		
+		    month--; //month를 계속 감소시켜준다
+		    
+		    if (month < 1) { // month가 1보다 작아지면
+		       month = 12; // month를 12로 만들어줌
+		       year -= 1; //year를 1 감소시켜준다
+		    }
+		    
+		    //if(year < 1970){ //1970년 밑으로는 내려가지 않음..
+		    //    alert("기원전");
+		    //     for(var i=1;i<100;i--){
+		    //    window.top.moveTo(i ,i *=-1);
+		    //    }
+		    //}
+		
+		    var ymda = year + "년" + (month) + "월";
+		
+		    //present();
+		 }
+		
+		 function nextmonth() { //다음 월로 가는 함수
+		    var ymda = document.getElementById("next");
+		    var yg = document.getElementById("Ymd");
+		
+		    month++; //month 를 계속 증가시켜줌
+		    if (month > 12) { //만약 month가 12를 넘어가면
+		       month = 1; // month를 1로 만듦
+		       year += 1; //year을 1 증가시켜준다
+		    }
+		
+		    var ymda = year + "년" + month + "월";
+		
+		    //present(); //present()함수를 호출하여 다시 찍어줌
+		 }
+		
 		//조퇴 버튼 
 		$("#early_leave_btn").on("click", function(){
 			console.log("#early_leave_btn");
