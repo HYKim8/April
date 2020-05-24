@@ -5,8 +5,24 @@
 <mapper namespace="com.april.groupware.nbanswer">
 
 
+    <!-- 단건 조회 -->
+    <select id="doSelectOne" parameterType="NBAnswerVO" resultType="NBAnswerVO">
+	    SELECT
+		    aw_no as awNo,
+		    nb_no as nbNo,
+		    aw_contents as awContents,
+		    reg_id as regId,
+		    mod_id as modId,
+		    reg_date as regDate,
+		    mod_date as modDate
+		FROM
+		    nb_answer
+		WHERE aw_no = #{awNo}
+		AND nb_no= #{nbNo}
+	</select>
+
     <!-- 목록조회 -->
-    <select id="doRetrieve" parameterType="SearchVO" resultType="NBAnswerVO">
+    <select id="doRetrieve" parameterType="SearchVO" resultType="NBAnswerVO"> 
         SELECT T1.*,T2.*
 		FROM(
 		
