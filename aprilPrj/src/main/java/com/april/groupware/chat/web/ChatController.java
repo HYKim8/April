@@ -107,7 +107,7 @@ public class ChatController {
 	
 	
 	
-	@RequestMapping(value = "chat/do_selectone.do",method = RequestMethod.GET)
+	@RequestMapping(value = "chat/do_selectOne.do",method = RequestMethod.GET)
 	public String doSelectOne(ChatVO user,Locale locale,Model model) {
 
 		//param board_id
@@ -126,7 +126,7 @@ public class ChatController {
 		model.addAttribute("vo", outVO);
 		
 		//여기에 자동으로 /+
-		return "views/chat_mng"; //원하는 채팅 화면으로 이동 jsp경로라거나 아니면 controller 
+		return "views/chat_list"; //원하는 채팅 화면으로 이동 jsp경로라거나 아니면 controller 
 	
 	}
 	
