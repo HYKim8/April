@@ -55,17 +55,17 @@
     //out.print("search:"+search);
     
     List<CodeVO> searchList = (List<CodeVO>) request.getAttribute("searchList");
-    //out.print("searchList:"+searchList);
-    /*     for(CodeVO vo:searchList){
-            out.print(vo.toString()+"<br/>");
-        } */
+   // out.print("searchList:"+searchList);
+   //     for(CodeVO vo:searchList){
+   //        out.print(vo.toString()+"<br/>");
+   //     } 
     
     //pageSizeList
     List<CodeVO> pageSizeList = (List<CodeVO>) request.getAttribute("pageSizeList");
-    //out.print("pageSizeList:"+pageSizeList);
-    /*     for(CodeVO vo:pageSizeList){
-            out.print(vo.toString()+"<br/>");
-        }   */
+   // out.print("pageSizeList:"+pageSizeList);
+   //      for(CodeVO vo:pageSizeList){
+   //         out.print(vo.toString()+"<br/>");
+   //     }   
     
     int totalCnt = 0;
     
@@ -647,21 +647,6 @@
 
         }
 
-        function doRetrieve() {
-            console.log("doRetrieve");
-            var frm = document.searchFrm;
-            frm.pageNum.value = "1";
-            frm.action = "${hContext}/nboard/do_retrieve.do";
-            frm.submit();
-        }
-
-        $("#searchWord").on("keypress", function(e) {
-            console.log("#searchWord");
-            console.log("#searchWord:" + e.which);
-            if (e.which == 13) {
-                doRetrieve();
-            }
-        });
 
         //selecOne
         $("#listTable>tbody").on("click","tr",function(){

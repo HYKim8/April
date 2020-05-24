@@ -468,8 +468,8 @@
                                             </div>
                                             <div class="form-group">
                                                                                                         등록자 
-                                               <input type="text" class="form-control bg-transparent" placeholder="등록자"
-                                                      id="regId" name="regId" placeholder="등록자를 입력하세요." value="${user.name}" readonly="readonly">
+                                               <input type="text" class="form-control bg-transparent"
+                                                      id="regId" name="regId" value="${user.id}" readonly="readonly">
                                                <%-- <input type="text" class="form-control bg-transparent" placeholder="등록자"
                                                       id="regId" name="regId" placeholder="등록자를 입력하세요." value="${vo.regId }"> --%>
                                             </div>

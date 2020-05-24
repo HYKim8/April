@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.april.groupware.cmn.DTO;
 import com.april.groupware.nboard.service.NBAnswerDao;
 import com.april.groupware.nboard.service.NBAnswerService;
+import com.april.groupware.nboard.service.NBAnswerVO;
 
 @Service
 public class NBAnswerServiceImple implements NBAnswerService {
@@ -31,8 +32,10 @@ public class NBAnswerServiceImple implements NBAnswerService {
 
 	@Override
 	public DTO doSelectOne(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		NBAnswerVO outVO = (NBAnswerVO) dao.doSelectOne(dto);
+		
+
+		return outVO;
 	}
 
 	@Override

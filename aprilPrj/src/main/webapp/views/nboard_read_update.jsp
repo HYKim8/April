@@ -497,8 +497,8 @@
                                             </div>
                                         </div>
 	                                            <!-- 수정시 수정자 아이디/수정일 -->
-	                                            <p class="m-b-2" > 수정자 ${user.deptNm } ${user.position } ${user.name }</p>
-	                                            <input type="text" id="modId" name="modId" value="${user.id }">
+	                                            <%-- <p class="m-b-2" > 수정자 ${user.deptNm } ${user.position } ${user.name }</p> --%>
+	                                            <input type="hidden" id="modId" name="modId" value="${user.id }">
                                         <hr>
                                         <div class="form-group">
 								           <label for="contents" class="col-sm-2 control-label">수정 내용</label>

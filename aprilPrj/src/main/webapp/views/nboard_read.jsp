@@ -15,6 +15,10 @@
   */
 --%>
 
+<%@page import="com.april.groupware.cmn.StringUtil"%>
+<%@page import="java.util.List"%>
+<%@page import="com.april.groupware.code.service.CodeVO"%>
+<%@page import="com.april.groupware.cmn.SearchVO"%>
 <%@page import="com.april.groupware.member.service.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -25,7 +29,54 @@
 <%
 	//session
 	UserVO userInfo = (UserVO) session.getAttribute("user");
-	String auth = userInfo.getAuth();
+
+    /* //페이지 사이즈
+    String pageSize = "10";
+    
+    //페이지 num
+    String pageNum = "1";
+    
+    //검색구분
+    String searchDiv = "";
+    
+    //검색어
+    String searchWord = "";
+    
+    SearchVO search = (SearchVO) request.getAttribute("vo");
+    if (null != search) {
+        pageSize = String.valueOf(search.getPageSize());
+        pageNum = String.valueOf(search.getPageNum());
+        searchDiv = search.getSearchDiv();
+        searchWord = search.getSearchWord();
+    }
+    
+    //pageSizeList
+    List<CodeVO> pageSizeList = (List<CodeVO>) request.getAttribute("pageSizeList");
+   // out.print("pageSizeList:"+pageSizeList);
+   //      for(CodeVO vo:pageSizeList){
+   //         out.print(vo.toString()+"<br/>");
+   //     }   
+    
+    int totalCnt = 0;
+    
+    totalCnt = (Integer) request.getAttribute("totalCnt");
+    //out.print("totalCnt:"+totalCnt);
+
+    //paging
+    String url = H_PATH+"/nbAnswer/do_retrieve.do";
+    String scriptName = "doSeachPage";
+    int maxNum =0;//총글수
+    int currPageNo=1;//현재페이지 
+    int rowPerPage=10;
+    int bottomCount=5;//바닥에 page
+    
+    if(null !=search){
+        currPageNo = search.getPageNum();
+        rowPerPage = search.getPageSize();
+        maxNum     = totalCnt;
+    }
+    //--paging */
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -491,7 +542,7 @@
                                         </div>
                                             <c:choose>
                                                 <c:when test="${vo.modId != null}">     
-                                                    <p class="m-b-2" > 수정자 ${user.deptNm } ${user.position } ${user.name }  수정일 ${vo.modDate }</p>
+                                                    <p class="m-b-2" > 수정자 ${vo.regId} 수정일 ${vo.modDate }</p>
                                                 </c:when>
                                              </c:choose>
                                         <hr>
@@ -514,13 +565,15 @@
                             </div>
                                       </form>
                         </div>
+                        
+                        
                         <!--div 댓글 작성 -->
                         <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body" style="padding-bottom: 1em;">
                                 <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 작성</span>
                                 <div class="basic-form">
-                                    <form>
+                                    <form id="answerFrm" name="answerFrm">
                                         <div class="form-group">
                                             <table>
                                                 <tr>
@@ -528,12 +581,13 @@
                                                     <img class="mr-3 circle-rounded" src="${hContext}/views/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                                     </td>
                                                     <td width="1500px">
-                                                   <textarea class="form-control h-150px" rows="2" id="comment"></textarea>
+                                                   <textarea class="form-control h-150px" rows="2" id="aw_contents" placeholder="댓글 내용을 입력하세요."></textarea>
+                                                   <input type="hidden" id="awRegId" name="awRegId" value=" ${user.id }">
                                                    </td>
                                                 </tr>
                                                 <tr>
                                                    <td colspan = "2" align="right" style="padding-top: 1em;">
-                                                       <button type="button" class="btn mb-1 btn-outline-info">댓글 등록</button>
+                                                       <button type="button" class="btn mb-1 btn-outline-info" id="aw_insert_btn">댓글 등록</button>
                                                    </td>
                                                 </tr>
                                             </table>
@@ -543,18 +597,53 @@
                             </div>
                         </div>
                         
-                        <!--div 댓글 읽기 -->
+                        <%-- <!--div 댓글 읽기 -->
                         <div class="card">
                             <div class="card-body">
                              <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글</span>
+                                
+                                <!-- 댓글박스 -->
                                 <div class="media media-reply">
+                       <c:choose>
+                        <c:when test="${list.size()>0 }">
+                            <c:forEach var="vo" items="${list }">
                                     <img class="mr-3 circle-rounded" src="${hContext}/views/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                     <div class="media-body">
                                         <div class="d-sm-flex justify-content-between mb-2">
-                                            <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
+                                            <h5 class="mb-sm-0">${vo.regId}
+                                            
+                                        <c:choose>
+                                            <c:when test="${vo.modId ==null }">
+	                                            <small class="text-muted ml-3">
+	                                            ${vo.redDate } </small></h5>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <small class="text-muted ml-3">
+                                                ${vo.modDate } 수정됨</small></h5>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td class="text-center">No data found.</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
+                    <!-- pagenation -->
+            <nav>
+                 <ul class="pagination justify-content-center">
+                    <div class="text-center">
+                        <%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
+                    </div>
+                 </ul>
+             </nav> 
+         <!--// pagenation -->
                                         </div>
                                         
-                                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+                                        
+                                        
+                                        <p> ${vo.awContents }</p>
                                         <ul>
                                             <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/2.jpg" alt=""></li>
                                             <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/3.jpg" alt=""></li>
@@ -563,22 +652,7 @@
                                         </ul>
                                 </div>
                             </div>
-                            <div class="media media-reply">
-                                    <img class="mr-3 circle-rounded" src="${hContext}/views/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <div class="d-sm-flex justify-content-between mb-2">
-                                            <h5 class="mb-sm-0">Milan Gbah <small class="text-muted ml-3">about 3 days ago</small></h5>
-                                        </div>
-                                        
-                                        <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-                                        <ul>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/2.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/3.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/4.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/1.jpg" alt=""></li>
-                                        </ul>
-                                </div>
-                            </div>
+                            <!--//댓글읽기 끝 --> --%>
                             
                         </div>
                         </div>
@@ -625,17 +699,6 @@
         //location.href="${hContext}/nboard/nboard_list.jsp";
     }
 
-   //수정 화면으로 이동
-    /* function doUpdateView() {
-    	console.log("doUpdateView");
-        var nbNo = ${vo.nbNo };
-        console.log("nbNo : " + nbNo);
-        var frm = document.searchFrm;
-        frm.nbNo.value = nbNo;
-        frm.action = "${hContext}/nboard/do_selectone_update.do";
-        frm.submit();
-    } */
-    
   //수정 화면으로 이동
     $("#update_btn").on("click",function(){
 	    	var nbNo = ${vo.nbNo };
@@ -688,6 +751,68 @@
                
        });//--ajax
     });
+
+    //댓글 입력
+    $("#aw_insert_btn").on("click",function(){
+
+                
+        //nbContents 내용 미입력시 
+        var awContents = $("#aw_contents").val().trim();
+        if(null==awContents || awContents.length<=1){
+           $("#aw_contents").focus();
+           alert("댓글 내용을 입력하세요.");
+           return;
+        }
+
+        //게시글번호
+        var nbNo = ${vo.nbNo };
+        console.log("nbNo : "+nbNo);
+
+        //var regId = regId;
+        var awRegId = $("#awRegId").val().trim();
+        console.log("awRegId : "+awRegId);
+
+        /* var awRegId = $("#awRegId").val().trim();
+        if(null==awRegId || awRegId.length<=1){
+           $("#regId").focus();
+           alert("아이디를 입력하세요.");
+           return;
+        } */
+
+        if(false==confirm("등록하시겠습니까?")) return;
+        
+      //ajax
+        $.ajax({
+           type:"POST",
+           url:"${hContext }/nbAnswer/do_insert.do",
+           dataType:"html", 
+           data:{"nbNo":nbNo,
+        	     "awContents":awContents,
+                 "regId":awRegId
+           },
+           success:function(data){ //성공
+              //{"msgId":"1","msgMsg":"삭제 되었습니다.","num":0,"totalCnt":0}
+              //alert(data);
+
+              var jData = JSON.parse(data);
+              if(null != jData && jData.msgId=="1"){
+                 alert(jData.msgMsg);
+                 //등록 성공시 페이지 새로고침
+                 location.reload();
+              }else{
+                 alert(jData.msgMsg);
+              }
+           },
+           error:function(xhr,status,error){
+              //{"msgId":"0","msgMsg":"삭제 실패.","num":0,"totalCnt":0}
+              alert("error:"+error);
+           },
+           complete:function(data){
+           
+           }   
+        
+        });//--ajax  
+     }); //--insert_btn
 
     </script>
 </body>

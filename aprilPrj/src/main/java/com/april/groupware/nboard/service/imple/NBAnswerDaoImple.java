@@ -40,13 +40,13 @@ public class NBAnswerDaoImple implements NBAnswerDao {
 	public int doInsert(DTO dto) {
 		NBAnswerVO inVO = (NBAnswerVO) dto;
 		
-		LOG.debug("1= NBAnswerImple doInsert=============================");
+		LOG.debug("1= DaoImple doInsert=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nbanswer.doInsert 
 		String statement = NAMESPACE+".doInsert";
-		LOG.debug("2= NBAnswerImple doInsert=============================");
+		LOG.debug("2= DaoImple doInsert=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
@@ -64,28 +64,23 @@ public class NBAnswerDaoImple implements NBAnswerDao {
 		return 0;
 	}
 
-	@Override
-	public DTO doSelectOne(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public int doDelete(DTO dto) {
 		NBAnswerVO inVO = (NBAnswerVO) dto;
 		
-		LOG.debug("1= DapImple doDelete=============================");
+		LOG.debug("1= DaoImple doDelete=============================");
 		LOG.debug("1=inVO="+inVO);
 		LOG.debug("1==============================");
 		
 		// namespace+id = com.april.groupware.nbanswer.doDelete 
 		String statement = NAMESPACE+".doDelete";
-		LOG.debug("2= DapImple doDelete=============================");
+		LOG.debug("2= DaoImple doDelete=============================");
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
 		int  flag = this.sqlSessionTemplate.delete(statement, inVO);
-		LOG.debug("3= DapImple doDelete=============================");
+		LOG.debug("3= DaoImple doDelete=============================");
 		LOG.debug("3=flag="+flag);
 		LOG.debug("3==============================");			
 		
@@ -131,6 +126,28 @@ public class NBAnswerDaoImple implements NBAnswerDao {
 		LOG.debug("3==============================");			
 		
 		return outList;
+	}
+	
+	@Override
+	public DTO doSelectOne(DTO dto) {
+		NBoardVO inVO = (NBoardVO) dto;
+		
+		LOG.debug("1= DapImple doSelectOne=============================");
+		LOG.debug("1=inVO="+inVO);
+		LOG.debug("1==============================");
+		
+		// namespace+id = com.april.groupware.nbanswer.doSelectOne 
+		String statement = NAMESPACE+".doSelectOne";
+		LOG.debug("2= DapImple doSelectOne=============================");
+		LOG.debug("2=statement="+statement);
+		LOG.debug("2==============================");	
+		
+		NBoardVO outVO = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("3= DapImple doSelectOne=============================");
+		LOG.debug("3=outVO="+outVO);
+		LOG.debug("3==============================");			
+		
+		return outVO;
 	}
 
 	@Override
