@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.april.groupware.nbanswer">
+
+
+    <!-- 목록조회 -->
+    <select id="doRetrieve" parameterType="SearchVO" resultType="NBAnswerVO">
+        SELECT T1.*,T2.*
+		FROM(
+		
+		    SELECT B.aw_no as awNo,
+		           B.nb_no as nbNo,
+		           B.aw_contents as awContents,
+		           B.REG_ID as regId,
+		           B.MOD_ID as modId,
+		           CASE TO_CHAR(B.REG_DATE,'YYYY/MM/DD') WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') 
+		                                               THEN TO_CHAR(SYSDATE,'HH24:MI') 
+		           ELSE TO_CHAR(B.REG_DATE,'YYYY/MM/DD') END regDate ,
+		           CASE TO_CHAR(B.MOD_DATE,'YYYY/MM/DD') WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') 
+		                                               THEN TO_CHAR(SYSDATE,'HH24:MI') 
+		           ELSE TO_CHAR(B.MOD_DATE,'YYYY/MM/DD') END modDate
+		    FROM(
+		        SELECT ROWNUM AS rnum,a.*
+		        FROM (
+		            SELECT *
+		            FROM nb_answer
+		            ORDER BY REG_DATE desc
+		        )A
+		        WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize} *(#{pageNum} - 1)+#{pageSize})
+		    )B
+		    WHERE rnum <![CDATA[ >= ]]> (#{pageSize}*(#{pageNum}-1)+1)
+		)T1
+		NATURAL JOIN
+		(
+		    SELECT COUNT(*) totalCnt
+		    FROM nb_answer
+		)T2
+
+        
+    </select>
+    
+    <!-- 등록 : namespace+id = com.april.groupware.com.april.groupware.nbanswer.doInsert -->
+    <insert id="doInsert" parameterType="NBAnswerVO">
+        INSERT INTO nb_answer (
+		    aw_no,
+		    nb_no,
+		    aw_contents,
+		    reg_id
+		) VALUES (
+		    AW_NO_SEQ.NEXTVAL,
+		    #{nbNo}, 
+		    #{awContents,jdbcType=VARCHAR},                     
+            #{regId,jdbcType=VARCHAR}
+		
+		)
+    </insert>
+    
+    <!--단건 삭제 : namespace+id = com.april.groupware.com.april.groupware.nbanswer.doDelete -->
+    <delete id="doDelete" parameterType="NBAnswerVO">
+	    DELETE FROM nb_answer 
+		WHERE nb_no = #{nbNo}
+		AND aw_no = #{awNo}
+	</delete>
+	
+	<!-- 전체 삭제 -->
+	<delete id="doDeleteAll">
+        <![CDATA[
+        DELETE FROM nb_answer
+        ]]>
+    </delete>
+</mapper>
