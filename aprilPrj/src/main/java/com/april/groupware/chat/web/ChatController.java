@@ -35,7 +35,7 @@ public class ChatController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/chat.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String chat(Locale locale, Model model) {
 		LOG.debug("~환영~ 채팅방 좀 열려라 시발 ~ {}.", locale);
 		
