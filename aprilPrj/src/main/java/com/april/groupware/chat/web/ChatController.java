@@ -35,9 +35,9 @@ public class ChatController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/chatchat.do", method = RequestMethod.GET)
 	public String chat(Locale locale, Model model) {
-		LOG.debug("~환영~ 채팅방 좀 열려라 시발 ~ {}.", locale);
+		LOG.debug(" 열림 테스트 {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
