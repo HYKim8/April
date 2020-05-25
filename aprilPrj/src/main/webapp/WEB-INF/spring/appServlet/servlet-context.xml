@@ -37,17 +37,19 @@
 	</websocket:handlers> -->
 	
 	
+
 	<!-- Login시 필요 세션이 없을경우 /meber로, 있을경우 /views로 -->
-	<beans:bean id="authLoginInterceptor" class="com.april.groupware.cmn.AuthLoginInterceptor"/>
-	<interceptors>
-        <interceptor>
-            <mapping path="/views/*.do"/>
-            <mapping path="/member/*.do"/>
-            <!-- 예외 -->
-	        <exclude-mapping path="/resources/**"/>
-	        <exclude-mapping path="/login/**"/>
-	        <beans:ref bean="authLoginInterceptor"/>
-        </interceptor>
-	</interceptors>
+		<beans:bean id="authLoginInterceptor" class="com.april.groupware.cmn.AuthLoginInterceptor"/>
+		<interceptors>
+	        <interceptor>
+				<mapping path="/admin/*.do" />
+		        <mapping path="/org/*.do" />
+		        <mapping path="/attend/*.do" />
+	            <!-- 예외 -->
+		        <exclude-mapping path="/resources/**"/>
+		        <exclude-mapping path="/login/**"/>
+		        <beans:ref bean="authLoginInterceptor"/>
+	        </interceptor>
+		</interceptors>
 	
 </beans:beans>

@@ -67,7 +67,6 @@
                                     <div class="form-group">
                                         <input type="password"  name="password" id="password" class="form-control" placeholder="패스워드" maxlength="50">
                                     </div>
-                                   
                                 </form>
                                 
                                 <button type="button" class="btn login-form__btn submit w-100" id="member_login" size="20">
@@ -97,63 +96,61 @@
 
 	<script type="text/javascript">
 	    function goRetrieve(id){
+		if (id == 'admin' || id == 'ADMIN') {
+				location.href = "${hContext}/dash/do_selectone.do";
+			} else {
+				location.href = "${hContext}/attend/do_select_one.do?id=" + id;
+			}
+		}
 
-		    if(id=='kimjh' || id=='KIMJH'){
-	        		location.href="${hContext}/dash/do_selectone.do";
-		    }else{
-		    		location.href="${hContext}/views/admin_org_write.jsp";
-			    }
-	    }
+		$("#member_login").on("click", function() {
+			console.log("member_login");
+			//  document.login_form.submit();
 
-
-	   $("#member_login").on("click",function(){
-		   console.log("member_login");
-		  //  document.login_form.submit();
-		  
 			var id = $("#id").val().trim();
-	        if(null == id || id.length<=1){
-	        	$("#id").focus();
-	            alert("아이디를 입력하세요.");
-	            return;
-	        }
+			if (null == id || id.length <= 1) {
+				$("#id").focus();
+				alert("아이디를 입력하세요.");
+				return;
+			}
 
-	     	var password = $("#password").val().trim();
-	        if(null == password || password.length<=1){
-	            $("#password").focus();
-	            alert("패스워드를 입력하세요.");
-	            return;
-	        }
-			  
-		  $.ajax({
-			   type:"POST",
-			   url:"${hContext}/login/login.do",
-			   dataType:"html",
-			   data:{
-				     "id":$("#id").val(),
-			         "password":$("#password").val()
-			   },
-			   success:function(data){ //성공
-				   var jData = JSON.parse(data);
-                   if(null !=jData && jData.msgId=="30"){
-                       alert(jData.msgMsg);
-                       //목록화면으로 이동
-                       goRetrieve(id);
-                   }else{
-                       alert(jData.msgMsg);
+			var password = $("#password").val().trim();
+			if (null == password || password.length <= 1) {
+				$("#password").focus();
+				alert("패스워드를 입력하세요.");
+				return;
+			}
 
-                   }
+			$.ajax({
+				type : "POST",
+				url : "${hContext}/login/login.do",
+				dataType : "html",
+				data : {
+					"id" : $("#id").val(),
+					"password" : $("#password").val()
+				},
+				success : function(data) { //성공
+					var jData = JSON.parse(data);
+					if (null != jData && jData.msgId == "30") {
+						alert(jData.msgMsg);
+						//목록화면으로 이동
+						goRetrieve(id);
+					} else {
+						alert(jData.msgMsg);
 
-			   },
-			   error:function(xhr,status,error){
-			    alert("error:"+error);
-			   },
-			   complete:function(data){
+					}
 
-			   }
+				},
+				error : function(xhr, status, error) {
+					alert("error:" + error);
+				},
+				complete : function(data) {
 
-		  });//--ajax
+				}
 
-	   });
+			});//--ajax
+
+		});
 	</script>
 </body>
 </html>
