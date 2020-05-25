@@ -108,7 +108,8 @@ public class NBAnswerDaoImple implements NBAnswerDao {
 
 	@Override
 	public List<?> doRetrieve(DTO dto) {
-		SearchVO inVO = (SearchVO) dto;
+//		SearchVO inVO = (SearchVO) dto;
+		NBAnswerVO inVO = (NBAnswerVO) dto;
 		
 		LOG.debug("1= DapImple doRetrieve=============================");
 		LOG.debug("1=inVO="+inVO);
@@ -120,7 +121,7 @@ public class NBAnswerDaoImple implements NBAnswerDao {
 		LOG.debug("2=statement="+statement);
 		LOG.debug("2==============================");	
 		
-		List<NBoardVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
+		List<NBAnswerVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
 		LOG.debug("3= DapImple doRetrieve=============================");
 		LOG.debug("3=outList="+outList);
 		LOG.debug("3==============================");			

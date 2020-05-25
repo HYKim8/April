@@ -21,41 +21,31 @@
 		AND nb_no= #{nbNo}
 	</select>
 
-    <!-- 목록조회 -->
-    <select id="doRetrieve" parameterType="SearchVO" resultType="NBAnswerVO"> 
-        SELECT T1.*,T2.*
-		FROM(
-		
-		    SELECT B.aw_no as awNo,
-		           B.nb_no as nbNo,
-		           B.aw_contents as awContents,
-		           B.REG_ID as regId,
-		           B.MOD_ID as modId,
-		           CASE TO_CHAR(B.REG_DATE,'YYYY/MM/DD') WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') 
-		                                               THEN TO_CHAR(SYSDATE,'HH24:MI') 
-		           ELSE TO_CHAR(B.REG_DATE,'YYYY/MM/DD') END regDate ,
-		           CASE TO_CHAR(B.MOD_DATE,'YYYY/MM/DD') WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') 
-		                                               THEN TO_CHAR(SYSDATE,'HH24:MI') 
-		           ELSE TO_CHAR(B.MOD_DATE,'YYYY/MM/DD') END modDate
-		    FROM(
-		        SELECT ROWNUM AS rnum,a.*
-		        FROM (
-		            SELECT *
-		            FROM nb_answer
-		            ORDER BY REG_DATE desc
-		        )A
-		        WHERE ROWNUM <![CDATA[ <= ]]> (#{pageSize} *(#{pageNum} - 1)+#{pageSize})
-		    )B
-		    WHERE rnum <![CDATA[ >= ]]> (#{pageSize}*(#{pageNum}-1)+1)
-		)T1
-		NATURAL JOIN
-		(
-		    SELECT COUNT(*) totalCnt
-		    FROM nb_answer
-		)T2
+    <!-- 목록조회 :  namespace+id = com.april.groupware.com.april.groupware.nbanswer.doRetrieve -->
+    <select id="doRetrieve" parameterType="NBAnswerVO" resultType="NBAnswerVO">
+	    SELECT 
+		    N.aw_no as awNo,
+		    N.nb_no as nbNo,
+		    N.aw_contents as awContents,
+		    N.reg_id as regId,
+		    N.mod_id as modId,
+		    CASE TO_CHAR(N.REG_DATE,'YYYY/MM/DD') WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') 
+		                                           THEN TO_CHAR(SYSDATE,'HH24:MI') 
+		    ELSE TO_CHAR(N.REG_DATE,'YYYY/MM/DD') END regDate,
+		    CASE TO_CHAR(N.MOD_DATE,'YYYY/MM/DD') WHEN TO_CHAR(SYSDATE,'YYYY/MM/DD') 
+		                                          THEN TO_CHAR(SYSDATE,'HH24:MI') 
+		    ELSE TO_CHAR(N.MOD_DATE,'YYYY/MM/DD') END modDate,
+		    O.id,
+		    O.name,
+		    O.dept_nm as deptNm,
+		    O.position
+		FROM
+		    nb_answer N, organization O
+        WHERE N.reg_id = O.id
+		AND N.nb_no = #{nbNo}
+	</select>
 
-        
-    </select>
+
     
     <!-- 등록 : namespace+id = com.april.groupware.com.april.groupware.nbanswer.doInsert -->
     <insert id="doInsert" parameterType="NBAnswerVO">

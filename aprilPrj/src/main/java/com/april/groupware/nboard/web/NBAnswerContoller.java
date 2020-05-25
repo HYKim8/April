@@ -18,6 +18,7 @@ import com.april.groupware.cmn.SearchVO;
 import com.april.groupware.cmn.StringUtil;
 import com.april.groupware.code.service.CodeService;
 import com.april.groupware.code.service.CodeVO;
+import com.april.groupware.mail.service.MailVO;
 import com.april.groupware.nboard.service.NBAnswerService;
 import com.april.groupware.nboard.service.NBAnswerVO;
 import com.april.groupware.nboard.service.NBoardService;
@@ -30,7 +31,7 @@ public class NBAnswerContoller {
 	Logger  LOG = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired
-	NBAnswerService boardService;
+	NBAnswerService answerService;
 	
 	@Autowired
 	CodeService codeService;
@@ -38,9 +39,10 @@ public class NBAnswerContoller {
 	@Autowired
 	MessageSource messageSource;
 	
-	//목록조회
+	//목록조회 --paging ver
 	@RequestMapping(value = "nbAnswer/do_retrieve.do",method = RequestMethod.GET)
 	public String doRetrieve(SearchVO  search,Model model) {
+		LOG.debug("=====NBAnswerContoller [doRetrieveTrash] Start=====");
 		//param 기본값 처리
 		if(search.getPageNum()==0) {
 			search.setPageNum(1);
@@ -50,26 +52,20 @@ public class NBAnswerContoller {
 			search.setPageSize(10);
 		}
 		
-		LOG.debug("1=====NBAnswerContoller=doRetrieve===========");
-		LOG.debug("1=param="+search);
-		LOG.debug("1=================");
+		//검색구분
+		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+		//검색어
+		search.setSearchWord(StringUtil.nvl(search.getSearchWord().trim()));
+		
+		LOG.debug("** param : "+search);
 		//검색조건 화면으로 전달.
 		model.addAttribute("vo", search);
-		//TODO: codeTable : 페이지 사이즈
 		
-		//페이지 사이즈: PAGE_SIZE
-		CodeVO  code=new CodeVO();
-		code.setCodeTypeId("PAGE_SIZE");
-		List<CodeVO> pageSizeList=(List<CodeVO>) this.codeService.doRetrieve(code);
-		LOG.debug("1.1=pageSizeList="+pageSizeList);
-		model.addAttribute("pageSizeList", pageSizeList);
-		
-		
-		List<NBAnswerVO> list = (List<NBAnswerVO>) this.boardService.doRetrieve(search);
+		List<NBAnswerVO> list = (List<NBAnswerVO>) this.answerService.doRetrieve(search);
 		//조회결과 화면 전달
 		model.addAttribute("list", list);
 		for(NBAnswerVO vo:list) {
-			LOG.debug("1.1=out="+vo);
+			LOG.debug("** list : "+vo);
 		}
 		
 		//총건수
@@ -77,14 +73,62 @@ public class NBAnswerContoller {
 		if(null !=list &&  list.size()>0) {
 			totalCnt = list.get(0).getTotalCnt();
 		}
+		LOG.debug("** totalCnt : "+totalCnt);
 		
-		LOG.debug("1.2======NBAnswerContoller=doRetrieve===========");
-		LOG.debug("1.2=totalCnt="+totalCnt);
-		LOG.debug("1.2=================");
 		//조회결과 화면 전달
 		model.addAttribute("totalCnt", totalCnt);
+		
+		LOG.debug("=====NBAnswerContoller [doRetrieveTrash] End=====");
+		
 		return "views/nboard_read";// "/views/nboard_read.jsp
 	}
+//	//목록조회 --paging ver
+//	@RequestMapping(value = "nbAnswer/do_retrieve.do",method = RequestMethod.GET)
+//	public String doRetrieve(SearchVO  search,Model model) {
+//		//param 기본값 처리
+//		if(search.getPageNum()==0) {
+//			search.setPageNum(1);
+//		}
+//		
+//		if(search.getPageSize()==0) {
+//			search.setPageSize(10);
+//		}
+//		
+//		LOG.debug("1=====NBAnswerContoller=doRetrieve===========");
+//		LOG.debug("1=param="+search);
+//		LOG.debug("1=================");
+//		//검색조건 화면으로 전달.
+//		model.addAttribute("vo", search);
+//		//TODO: codeTable : 페이지 사이즈
+//		
+//		//페이지 사이즈: PAGE_SIZE
+//		CodeVO  code=new CodeVO();
+//		code.setCodeTypeId("PAGE_SIZE");
+//		List<CodeVO> pageSizeList=(List<CodeVO>) this.codeService.doRetrieve(code);
+//		LOG.debug("1.1=pageSizeList="+pageSizeList);
+//		model.addAttribute("pageSizeList", pageSizeList);
+//		
+//		
+//		List<NBAnswerVO> list = (List<NBAnswerVO>) this.boardService.doRetrieve(search);
+//		//조회결과 화면 전달
+//		model.addAttribute("list", list);
+//		for(NBAnswerVO vo:list) {
+//			LOG.debug("1.1=out="+vo);
+//		}
+//		
+//		//총건수
+//		int totalCnt = 0;
+//		if(null !=list &&  list.size()>0) {
+//			totalCnt = list.get(0).getTotalCnt();
+//		}
+//		
+//		LOG.debug("1.2======NBAnswerContoller=doRetrieve===========");
+//		LOG.debug("1.2=totalCnt="+totalCnt);
+//		LOG.debug("1.2=================");
+//		//조회결과 화면 전달
+//		model.addAttribute("totalCnt", totalCnt);
+//		return "views/nboard_read";// "/views/nboard_read.jsp
+//	}
 	
 	
 	//삭제
@@ -106,7 +150,7 @@ public class NBAnswerContoller {
 			throw new IllegalArgumentException("awNo를 확인 하세요.");			
 		}
 		
-		int flag = this.boardService.doDelete(board);
+		int flag = this.answerService.doDelete(board);
 		MessageVO message=new MessageVO();
 		//삭제 성공
 		if(flag>0) {
@@ -139,7 +183,7 @@ public class NBAnswerContoller {
 		LOG.debug("1=param="+nboard);
 		LOG.debug("1=================");
 		
-		int flag = this.boardService.doInsert(nboard);
+		int flag = this.answerService.doInsert(nboard);
 		
 		MessageVO message=new MessageVO();
 		

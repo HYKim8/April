@@ -18,7 +18,44 @@ public class NBAnswerVO extends DTO {
 	String	modId		; /*	수정자	*/
 	String	regDate		; /*	작성일	*/
 	String	modDate		; /*	수정일	*/
+	String	id			; /*	작성자 아이디	*/
+	String	name		; /*	작성자 이름	*/
+	String	deptNm		; /*	작성자 부서	*/
+	String	position	; /*	작성자 직급	*/
 	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDeptNm() {
+		return deptNm;
+	}
+
+	public void setDeptNm(String deptNm) {
+		this.deptNm = deptNm;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
 	public NBAnswerVO() {}
 
 	public int getAwNo() {
@@ -80,9 +117,16 @@ public class NBAnswerVO extends DTO {
 	@Override
 	public String toString() {
 		return "NBAnswerVO [awNo=" + awNo + ", nbNo=" + nbNo + ", awContents=" + awContents + ", regId=" + regId
-				+ ", modId=" + modId + ", regDate=" + regDate + ", modDate=" + modDate + ", toString()="
-				+ super.toString() + "]";
+				+ ", modId=" + modId + ", regDate=" + regDate + ", modDate=" + modDate + ", id=" + id + ", name=" + name
+				+ ", deptNm=" + deptNm + ", position=" + position + ", toString()=" + super.toString() + "]";
 	}
+	
+//	@Override
+//	public String toString() {
+//		return "NBAnswerVO [awNo=" + awNo + ", nbNo=" + nbNo + ", awContents=" + awContents + ", regId=" + regId
+//				+ ", modId=" + modId + ", regDate=" + regDate + ", modDate=" + modDate + ", toString()="
+//				+ super.toString() + "]";
+//	}
 
 	public NBAnswerVO(int awNo, int nbNo, String awContents, String regId, String modId, String regDate,
 			String modDate) {
@@ -95,6 +139,26 @@ public class NBAnswerVO extends DTO {
 		this.regDate = regDate;
 		this.modDate = modDate;
 	}
+
+	//조직 테이블 데이터 포함
+	public NBAnswerVO(int awNo, int nbNo, String awContents, String regId, String modId, String regDate, String modDate,
+			String id, String name, String deptNm, String position) {
+		super();
+		this.awNo = awNo;
+		this.nbNo = nbNo;
+		this.awContents = awContents;
+		this.regId = regId;
+		this.modId = modId;
+		this.regDate = regDate;
+		this.modDate = modDate;
+		this.id = id;
+		this.name = name;
+		this.deptNm = deptNm;
+		this.position = position;
+	}
+	
+	
+	
 	
 	
 

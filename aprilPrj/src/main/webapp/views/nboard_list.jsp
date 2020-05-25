@@ -24,7 +24,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="/views/common/common.jsp"%>
+<%@ include file="/common/common.jsp"%>
 <%
     //session
     /* UserVO userInfo = (UserVO) session.getAttribute("user");

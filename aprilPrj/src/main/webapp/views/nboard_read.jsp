@@ -26,60 +26,12 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="/views/common/common.jsp"%>
+<%@ include file="/common/common.jsp"%>
 <%
-	 //session
-	UserVO userInfo = (UserVO) session.getAttribute("user");
+     //session
+    UserVO userInfo = (UserVO) session.getAttribute("user");
 
-    NBAnswerVO list = (NBAnswerVO) request.getAttribute("list");
- 
-     //페이지 사이즈
-    String pageSize = "10";
-    
-    //페이지 num
-    String pageNum = "1";
-    
-    //검색구분
-    String searchDiv = "";
-    
-    //검색어
-    String searchWord = "";
-    
-    SearchVO search = (SearchVO) request.getAttribute("vo");
-    if (null != search) {
-        pageSize = String.valueOf(search.getPageSize());
-        pageNum = String.valueOf(search.getPageNum());
-        searchDiv = search.getSearchDiv();
-        searchWord = search.getSearchWord();
-    }
-    
-    //pageSizeList
-    List<CodeVO> pageSizeList = (List<CodeVO>) request.getAttribute("pageSizeList");
-   // out.print("pageSizeList:"+pageSizeList);
-   //      for(CodeVO vo:pageSizeList){
-   //         out.print(vo.toString()+"<br/>");
-   //     }   
-    
-    int totalCnt = 0;
-    
-    totalCnt = (Integer) request.getAttribute("totalCnt");
-    //out.print("totalCnt:"+totalCnt);
-
-    //paging
-    String url = H_PATH+"/nbAnswer/do_retrieve.do";
-    String scriptName = "doSeachPage";
-    int maxNum =0;//총글수
-    int currPageNo=1;//현재페이지 
-    int rowPerPage=10;
-    int bottomCount=5;//바닥에 page
-    
-    if(null !=search){
-        currPageNo = search.getPageNum();
-        rowPerPage = search.getPageSize();
-        maxNum     = totalCnt;
-    }
-    //--paging  
-
+    //List<NBAnswerVO> list = (List<NBAnswerVO>) request.getAttribute("list");
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -187,21 +139,21 @@
                                          <!-- 마지막에 풀기 -->
                                          <c:choose>
                                             <c:when test="${9 eq user.auth}">
-	                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
-	                                                 class="label label-pill label-danger"
-	                                                 value="삭제(관리자)" id="delete_btn" name="delete_btn" />
-	                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
-	                                                 class="label label-pill label-danger" value="수정(관리자)"
-	                                                 id="update_btn" name="update_btn" />
-	                                       </c:when>
+                                              <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+                                                     class="label label-pill label-danger"
+                                                     value="삭제(관리자)" id="delete_btn" name="delete_btn" />
+                                              <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
+                                                     class="label label-pill label-danger" value="수정(관리자)"
+                                                     id="update_btn" name="update_btn" />
+                                           </c:when>
                                          </c:choose>
-	                                          <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
-	                                                 id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
-	                                          <label style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
-	                                                 >조회수 ${vo.readCnt }</label>
-	                                          <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
-	                                          <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
-	                                                 value="글 목록" id="list_btn" onclick="goRetrieve();" />
+                                              <input type="text" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success" 
+                                                     id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
+                                              <label style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+                                                     >조회수 ${vo.readCnt }</label>
+                                              <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
+                                              <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
+                                                     value="글 목록" id="list_btn" onclick="goRetrieve();" />
                                         </div>
                                     </div>
                                     
@@ -220,8 +172,8 @@
                                         <div class="media pt-3">
                                             <img class="mr-3 rounded-circle" src="${hContext}/views/images/avatar/1.jpg">
                                             <div class="media-body">
-	                                            <%-- <input type="hidden" id="regId" value="${vo.regId }"/>
-	                                            <input type="hidden" id="regDate" value="${vo.regDate }"/> --%>
+                                                <%-- <input type="hidden" id="regId" value="${vo.regId }"/>
+                                                <input type="hidden" id="regDate" value="${vo.regDate }"/> --%>
                                                 <h5 class="m-b-3">등록자 ${vo.regId }</h5>
                                                 <p class="m-b-2">등록일 ${vo.regDate }</p>
                                             </div>
@@ -258,7 +210,7 @@
                         <div class="col-lg-12">
                         <div class="card">
                             <div class="card-body" style="padding-bottom: 1em;">
-                                <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 작성</span>
+                                <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-danger">댓글 작성</span>
                                 <div class="basic-form">
                                     <form id="answerFrm" name="answerFrm">
                                         <div class="form-group">
@@ -285,131 +237,38 @@
                         </div>
                         
                         
-                      <!-- 댓글 목록 -->
-         <div class="table-responsive">
-           <table class="table header-border table-hover verticle-middle" id="listTable">
-<!--            <table class="table" id="listTable"> -->
-               <thead>
-                   <tr>
-                       <th class="text-center" width="120">등록자</th>
-                       <th class="text-center" width="800">내용</th>
-                       <th class="text-center">등록일</th>
-                   </tr>
-               </thead>
-               <tbody>
-                    <c:choose>
-                        <c:when test="${aw.size()>0 }">
-                            <c:forEach var="vo" items="${aw }">
-                                <tr>
-                                    <td class="text-center hidden-sm hidden-xs">
-                                            <c:out value="${vo.nbNo }" /></td>
-                                    <td class="text-center"><c:out value="${vo.awContents }" /></td>
-                                    <td class="text-center"><c:out value="${vo.regId }" /></td>
-                                    <td class="text-center hidden-sm hidden-xs  ">
-                                        <c:out value="${vo.regDate }" /></td>
-                                </tr>
-                            </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <tr>
-                                <td class="text-center">No data found.</td>
-                            </tr>
-                        </c:otherwise>
-                    </c:choose>
-
-                </tbody>
-             </table>
-         </div>
-        <!-- pagenation -->
-            <nav>
-                 <ul class="pagination justify-content-center">
-                    <div class="text-center">
-                        <%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
-                    </div>
-                 </ul>
-             </nav> 
-         <!--// pagenation -->
-         <!-- </div> -->
-          <!-- //댓글 목록 --> 
                         
                         
-                        <%-- <!--div 댓글 읽기 -->
+                       <!--div 댓글 읽기 -->
                         <div class="card">
                             <div class="card-body">
                              <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글</span>
+                                <c:choose>
+			                        <c:when test="${list.size()>0 }">
+			                            <c:forEach var="vo" items="${list }">
                                 <div class="media media-reply">
-                                    <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
                                     <div class="media-body">
                                         <div class="d-sm-flex justify-content-between mb-2">
-                                            <h5 class="mb-sm-0">${aw.redId } <small class="text-muted ml-3">${aw.redDate }</small></h5>
+                                            <h6 class="mb-sm-0"><c:out value="${vo.deptNm } ${vo.position } ${vo.name }" /></h6>
+                                             <small class="text-muted ml-3"><c:out value="${vo.regDate }" /></small>
                                         </div>
-                                        
-                                        <p>${aw.awContents }</p>
-                                        <ul>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/2.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/3.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/4.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/1.jpg" alt=""></li>
-                                        </ul>
-                                </div>
-                            </div> --%>
-                        
-                         <%-- <!--div 댓글 읽기 -->
-                        <div class="card">
-                            <div class="card-body">
-                             <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글</span>
-                                
-                                <!-- 댓글박스 -->
-                                <div class="media media-reply">
-                       <c:choose>
-                        <c:when test="${list.size()>0 }">
-                            <c:forEach var="vo" items="${list }">
-                                    <img class="mr-3 circle-rounded" src="${hContext}/views/images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
-                                    <div class="media-body">
-                                        <div class="d-sm-flex justify-content-between mb-2">
-                                            <h5 class="mb-sm-0">${vo.regId}
-                                            
-                                        <c:choose>
-                                            <c:when test="${vo.modId ==null }">
-	                                            <small class="text-muted ml-3">
-	                                            ${vo.redDate } </small></h5>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <small class="text-muted ml-3">
-                                                ${vo.modDate } 수정됨</small></h5>
-                                            </c:otherwise>
-                                        </c:choose>
-                                        </c:forEach>
-                        </c:when>
-                        <c:otherwise>
-                            <tr>
-                                <td class="text-center">No data found.</td>
-                            </tr>
-                        </c:otherwise>
-                    </c:choose>
-                    <!-- pagenation -->
-            <nav>
-                 <ul class="pagination justify-content-center">
-                    <div class="text-center">
-                        <%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
-                    </div>
-                 </ul>
-             </nav> 
-         <!--// pagenation -->
-                                        </div>
-                                        
-                                        
-                                        
-                                        <p> ${vo.awContents }</p>
-                                        <ul>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/2.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/3.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/4.jpg" alt=""></li>
-                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="${hContext}/views/images/blog/1.jpg" alt=""></li>
-                                        </ul>
+                                        <p><c:out value="${vo.awContents }" /></p>
                                 </div>
                             </div>
-                            <!--//댓글읽기 끝 --> --%>
+                            </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                            <div class="media media-reply">
+                                    <div class="media-body">
+                                        <div class="d-sm-flex justify-content-between mb-2">
+                                            <h5 class="mb-sm-0"><small class="text-muted ml-3"></small></h5>
+                                        </div>
+                                        <p> 등록된 댓글이 없습니다.</p>
+                                </div>
+                            </div>
+                            </c:otherwise>
+                            </c:choose>
+                        
                             
                         </div>
                         </div>
@@ -456,10 +315,10 @@
 
   //수정 화면으로 이동
     $("#update_btn").on("click",function(){
-	    	var nbNo = ${vo.nbNo };
-	    	var readCnt = ${vo.readCnt };
-	        console.log("nbNo:"+nbNo);
-	        console.log("readCnt:"+readCnt);
+            var nbNo = ${vo.nbNo };
+            var readCnt = ${vo.readCnt };
+            console.log("nbNo:"+nbNo);
+            console.log("readCnt:"+readCnt);
              var frm = document.searchFrm;
              frm.nbNo.value = nbNo;
              frm.action = "${hContext}/nboard/do_selectone_update.do";
@@ -542,7 +401,7 @@
            url:"${hContext }/nbAnswer/do_insert.do",
            dataType:"html", 
            data:{"nbNo":nbNo,
-        	     "awContents":awContents,
+                 "awContents":awContents,
                  "regId":awRegId
            },
            success:function(data){ //성공
