@@ -1,7 +1,7 @@
 <%--
  /**
-  * Class Name : reservation.jsp
-  * Description : 회의실 예약 페이지
+  * Class Name : attendance.jsp
+  * Description : 근태 관리 페이지
   * http://localhost:8080/groupware/attend/do_select_one.do?id=kimjh1
   * Modification Information
   *
@@ -16,20 +16,9 @@
   */
 --%>
 <%@page import="java.util.Calendar"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="aprilContext" value="${pageContext.request.contextPath}"></c:set>
-<%
-	Calendar cal = Calendar.getInstance();
-	
-	int year = cal.get(Calendar.YEAR);
-	int month = cal.get(Calendar.MONTH)+1;
-	//int day = cal.get(Calendar.DAY_OF_MONTH);
-	//int hour = cal.get(Calendar.HOUR_OF_DAY);
-	//int min = cal.get(Calendar.MINUTE);
-	//int sec = cal.get(Calendar.SECOND);
-%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -504,12 +493,26 @@
                                     <!-- end col -->
                                     <!-- TODO -->
                                     <div class="col-md-7">
-                                    <table class="verticle-middle">
+                                    	<form action="${aprilContext}/attend/do_get_all.do" method="get" name="search_form">
+	                                    	<table class="verticle-middle">
+		                                    	<tr>
+		                                    		<td><select name="year" id="year" class="form-control"></select>&nbsp;</td>
+		                                    		<td>년&nbsp;&nbsp;</td>
+		                                    		<td><select name="month" id="month" class="form-control"></select>&nbsp;</td>
+		                                    		<td>월</td>
+		                                    		<!-- <button style="margin-right:0.5em; text-align:center; height: 40px;" class="btn btn-primary" type="button" onclick="doRetrieve();">조회</button> -->
+		                                    		<td><button type="submit" name="search_btn" id="search_btn" class="btn mb-1 btn-outline-primary">조회</button></td>
+		                                    	</tr>
+	                                    	</table>
+                                    	</form>
+                                    	<input type="hidden" name="getYear" id="getYear" value="${attendanceVO.year}" />
+						    			<input type="hidden" name="getMonth" id="getMonth" value="${attendanceVO.month}" />
+                                    <%-- <table class="verticle-middle">
                                     	<tr>
 	                                    	<td><input type="text" id="year" name="year" value="<%=year%>년" size=5 readonly="readonly" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
 	                                    	<td><input type="text" id="month" name="month" value="<%=month%>월" size=3 readonly="readonly" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
 	                                    </tr>
-                                    </table>
+                                    </table> --%>
                                     <table class="table table-bordered table-striped verticle-middle">
 						    		    <!-- hidden-sm hidden-xs 숨기기 -->
 						    			<thead>
@@ -528,6 +531,7 @@
 						    				<c:choose>
 						    					<c:when test="${attendanceList.size()>0}">
 						    						<c:forEach var="vo" items="${attendanceList}">
+						    							
 								    					<tr>
 									    					<td style="display:none;"><c:out value="${vo.seq}" /></td>
 									    					<td style="display:none;"><c:out value="${vo.id}" /></td>
@@ -544,7 +548,7 @@
 						    					</c:when>
 						    					<c:otherwise>
 						    						<tr>
-						    							<td class="text-center">데이터가 없습니다</td>
+						    							<td class="text-center" colspan="99">데이터를 찾을 수 없습니다</td>
 						    						</tr>
 						    					</c:otherwise>
 						    				</c:choose>
@@ -659,49 +663,105 @@
     <script src="${aprilContext}/views/plugins/moment/moment.min.js"></script>
     <script src="${aprilContext}/views/plugins/fullcalendar/js/fullcalendar.min.js"></script>
     <script src="${aprilContext}/views/js/plugins-init/fullcalendar-init.js"></script>
-	<script type="text/javascript">
-		//TODO : id 변수 = 로그인 세션
+    
+    <script type="text/javascript">
+	    //TODO : id 변수 = 로그인 세션
 		function goAttend() {
 	    	location.href="${aprilContext}/attend/do_select_one.do?id=kimjh1";
 	    }
+	    
+	    $(document).ready(function(){
+	        setDateBox();
+	    });    
+	 
+	    //년, 월 표시 - Selectbox
+	    function setDateBox(){
+	        var date = new Date();
+	        var now_year = date.getFullYear();
+	        var now_month = (date.getMonth()+1)>9? (date.getMonth()+1) : "0"+(date.getMonth()+1);
+	        
+	        //$("#year").append("<option value=''>"+now_year+"</option>");
+	        //올해 기준으로 -1년부터 +5년을 보여줌
+	        for(var y = (now_year-5); y <= (now_year+5); y++){
+	            $("#year").append("<option value='"+ y +"'>"+ y +"</option>");
+	        }
+	        
+	        //$("#month").append("<option value=''>"+now_month+"</option>");
+	        for(var i = 1; i <= 12; i++){
+		        //1~9까지는 앞에 0을 붙임 ex) 01, 02, ...
+	        	var sm = i > 9 ? i : "0"+i ;
+	            $("#month").append("<option value='"+ sm +"'>"+ sm +"</option>");
+	        }
 
-		function prevmonth() { //이전 월로 가는 함수
-		    var ymda = document.getElementById("prev");
-		    var yg = document.getElementById("Ymd");
-		
-		    month--; //month를 계속 감소시켜준다
-		    
-		    if (month < 1) { // month가 1보다 작아지면
-		       month = 12; // month를 12로 만들어줌
-		       year -= 1; //year를 1 감소시켜준다
-		    }
-		    
-		    //if(year < 1970){ //1970년 밑으로는 내려가지 않음..
-		    //    alert("기원전");
-		    //     for(var i=1;i<100;i--){
-		    //    window.top.moveTo(i ,i *=-1);
-		    //    }
-		    //}
-		
-		    var ymda = year + "년" + (month) + "월";
-		
-		    //present();
-		 }
-		
-		 function nextmonth() { //다음 월로 가는 함수
-		    var ymda = document.getElementById("next");
-		    var yg = document.getElementById("Ymd");
-		
-		    month++; //month 를 계속 증가시켜줌
-		    if (month > 12) { //만약 month가 12를 넘어가면
-		       month = 1; // month를 1로 만듦
-		       year += 1; //year을 1 증가시켜준다
-		    }
-		
-		    var ymda = year + "년" + month + "월";
-		
-		    //present(); //present()함수를 호출하여 다시 찍어줌
-		 }
+			var getYear = $("#getYear").val();
+			var getMonth = $("#getMonth").val();
+			
+			//현재 연도, 월을 selected
+	        //jQuery("#year > option[value="+now_year+"]").attr("selected", "true");
+	        //jQuery("#month > option[value="+now_month+"]").attr("selected", "true");
+	        jQuery("#year > option[value="+getYear+"]").attr("selected", "true");
+	        jQuery("#month > option[value="+getMonth+"]").attr("selected", "true");
+
+	        /* if(null !=list) {
+				for(CodeVO vo :list) {
+					sb.append("\t\t<option value='"+vo.getCodeId()+"'  ");
+					if(selectNm.equals(vo.getCodeId())) {
+						sb.append("selected");
+					}
+					
+					sb.append(">");
+					sb.append(vo.getCodeNm());
+					sb.append("</option>\n");
+				}
+			}
+			sb.append("</select> \n"); */
+	        
+	    }
+		//--년, 월 표시 - Selectbox
+
+		//조회
+		//$("#search_btn").on("click", function(){
+			//console.log("#search_btn");
+
+			////포맷
+			//var date = new Date();
+			////연도
+			//var y = $('#year :selected').val();
+			////월
+			//var m = $('#month :selected').val();
+			////오늘 날짜 
+			//var searchDate = y+"/"+m+"/01";
+			////오늘 날짜
+			//console.log(searchDate);
+
+			//ajax
+			//$.ajax({
+			//	type:"POST",
+			//	url:"${aprilContext}/attend/do_get_all.do",
+			//	dataType:"html",
+	        //    data:{
+	        //    	"searchDate" : searchDate
+	        //    },
+			//	success:function(data) {
+			//		console.log("data : "+data);
+			//		var parseData = $.parseJSON(data);
+			//		location.href="${aprilContext}/attend/do_select_one.do?id=kimjh1"+"&searchDate="+searchDate;
+			//		//성공
+			//		if(parseData.msgId=="1") {
+			//			alert(parseData.msgMsg);
+			//		//실패
+			//		} else {
+			//			alert(parseData.msgMsg);
+			//		}
+			//	},
+			//	error:function(xhr, status, error) {
+			//		console.log("error:"+error);
+			//	},
+			//	complete:function(data) {
+			//		
+			//	}
+			//}); //--ajax
+		//});
 		
 		//조퇴 버튼 
 		$("#early_leave_btn").on("click", function(){
@@ -762,7 +822,7 @@
 				dataType:"html",
 	            data:{
 		            //TODO 마지막 seq를 받아서 처리
-	            	"seq" : "6",
+	            	"seq" : "7",
                     "id" : $("#id").val(),
                     "leaveTime" : leaveTime,
 					"attendYN" : $("#attendYN").val(),
@@ -808,7 +868,7 @@
 				dataType:"html",
 	            data:{
 		            //TODO seq query(next.val)
-	            	"seq" : "6",
+	            	"seq" : "7",
                     "id" : $("#id").val(),
 					"attendTime" : attendTime,
 					"attendYN" : $("#attendYN").val(),

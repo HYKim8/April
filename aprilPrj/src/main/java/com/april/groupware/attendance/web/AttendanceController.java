@@ -2,6 +2,7 @@ package com.april.groupware.attendance.web;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -233,10 +234,35 @@ public class AttendanceController {
 	@RequestMapping(value="attend/do_select_one.do", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
 	public String doSelectOne(AttendanceVO attendVO, Model model) {
 		LOG.debug("====================");
-		LOG.debug("=doSelectOne user= : "+attendVO);
+		LOG.debug("=doSelectOne attendVO= : "+attendVO);
 		LOG.debug("====================");
 		
+		//로그인 세션
+		attendVO.setId("kimjh1");
+
+		//날짜 검색
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM");
+		String today = format.format(date)+"/01";
+		LOG.debug("=today= : "+today);
+		//날짜 검색어 set
+		attendVO.setSearchDate(today);
+		
+		//today ex)2020/05/01
 		AttendanceVO outVO = (AttendanceVO) attendanceDao.doSelectOne(attendVO);
+		
+		//View에 연도 출력
+		SimpleDateFormat yFormat = new SimpleDateFormat("yyyy");
+		String year = yFormat.format(date);
+		outVO.setYear(year);
+		LOG.debug("=year= : "+year);
+
+		//View에 월 출력
+		SimpleDateFormat mFormat = new SimpleDateFormat("MM");
+		String month = mFormat.format(date);
+		outVO.setMonth(month);
+		LOG.debug("=month= : "+month);
+		
 		LOG.debug("====================");
 		LOG.debug("=doSelectOne outVO= : "+outVO);
 		LOG.debug("====================");
@@ -251,12 +277,61 @@ public class AttendanceController {
 		model.addAttribute("attendanceList", outList);
 		
 		//Json(Gson)
-//		Gson gson = new Gson();
-//		String json = gson.toJson(outVO);
-//		
-//		LOG.debug("====================");
-//		LOG.debug("=doSelectOne json= : "+json);
-//		LOG.debug("====================");
+		Gson gson = new Gson();
+		String json = gson.toJson(outVO);
+		
+		LOG.debug("====================");
+		LOG.debug("=doSelectOne json= : "+json);
+		LOG.debug("====================");
+		
+		return "/views/attendance";
+	}
+	
+	@RequestMapping(value="attend/do_get_all.do", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
+	public String getAllSearchDate(AttendanceVO attendVO, Model model) {
+		LOG.debug("====================");
+		LOG.debug("=doSelectOne attendVO= : "+attendVO);
+		LOG.debug("====================");
+		
+		attendVO.setId("kimjh1");
+		
+		String year = attendVO.getYear();
+		String month = attendVO.getMonth();
+		String searchDate = year+"/"+month+"/01";
+		//날짜 검색어 set
+		attendVO.setSearchDate(searchDate);
+		LOG.debug("=today= : "+searchDate);
+		
+		//today ex)2020/05/01
+		AttendanceVO outVO = (AttendanceVO) attendanceDao.doSelectOne(attendVO);
+		//View에 연도 출력
+		outVO.setYear(year);
+		LOG.debug("=year= : "+year);
+
+		//View에 월 출력
+		outVO.setMonth(month);
+		LOG.debug("=month= : "+month);
+		
+		LOG.debug("====================");
+		LOG.debug("=doSelectOne outVO= : "+outVO);
+		LOG.debug("====================");
+		
+		model.addAttribute("attendanceVO", outVO);
+		
+		List<AttendanceVO> outList = (List<AttendanceVO>) attendanceDao.getAll(attendVO);
+		LOG.debug("====================");
+		LOG.debug("=getAll outList= : "+outList);
+		LOG.debug("====================");
+		
+		model.addAttribute("attendanceList", outList);
+		
+		//Json(Gson)
+		Gson gson = new Gson();
+		String json = gson.toJson(outList);
+		
+		LOG.debug("====================");
+		LOG.debug("=doSelectOne json= : "+json);
+		LOG.debug("====================");
 		
 		return "/views/attendance";
 	}

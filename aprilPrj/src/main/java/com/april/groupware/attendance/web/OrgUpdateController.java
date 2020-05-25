@@ -32,60 +32,85 @@ public class OrgUpdateController {
 	OrgUpdateDao orgUpdateDao;
 	
 	@RequestMapping(value="org/do_update.do", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
-	public String doUpdate(OrgUpdateVO orgVO, MultipartHttpServletRequest mhsRequest, ModelAndView model) throws IllegalStateException, IOException {
-		LOG.debug("====================");
-		LOG.debug("=doUpdate orgVO(View Input)= : "+orgVO);
-		LOG.debug("====================");
-		
-		//if(orgVO.getId() == null) {
-		//	throw new IllegalArgumentException("ID를 입력하세요");
-		//}
-		
+	public String doUpdate(MultipartHttpServletRequest mhsRequest, ModelAndView model) throws IllegalStateException, IOException {
+		OrgUpdateVO orgVO = new OrgUpdateVO();
 		//세션
 		orgVO.setId("kimjh1");
+		LOG.debug("====================");
+		LOG.debug("=doUpdate orgVO ID= : "+orgVO.getId());
+		LOG.debug("====================");
 		
 		OrgUpdateVO orgUpdateVO = (OrgUpdateVO) orgUpdateDao.doSelectOne(orgVO);
 		LOG.debug("====================");
-		LOG.debug("=doUpdate orgUpdateVO(DB)= : "+orgUpdateVO);
+		LOG.debug("=doUpdate orgUpdateVO DB= : "+orgUpdateVO);
 		LOG.debug("====================");
+		//DB에 있는 기존 정보
+		String dbPassword = orgUpdateVO.getPassword();
+		String dbEmail = orgUpdateVO.getEmail();
+		String dbMobile = orgUpdateVO.getMobile();
+		String dbAddress = orgUpdateVO.getAddress();
+		String dbGrade = orgUpdateVO.getGrade();
+		String dbMilitaryYN = orgUpdateVO.getMilitaryYN();
+		String dbDspsnYN = orgUpdateVO.getDspsnYN();
 		
-		//수정 가능 변수 : View에서 입력 받은 변수
-		//String inputPassword = orgVO.getPassword();
+		//View에서 입력 받은 정보(수정 가능 변수) 
 		String inputPassword = mhsRequest.getParameter("password");
 		String inputEmail = mhsRequest.getParameter("email");
 		String inputMobile = mhsRequest.getParameter("mobile");
 		String inputAddress = mhsRequest.getParameter("address");
-		String inputGrade = mhsRequest.getParameter("grade");
+		String inputGrade = mhsRequest.getParameter("grade")+","+mhsRequest.getParameter("grade_sc_name")+","+mhsRequest.getParameter("grade_dp_name");
 		String inputMilitaryYN = mhsRequest.getParameter("militaryYN");
 		String inputDspsnYN = mhsRequest.getParameter("dspsnYN");
 		
-		orgUpdateVO.setPassword(inputPassword);
-		//if(!inputPassword.equals("") && inputPassword!=null) {
-		//}
+		LOG.debug("inputPassword "+inputPassword);
+		LOG.debug("inputEmail "+inputEmail);
+		LOG.debug("inputMobile "+inputMobile);
+		LOG.debug("inputAddress "+inputAddress);
+		LOG.debug("inputGrade "+inputGrade);
+		LOG.debug("inputMilitaryYN "+inputMilitaryYN);
+		LOG.debug("inputDspsnYN "+inputDspsnYN);
 		
-		orgUpdateVO.setEmail(inputEmail);
-		//if(!inputEmail.equals("") && inputEmail!=null) {
-		//}
+		if(inputPassword.equals("") && inputPassword==null) {
+			orgUpdateVO.setPassword(dbPassword);
+		} else if(!inputPassword.equals("") && inputPassword!=null) {
+			orgUpdateVO.setPassword(inputPassword);
+		}
 		
-		orgUpdateVO.setMobile(inputMobile);
-		//if(!inputMobile.equals("") && inputMobile!=null) {
-		//}
+		if(inputEmail.equals("") && inputEmail==null) {
+			orgUpdateVO.setEmail(dbEmail);
+		} else if(!inputEmail.equals("") && inputEmail!=null) {
+			orgUpdateVO.setEmail(inputEmail);
+		}
 		
-		orgUpdateVO.setAddress(inputAddress);
-		//if(!inputAddress.equals("") && inputAddress!=null) {
-		//}
+		if(inputMobile.equals("") && inputMobile==null) {
+			orgUpdateVO.setMobile(dbMobile);
+		} else if(!inputMobile.equals("") && inputMobile!=null) {
+			orgUpdateVO.setMobile(inputMobile);
+		}
 		
-		orgUpdateVO.setGrade(inputGrade);
-		//if(!inputGrade.equals("") && inputGrade!=null) {
-		//}
+		if(inputAddress.equals("") && inputAddress==null) {
+			orgUpdateVO.setAddress(dbAddress);
+		} else if(!inputAddress.equals("") && inputAddress!=null) {
+			orgUpdateVO.setAddress(inputAddress);
+		}
 		
-		orgUpdateVO.setMilitaryYN(inputMilitaryYN);
-		//if(!inputMilitaryYN.equals("") && inputMilitaryYN!=null) {
-		//}
+		if(inputGrade.equals("") && inputGrade==null) {
+			orgUpdateVO.setGrade(dbGrade);
+		} else if(!inputGrade.equals("") && inputGrade!=null) {
+			orgUpdateVO.setGrade(inputGrade);
+		}
 		
-		orgUpdateVO.setDspsnYN(inputDspsnYN);
-		//if(!inputDspsnYN.equals("") && inputDspsnYN!=null) {
-		//}
+		if(inputMilitaryYN.equals("") && inputMilitaryYN==null) {
+			orgUpdateVO.setMilitaryYN(dbMilitaryYN);
+		} else if(!inputMilitaryYN.equals("") && inputMilitaryYN!=null) {
+			orgUpdateVO.setMilitaryYN(inputMilitaryYN);
+		}
+		
+		if(inputDspsnYN.equals("") && inputDspsnYN==null) {
+			orgUpdateVO.setDspsnYN(dbDspsnYN);
+		} else if(!inputDspsnYN.equals("") && inputDspsnYN!=null) {
+			orgUpdateVO.setDspsnYN(inputDspsnYN);
+		}
 		
 		/**프로필 이미지 파일 저장*/
 		//1.저장 폴더 생성
@@ -191,7 +216,8 @@ public class OrgUpdateController {
 		LOG.debug("=doUpdate json= : "+json);
 		LOG.debug("====================");
 		
-		return "/views/mypage_org";
+//		return "/views/mypage_org";
+		return "redirect:/org/do_select_one.do?id=kimjh1";
 	}
 
 	@RequestMapping(value="org/do_select_one.do", method=RequestMethod.GET, produces="application/json; charset=UTF-8")

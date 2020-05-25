@@ -619,6 +619,36 @@ public class AttendanceDaoImple implements AttendanceDao {
 		
 		return outList;
 	}
+	
+	public List<?> getAllSearchDate(DTO dto) {
+		LOG.debug("=====================");
+		LOG.debug("=AttendanceDao getAllSearchDate=");
+		LOG.debug("=====================");
+		
+		//Param
+		AttendanceVO inVO = (AttendanceVO) dto;
+		LOG.debug("=====================");
+		LOG.debug("=AttendanceDao inVO= : "+inVO);
+		LOG.debug("=====================");
+		
+		//SQL-Query
+		String statement = NAMESPACE+".getAllSearchDate";
+		LOG.debug("=====================");
+		LOG.debug("=getAllSearchDate statement= : "+statement);
+		LOG.debug("=====================");
+		
+		//Call
+		List<AttendanceVO> outList = this.sqlSessionTemplate.selectList(statement, inVO);
+		LOG.debug("=====================");
+		LOG.debug("=getAllSearchDate outList= : "+outList);
+		LOG.debug("=====================");
+
+		for(AttendanceVO vo: outList) {
+			LOG.debug("=vo="+vo);
+		}
+		
+		return outList;
+	}
 
 	@Override
 	public List<?> doRetrieve(DTO dto) {

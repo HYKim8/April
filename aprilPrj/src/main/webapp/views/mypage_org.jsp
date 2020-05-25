@@ -1,12 +1,13 @@
 <%--
  /**
-  * Class Name : 
-  * Description : http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1
+  * Class Name : mypage_org.jsp
+  * Description : 회원 정보 수정
+  * http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1
   * Modification Information
   *
-  * 수정일		수정자		수정내용
-  * -------    --------    ---------------------------
-  * 2020. 4. 27.					최초 생성
+  * 수정일			수정자		수정내용
+  * ------------    --------    ---------------------------
+  * 2020. 4. 27.	이지은		최초 생성
   *
   * author 실행환경 개발팀
   * since 2009.01.06
@@ -16,8 +17,9 @@
 --%>
 <%@page import="com.april.groupware.attendance.service.OrgUpdateVO"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="aprilContext" value="${pageContext.request.contextPath}"></c:set>
 
@@ -215,7 +217,7 @@
                             <a href="javascript:void(0)" class="log-user"  data-toggle="dropdown">
                                 <span>English</span>  <i class="fa fa-angle-down f-s-14" aria-hidden="true"></i>
                             </a>
-                            <div class="drop-down dropdown-language animated fadeIn  dropdown-menu">
+                            <div class="drop-down dropdown-language animated fadeIn dropdown-menu">
                                 <div class="dropdown-content-body">
                                     <ul>
                                         <li><a href="javascript:void()">English</a></li>
@@ -225,7 +227,7 @@
                             </div>
                         </li>
                         <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative"   data-toggle="dropdown">
+                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                                 <span class="activity active"></span>
                                 <img src="${aprilContext}/views/images/user/1.png" height="40" width="40" alt="">
                             </div>
@@ -285,8 +287,6 @@
                             <li><a href="./layout-horizontal.html">Horizontal</a></li>
                             <li><a href="./layout-boxed.html">Boxed</a></li>
                             <li><a href="./layout-wide.html">Wide</a></li>
-                            
-                            
                             <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
                             <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
                         </ul>
@@ -435,39 +435,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="form-validation">
-                                
-	                               	<!-- TODO -->
-	                                <!-- <table border="1">
-	                                	<tr>
-	                                		<td rowspan="5">사진</td>
-	                                		<td>이름</td>
-	                                		<td colspan="3">00</td>
-	                                	</tr>
-	                                	<tr>
-	                                		<td>생년월일</td>
-	                                		<td>00</td>
-	                                		<td>입사일</td>
-	                                		<td>00</td>
-	                                	</tr>
-	                                	<tr>
-	                                		<td>핸드폰</td>
-	                                		<td>00</td>
-	                                		<td>부서명</td>
-	                                		<td>00</td>
-	                                	</tr>
-	                                	<tr>
-	                                		<td>이메일</td>
-	                                		<td>00</td>
-	                                		<td>직급</td>
-	                                		<td>00</td>
-	                                	</tr>
-	                                	<tr>
-	                                		<td>주소</td>
-	                                		<td colspan="3">00</td>
-	                                	</tr>
-	                                </table> -->
-									
-                                    <form class="form-valide" action="${aprilContext}/org/do_update.do" name="org_form" method="post" enctype="multipart/form-data">
+                                    <form action="${aprilContext}/org/do_update.do" name="org_form" id="org_form" method="post" enctype="multipart/form-data">
                                     	<div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="profile">사진 <span class="text-danger"></span>
                                             </label>
@@ -475,7 +443,7 @@
                                             	<!-- 사진 미리보기 https://codepen.io/buppagi/pen/wKwPBP -->
                                             	<table>
                                             		<tr>
-                                            			<td>
+                                            			<td style="width:150px;">
                                             				<!-- style="width: 150px; height: 180px; color: grey; border: 1px solid grey; dispaly: inline;" -->
                                             				<!-- URL : /groupware/resources/file_upload_img/2020/05/20200521223603e14a31e15955478eab54f34c7a9cd2cd.gif -->
                                             				<!-- URL 못 불러오면 [Window]-[Preferences]-[Workspace]-"Refresh using native hooks or polling" 체크 -->
@@ -487,6 +455,7 @@
 																    <img class="card-img rounded-0" style="width:300px; height:300px" src="<c:out value="${vo.imgFile}"></c:out>" alt="">
 															    </c:otherwise>
 															</c:choose> --%>
+															<!-- 이미지가 없을 경우 no_image -->
 															<c:choose>
 																<c:when test="${orgUpdateVO.saveFileName==null || orgUpdateVO.saveFileName.length()==0}">
 																    <img alt="profile" src="${aprilContext}/img_cmn/no_image.gif" width="150px" height="180px"/>
@@ -496,12 +465,13 @@
 															    </c:otherwise>
 															</c:choose>
                                                 		</td>
-                                                		<td>
+                                                		<td style="width:50px;"></td>
+                                                		<td style="width:150px;">
 															<div id='View_area' style='position:relative; width: 150px; height: 180px; display: inline;'></div>
                                                 		</td>
                                                 	</tr>
                                                 	<tr>
-                                                		<td colspan="2">
+                                                		<td colspan="3">
                                                 			<input type="file" name="profile_after" id="profile_after" onchange="previewImage(this,'View_area')">
                                                 			<!-- TODO : 지우기 -->
                                                 			<input type="hidden" name="id" id="id" value="${orgUpdateVO.id}" />
@@ -526,10 +496,10 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-lg-4 col-form-label" for="confirm-password">패스워드  확인 <span class="text-danger">*</span>
+                                            <label class="col-lg-4 col-form-label" for="confirm_password">패스워드  확인 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="">
+                                                <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -585,7 +555,7 @@
                                             <label class="col-lg-4 col-form-label" for="grade">최종 학력 <span class=""></span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <select class="form-control" id="grade" name="grade">
+                                                <%-- <select class="form-control" id="grade" name="grade">
                                                     <option value="고졸" <c:if test="${orgUpdateVO.grade == '고졸'}"> selected="selected"</c:if>>
                                                     	고졸
                                                     </option>
@@ -601,10 +571,27 @@
                                                     <option value="박사" <c:if test="${orgUpdateVO.grade == '박사'}"> selected="selected"</c:if>>
                                                     	박사
                                                     </option>
+                                                </select> --%>
+                                                <select class="form-control" id="grade" name="grade">
+                                                    <option value="고졸" <c:if test="${orgUpdateVO.grade.split(',')[0] == '고졸'}"> selected="selected"</c:if>>
+                                                    	고졸
+                                                    </option>
+                                                    <option value="전문학사" <c:if test="${orgUpdateVO.grade.split(',')[0] == '전문학사'}"> selected="selected"</c:if>>
+                                                    	전문학사
+                                                    </option>
+                                                    <option value="학사" <c:if test="${orgUpdateVO.grade.split(',')[0] == '학사'}"> selected="selected"</c:if>>
+                                                    	학사
+                                                    </option>
+                                                    <option value="석사" <c:if test="${orgUpdateVO.grade.split(',')[0] == '석사'}"> selected="selected"</c:if>>
+                                                    	석사
+                                                    </option>
+                                                    <option value="박사" <c:if test="${orgUpdateVO.grade.split(',')[0] == '박사'}"> selected="selected"</c:if>>
+                                                    	박사
+                                                    </option>
                                                 </select>
                                                 <!-- TODO : ,로 split -->
-                                                <input type="text" class="form-control" id="grade_sc_name" name="grade_sc_name" placeholder="학교명">
-                                                <input type="text" class="form-control" id="grade_dp_name" name="grade_dp_name" placeholder="계열 및 전공학과명">
+                                                <input type="text" class="form-control" id="grade_sc_name" name="grade_sc_name" placeholder="학교명" value="${orgUpdateVO.grade.split(',')[1]}">
+                                                <input type="text" class="form-control" id="grade_dp_name" name="grade_dp_name" placeholder="계열 및 전공학과명" value="${orgUpdateVO.grade.split(',')[2]}">
                                             </div>
                                         </div>
                                         <div class="form-group row">
@@ -790,15 +777,125 @@
     <script src="${aprilContext}/views/js/gleek.js"></script>
     <script src="${aprilContext}/views/js/styleSwitcher.js"></script>
 
-    <script src="${aprilContext}/views/plugins/validation/jquery.validate.min.js"></script>
-    <script src="${aprilContext}/views/plugins/validation/jquery.validate-init.js"></script>
+	<script src="${aprilContext}/views/js/jquery-migrate-1.4.1.js"></script>
+	<script src="${aprilContext}/views/js/jquery.validate.js"></script>
+    <%-- <script src="${aprilContext}/views/plugins/validation/jquery.validate.min.js"></script>
+    <script src="${aprilContext}/views/plugins/validation/jquery.validate-init.js"></script> --%>
 	
 	<script type="text/javascript">
-		//TODO : id 변수 = 로그인 세션
-		function goAttend() {
-	    	location.href="http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1";
-	    }
-	
+
+		//input 태그 유효성 검사
+		function bindEventHandler() {
+			$("#org_form").validate({
+				//서버 전송 여부 : true-유효성 검사만 함, false-DB로 넘김 
+				onfocus : false,
+				debug : true,
+				rules : {
+					//name 속성 값 (name=password)
+					password : {
+						//필수값
+						//required : true,
+						//최소 길이
+						//minlength : 4,
+						//최대 길이
+						//maxlength : 20,
+						//범위
+						rangelength : [4, 20]
+					}, confirm_password : {
+						//필수값
+						required : true,
+						//범위
+						rangelength : [4, 20],
+						//password == password
+						equalTo: "#password"
+					}, email : {
+						//이메일 형식
+						email: true
+					}, mobile : {
+						//범위
+						range: [12, 13]
+					}
+				},
+				//message
+				messages : {
+					//name, pass : id 속성으로
+					password : {
+						//최소길이
+						//minlength : $.validator.format('비밀번호는 최소{0}자 ~ 최대{1}자로 입력하세요.')
+						rangelength : $.validator.format('패스워드는 최소 {0}자 ~ 최대 {1}자로 입력하세요.')
+					}, confirm_password : {
+						//필수값 
+						required : "패스워드 확인을 반드시 입력해주세요.",
+						//최소길이
+						rangelength : $.validator.format('패스워드는 최소 {0}자 ~ 최대 {1}자로 입력하세요.'),
+						//pass == comfirm_pass
+						equalTo: "패스워드와 패스워드 확인이 일치하지 않습니다."
+					}, email : {
+						//이메일 형식
+						email: "올바른 이메일 형식이 아닙니다. ex)abc@email.com"
+					}, mobile : {
+						//범위
+						range: $.validator.format('휴대폰 번호는 {0}~{1}자로 입력하세요. ex)010-000-0000')
+					}
+				}, errorElement: "em", errorPlacement: function ( error, element ) {
+					// Add the `help-block` class to the error element
+					error.addClass( "help-block" );
+					
+					if ( element.prop( "type" ) === "checkbox" ) {
+					    error.insertAfter( element.parent( "label" ) );
+					} else {
+					    error.insertAfter( element );
+					}
+				}, highlight: function ( element, errorClass, validClass ) {
+				    $( element ).parents( ".col-lg-5" ).addClass( "has-error" ).removeClass( "has-success" );
+				}, unhighlight: function (element, errorClass, validClass) {
+				    $( element ).parents( ".col-lg-5" ).addClass( "has-success" ).removeClass( "has-error" );
+				}
+	    	});
+		}
+
+		$(document).ready(function() {
+			bindEventHandler();
+		});
+		//--input 태그 유효성 검사
+
+		//전화번호 자동 하이픈
+		var autoHypenPhone = function(str){
+			str = str.replace(/[^0-9]/g, '');
+			var tmp = '';
+			if( str.length < 4){
+			    return str;
+			} else if(str.length < 7){
+			    tmp += str.substr(0, 3);
+			    tmp += '-';
+			    tmp += str.substr(3);
+			    return tmp;
+			} else if(str.length < 11){
+			    tmp += str.substr(0, 3);
+			    tmp += '-';
+			    tmp += str.substr(3, 3);
+			    tmp += '-';
+			    tmp += str.substr(6);
+			    return tmp;
+			} else {              
+			    tmp += str.substr(0, 3);
+			    tmp += '-';
+			    tmp += str.substr(3, 4);
+			    tmp += '-';
+			    tmp += str.substr(7);
+			    return tmp;
+			}
+			return str;
+		}
+
+		var mobile = document.getElementById('mobile');
+
+		mobile.onkeyup = function(){
+			console.log(this.value);
+			this.value = autoHypenPhone(this.value) ;  
+		}
+		//--전화번호 자동 하이픈
+		
 		//취소-초기화
 		$("#cancel_btn").on("click", function(){
 			console.log("#cancel_btn");
@@ -830,127 +927,59 @@
 			//$("#doUpdate").prop("disabled", true);
 			//$("#doDelete").prop("disabled", true);
 		});
-
-	//id = id;                   
-	//password = password;       
-	//deptNm = deptNm;           
-	//deptCd = deptCd;           
-	//parentDeptCd = parentDeptCd
-	//auth = auth;               
-	//name = name;               
-	//position = position;       
-	//mobile = mobile;           
-	//email = email;             
-	//address = address;         
-	//hiredate = hiredate;       
-	//birth = birth;             
-	//vacationCnt = vacationCnt; 
-	//militaryYN = militaryYN;   
-	//dspsnYN = dspsnYN;         
-	//grade = grade;             
-	//orgFileName = orgFileName; 
-	//modFileName = modFileName; 
-	//imgPath = imgPath;         
-	//ext = ext;                 
-	//fileSize = fileSize;       
-	//regId = regId;             
-	//regDate = regDate;         
-	//modId = modId;             
-	//modDate = modDate;         
+ 
 		//정보 수정 버튼
 		$("#update_btn").on("click", function(){
 			//org_form
 			var form = $('form')[0]; //Form data read, 폼 태그 중에 1번째 폼을 불러옴
 	        var formData = new FormData(form);
-		
-			/** */
-			//아이디
-        	var id = $("#id").val().trim();
-            //if(id == null || id.length<=1){
-            //    console.log("아이디가 없습니다");
-            //    return;
-            //}
-            
-			//변경 후 사진        	
-        	var saveFileName = $("#profile_after").val();
-
-			//패스워드
-			var password = $("#password").val().trim();
-
-			//이메일
-			var email = $("#email").val().trim();
-
-			//휴대폰 번호
-			var mobile = $("#mobile").val().trim();
-
-			//주소
-        	var address = $("#address").val().trim();
-
-			//$("#grade option:selected").val()
-        	//최종 학력
-        	var grade = $("#grade option:selected").val().trim()+","+ $("#grade_sc_name").val().trim()+","+$("#grade_dp_name").val().trim();
-
-			//병역 사항
-			var militaryYN = $('input[name="militaryYN"]:checked').val();
-				
-			//장애 여부
-			var dspsnYN = $('input:radio[name="dspsnYN"]:checked').val();
-			
-			//console.log(id);
-			//console.log(password);
-			//console.log(email);
-			//console.log(mobile);
-			//console.log(address);
-			//console.log(grade);
-			//console.log(militaryYN);
-			//console.log(dspsnYN);
-			/** */
 
             if(confirm("수정하시겠습니까?") == true) {
-	            $.ajax({
-	            	async: false,
-	                cache: false,
-					processData: false,
-					contentType: false,
-					enctype: "multipart/form-data",
-			        type:"POST",
-			        url:"${aprilContext}/org/do_update.do",
-			        dataType:"html", 
-			        data: formData,
-			        //data:{
-					//    "id": id,
-					//    "password": password,
-					//    "email": email,
-					//    "mobile": mobile,
-					//    "address": address,
-					//    "grade": grade,
-					//    "militaryYN": militaryYN,
-					//    "dspsnYN": dspsnYN
-			        //},
-					//성공
-			        success:function(data){
-                        //alert(data);
-                        window.location.href="http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1";
-                        location.href="http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1";
-				        goAttend();
-                        alert("성공");
                 
-				        var jData = JSON.parse(data);
-                        if(null != jData && jData.msgId == "1"){
-                            alert(jData.msgMsg);
-                        } else {
-                            alert(jData.msgMsg);
-                        }
-					},
-					//에러
-		            error:function(xhr,status,error){
-		            	alert("error:"+error);
-		            },
-		            complete:function(data){
-		            }   
-				}); //--ajax
+            //버튼으로 submit할 경우 form과 ajax가 두 번 동작해서 form으로만 돌리고 controller에서 리디렉션함
+	            //$.ajax({
+	            //	async: false,
+	            //    cache: false,
+				//	processData: false,
+				//	contentType: false,
+				//	enctype: "multipart/form-data",
+			    //    type:"POST",
+			    //    url:"${aprilContext}/org/do_update.do",
+			    //    //dataType:"html", 
+			    //    data: formData,
+			    //    //data:{
+				//	//    "id": id,
+				//	//    "password": password,
+				//	//    "email": email,
+				//	//    "mobile": mobile,
+				//	//    "address": address,
+				//	//    "grade": grade,
+				//	//    "militaryYN": militaryYN,
+				//	//    "dspsnYN": dspsnYN
+			    //    //},
+				//	//성공
+			    //    success:function(data){
+                //        //alert(data);
+                //        window.location.href="http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1";
+                //        location.href="http://localhost:8080/groupware/org/do_select_one.do?id=kimjh1";
+				//        goAttend();
+                //        alert("성공");
+                //
+				//        var jData = JSON.parse(data);
+                //        if(null != jData && jData.msgId == "1"){
+                //            alert(jData.msgMsg);
+                //        } else {
+                //            alert(jData.msgMsg);
+                //        }
+				//	},
+				//	//에러
+		        //    error:function(xhr,status,error){
+		        //    	alert("error:"+error);
+		        //    },
+		        //    complete:function(data){
+		        //    }   
+				//}); //--ajax
 			}
-
         });
 
 		function previewImage(targetObj, View_area) {
