@@ -1,15 +1,13 @@
 <%--
 /**
   * Class Name : 
-  * Description : 
+  * Description :  
   * Modification Information
   *
   *   수정일                   수정자                      수정내용
   *  -------    --------    ---------------------------
   *  2020.5.7.           	 최초 생성
   *
-  * author 실행환경 개발팀
-  * since 2009.01.06
   * http://localhost:8080/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord= 
   *
   * Copyright (C) 2009 by KandJang  All right reserved.
@@ -25,7 +23,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/views/common/common.jsp"%>
-
 <%
 	//페이지 사이즈
 String pageSize = "10";
@@ -83,8 +80,7 @@ if (null != search) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quixlab - Bootstrap Admin Dashboard Template by
-	Themefisher.com</title>
+<title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="${hContext}/views/images/favicon.png">
@@ -540,8 +536,8 @@ if (null != search) {
 					<div class="col-lg-6">
 						<div class="card text-center" >
 							<div class="card-body">
-								<h5 class="card-title">점심메뉴 고민방</h5>
-								<p class="card-text">오점뭐먹</p>
+								<h5 class="card-title">테스트 중</h5>
+								<p class="card-text">채팅방</p>
 								<a href="#" class="btn btn-primary">참여하기</a>
 							</div>
 						</div>
@@ -692,8 +688,10 @@ if (null != search) {
 
 		}
 
+		
+		/*
 		//--사원목록에서 하나를 선택했을 때 해당 사원의 정보를 띄움
-		$("#listTable>tbody").on("click", "tr", function() {
+		 $("#listTable>tbody").on("click", "tr", function() {
 			console.log("#listTable>tbody");
 			var trs = $(this);
 			var tds = trs.children();
@@ -701,17 +699,10 @@ if (null != search) {
 			console.log("id = " + id);
 			location.href = "${hContext}/chat/do_selectOne.do?id=" + id;
 
-			//console.log("mailId = "+mailId);
-			//$("#mailIdInput").val(mailId);
-			//var frm = document.mailFrm;
-			//console.log("mailIdInput.val() = "+$("#mailIdInput").val());
-			////frm.mailId.value = mailId;
-			//frm.action="${aprilContext}/mail/do_selectOne.do?mailId="+mailId;
-			//frm.submit();
-
 		});
-		//끝
-
+ 		//끝
+ 		*/
+ 		
 		/*<form action="${hContext}/chat/do_retrieve.do" name="dNameForm" method="get" class="form-inline">
 		 			<select name="dNameList" id="dNameList" onchange="doRetrieve()">
 		               	<option value="">전체</option>
