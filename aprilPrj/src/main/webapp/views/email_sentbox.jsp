@@ -163,17 +163,16 @@ if (search != null) {
                             <div class="card-body">
                                 <div class="email-left-box">
                                 	<a href="${aprilContext}/views/email-compose.html" class="btn btn-primary btn-block">메일 쓰기</a>
-                                	<a href="${aprilContext}/views/email-composeVacation.html" class="btn btn-primary btn-block">휴가 신청서 쓰기</a>
                                     <div class="mail-list mt-4">
-                                    	<a href="${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=honggd01" class="list-group-item border-0 p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> 
+                                    	<a href="${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}" class="list-group-item border-0 p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> 
 	                                    	<b>받은 메일함</b> 
 	                                    	<span class="badge badge-primary badge-sm float-right m-t-5">198</span> 
                                     	</a>
-                                        <a href="${aprilContext}/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=kimmj" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함</a>  
+                                        <a href="${aprilContext}/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}" class="list-group-item border-0 text-primary p-r-0"><i class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸 메일함</a>  
                                         <!-- 
                                         <a href="#" class="list-group-item border-0 p-r-0"><i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a>
                                          -->
-                                        <a href="${aprilContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord=honggd01" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
+                                        <a href="${aprilContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}" class="list-group-item border-0 p-r-0"><i class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
                                     </div>
                                     <!-- 
                                     <h5 class="mt-5 m-b-10">카테고리</h5>
@@ -304,14 +303,10 @@ if (search != null) {
     <script type="text/javascript">
 
     function doRetrieve() {
-		var searchWord = "honggd01";
+		var searchWord = ${user.id};
 		location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+ searchWord;
 	}
 
-	function goTrash() {
-		var searchWord = "honggd01";
-		location.href = "${aprilContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+ searchWord;
-	}
 	
     function doSearchPage(url,no){
         var frm = document.mailFrm;

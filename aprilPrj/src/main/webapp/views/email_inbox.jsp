@@ -16,6 +16,7 @@
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
 --%>
+<%@page import="com.april.groupware.member.service.UserVO"%>
 <%@page import="com.april.groupware.cmn.StringUtil"%>
 <%@page import="com.april.groupware.cmn.SearchVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -35,8 +36,10 @@ String pageNum = "1";
 //검색구분
 String searchDiv = "";
 
+UserVO userVO = (UserVO)session.getAttribute("user");
+
 //검색어
-String searchWord = "honggd01";
+String searchWord = userVO.getId();
 
 SearchVO search = (SearchVO) request.getAttribute("vo");
 if (search != null) {
@@ -170,19 +173,19 @@ if (search != null) {
 									<a href="${aprilContext}/views/email_compose.jsp"
 										class="btn btn-primary btn-block">메일 쓰기</a>
 									<div class="mail-list mt-4">
-										<a href="${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=honggd01"
+										<a href="${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}"
 											class="list-group-item border-0 text-primary p-r-0"><i
 											class="fa fa-inbox font-18 align-middle mr-2"></i> <b>받은
 												메일함</b> <span
 											class="badge badge-primary badge-sm float-right m-t-5">198</span>
-										</a> <a href="${aprilContext}/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=kimmj"
+										</a> <a href="${aprilContext}/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}"
 											class="list-group-item border-0 p-r-0"><i
 											class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸
 											메일함</a> 
 										<!-- 
                                         <a href="#" class="list-group-item border-0 p-r-0"><i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a>
                                          -->
-										<a href="${aprilContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord=honggd01" class="list-group-item border-0 p-r-0"><i
+										<a href="${aprilContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}" class="list-group-item border-0 p-r-0"><i
 											class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
 									</div>
 									<!-- 
@@ -226,7 +229,7 @@ if (search != null) {
 									<div class="email-list m-t-15">
 										<form action="" name="mailFrm">
 											<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum}" />
-											<input type="hidden" id="searchWord" name="searchWord" value="honggd01" />
+											<input type="hidden" id="searchWord" name="searchWord" value="${user.id}" />
 											<table id="listTable"
 												class="table table-striped table-bordered">
 												<tbody>
@@ -654,9 +657,8 @@ if (search != null) {
 
 	<script type="text/javascript">
 		function doRetrieve() {
-			var searchWord = "honggd01";
-			location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="
-					+ searchWord;
+			var searchWord = ${user.id};
+			location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+searchWord;
 		}
 
 		function doSearchPage(url,no){
@@ -667,11 +669,6 @@ if (search != null) {
 	         console.log("url: "+url);
 	         frm.submit();
 	    }
-
-		function goTrash() {
-			var searchWord = "honggd01";
-			location.href = "${aprilContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+ searchWord;
-		}
 		
 		//--메일 list 중 하나 선택했을 때 메일 읽기 페이지로 넘어가는 기능 Start
 		$("#listTable").on("click","tr",function() {
