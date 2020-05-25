@@ -273,8 +273,6 @@
 	var recipient_add;
 	//제목
 	var title;
-	//첨부파일
-	var fileUp;
 	//내용
 	var contents;
 	//보내는 사람(나중에 session하면 다시 코딩)
@@ -323,8 +321,6 @@
 		$("#recipient").val("");
 		$("#recipient_add").val("");
 		$("#title").val("");
-		//파일은 나중에 코딩
-		//$("#fileUp").val("");
 		$("#contents").val("");
 
 		alert("초기화 되었습니다.");		
@@ -361,9 +357,6 @@
 			}
 		}
 
-		//첨부파일
-		fileUp = $("#fileUp").val().trim();
-
 		//내용
 		contents = $("#contents").val();
 		if(null==contents || contents.length<1){
@@ -388,7 +381,6 @@
 			dataType:"html", 
 			data:{"recipient":recipient,
 				  "title":title,
-				  "fileId":fileUp,
 				  "contents":contents,
 				  "sender":sender,
 				  "senderId":senderId,
