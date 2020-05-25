@@ -236,7 +236,13 @@ public class AttendanceDaoImple implements AttendanceDao {
 		int attendTime = Integer.parseInt(attendTimeStr);
 		
 		int workTimeNum = (leaveTime - attendTime) -1;
-		String workTime = String.valueOf(workTimeNum); 
+		LOG.debug("=====================");
+		LOG.debug("=workTimeNum= : "+workTimeNum);
+		LOG.debug("=====================");
+		
+		//근무시간이 0보다 작으면 0으로 set
+		String workTime = (workTimeNum <= 0) ? "0" : String.valueOf(workTimeNum);
+
 		LOG.debug("=====================");
 		LOG.debug("=workTime= : "+workTime);
 		LOG.debug("=====================");
@@ -361,14 +367,19 @@ public class AttendanceDaoImple implements AttendanceDao {
 		int attendTime = Integer.parseInt(attendTimeStr);
 		
 		int workTimeNum = (leaveTime - attendTime) -1;
-		String workTime = String.valueOf(workTimeNum); 
+		LOG.debug("=====================");
+		LOG.debug("=workTimeNum= : "+workTimeNum);
+		LOG.debug("=====================");
+		
+		//근무시간이 0보다 작으면 0으로 set
+		String workTime = (workTimeNum <= 0) ? "0" : String.valueOf(workTimeNum);
+		
 		LOG.debug("=====================");
 		LOG.debug("=workTime= : "+workTime);
 		LOG.debug("=====================");
 		
 		//9시 ~ 18시 
 		if(9 <= leaveTime && leaveTime <= 18) {
-			//근무 시간
 			attendVO.setWorkTime(workTime);
 			
 			//SQL-Query

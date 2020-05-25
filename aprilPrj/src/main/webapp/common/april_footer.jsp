@@ -16,13 +16,12 @@
 --%>
 
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-
-  <!-- footer start -->
-   <div class="copyright">
+	<!-- footer start -->
+	<div class="copyright">
         <p>Copyright &copy; April Groupware by <a href="#">April 2020</a></p>
-   </div>
-<!--/ footer end  -->
+	</div>
+	<!--/ footer end  -->

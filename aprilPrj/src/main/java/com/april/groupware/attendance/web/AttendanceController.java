@@ -34,12 +34,30 @@ public class AttendanceController {
 		LOG.debug("=doInsert user= : "+attendVO);
 		LOG.debug("====================");
 		
-		int flag  = attendanceDao.doInsert(attendVO);
+		int flag = 0;
+		MessageVO message = new MessageVO();
+		//Json(Gson)
+		Gson gson = new Gson();
+		String json = "";
+		
+		//DB에 출근한 기록이 있는지 확인
+		AttendanceVO outVO = (AttendanceVO) attendanceDao.doSelectOne(attendVO);
+		LOG.debug("====================");
+		LOG.debug("=Attendance DB outVO= : "+outVO);
+		LOG.debug("====================");
+		
+		//출근한 기록이 있는 경우 flag = 2
+		if(outVO != null && outVO.getAttendYN().equals("1")) {
+			flag = 2;
+			message.setMsgMsg(attendVO.getId()+"님 \n이미 출근이 완료되었습니다.");
+			json = gson.toJson(message);
+			return json;
+		}
+		
+		flag  = attendanceDao.doInsert(attendVO);
 		LOG.debug("====================");
 		LOG.debug("=doInsert flag= : "+flag);
 		LOG.debug("====================");
-		
-		MessageVO message = new MessageVO();
 		
 		message.setMsgId(String.valueOf(flag));
 		
@@ -47,15 +65,15 @@ public class AttendanceController {
 		DateFormat format = DateFormat.getDateInstance(DateFormat.FULL);
 		String today = format.format(date);
 		
+		//출근 성공
 		if(flag == 1) {
 			message.setMsgMsg(attendVO.getId()+"님 \n"+today+" 출근이 완료되었습니다.");
+		//출근 실패
 		} else {
 			message.setMsgMsg("출근을 완료하지 못했습니다. \n관리자에게 문의해주세요.");
 		}
 		
-		//Json(Gson)
-		Gson gson = new Gson();
-		String json = gson.toJson(message);
+		json = gson.toJson(message);
 		
 		LOG.debug("====================");
 		LOG.debug("=doInsert json= : "+json);
@@ -267,14 +285,23 @@ public class AttendanceController {
 		LOG.debug("=doSelectOne outVO= : "+outVO);
 		LOG.debug("====================");
 		
-		model.addAttribute("attendanceVO", outVO);
+		if(outVO != null) {
+			model.addAttribute("attendanceVO", outVO);
+		} else {
+			return "/views/attendance";
+		}
+		
 		
 		List<AttendanceVO> outList = (List<AttendanceVO>) attendanceDao.getAll(attendVO);
 		LOG.debug("====================");
 		LOG.debug("=getAll outList= : "+outList);
 		LOG.debug("====================");
 		
-		model.addAttribute("attendanceList", outList);
+		if(outList != null) {
+			model.addAttribute("attendanceList", outList);
+		} else {
+			return "/views/attendance";
+		}
 		
 		//Json(Gson)
 		Gson gson = new Gson();
