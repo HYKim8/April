@@ -87,6 +87,8 @@ public class MemberController {
 			LOG.debug("2=userInfo="+userInfo);
 			LOG.debug("2===================");
 			
+			
+			
 			session.setAttribute("user", userInfo);
 		}
 
