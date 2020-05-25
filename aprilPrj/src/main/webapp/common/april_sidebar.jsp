@@ -24,7 +24,7 @@
 	<!-- sidebar start  -->
     <div class="nk-nav-scroll">
        <ul class="metismenu" id="menu">
-           <li class="nav-label">김주희님 환영합니다</li>
+           <li class="nav-label">${user.name}님 환영합니다</li>
            
            <!-- 관리자페이지 네비게이션 시작 -->
            <li>
