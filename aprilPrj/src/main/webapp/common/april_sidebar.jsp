@@ -52,11 +52,11 @@
                     <!-- 이메일페이지 네비게이션 시작 -->
                     <li class="mega-menu mega-menu-sm">
                         <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">이메일</span>
+                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">메일</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">메뉴01</a></li>
-                            <li><a href="./layout-one-column.html">메뉴02</a></li>
+                            <li><a href="http://localhost:8080/groupware/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">받은 메일함</a></li>
+                            <li><a href="http://localhost:8080/groupware/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">보낸 메일함</a></li>
                         </ul>
                     </li>
                     
