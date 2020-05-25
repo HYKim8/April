@@ -163,9 +163,7 @@
                                                 	<tr>
                                                 		<td colspan="3">
                                                 			<input type="file" name="profile_after" id="profile_after" onchange="previewImage(this,'View_area')">
-                                                			<!-- TODO : 지우기 -->
-                                                			<input type="hidden" name="id" id="id" value="${orgUpdateVO.id}" />
-                                                			<!-- TODO : 지우기 -->
+                                                			<input type="hidden" name="id" id="id" value="${user.id}" />
                                                 		</td>
                                                 	</tr>
                                                 </table>

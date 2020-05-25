@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import com.april.groupware.attendance.service.OrgUpdateDao;
 import com.april.groupware.attendance.service.OrgUpdateVO;
 import com.april.groupware.cmn.MessageVO;
 import com.april.groupware.cmn.StringUtil;
+import com.april.groupware.member.service.UserVO;
 import com.google.gson.Gson;
 
 @Controller
@@ -32,10 +35,13 @@ public class OrgUpdateController {
 	OrgUpdateDao orgUpdateDao;
 	
 	@RequestMapping(value="org/do_update.do", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
-	public String doUpdate(MultipartHttpServletRequest mhsRequest, ModelAndView model) throws IllegalStateException, IOException {
+	public String doUpdate(MultipartHttpServletRequest mhsRequest, HttpSession session, ModelAndView model) throws IllegalStateException, IOException {
 		OrgUpdateVO orgVO = new OrgUpdateVO();
-		//세션
-		orgVO.setId("kimjh1");
+		
+		//로그인 세션
+		UserVO userInfo = (UserVO) session.getAttribute("user");
+		//orgVO.setId("kimjh1");
+		orgVO.setId(userInfo.getId());
 		LOG.debug("====================");
 		LOG.debug("=doUpdate orgVO ID= : "+orgVO.getId());
 		LOG.debug("====================");
@@ -217,11 +223,12 @@ public class OrgUpdateController {
 		LOG.debug("====================");
 		
 //		return "/views/mypage_org";
-		return "redirect:/org/do_select_one.do?id=kimjh1";
+//		return "redirect:/org/do_select_one.do?id=kimjh1";
+		return "redirect:/org/do_select_one.do?id="+userInfo.getId();
 	}
 
 	@RequestMapping(value="org/do_select_one.do", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
-	public String doSelectOne(OrgUpdateVO userOrg, Model model) {
+	public String doSelectOne(OrgUpdateVO userOrg, HttpSession session, Model model) {
 		LOG.debug("====================");
 		LOG.debug("=doSelectOne user= : "+userOrg);
 		LOG.debug("====================");
@@ -230,7 +237,10 @@ public class OrgUpdateController {
 		//	throw new IllegalArgumentException("ID를 입력하세요");
 		//}
 		
-		userOrg.setId("kimjh1");
+		//로그인 세션
+		UserVO userInfo = (UserVO) session.getAttribute("user");
+		//orgVO.setId("kimjh1");
+		userOrg.setId(userInfo.getId());
 		
 		OrgUpdateVO outVO = (OrgUpdateVO) orgUpdateDao.doSelectOne(userOrg);
 		LOG.debug("====================");

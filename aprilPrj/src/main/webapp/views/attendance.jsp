@@ -105,8 +105,8 @@
             <div class="row page-titles mx-0">
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">마이페이지</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">개인 정보 수정</a></li>
                     </ol>
                 </div>
             </div>
@@ -123,9 +123,9 @@
                                 <div class="row">
                                     <div class="text-center col-lg-3 mt-1">
                                     
+                                    	<!-- <div class="col-lg-2"> -->
                                     	<!-- 시계 -->
                                     	<table class="table table-bordered verticle-middle">
-                                    	<!-- <div class="col-lg-2"> -->
                                     		<tr>
 	                                    		<td>
 		                                    		<form name="rtcForm">
@@ -140,65 +140,47 @@
                                     	</table>
                                     	<!-- //시계 -->
                                     	
+                                    	<!-- 출근, 조퇴, 퇴근 버튼 -->
                                         <!-- <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> Create New</a> -->
-                                    	<button type="button" name="attenance_btn" id="attenance_btn" class="btn mb-1 btn-outline-primary">출근</button><br/>
-                                    	<button type="button" name="leave_work_btn" id="leave_work_btn" class="btn mb-1 btn-outline-primary">퇴근</button><br/>
-                                    	<button type="button" name="early_leave_btn" id="early_leave_btn" class="btn mb-1 btn-outline-primary">조퇴</button><br/>
+                                    	<button type="button" name="attenance_btn" id="attenance_btn" class="btn btn-outline-primary">출근</button>
+                                    	<button type="button" name="early_leave_btn" id="early_leave_btn" class="btn btn-outline-primary">조퇴</button>
+                                    	<button type="button" name="leave_work_btn" id="leave_work_btn" class="btn btn-outline-primary">퇴근</button>
+                                    	<!--// 출근, 조퇴, 퇴근 버튼 -->
                                     	
                                     	<form action="${aprilContext}/attend/do_insert.do" name="attend_form" method="post">
-                                    		<input type="hidden" name="id" id="id" value="kimjh1">
+                                    		<%-- <input type="hidden" name="id" id="id" value="kimjh1"> --%>
+                                    		<input type="hidden" name="id" id="id" value="${user.id}"> 
                                     		<input type="hidden" name="attendTime" id="attendTime" value="">
                                     		<input type="hidden" name="attendYN" id="attendYN" value="1">
                                     		<input type="hidden" name="leaveYN" id="leaveYN" value="0">
                                     		<input type="hidden" name="state" id="state" value="0">
-                                    		<input type="hidden" name="regId" id="regId" value="kimjh1">
-                                    		<input type="hidden" name="modId" id="modId" value="kimjh1">
+                                    		<!-- <input type="hidden" name="regId" id="regId" value="kimjh1">
+                                    		<input type="hidden" name="modId" id="modId" value="kimjh1"> -->
+                                    		<input type="hidden" name="regId" id="regId" value="${user.id}">
+                                    		<input type="hidden" name="modId" id="modId" value="${user.id}">
                                     	</form>
-                                        <!-- <div id="external-events" class="m-t-20">
-                                            <p>Drag and drop your event or click in the calendar</p>
-                                            <div class="external-event bg-primary text-white" data-class="bg-primary"><i class="fa fa-move"></i>New Theme Release</div>
-                                            <div class="external-event bg-success text-white" data-class="bg-success"><i class="fa fa-move"></i>My Event</div>
-                                            <div class="external-event bg-warning text-white" data-class="bg-warning"><i class="fa fa-move"></i>Meet manager</div>
-                                            <div class="external-event bg-dark text-white" data-class="bg-dark"><i class="fa fa-move"></i>Create New theme</div>
-                                        </div>
-                                        checkbox
-                                        <div class="checkbox m-t-40">
-                                            <input id="drop-remove" type="checkbox">
-                                            <label for="drop-remove">Remove after drop</label>
-                                        </div> -->
                                     </div>
                                     
-                                    <!-- 캘린더 -->
-                                    <!-- <div class="col-md-8">
-                                        <div class="card-box m-b-50">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div> -->
-                                    <!-- //캘린더 -->
-                                    <!-- end col -->
-                                    <!-- TODO -->
                                     <div class="col-md-7">
+	                                    <!-- 월별 근태 조회 -->
                                     	<form action="${aprilContext}/attend/do_get_all.do" method="get" name="search_form">
 	                                    	<table class="verticle-middle">
 		                                    	<tr>
 		                                    		<td><select name="year" id="year" class="form-control"></select>&nbsp;</td>
 		                                    		<td>년&nbsp;&nbsp;</td>
 		                                    		<td><select name="month" id="month" class="form-control"></select>&nbsp;</td>
-		                                    		<td>월</td>
+		                                    		<td>월&nbsp;&nbsp;</td>
 		                                    		<!-- <button style="margin-right:0.5em; text-align:center; height: 40px;" class="btn btn-primary" type="button" onclick="doRetrieve();">조회</button> -->
-		                                    		<td><button type="submit" name="search_btn" id="search_btn" class="btn mb-1 btn-outline-primary">조회</button></td>
+		                                    		<td><button type="submit" name="search_btn" id="search_btn" style="margin-bottom:20px;" class="btn btn-primary">조회</button></td>
 		                                    	</tr>
 	                                    	</table>
                                     	</form>
                                     	<input type="hidden" name="getYear" id="getYear" value="${attendanceVO.year}" />
 						    			<input type="hidden" name="getMonth" id="getMonth" value="${attendanceVO.month}" />
-                                    <%-- <table class="verticle-middle">
-                                    	<tr>
-	                                    	<td><input type="text" id="year" name="year" value="<%=year%>년" size=5 readonly="readonly" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-	                                    	<td><input type="text" id="month" name="month" value="<%=month%>월" size=3 readonly="readonly" style="border:none;border-right:0px; border-top:0px; boder-left:0px; boder-bottom:0px;"></td>
-	                                    </tr>
-                                    </table> --%>
-                                    <table class="table table-bordered table-striped verticle-middle">
+						    			<!-- //월별 근태 조회 -->
+                                    
+                                    <!-- table-striped -->
+                                    <table class="table table-bordered verticle-middle table-hover">
 						    		    <!-- hidden-sm hidden-xs 숨기기 -->
 						    			<thead>
 						    				<th style="display:none;">순서</th>
@@ -237,14 +219,6 @@
 						    						</tr>
 						    					</c:otherwise>
 						    				</c:choose>
-						    				<%-- <tr>
-						    					<td class="text-center hidden-sm hidden-xs">1</td>
-						    					<td class="text-left">제목입니다. 비둘기 아닙니다.</td>
-						    					<td class="text-center">이상무</td>
-						    					<td class="text-center hidden-sm hidden-xs">2020/03/10</td>
-						    					<td class="text-right hidden-sm hidden-xs">88</td>
-						    					<td style="display:none;">88</td>
-						    				</tr> --%>
 						    			</tbody>
 						    		</table>
 						    		</div>
@@ -348,9 +322,9 @@
     <script src="${aprilContext}/views/js/plugins-init/fullcalendar-init.js"></script>
     
     <script type="text/javascript">
-	    //TODO : id 변수 = 로그인 세션
 		function goAttend() {
-	    	location.href="${aprilContext}/attend/do_select_one.do?id=kimjh1";
+			//location.href="${aprilContext}/attend/do_select_one.do?id=kimjh1";
+	    	location.href="${aprilContext}/attend/do_select_one.do?id="+${user.id};
 	    }
 	    
 	    $(document).ready(function(){

@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.april.groupware.attendance.service.AttendanceDao;
 import com.april.groupware.attendance.service.AttendanceVO;
 import com.april.groupware.cmn.MessageVO;
+import com.april.groupware.member.service.UserVO;
 import com.google.gson.Gson;
 
 @Controller
@@ -209,13 +212,15 @@ public class AttendanceController {
 	
 	@RequestMapping(value="attend/do_delete.do", method=RequestMethod.POST, produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public String doDelete(AttendanceVO attendVO) {
+	public String doDelete(AttendanceVO attendVO, HttpSession session) {
 		LOG.debug("====================");
 		LOG.debug("=doDelete user= : "+attendVO);
 		LOG.debug("====================");
 		
-		//TODO 로그인 
-		attendVO.setId("kimjh1");
+		//로그인 세션 
+		UserVO userInfo = (UserVO) session.getAttribute("user");
+		//attendVO.setId("kimjh1");
+		attendVO.setId(userInfo.getId());
 		
 		if(attendVO.getId() == null) {
 			throw new IllegalArgumentException("ID를 입력하세요");
@@ -250,13 +255,15 @@ public class AttendanceController {
 	}
 	
 	@RequestMapping(value="attend/do_select_one.do", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
-	public String doSelectOne(AttendanceVO attendVO, Model model) {
+	public String doSelectOne(AttendanceVO attendVO, HttpSession session, Model model) {
 		LOG.debug("====================");
 		LOG.debug("=doSelectOne attendVO= : "+attendVO);
 		LOG.debug("====================");
 		
 		//로그인 세션
-		attendVO.setId("kimjh1");
+		UserVO userInfo = (UserVO) session.getAttribute("user");
+		//attendVO.setId("kimjh1");
+		attendVO.setId(userInfo.getId());
 
 		//날짜 검색
 		Date date = new Date();
@@ -315,12 +322,15 @@ public class AttendanceController {
 	}
 	
 	@RequestMapping(value="attend/do_get_all.do", method=RequestMethod.GET, produces="application/json; charset=UTF-8")
-	public String getAllSearchDate(AttendanceVO attendVO, Model model) {
+	public String getAllSearchDate(AttendanceVO attendVO, HttpSession session, Model model) {
 		LOG.debug("====================");
 		LOG.debug("=doSelectOne attendVO= : "+attendVO);
 		LOG.debug("====================");
 		
-		attendVO.setId("kimjh1");
+		//로그인 세션 
+		UserVO userInfo = (UserVO) session.getAttribute("user");
+		//attendVO.setId("kimjh1");
+		attendVO.setId(userInfo.getId());
 		
 		String year = attendVO.getYear();
 		String month = attendVO.getMonth();
