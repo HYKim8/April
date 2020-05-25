@@ -49,8 +49,7 @@ public class TodoServiceImple implements TodoService {
 
 	@Override
 	public DTO doSelectOne(DTO dto) {
-		// TODO Auto-generated method stub
-		return null;
+		return dao.doSelectOne(dto);
 	}
 
 }

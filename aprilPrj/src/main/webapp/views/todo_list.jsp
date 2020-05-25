@@ -22,7 +22,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="/views/common/common.jsp"%>
+<%@ include file="/common/common.jsp"%>
 <%
 		//페이지 사이즈
 	String pageSize = "10";
@@ -87,20 +87,14 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="${hContext}/views/images/favicon.png">
     <!-- Custom Stylesheet -->
-    <link href="./plugins/tables/css/datatable/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-
-<!-- 부트스트랩 -->
-<link href="${hContext}/resources/css/bootstrap.min.css"
-	rel="stylesheet"> 
+    <link href="${hContext}/views/css/style.css" rel="stylesheet">
 
 </head>
 
@@ -120,7 +114,6 @@
         Preloader end
     ********************-->
 
-    
     <!--**********************************
         Main wrapper start
     ***********************************-->
@@ -129,9 +122,9 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-        <div class="nav-header">
+      <div class="nav-header">
             <div class="brand-logo">
-                <a href="index.html">
+                <a href="${hContext}/views/index.html">
                     <b class="logo-abbr"><img src="${hContext}/views/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${hContext}/views/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
@@ -326,156 +319,8 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="nk-sidebar">           
-            <div class="nk-nav-scroll">
-                <ul class="metismenu" id="menu">
-                    <li class="nav-label">Dashboard</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./index.html">Home 1</a></li>
-                            <!-- <li><a href="./index-2.html">Home 2</a></li> -->
-                        </ul>
-                    </li>
-                    <li class="mega-menu mega-menu-sm">
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Layouts</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./layout-blank.html">Blank</a></li>
-                            <li><a href="./layout-one-column.html">One Column</a></li>
-                            <li><a href="./layout-two-column.html">Two column</a></li>
-                            <li><a href="./layout-compact-nav.html">Compact Nav</a></li>
-                            <li><a href="./layout-vertical.html">Vertical</a></li>
-                            <li><a href="./layout-horizontal.html">Horizontal</a></li>
-                            <li><a href="./layout-boxed.html">Boxed</a></li>
-                            <li><a href="./layout-wide.html">Wide</a></li>
-                            
-                            
-                            <li><a href="./layout-fixed-header.html">Fixed Header</a></li>
-                            <li><a href="layout-fixed-sidebar.html">Fixed Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Apps</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-envelope menu-icon"></i> <span class="nav-text">Email</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./email-inbox.html">Inbox</a></li>
-                            <li><a href="./email-read.html">Read</a></li>
-                            <li><a href="./email-compose.html">Compose</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">Apps</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./app-profile.html">Profile</a></li>
-                            <li><a href="./app-calender.html">Calender</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-graph menu-icon"></i> <span class="nav-text">Charts</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./chart-flot.html">Flot</a></li>
-                            <li><a href="./chart-morris.html">Morris</a></li>
-                            <li><a href="./chart-chartjs.html">Chartjs</a></li>
-                            <li><a href="./chart-chartist.html">Chartist</a></li>
-                            <li><a href="./chart-sparkline.html">Sparkline</a></li>
-                            <li><a href="./chart-peity.html">Peity</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">UI Components</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-grid menu-icon"></i><span class="nav-text">UI Components</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./ui-accordion.html">Accordion</a></li>
-                            <li><a href="./ui-alert.html">Alert</a></li>
-                            <li><a href="./ui-badge.html">Badge</a></li>
-                            <li><a href="./ui-button.html">Button</a></li>
-                            <li><a href="./ui-button-group.html">Button Group</a></li>
-                            <li><a href="./ui-cards.html">Cards</a></li>
-                            <li><a href="./ui-carousel.html">Carousel</a></li>
-                            <li><a href="./ui-dropdown.html">Dropdown</a></li>
-                            <li><a href="./ui-list-group.html">List Group</a></li>
-                            <li><a href="./ui-media-object.html">Media Object</a></li>
-                            <li><a href="./ui-modal.html">Modal</a></li>
-                            <li><a href="./ui-pagination.html">Pagination</a></li>
-                            <li><a href="./ui-popover.html">Popover</a></li>
-                            <li><a href="./ui-progressbar.html">Progressbar</a></li>
-                            <li><a href="./ui-tab.html">Tab</a></li>
-                            <li><a href="./ui-typography.html">Typography</a></li>
-                        <!-- </ul>
-                    </li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-layers menu-icon"></i><span class="nav-text">Components</span>
-                        </a>
-                        <ul aria-expanded="false"> -->
-                            <li><a href="./uc-nestedable.html">Nestedable</a></li>
-                            <li><a href="./uc-noui-slider.html">Noui Slider</a></li>
-                            <li><a href="./uc-sweetalert.html">Sweet Alert</a></li>
-                            <li><a href="./uc-toastr.html">Toastr</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="widgets.html" aria-expanded="false">
-                            <i class="icon-badge menu-icon"></i><span class="nav-text">Widget</span>
-                        </a>
-                    </li>
-                    <li class="nav-label">Forms</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-note menu-icon"></i><span class="nav-text">Forms</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./form-basic.html">Basic Form</a></li>
-                            <li><a href="./form-validation.html">Form Validation</a></li>
-                            <li><a href="./form-step.html">Step Form</a></li>
-                            <li><a href="./form-editor.html">Editor</a></li>
-                            <li><a href="./form-picker.html">Picker</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Table</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-menu menu-icon"></i><span class="nav-text">Table</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./table-basic.html" aria-expanded="false">Basic Table</a></li>
-                            <li><a href="./table-datatable.html" aria-expanded="false">Data Table</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-label">Pages</li>
-                    <li>
-                        <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                            <i class="icon-notebook menu-icon"></i><span class="nav-text">Pages</span>
-                        </a>
-                        <ul aria-expanded="false">
-                            <li><a href="./page-login.html">Login</a></li>
-                            <li><a href="./page-register.html">Register</a></li>
-                            <li><a href="./page-lock.html">Lock Screen</a></li>
-                            <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Error</a>
-                                <ul aria-expanded="false">
-                                    <li><a href="./page-error-404.html">Error 404</a></li>
-                                    <li><a href="./page-error-403.html">Error 403</a></li>
-                                    <li><a href="./page-error-400.html">Error 400</a></li>
-                                    <li><a href="./page-error-500.html">Error 500</a></li>
-                                    <li><a href="./page-error-503.html">Error 503</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+   		<div class="nk-sidebar">           
+			 <%@ include file="/common/april_sidebar.jsp" %>
         </div>
         <!--**********************************
             Sidebar end
@@ -484,23 +329,39 @@
         <!--**********************************
             Content body start
         ***********************************-->
-       <!-- div container -->
-	<div class="container">
-		<!-- div title -->
-		<div class="page-header">
-			<h1>게시판 목록</h1>
-		</div>
+      <div class="content-body">
+
+            <div class="row page-titles mx-0">
+                <div class="col p-md-0">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Apps</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Email</a></li>
+                    </ol>
+                    
+                    
+                </div>
+            </div>
+            <!-- row -->
+
+            <div class="container-fluid">
+            <div class="bootstrap-label">
+               <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                            <div class="card-title">
+                                    <h4>TODO 게시판</h4><hr/>
+                                </div>
 		<!--// div title -->
 		<!-- 검색영역 -->
-		<div class="row">
-			<div class="col-md-12 text-right">
-				<form action="${hContext}/todo/do_retrieve.do" name="searchFrm"
-					method="get" class="form-inline">
+<%-- 		<div class="row">
+			<div class="col-md-12">
+				<form action="${hContext}/todo/do_retrieve.do" name="searchFrm" method="get" class="form-inline">
 					<input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
 					<input type="hidden"   name="id" id="id" />
 					<div class="form-group">
-					<%-- 	<%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
-						<%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%> --%>
+						<%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>
+						<%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%> 
 						<input type="text" class="form-control input-sm" id="searchWord"
 							name="searchWord" placeholder="검색어"  value="${vo.searchWord }">
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -510,20 +371,46 @@
 					</div>
 				</form>
 			</div>
-		</div>
+		</div> --%>
 		<!--// 검색영역 -->
+
+        <!-- 검색영역 -->
+        <div class="row">
+            <div class="col-md-12">
+                <form action="${hContext}/todo/do_retrieve.do" class="form-inline" style="text-align: center;" 
+                        name="searchFrm" method="get">
+                    <input type="hidden" name="pageNum" id="pageNum" value="${vo.pageNum }">
+                    <input type="hidden" name="id" id="id" />
+                       
+                        <div class="btn-group mr-2 mb-2">
+                        <%=StringUtil.makeSelectBox(pageSizeList, "pageSize", pageSize, false)%>&nbsp;&nbsp;
+                        </div>
+                     	 <div class="btn-group mr-2 mb-2">
+                        <%=StringUtil.makeSelectBox(searchList, "searchDiv", searchDiv, true)%>&nbsp;&nbsp;
+                        </div>
+                        
+                        <input type="text" style="height: 12px;" class="form-control"  id="searchWord" name="searchWord" placeholder="검색어" value="${vo.searchWord }">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+                        <button style="margin-right:0.5em; text-align:center; height: 40px;" class="btn btn-primary" type="button" onclick="doRetrieve();">조회</button> 
+                        <button style="margin-right:0.5em; text-align:center; height: 40px;" class="btn btn-danger" type="button" onclick="doInsertView();">등록</button>
+                       <%--  <button style="margin-right:0.5em; text-align:center; height: 40px;" class="btn btn-success" type="button" disabled="disabled">사원수 ${totalCnt } 명</button> --%>
+                     </div>   
+                </form>
+            </div>
+        </div>
+        <!--// 검색영역 -->
+
 
 		<!-- Grid영역 -->
 		<div class="table-responsive">
-			<table class="table table-striped table-bordered sung" id="listTable">
+			<table class="table header-border table-hover verticle-middle" id="listTable">
 				<!-- hidden-sm hidden-xs 숨기기 -->
 				<thead class="bg-primary">
-					<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs ">부서명</th>
-					<th class="text-center col-lg-8 col-md-8 col-sm-8 col-xs-8">프로젝트 명</th>
-					<th class="text-center col-lg-1 col-md-1 col-sm-1 col-xs-1">고객사</th>
-					<th class="text-center col-lg-1 col-md-1 col-sm-1 hidden-xs  ">작성자</th>
-					<th class="text-center col-lg-1 col-md-1 hidden-sm hidden-xs ">작성일</th>
-					<th style="display: none;">id</th>
+					<th class="text-center">작성자</th>
+					<th class="text-center">프로젝트 명</th>
+					<th class="text-center">고객사</th>
+					<th class="text-center">부서명</th>
+					<th class="text-center">작성일</th>
 				</thead>
 				<tbody>
 					<c:choose>   
@@ -531,11 +418,11 @@
 							<c:forEach var="vo" items="${list }">
 								<tr>
 									<td class="text-center hidden-sm hidden-xs"><c:out
-											value="${vo.deptNm }" /></td>
+											value="${vo.id }" /></td>
 									<td class="text-left"><c:out value="${vo.pTitle }" /></td>
 									<td class="text-center"><c:out value="${vo.customer }" /></td>
 									<td class="text-center hidden-sm hidden-xs  "><c:out
-											value="${vo.regId }" /></td>
+											value="${vo.deptNm }" /></td>
 									<td class="text-right hidden-sm hidden-xs"><c:out
 											value="${vo.regDate }" /></td>
 									<td style="display: none;"><c:out value="${vo.id }" /></td>
@@ -553,14 +440,18 @@
 			</table>
 		</div>
 		<!--// Grid영역 -->
-		<!-- pagenation -->
-	<div class="text-center">
-			<%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
-		</div>
-		<!--// pagenation --> 
-	</div>
+	 <!-- pagenation -->
+            <nav>
+                 <ul class="pagination justify-content-center">
+                    <div class="text-center">
+			            <%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
+			        </div>
+                 </ul>
+             </nav> 
+         <!--// pagenation -->
 	<!--// div container -->
-        </div>
+           </div>
+         </div>
         <!--**********************************
             Content body end
         ***********************************-->
@@ -570,9 +461,7 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            <%@ include file="/common/april_footer.jsp" %>
         </div>
         <!--**********************************
             Footer end
@@ -590,21 +479,13 @@
     <script src="${hContext}/views/js/settings.js"></script>
     <script src="${hContext}/views/js/gleek.js"></script>
     <script src="${hContext}/views/js/styleSwitcher.js"></script>
-
-    <script src="${hContext}/views/plugins/tables/js/jquery.dataTables.min.js"></script>
-    <script src="${hContext}/views/plugins/tables/js/datatable/dataTables.bootstrap4.min.js"></script>
-    <script src="${hContext}/views/plugins/tables/js/datatable-init/datatable-basic.min.js"></script>
-
-	<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
-	<script src="${hContext}/views/resources/js/jquery-migrate-1.4.1.js"></script>
-	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
-	<script src="${hContext}/views/resources/js/bootstrap.min.js">
-		
-	</script>
 	<script type="text/javascript">
+
+
+	
         //등록으로 화면 이동.
 	    function doInsertView() {
-	        console.log("doInsertView");
+	    	console.log("doInsertView");
 	        console.log("")
 	        var frm = document.searchFrm;
 	        frm.action = "${hContext}/todo/do_insert_view.do";
@@ -621,8 +502,11 @@
             frm.submit();
 
         }
-	
-		function doRetrieve() {
+
+		
+
+    	
+			function doRetrieve() {
 			//console.log("doRetrieve");
 			var frm = document.searchFrm;
 			frm.pageNum.value = "1";
@@ -644,7 +528,7 @@
 	    	//console.log("sung #listTable>tbody");
             var trs = $(this);
             var tds = trs.children();
-            var id = tds.eq(5).text();
+            var id = tds.eq(0).text();
             console.log("id:"+id);
 	    	//board/do_selectone.do
             var frm = document.searchFrm;
