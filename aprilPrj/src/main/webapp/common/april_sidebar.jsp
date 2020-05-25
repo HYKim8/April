@@ -93,7 +93,7 @@
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">채팅페이지</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="${hContext}/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord= ">채팅페이지 메인</a></li>
+                            <li><a href="http://localhost:8080/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">채팅페이지 메인</a></li>
                             <li><a href="./layout-one-column.html">채팅방01</a></li>
                         </ul>
                     </li>

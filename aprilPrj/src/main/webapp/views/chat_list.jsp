@@ -1,14 +1,15 @@
 <%--
 /**
-  * Class Name : 
-  * Description :  
+  * Class Name : chat_list
+  * Description : 채팅 메인페이지 사원목록 조회
+  * http://localhost:8080/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord= 
   * Modification Information
   *
   *   수정일                   수정자                      수정내용
   *  -------    --------    ---------------------------
   *  2020.5.7.           	 최초 생성
   *
-  * http://localhost:8080/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord= 
+  * 
   *
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
@@ -538,7 +539,7 @@ if (null != search) {
 							<div class="card-body">
 								<h5 class="card-title">테스트 중</h5>
 								<p class="card-text">채팅방</p>
-								<a href="#" class="btn btn-primary">참여하기</a>
+								<a href="${hContext}/chat/chat.do" class="btn btn-primary">참여하기</a>
 							</div>
 						</div>
 					</div>

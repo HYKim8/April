@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.april.groupware.chat.service.ChatService;
 import com.april.groupware.chat.service.ChatVO;
@@ -35,7 +34,7 @@ public class ChatController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/chatchat.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/chat/chat.do", method = RequestMethod.GET)
 	public String chat(Locale locale, Model model) {
 		LOG.debug(" 열림 테스트 {}.", locale);
 		
@@ -45,7 +44,7 @@ public class ChatController {
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);
 	
-		return "views/chatchat";
+		return "views/chat_room";
 	}
 	
 	
