@@ -15,6 +15,7 @@
   */
 --%>
 
+<%@page import="com.april.groupware.nboard.service.NBAnswerVO"%>
 <%@page import="com.april.groupware.cmn.StringUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="com.april.groupware.code.service.CodeVO"%>
@@ -25,12 +26,14 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="/common/common.jsp"%>
+<%@ include file="/views/common/common.jsp"%>
 <%
-	//session
+	 //session
 	UserVO userInfo = (UserVO) session.getAttribute("user");
 
-    /* //페이지 사이즈
+    NBAnswerVO list = (NBAnswerVO) request.getAttribute("list");
+ 
+     //페이지 사이즈
     String pageSize = "10";
     
     //페이지 num
@@ -75,7 +78,7 @@
         rowPerPage = search.getPageSize();
         maxNum     = totalCnt;
     }
-    //--paging */
+    //--paging  
 
 %>
 <!DOCTYPE html>
@@ -136,7 +139,7 @@
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header">    
+         <div class="header">    
             <%@ include file="/common/april_header.jsp" %>
         </div>
         <!--**********************************
@@ -281,7 +284,77 @@
                             </div>
                         </div>
                         
+                        
+                      <!-- 댓글 목록 -->
+         <div class="table-responsive">
+           <table class="table header-border table-hover verticle-middle" id="listTable">
+<!--            <table class="table" id="listTable"> -->
+               <thead>
+                   <tr>
+                       <th class="text-center" width="120">등록자</th>
+                       <th class="text-center" width="800">내용</th>
+                       <th class="text-center">등록일</th>
+                   </tr>
+               </thead>
+               <tbody>
+                    <c:choose>
+                        <c:when test="${aw.size()>0 }">
+                            <c:forEach var="vo" items="${aw }">
+                                <tr>
+                                    <td class="text-center hidden-sm hidden-xs">
+                                            <c:out value="${vo.nbNo }" /></td>
+                                    <td class="text-center"><c:out value="${vo.awContents }" /></td>
+                                    <td class="text-center"><c:out value="${vo.regId }" /></td>
+                                    <td class="text-center hidden-sm hidden-xs  ">
+                                        <c:out value="${vo.regDate }" /></td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td class="text-center">No data found.</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
+
+                </tbody>
+             </table>
+         </div>
+        <!-- pagenation -->
+            <nav>
+                 <ul class="pagination justify-content-center">
+                    <div class="text-center">
+                        <%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName) %>
+                    </div>
+                 </ul>
+             </nav> 
+         <!--// pagenation -->
+         <!-- </div> -->
+          <!-- //댓글 목록 --> 
+                        
+                        
                         <%-- <!--div 댓글 읽기 -->
+                        <div class="card">
+                            <div class="card-body">
+                             <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글</span>
+                                <div class="media media-reply">
+                                    <img class="mr-3 circle-rounded" src="images/avatar/2.jpg" width="50" height="50" alt="Generic placeholder image">
+                                    <div class="media-body">
+                                        <div class="d-sm-flex justify-content-between mb-2">
+                                            <h5 class="mb-sm-0">${aw.redId } <small class="text-muted ml-3">${aw.redDate }</small></h5>
+                                        </div>
+                                        
+                                        <p>${aw.awContents }</p>
+                                        <ul>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/2.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/3.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/4.jpg" alt=""></li>
+                                            <li class="d-inline-block"><img class="rounded" width="60" height="60" src="images/blog/1.jpg" alt=""></li>
+                                        </ul>
+                                </div>
+                            </div> --%>
+                        
+                         <%-- <!--div 댓글 읽기 -->
                         <div class="card">
                             <div class="card-body">
                              <span style="margin-bottom:1em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글</span>

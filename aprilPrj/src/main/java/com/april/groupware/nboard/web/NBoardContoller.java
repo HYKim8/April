@@ -18,6 +18,7 @@ import com.april.groupware.cmn.SearchVO;
 import com.april.groupware.cmn.StringUtil;
 import com.april.groupware.code.service.CodeService;
 import com.april.groupware.code.service.CodeVO;
+import com.april.groupware.nboard.service.NBAnswerVO;
 import com.april.groupware.nboard.service.NBoardService;
 import com.april.groupware.nboard.service.NBoardVO;
 import com.google.gson.Gson;
@@ -176,7 +177,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 	
 	//단건조회 - 상세페이지 조회
 	@RequestMapping(value = "nboard/do_selectone.do",method = RequestMethod.GET)
-	public String doSelectOne(NBoardVO  board,Locale locale,Model model) {
+	public String doSelectOne(NBoardVO  board,Locale locale,Model model,SearchVO  search) {
 		//param NbNo
 		LOG.debug("1=====NBoardContoller=doSelectOne===========");
 		LOG.debug("1=param="+board);
@@ -192,6 +193,52 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		LOG.debug("1.1=outVO="+outVO);
 		LOG.debug("1.1=================");	
 		model.addAttribute("vo", outVO);
+		
+		//------------------------------------------------------------------
+		//param 기본값 처리
+		if(search.getPageNum()==0) {
+			search.setPageNum(1);
+		}
+
+		if(search.getPageSize()==0) {
+			search.setPageSize(10);
+		}
+
+		LOG.debug("1=====NBAnswerContoller=doRetrieve===========");
+		LOG.debug("1=param="+search);
+		LOG.debug("1=================");
+		//검색조건 화면으로 전달.
+		model.addAttribute("search", search);
+		//TODO: codeTable : 페이지 사이즈
+
+		//페이지 사이즈: PAGE_SIZE
+		CodeVO  code=new CodeVO();
+		code.setCodeTypeId("PAGE_SIZE");
+		List<CodeVO> pageSizeList=(List<CodeVO>) this.codeService.doRetrieve(code);
+		LOG.debug("1.1=pageSizeList="+pageSizeList);
+		model.addAttribute("pageSizeList", pageSizeList);
+
+
+		List<NBAnswerVO> list = (List<NBAnswerVO>) this.boardService.doRetrieve(search);
+		//조회결과 화면 전달
+		model.addAttribute("aw", list);
+		for(NBAnswerVO aw: list) {
+			LOG.debug("1.1=out="+aw);
+		}
+
+		//총건수
+		int totalCnt = 0;
+		if(null !=list &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+		}
+
+		LOG.debug("1.2======NBAnswerContoller=doRetrieve===========");
+		LOG.debug("1.2=totalCnt="+totalCnt);
+		LOG.debug("1.2=================");
+		//조회결과 화면 전달
+		model.addAttribute("totalCnt", totalCnt);
+		
+		//------------------------------------------------------------------
 		
 		return "views/nboard_read"; // views/nboard_read.jsp
 	}

@@ -24,7 +24,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ include file="/common/common.jsp"%>
+<%@ include file="/views/common/common.jsp"%>
 <%
     //session
     /* UserVO userInfo = (UserVO) session.getAttribute("user");
@@ -146,7 +146,7 @@
         <!--**********************************
             Header start
         ***********************************-->
-        <div class="header">    
+         <div class="header">    
             <%@ include file="/common/april_header.jsp" %>
         </div>
         <!--**********************************
@@ -156,7 +156,7 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        <div class="nk-sidebar">           
+         <div class="nk-sidebar">           
              <%@ include file="/common/april_sidebar.jsp" %>
         </div>
         <!--**********************************
@@ -335,11 +335,11 @@
                  //console.log("sung #listTable>tbody");
                  var trs = $(this);
                  var tds = trs.children();
-                 var nbNo = tds.eq(0).text();
+                 var nbNo = tds.eq(0).text().trim();
                  console.log("nbNo:"+nbNo);
                  //board/do_selectone.do
                  var frm = document.searchFrm;
-                 frm.nbNo.value = nbNo;
+                 frm.nbNo.value = nbNo.trim();
                  frm.action = "${hContext}/nboard/do_selectone.do";
                  frm.submit();
                  

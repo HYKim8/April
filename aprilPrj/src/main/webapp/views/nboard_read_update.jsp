@@ -21,7 +21,7 @@
 <%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib  prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib  prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@ include file="/views/common/common.jsp"%>
+<%@ include file="/common/common.jsp"%>
 <%
     //session
     UserVO userInfo = (UserVO) session.getAttribute("user");
@@ -224,9 +224,7 @@
             Footer start
         ***********************************-->
         <div class="footer">
-            <div class="copyright">
-                <p>Copyright &copy; Designed & Developed by <a href="https://themeforest.net/user/quixlab">Quixlab</a> 2018</p>
-            </div>
+            <%@ include file="/common/april_footer.jsp" %>
         </div>
         <!--**********************************
             Footer end
