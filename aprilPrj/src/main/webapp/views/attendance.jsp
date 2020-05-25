@@ -324,7 +324,7 @@
     <script type="text/javascript">
 		function goAttend() {
 			//location.href="${aprilContext}/attend/do_select_one.do?id=kimjh1";
-	    	location.href="${aprilContext}/attend/do_select_one.do?id="+${user.id};
+	    	location.href="${aprilContext}/attend/do_select_one.do";
 	    }
 	    
 	    $(document).ready(function(){
