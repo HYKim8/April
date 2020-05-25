@@ -2,6 +2,8 @@ package com.april.groupware.member.web;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.LocaleResolver;
 
 import com.april.groupware.cmn.MessageVO;
+import com.april.groupware.cmn.SearchVO;
+import com.april.groupware.mail.service.MailService;
+import com.april.groupware.mail.service.MailVO;
 import com.april.groupware.member.service.UserService;
 import com.april.groupware.member.service.UserVO;
 import com.google.gson.Gson;
@@ -29,6 +34,9 @@ public class MemberController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	MailService mailService;
+	
 	/**
 	 * Login
 	 * @param user
@@ -87,9 +95,42 @@ public class MemberController {
 			LOG.debug("2=userInfo="+userInfo);
 			LOG.debug("2===================");
 			
-			
-			
 			session.setAttribute("user", userInfo);
+			
+			//---------------민지 alarm part Start
+			LOG.debug("3=====민지 alarm part Start=====");
+			SearchVO search = new SearchVO();
+			search.setSearchWord(userInfo.getId());
+			//알림용 list
+			List<MailVO> alarmList = (List<MailVO>) this.mailService.getAll(search);
+			
+			
+			//알림용 image
+			String img = "";
+					
+			//안읽은 건수
+			int totalCntNotRead = 0;
+			
+			for(MailVO vo:alarmList) {
+				LOG.debug("** alarmList : "+vo);
+				if(vo.getRead().equals("0")) {
+					totalCntNotRead++;
+					
+					MailVO imgVO = (MailVO)this.mailService.doSelectImage(vo);
+					img = "/groupware/"+ imgVO.getSaveFileName();
+					vo.setSaveFileName(img);
+					LOG.debug("** alarmList(SaveFileName) : "+vo);
+				}
+			}
+			
+			session.setAttribute("alarmList", alarmList);
+			
+			LOG.debug("** totalCntNotRead : "+totalCntNotRead);
+			
+			//조회결과 화면 전달
+			session.setAttribute("totalCntNotRead", totalCntNotRead);
+			LOG.debug("3=====민지 alarm part End=====");
+			//---------------민지 alarm part End
 		}
 
 		Gson gson=new Gson();

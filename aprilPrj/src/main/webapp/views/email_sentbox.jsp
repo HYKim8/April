@@ -162,7 +162,7 @@ if (search != null) {
                         <div class="card">
                             <div class="card-body">
                                 <div class="email-left-box">
-                                	<a href="${aprilContext}/views/email-compose.html" class="btn btn-primary btn-block">메일 쓰기</a>
+                                	<a href="${aprilContext}/views/email_compose.jsp" class="btn btn-primary btn-block">메일 쓰기</a>
                                     <div class="mail-list mt-4">
                                     	<a href="${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}" class="list-group-item border-0 p-r-0"><i class="fa fa-inbox font-18 align-middle mr-2"></i> 
 	                                    	<b>받은 메일함</b> 
@@ -303,8 +303,9 @@ if (search != null) {
     <script type="text/javascript">
 
     function doRetrieve() {
-		var searchWord = ${user.id};
-		location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+ searchWord;
+		var searchWord = "";
+		//location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+ searchWord;
+		location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}";
 	}
 
 	

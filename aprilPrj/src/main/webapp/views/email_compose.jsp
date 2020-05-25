@@ -180,8 +180,8 @@
                                            <div class="form-group">
                                            	<h5 class="m-b-20">받는 사람 &nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" id="checkMe">&nbsp;&nbsp;나에게</h5> 
                                                <input type="text" id="recipient" name="recipient" value="${vo.sender}" class="form-control bg-transparent" placeholder=" 받는 사람">
-                                               <input type="hidden" id="sender" value="김민지" class="form-control bg-transparent" placeholder=" 보내는 사람">
-                                               <input type="hidden" id="senderId" value="kimmj" class="form-control bg-transparent" placeholder=" 보내는 사람ID">
+                                               <input type="hidden" id="sender" value="${user.name}" class="form-control bg-transparent" placeholder=" 보내는 사람">
+                                               <input type="hidden" id="senderId" value="${user.id}" class="form-control bg-transparent" placeholder=" 보내는 사람ID">
                                            </div>
                                            <div class="form-group">
                                            	<h5 class="m-b-20">참조</h5>
@@ -396,7 +396,7 @@
 				if(null != jData && jData.msgId=="1"){
 					alert(jData.msgMsg);
 					//메일 목록 화면으로 이동
-					doRetrieve();
+					location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}"
 				}else{
 					alert(jData.msgMsg);
 				}
