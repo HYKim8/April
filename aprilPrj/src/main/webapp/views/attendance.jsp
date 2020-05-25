@@ -433,7 +433,6 @@
 				url:"${aprilContext}/attend/early_leave.do",
 				dataType:"html",
 	            data:{
-		            //TODO 마지막 seq를 받아서 처리
 	            	"seq" : "",
                     "id" : $("#id").val(),
                     "leaveTime" : leaveTime,
@@ -478,7 +477,6 @@
 				url:"${aprilContext}/attend/leave_update.do",
 				dataType:"html",
 	            data:{
-		            //TODO 마지막 seq를 받아서 처리
 	            	"seq" : "",
                     "id" : $("#id").val(),
                     "leaveTime" : leaveTime,
