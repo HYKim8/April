@@ -36,7 +36,7 @@ public class ChatController {
 	 */
 	@RequestMapping(value = "/chat/chat.do", method = RequestMethod.GET)
 	public String chat(Locale locale, Model model) {
-		LOG.debug(" 열림 테스트 {}.", locale);
+		LOG.debug(" 채팅방01 활성화 {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -44,9 +44,8 @@ public class ChatController {
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);
 	
-		return "views/chat_room3";
+		return "views/chat_room";
 	}
-	
 	
 	
 	@RequestMapping(value = "chat/do_retrieve.do",method = RequestMethod.GET)
@@ -105,7 +104,6 @@ public class ChatController {
 	}
 	
 	
-	
 	@RequestMapping(value = "chat/do_selectOne.do",method = RequestMethod.GET)
 	public String doSelectOne(ChatVO user,Locale locale,Model model) {
 
@@ -125,12 +123,9 @@ public class ChatController {
 		model.addAttribute("vo", outVO);
 		
 		//여기에 자동으로 /+
-		return "views/chat_list"; //원하는 채팅 화면으로 이동 jsp경로라거나 아니면 controller 
+		return "views/chat_room_p2p"; //원하는 채팅 화면으로 이동 jsp경로라거나 아니면 controller 
 	
 	}
-	
-	
-	
-	
+
 }
 

@@ -1,8 +1,8 @@
 <%--
 /**
   * Class Name : chat_list
-  * Description : 채팅 메인페이지 사원목록 조회
-  * http://localhost:8080/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord= 
+  * Description : 1:1 채티방
+  * http://localhost:8080/groupware/chat/chat.do 
   * Modification Information
   *
   *   수정일                   수정자                      수정내용
@@ -433,8 +433,7 @@
 
 		<!--**********************************
             Content body start
-        ***********************************-->
-		
+        ***********************************-->	
 		<div class="content-body">
 			<div class="row page-titles mx-0">
 				<div class="col p-md-0">
@@ -452,19 +451,20 @@
 					<div class="col-lg-8" >
 						<div class="card text-center" >
 							<div class="card-body" style="padding-left:60px; padding-right:60px; ">
-								<h5 class="card-title">상대방 아이디</h5>
+								<h5 class="card-title"><c:out value="${vo.name }"></c:out>
+														<input type="hidden" value="${vo.id }"> </h5>
  								 <br/>
 								 <fieldset>								
 						        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; padding-right: 0px;">
 										<textarea class="form-control" name="messageBox" id="messageBox" 
-												  readonly="true" rows="18" >${vo.contents}
+												  readonly="true" rows="18" >
 										</textarea>
 									</div>
                                 	<hr/>
-                                    <input type="text" id="inputMessage" value="${vo.name}" class="form-control bg-transparent" >
+                                    	<input onkeyup="enterkey();" type="text" id="inputMessage" class="form-control bg-transparent" >
                                     <br/><br/>
-                                    <input class="btn btn-primary" type="submit" value="보내기" onclick="send()" />
-                                    <input type="hidden" id="userName" value="${user.name }">
+                                    <input type="submit" onclick="send()" class="btn btn-primary" value="보내기"  />
+                                    <%-- <input type="hidden" id="userName" value="${user.name }"> --%>
 							     </fieldset>
 							</div>
 						</div>
@@ -478,7 +478,6 @@
 		<!--**********************************
             Content body end
         ***********************************-->
-
 
 		<!--**********************************
             Footer start
@@ -494,7 +493,7 @@
 		<!--**********************************
             Footer end
         ***********************************-->
-	</div>
+
 	<!--**********************************
         Main wrapper end
     ***********************************-->
@@ -523,13 +522,12 @@
       onMessage(event)
     };
     function onMessage(event) {
-        textarea.value += "상대 : " + event.data + "\n";
+        textarea.value += "${vo.name } 님 : " + event.data + "\n";
     }
     function onOpen(event) {
         //textarea.value += userName+" 님이 대화에 참여하셨습니다 \n";
     	textarea.value += "${user.name}님이 대화에 참여하셨습니다 \n";
     }
-
     webSocket.onerror = function(event) {
         onError(event)
       };
@@ -541,7 +539,14 @@
         webSocket.send(inputMessage.value);
         inputMessage.value = "";
     }
-    
+
+    //엔터키 누르면 바로 메세지 보내기
+    function enterkey() {
+        if (window.event.keyCode == 13) {
+        	send();
+        }
+	}
+
   </script>
   
 </body>

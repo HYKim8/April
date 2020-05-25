@@ -476,7 +476,8 @@ if (null != search) {
 									<li><a href="${hContext}/views/page-error-503.html">Error
 											503</a></li>
 								</ul></li>
-						</ul></li>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -487,8 +488,8 @@ if (null != search) {
 		<!--**********************************
             Content body start
         ***********************************-->
+		
 		<div class="content-body">
-
 			<div class="row page-titles mx-0">
 				<div class="col p-md-0">
 					<ol class="breadcrumb">
@@ -500,7 +501,6 @@ if (null != search) {
 			</div>
 			<!-- row -->
 			<div class="container-fluid">
-
 				<div class="row">
 					<!-- 본인 정보란 -->	
 					<div class="col-lg-6">
@@ -533,17 +533,17 @@ if (null != search) {
 						</div>
 					</div>
 					<!-- /본인 정보란 -->
-					<!-- 채팅방1 -->
+					<!-- 채팅방 01 이동버튼 -->
 					<div class="col-lg-6">
 						<div class="card text-center" >
 							<div class="card-body">
-								<h5 class="card-title">테스트 중</h5>
-								<p class="card-text">채팅방</p>
+								<h5 class="card-title">[ 오점뭐먹 ]방</h5>
+								<p class="card-text">오늘 점심 뭐 먹을지 고민하는 방</p>
 								<a href="${hContext}/chat/chat.do" class="btn btn-primary">참여하기</a>
 							</div>
 						</div>
 					</div>
-					<!-- //채팅ㅂ1 -->
+					<!-- //채팅방 01 -->
 				</div>
 				<!-- /row -->	
 				
@@ -566,7 +566,7 @@ if (null != search) {
 								<!-- /부서검색박스 -->
 								<!-- 사원목록테이블 -->
 									<div class="table-responsive">
-										<table id="listTable"
+										<table id="listTable" 
 											class="table header-border table-hover verticle-middle" >
 											<!-- hidden-sm hidden-xs 숨기기 -->
 											<thead>
@@ -612,23 +612,14 @@ if (null != search) {
 								</div>
 							</div>
 							<!-- /사원목록테이블 -->
-	
-						</div>
-						
+						</div>		
 					</div>
-					<!-- //row2 -->
-					
-				</div>
-
-
-
-								
-				
-				</div>
+					<!-- //row2 -->	
+				</div>		
+			</div>
 
 				<!-- #/ container -->
 			</div>
-		</div>
 		<!--**********************************
             Content body end
         ***********************************-->
@@ -663,6 +654,7 @@ if (null != search) {
 	<script src="${hContext}/views/js/styleSwitcher.js"></script>
 	<%-- <script src="${hContext}/views/js/swiper.jquery.js"></script> --%>
 
+
 	<script type="text/javascript">
 		//--셀렉트박스 list 중 하나 선택했을 때 메일 읽기 페이지로 넘어가는 기능 Start
 		function doRetrieve() {
@@ -670,8 +662,8 @@ if (null != search) {
 			//console.log("doRetrieve");
 			var frm = document.dNameForm;
 			frm.searchDiv.value = $("#searchDiv option:selected").val();
-			/* frm.searchWord.value = ""; */
-			/* frm.pageSize.value = 10;
+			/* frm.searchWord.value = ""; 
+			frm.pageSize.value = 10;
 			frm.pageNum.value = 1;  */
 			frm.action = "${hContext}/chat/do_retrieve.do";
 			frm.submit();
@@ -686,58 +678,20 @@ if (null != search) {
 			frm.pageNum.value = no;
 			frm.action = url;
 			frm.submit();
-
 		}
-
-		
-		/*
+	
 		//--사원목록에서 하나를 선택했을 때 해당 사원의 정보를 띄움
 		 $("#listTable>tbody").on("click", "tr", function() {
 			console.log("#listTable>tbody");
 			var trs = $(this);
 			var tds = trs.children();
-			var id = tds.eq(5).text();
+			var id = tds.eq(0).text();
 			console.log("id = " + id);
 			location.href = "${hContext}/chat/do_selectOne.do?id=" + id;
 
 		});
  		//끝
- 		*/
  		
-		/*<form action="${hContext}/chat/do_retrieve.do" name="dNameForm" method="get" class="form-inline">
-		 			<select name="dNameList" id="dNameList" onchange="doRetrieve()">
-		               	<option value="">전체</option>
-		               	<option value="10">개발</option>
-		               	<option value="20">부서명</option>
-		            </select>
-		            </form> */
-
-		/*     $.ajax({
-		        type:"GET",
-		        url:"${hContext }/chat/do_retrieve.do",
-		        dataType:"html",
-		        data:{"searchDiv":$("#dNameList option:selected").val()  
-		        },
-		        success:function(data){ //성공
-		            
-		            var jsonObj = JSON.parse(data);
-		            if(jsonObj !=null && jsonObj.msgId == "1"){
-		                alert(jsonObj.msgContents);         //메시지 먼저 뜨고 아래에서 이동시킴
-		                
-		                //goRetrieve();
-		                //window.location.href='/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=';
-		            } else{
-		                alert(jsonObj.msgId+"|"+ jsonObj.msgContents);
-		                
-		            } 
-		            
-		        },error:function(xhr,status,error){
-		            alert("error:" + error);
-		        },complete:function(data){
-		        
-		        }
-		        
-		       });//--ajax */
 	</script>
-	</ body>
+</body>
 </html>
