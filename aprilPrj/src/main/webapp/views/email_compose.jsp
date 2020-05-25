@@ -396,7 +396,7 @@
 				if(null != jData && jData.msgId=="1"){
 					alert(jData.msgMsg);
 					//메일 목록 화면으로 이동
-					location.href = "${aprilContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord="+${user.id}; 
+					doRetrieve();
 				}else{
 					alert(jData.msgMsg);
 				}
