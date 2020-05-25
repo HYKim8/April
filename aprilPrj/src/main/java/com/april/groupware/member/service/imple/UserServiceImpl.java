@@ -83,6 +83,11 @@ public class UserServiceImpl implements UserService {
 		if(flag<1) {
 			return 20;//비번확인
 		}
+		
+		if(flag != 30) {
+			
+			LOG.debug("★★★★★★로그인 30이 아님");
+		}
 
 
 		return 30;

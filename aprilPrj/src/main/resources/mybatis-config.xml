@@ -28,6 +28,10 @@
         <typeAlias type="com.april.groupware.chat.service.ChatVO" alias="ChatVO"/>
         <typeAlias type="com.april.groupware.member.service.UserVO" alias="UserVO"/>
         
+        
+        <!-- 대시보드 -->
+		<typeAlias type="com.april.groupware.dash.service.DashTodoVO" alias="DashTodoVO"/>
+	
     </typeAliases>
 
 </configuration>

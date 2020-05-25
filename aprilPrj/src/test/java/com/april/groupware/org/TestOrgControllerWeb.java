@@ -6,10 +6,8 @@ import static org.junit.Assert.assertThat;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -40,15 +38,13 @@ import com.april.groupware.org.service.OrgVO;
                                    })
 public class TestOrgControllerWeb {
 	
-	
-	
 	private final Logger  LOG = LoggerFactory.getLogger(TestOrgControllerWeb.class);
 	
 	@Autowired
 	WebApplicationContext  webApplicationContext;
 	
 	@Autowired
-	OrgService  dao;
+	OrgService dao;
 
 	 
 	//브라우저 대신 Mock
@@ -76,8 +72,6 @@ public class TestOrgControllerWeb {
 		LOG.debug("=====================");	
 
 	}
-	
-	
 	   @Test
 	   public void doRetrieve() throws Exception { 
 	      // 1.전체삭제 //2.3건입력 //3.조회
@@ -103,7 +97,7 @@ public class TestOrgControllerWeb {
 	                     .andReturn()
 	                     .getResponse().getContentAsString();
 	               LOG.debug("=====================");
-	               LOG.debug("=result★="+result);
+	               LOG.debug("=result="+result);
 	               LOG.debug("=====================");
 	         }
 	

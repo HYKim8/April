@@ -28,9 +28,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+    <title>April Groupware</title>
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon.png">
+    <link rel="icon" type="${hContext}/views/image/png" sizes="16x16" href="${hContext}/views/images/favicon.png">
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <link href="${hContext}/views/css/style.css" rel="stylesheet">
 </head>
@@ -58,7 +58,7 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center" href="#"> <h4>April Groupware </h4></a>
+                                <a class="text-center" href="#"> <h4>April Groupware</h4></a>
         
                                 <form action="${hContext}/login/login.do" class="mt-5 mb-5 login-input" name="login_form" method="get" >
                                     <div class="form-group">
@@ -73,8 +73,6 @@
                                 <button type="button" class="btn login-form__btn submit w-100" id="member_login" size="20">
 									Login
 								</button>
-								
-								
                                 <p class="mt-5 login-form__footer"> <a href="#" class="text-primary">비밀번호 찾기</a> </p>
                             </div>
                         </div>
@@ -98,13 +96,34 @@
 	<!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
 
 	<script type="text/javascript">
-	    function goRetrieve(){
-	        location.href="${hContext}/views/attend.jsp";
+	    function goRetrieve(id){
+
+		    if(id=='kimjh' || id=='KIMJH'){
+	        		location.href="${hContext}/dash/do_selectone.do";
+		    }else{
+		    		location.href="${hContext}/views/admin_org_write.jsp";
+			    }
 	    }
+
 
 	   $("#member_login").on("click",function(){
 		   console.log("member_login");
 		  //  document.login_form.submit();
+		  
+			var id = $("#id").val().trim();
+	        if(null == id || id.length<=1){
+	        	$("#id").focus();
+	            alert("아이디를 입력하세요.");
+	            return;
+	        }
+
+	     	var password = $("#password").val().trim();
+	        if(null == password || password.length<=1){
+	            $("#password").focus();
+	            alert("패스워드를 입력하세요.");
+	            return;
+	        }
+			  
 		  $.ajax({
 			   type:"POST",
 			   url:"${hContext}/login/login.do",
@@ -118,7 +137,7 @@
                    if(null !=jData && jData.msgId=="30"){
                        alert(jData.msgMsg);
                        //목록화면으로 이동
-                       goRetrieve();
+                       goRetrieve(id);
                    }else{
                        alert(jData.msgMsg);
 
