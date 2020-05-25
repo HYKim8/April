@@ -105,34 +105,6 @@ public class MailController {
 			LOG.debug("** list : "+vo);
 		}
 		
-		//알림용 list
-		List<MailVO> alarmList = (List<MailVO>) this.mailService.getAll(search);
-		
-//		//알림용 image
-		String img = "";
-				
-		//안읽은 건수
-		int totalCntNotRead = 0;
-		
-		for(MailVO vo:alarmList) {
-			LOG.debug("** alarmList : "+vo);
-			if(vo.getRead().equals("0")) {
-				LOG.debug("쓰빠껐");
-				totalCntNotRead++;
-				MailVO imgVO = (MailVO)this.mailService.doSelectImage(vo);
-				img = "/groupware/"+ imgVO.getSaveFileName();
-				vo.setSaveFileName(img);
-				LOG.debug("** alarmList(SaveFileName) : "+vo);
-			}
-		}
-		
-		model.addAttribute("alarmList", alarmList);
-		
-		LOG.debug("** totalCntNotRead : "+totalCntNotRead);
-		
-		//조회결과 화면 전달
-		model.addAttribute("totalCntNotRead", totalCntNotRead);
-		
 		//총건수
 		int totalCnt = 0;
 		
@@ -143,7 +115,7 @@ public class MailController {
 		
 		//조회결과 화면 전달
 		model.addAttribute("totalCnt", totalCnt);
-
+		
 		LOG.debug("=====MailController [doRetrieve] End=====");
 		
 		return "views/email_inbox";// "/board/board_list.jsp
@@ -375,59 +347,6 @@ public class MailController {
 		LOG.debug("=====MailController [doRetrieve] End=====");
 		
 		return "views/email_sentbox";// "/board/board_list.jsp
-		
-	}
-	
-	/**
-	 * Method Name : doRetrieve 
-	 * 작성일: 2020. 5. 16. 
-	 * 작성자: MINJI 
-	 * 설명: 메일 목록 조회
-	 * 
-	 * @throws java.lang.Exception
-	 */
-	@RequestMapping(value = "mail/do_retrieveTrash.do",method = RequestMethod.GET)
-	public String doRetrieveTrash(SearchVO search, Model model) {
-		
-		LOG.debug("=====MailController [doRetrieveTrash] Start=====");
-		//param 기본값 처리
-		if(search.getPageNum()==0) {
-			search.setPageNum(1);
-		}
-		
-		if(search.getPageSize()==0) {
-			search.setPageSize(10);
-		}
-		
-		//검색구분
-		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
-		//검색어
-		search.setSearchWord(StringUtil.nvl(search.getSearchWord().trim()));
-		
-		LOG.debug("** param : "+search);
-		//검색조건 화면으로 전달.
-		model.addAttribute("vo", search);
-		
-		List<MailVO> list = (List<MailVO>) this.mailService.doRetrieveTrash(search);
-		//조회결과 화면 전달
-		model.addAttribute("list", list);
-		for(MailVO vo:list) {
-			LOG.debug("** list : "+vo);
-		}
-		
-		//총건수
-		int totalCnt = 0;
-		if(null !=list &&  list.size()>0) {
-			totalCnt = list.get(0).getTotalCnt();
-		}
-		LOG.debug("** totalCnt : "+totalCnt);
-		
-		//조회결과 화면 전달
-		model.addAttribute("totalCnt", totalCnt);
-		
-		LOG.debug("=====MailController [doRetrieveTrash] End=====");
-		
-		return "views/email_trashbox";// "/board/board_list.jsp
 		
 	}
 }

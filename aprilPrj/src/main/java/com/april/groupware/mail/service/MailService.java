@@ -96,5 +96,12 @@ public interface MailService {
 	 * @return
 	 */
 	public List<?> getAll(DTO dto);
+	
+	/**
+	 * 전체 조회 Count
+	 * @param dto
+	 * @return
+	 */
+	public int getAllCount(DTO dto);
 
 }

@@ -453,5 +453,25 @@ public class MailDaoImple implements MailDao {
 		return outVO;
 	}
 
+	@Override
+	public int getAllCount(DTO dto) {
+		SearchVO inVO = (SearchVO) dto;
+		
+		LOG.debug("=====MailDaoImple [getAllCount] Start======");
+		
+		LOG.debug("** inVO : "+inVO);
+		
+		// namespace+id = com.sist.ehr.board.doInsert 
+		String statement = NAMESPACE+".doGetAllCount";
+		LOG.debug("** statement : "+statement);
+		
+		int  flag = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("** flag : "+flag);
+		
+		LOG.debug("=====MailDaoImple [getAllCount] End======");
+		
+		return flag;
+	}
+
 
 }

@@ -227,4 +227,13 @@
 	WHERE 	id = #{senderId,jdbcType=VARCHAR}
     </select>
     
+    <!-- doGetAllCount(안읽은 것만, 옆에 갯수) -->
+    <select id="doGetAllCount" parameterType="SearchVO" resultType="Integer">
+	SELECT count(*)
+	FROM	email
+	WHERE	recipient_id like '%' || #{searchWord} ||'%'
+	AND		disable_yn = 'N'
+	AND		read = '0'
+    </select>
+    
 </mapper>

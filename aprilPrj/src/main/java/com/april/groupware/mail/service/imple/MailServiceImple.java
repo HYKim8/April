@@ -116,4 +116,9 @@ public class MailServiceImple implements MailService {
 		return mailDao.doSelectImage(dto);
 	}
 
+	@Override
+	public int getAllCount(DTO dto) {
+		return mailDao.getAllCount(dto);
+	}
+
 }

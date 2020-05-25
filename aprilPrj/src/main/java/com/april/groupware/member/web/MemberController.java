@@ -131,6 +131,15 @@ public class MemberController {
 			session.setAttribute("totalCntNotRead", totalCntNotRead);
 			LOG.debug("3=====민지 alarm part End=====");
 			//---------------민지 alarm part End
+			
+			LOG.debug("4=====민지 Count Start=====");
+			//Count Start
+			int count = this.mailService.getAllCount(search);
+			LOG.debug("** count : "+ count);
+			session.setAttribute("count", count);
+			//Count End
+			LOG.debug("4=====민지 Count End=====");
+			
 		}
 
 		Gson gson=new Gson();
