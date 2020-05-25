@@ -67,8 +67,7 @@
 			        <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Todo</span>
 			    </a>
 			    <ul aria-expanded="false">
-			        <li><a href="./layout-blank.html">메뉴01</a></li>
-			        <li><a href="./layout-one-column.html">메뉴02</a></li>
+			          <li><a href="${hContext}/todo/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">Todo게시판</a></li>
 			    </ul>
 			</li>
 			<!-- Todo페이지 네비게이션 끝 -->

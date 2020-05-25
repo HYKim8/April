@@ -292,7 +292,7 @@
                                             <label class="col-lg-4 col-form-label" for="id">아이디 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="id" name="id" value="${vo.id }" placeholder="아이디를 입력하세요" >
+                                                <input type="text" class="form-control" id="id" name="id" value="${user.id }" placeholder="아이디를 입력하세요" >
                                             </div>
                                         </div>
                                         <div class="form-group row">

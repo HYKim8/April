@@ -310,21 +310,21 @@
                                             <label class="col-lg-4 col-form-label" for=pTitle>프로젝트 명 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="pTitle" name="pTitle" value="${todovo.pTitle }" placeholder="프로젝트 명을 입력하세요" >
+                                                 <input type="text" class="form-control" id="pTitle" name="pTitle"  value="${todovo.pTitle }" placeholder="프로젝트 명을 입력하세요">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="pType">프로젝트 타입 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input class="form-control" id="pType" name="pType" value="${todovo.pType } rows="5" placeholder="업무 내용을 입력하세요">${vo.contents}</input>
+                                                 <input type="text" class="form-control" id="pType" name="pType"  value="${todovo.pType }" placeholder="프로젝트 타입을 입력하세요">
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label class="col-lg-4 col-form-label" for="taskContents">업무 내용 <span class="text-danger">*</span>
                                             </label>
                                             <div class="col-lg-6">
-                                                <input class="form-control" id="taskContents" name="taskContents" value="${todovo.taskContents } rows="5" placeholder="업무 내용을 입력하세요">${vo.contents}</input>
+                                            <input type="text" class="form-control" id="taskContents" name="taskContents"  value="${todovo.taskContents }" placeholder="업무 내용을 입력하세요">
                                             </div>
                                         </div>
                                         <div class="form-group row">

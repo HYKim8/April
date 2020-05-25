@@ -209,7 +209,7 @@ public class TodoController {
 		LOG.debug("1.1.=================");
 		LOG.debug("1.1=outVO="+outVO);
 		LOG.debug("1.1=================");	
-		model.addAttribute("vo", outVO);
+		model.addAttribute("todovo", outVO);
 		
 		return "views/todo_detail";
 	}
