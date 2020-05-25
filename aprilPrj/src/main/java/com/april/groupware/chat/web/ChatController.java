@@ -44,7 +44,7 @@ public class ChatController {
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);
 	
-		return "views/chat_room";
+		return "views/chat_room3";
 	}
 	
 	
