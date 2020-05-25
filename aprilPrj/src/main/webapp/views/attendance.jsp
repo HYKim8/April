@@ -215,7 +215,7 @@
 						    					</c:when>
 						    					<c:otherwise>
 						    						<tr>
-						    							<td class="text-center" colspan="99">데이터를 찾을 수 없습니다</td>
+						    							<td class="text-center" colspan="99">데이터를 찾을 수 없습니다.</td>
 						    						</tr>
 						    					</c:otherwise>
 						    				</c:choose>
