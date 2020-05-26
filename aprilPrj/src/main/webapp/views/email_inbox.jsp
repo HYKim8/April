@@ -113,7 +113,17 @@ if (search != null) {
             Nav header start
         ***********************************-->
 		<div class="nav-header">
-			<div class="brand-logo">
+			<%@ include file="/common/april_logo.jsp" %>
+			<%-- <div class="brand-logo">
+                <a>
+                    <b class="logo-abbr"><img src="${hContext}/views/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="${hContext}/views/images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="${hContext}/views/images/april_logo.png" alt="">
+                    </span>
+                </a>
+            </div> --%>
+			<%-- <div class="brand-logo">
 				<a href="index.html"> <b class="logo-abbr"><img
 						src="${aprilContext}/views/images/logo.png" alt=""> </b> <span
 					class="logo-compact"><img
@@ -122,7 +132,7 @@ if (search != null) {
 						src="${aprilContext}/views/images/logo-text.png" alt="">
 				</span>
 				</a>
-			</div>
+			</div> --%>
 		</div>
 		<!--**********************************
             Nav header end

@@ -113,16 +113,7 @@ if (search != null) {
             Nav header start
         ***********************************-->
 		<div class="nav-header">
-			<div class="brand-logo">
-				<a href="index.html"> <b class="logo-abbr"><img
-						src="${aprilContext}/views/images/logo.png" alt=""> </b> <span
-					class="logo-compact"><img
-						src="${aprilContext}/views/images/logo-compact.png" alt=""></span>
-					<span class="brand-title"> <img
-						src="${aprilContext}/views/images/logo-text.png" alt="">
-				</span>
-				</a>
-			</div>
+			<%@ include file="/common/april_logo.jsp" %>
 		</div>
 		<!--**********************************
             Nav header end
@@ -181,10 +172,7 @@ if (search != null) {
 										</a> <a href="${aprilContext}/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}"
 											class="list-group-item border-0 p-r-0"><i
 											class="fa fa-paper-plane font-18 align-middle mr-2"></i>보낸
-											메일함</a> <a href="#" class="list-group-item border-0 p-r-0">
-										<!-- 
-                                        <a href="#" class="list-group-item border-0 p-r-0"><i class="mdi mdi-file-document-box font-18 align-middle mr-2"></i>Draft</a>
-                                         -->
+											메일함</a> 
 										<a href="${aprilContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}" class="list-group-item border-0 p-r-0"><i
 											class="fa fa-trash font-18 align-middle mr-2"></i>휴지통</a>
 									</div>
