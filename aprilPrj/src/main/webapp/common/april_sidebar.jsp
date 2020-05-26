@@ -46,15 +46,15 @@
 			<!-- 관리자페이지 네비게이션 끝 -->
 			  
 			<!-- 전사게시판 네비게이션 시작 --> 
-			<li class="mega-menu mega-menu-sm">
-			    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-			        <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">전사게시판</span>
-			    </a>
-			    <ul aria-expanded="false">
-			         <li><a href="${hContext}/nboard/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">전사게시판</a></li>
-			    </ul>
-			</li>
-			<!-- 전사게시판 네비게이션 끝 --> 
+            <li class="mega-menu mega-menu-sm">
+                <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+                    <i class="icon-screen-tablet menu-icon"></i><span class="nav-text">게시판</span>
+                </a>
+                <ul aria-expanded="false">
+                     <li><a href="${hContext}/nboard/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">전사게시판</a></li>
+                </ul>
+            </li>
+            <!-- 전사게시판 네비게이션 끝 --> 
 			
 			<!-- 이메일페이지 네비게이션 시작 -->
 			<li class="mega-menu mega-menu-sm">

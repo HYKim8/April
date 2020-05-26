@@ -69,11 +69,11 @@
         ***********************************-->
         <div class="nav-header">
             <div class="brand-logo">
-                <a href="${hContext}/views/index.html">
+                <a>
                     <b class="logo-abbr"><img src="${hContext}/views/images/logo.png" alt=""> </b>
                     <span class="logo-compact"><img src="${hContext}/views/images/logo-compact.png" alt=""></span>
                     <span class="brand-title">
-                        <img src="${hContext}/views/images/logo-text.png" alt="">
+                        <img src="${hContext}/views/images/april_logo.png" alt="">
                     </span>
                 </a>
             </div>
