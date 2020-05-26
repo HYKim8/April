@@ -290,7 +290,7 @@ public class AttendanceDaoImple implements AttendanceDao {
 			
 			return flag;
 		//6 ~ 12시
-		} else if(18 < leaveTime && leaveTime > 24) {
+		} else if(18 <= leaveTime && leaveTime <= 24) {
 			//정상 퇴근
 			attendVO.setState("0");
 			//근무 시간

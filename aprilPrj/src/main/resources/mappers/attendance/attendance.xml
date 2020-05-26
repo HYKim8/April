@@ -24,7 +24,7 @@
 		) VALUES (              
 		    ATTEND_SEQ.NEXTVAL,                  
 		    #{id},                  
-		    '0',                  
+		    '1',                  
 		    '0',
 		    #{state},          
 		    '0',                  
