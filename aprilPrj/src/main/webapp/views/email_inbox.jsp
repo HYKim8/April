@@ -207,9 +207,6 @@ if (search != null) {
 											<button type="button" id="delete_btn" class="btn btn-light">
 												<i class="fa fa-trash font-18 align-middle mr-2"></i>삭제
 											</button>
-											<button type="button" class="btn btn-light">
-												<i class="fa fa-mail-forward font-18 align-middle mr-2"></i>전달
-											</button>
 											<button type="button" id="read" class="btn btn-light">
 												<i class="fa fa-envelope-open font-18 align-middle mr-2"></i>읽음
 											</button>
