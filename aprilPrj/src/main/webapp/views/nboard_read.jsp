@@ -151,7 +151,7 @@
                                                      id="nbNo" name="nbNo" value="글번호  ${vo.nbNo }"  readonly="readonly"/>
                                               <label style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
                                                      >조회수 ${vo.readCnt }</label>
-                                              <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글 000</span>
+                                              <span style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success">댓글  ${list.size()}</span>
                                               <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" class="label label-pill label-success"
                                                      value="글 목록" id="list_btn" onclick="goRetrieve();" />
                                         </div>
@@ -181,7 +181,7 @@
                                         </div>
                                             <c:choose>
                                                 <c:when test="${vo.modId != null}">     
-                                                    <p class="m-b-2" > 수정자 ${vo.regId} 수정일 ${vo.modDate }</p>
+                                                    <p class="m-b-2" > 수정자 ${vo.modId} 수정일 ${vo.modDate }</p>
                                                 </c:when>
                                              </c:choose>
                                         <hr>

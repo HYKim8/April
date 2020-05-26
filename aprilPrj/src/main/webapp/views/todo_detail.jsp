@@ -348,6 +348,13 @@
                                                 <input type="text" class="form-control" id="workingForm" name="workingForm" value="${todovo.workingForm }" placeholder="근무형태를 입력하세요">
                                             </div>
                                         </div>
+                                         <div class="form-group row">
+                                            <label class="col-lg-4 col-form-label" for="modId">수정자<span class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-lg-6">
+                                                <input type="hidden" class="form-control" id="modId" name="modId" value="${user.modId }" placeholder="수정자를 입력하세요">
+                                            </div>
+                                        </div>
                                         <div class="row text-right">
 										    <label for="title" class="col-lg-2 col-md-2 col-sm-2 col-xs-2 control-label"></label>
 										    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -454,6 +461,12 @@
                 alert("근무 형태를 입력하세요.");
                 return;
             }
+            var modId = $("#modId").val().trim();
+            if(null == modId || modId.length<=1){
+                $("#modId").focus();
+                alert("수정자를 입력하세요.");
+                return;
+            }
             
             if(false==confirm("수정 하시겠습니까?"))return;
 
@@ -469,7 +482,8 @@
 	                           "customer":customer,
 	                           "taskContents":taskContents,
 	                           "area":area,
-	                           "workingForm":workingForm
+	                           "workingForm":workingForm,
+	                           "modId":modId
                             },
                        success:function(data){ //성공
                         //alert(data);
