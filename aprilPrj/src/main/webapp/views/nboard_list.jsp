@@ -311,6 +311,15 @@
     <script src="${hContext}/views/js/styleSwitcher.js"></script>
     <script type="text/javascript">
 
+
+    function doRetrieve() {
+        console.log("doRetrieve");
+        var frm = document.searchFrm;
+        frm.pageNum.value = "1";
+        frm.action = "${hContext}/nboard/do_retrieve.do";
+        frm.submit();
+    }
+    
     //등록으로 화면 이동.
         function doInsertView() {
             console.log("doInsertView");
