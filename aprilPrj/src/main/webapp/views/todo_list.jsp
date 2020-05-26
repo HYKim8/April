@@ -397,7 +397,6 @@
                      </form>
                 </div>   
             </div>
-        </div>
         <!--// 검색영역 -->
 
 
@@ -405,11 +404,12 @@
 		<div class="table-responsive">
 			<table class="table header-border table-hover verticle-middle" id="listTable">
 				<!-- hidden-sm hidden-xs 숨기기 -->
-				<thead class="bg-primary">
+				<thead >
 					<th class="text-center">작성자</th>
 					<th class="text-center">프로젝트 명</th>
 					<th class="text-center">고객사</th>
 					<th class="text-center">부서명</th>
+					<th class="text-center">수정자</th>
 					<th class="text-center">작성일</th>
 				</thead>
 				<tbody>
@@ -423,6 +423,8 @@
 									<td class="text-center"><c:out value="${vo.customer }" /></td>
 									<td class="text-center hidden-sm hidden-xs  "><c:out
 											value="${vo.deptNm }" /></td>
+									<td class="text-center hidden-sm hidden-xs  "><c:out
+											value="${vo.modId }" /></td>
 									<td class="text-right hidden-sm hidden-xs"><c:out
 											value="${vo.regDate }" /></td>
 									<td style="display: none;"><c:out value="${vo.id }" /></td>
@@ -435,10 +437,10 @@
 							</tr>
 						</c:otherwise>
 					</c:choose>
-
 				</tbody>
 			</table>
 		</div>
+	
 		<!--// Grid영역 -->
 	 <!-- pagenation -->
             <nav>
@@ -466,7 +468,9 @@
         <!--**********************************
             Footer end
         ***********************************-->
+       
     </div>
+     </div>
     <!--**********************************
         Main wrapper end
     ***********************************-->

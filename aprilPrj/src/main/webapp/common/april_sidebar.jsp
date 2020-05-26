@@ -26,41 +26,17 @@
 		<ul class="metismenu" id="menu">
 			<li class="nav-label">${user.name}님 환영합니다</li>
 			
-		  <!-- 관리자페이지 네비게이션 시작 -->
-
-
-
-		<li><a class="has-arrow" href="javascript:void()"
-			aria-expanded="false"> <i class="icon-speedometer menu-icon"></i><span
-				class="nav-text">관리자페이지</span>
-		</a>
-
-			<ul aria-expanded="false">
-
-
-
-				<c:set var="orgId" value="${user.id}" />
-
-				<c:choose>
-					<c:when test="${orgId eq 'admin'}">
-						<li><a href="${hContext}/dash/do_selectone.do">대시보드</a></li>
-						<li><a
-							href="${hContext}/admin/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">조직데이터</a></li>
-					</c:when>
-					<c:otherwise>
-
-
-						<script type="text/javascript">
-							location.href = "${hContext}/attend/do_select_one.do?id="
-									+ ${user.id}
-						</script>
-					</c:otherwise>
-				</c:choose>
-
-
-
-			</ul></li>
-		<!-- 관리자페이지 네비게이션 끝 -->
+			<!-- 관리자페이지 네비게이션 시작 -->
+			<li>
+			    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
+			        <i class="icon-speedometer menu-icon"></i><span class="nav-text">관리자페이지</span>
+			    </a>
+			    <ul aria-expanded="false">
+			        <li><a href="${hContext}/dash/do_selectone.do">대시보드</a></li>
+			        <li><a href="${hContext}/admin/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">조직데이터</a></li>
+			    </ul>
+			</li>
+			<!-- 관리자페이지 네비게이션 끝 -->
 			  
 			<!-- 전사게시판 네비게이션 시작 --> 
 			<li class="mega-menu mega-menu-sm">
@@ -88,10 +64,10 @@
 			<!-- Todo페이지 네비게이션 시작 -->
 			<li class="mega-menu mega-menu-sm">
 			    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-			        <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Todo</span>
+			        <i class="icon-globe-alt menu-icon"></i><span class="nav-text">업무등록</span>
 			    </a>
 			    <ul aria-expanded="false">
-			          <li><a href="${hContext}/todo/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">Todo게시판</a></li>
+			          <li><a href="${hContext}/todo/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">Todo</a></li>
 			    </ul>
 			</li>
 			<!-- Todo페이지 네비게이션 끝 -->
@@ -111,10 +87,10 @@
 			<!-- 채팅페이지 네비게이션 시작 -->
 			<li class="mega-menu mega-menu-sm">
 			    <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-			        <i class="icon-globe-alt menu-icon"></i><span class="nav-text">채팅</span>
+			        <i class="icon-globe-alt menu-icon"></i><span class="nav-text">채팅페이지</span>
 			    </a>
 			    <ul aria-expanded="false">
-			        <li><a href="http://localhost:8080/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">채팅</a></li>
+			        <li><a href="http://localhost:8080/groupware/chat/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">채팅페이지 메인</a></li>
 			    </ul>
 			</li>
 			<!-- 채팅페이지 네비게이션 끝 -->
