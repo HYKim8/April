@@ -94,7 +94,7 @@ public class AttendanceDaoImple implements AttendanceDao {
 		int flag = 0;
 		
 		//9시 ~ 18시
-		if(9 <= attendTime && attendTime < 18) {
+		if(9 <= attendTime && attendTime <= 24) {
 			//지각
 			inVO.setState("1");	
 			
