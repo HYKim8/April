@@ -84,7 +84,8 @@
                                		<input type="hidden" name="modId" id="modId" >
                                	</form>
                                	<!-- //출근 -->
-                                <p class="mt-5 login-form__footer"> <a href="#" class="text-primary">비밀번호 찾기</a> </p>
+                               	 <p class="mt-5 login-form__footer" style="text-align: center"> <a  href="#" class="text-primary">아이디 찾기  ㅣ    비밀번호 찾기</a> </p>
+                        
                             </div>
                         </div>
                     </div>
