@@ -32,7 +32,7 @@ public class MemberController {
 	/**
 	 * Login
 	 * @param user
-	 * @param session
+	 * @param session 
 	 * @return json
 	 */
 	@RequestMapping(value = "login/logout.do",method = RequestMethod.GET)
