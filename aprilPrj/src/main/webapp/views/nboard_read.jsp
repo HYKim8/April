@@ -141,9 +141,9 @@
                                             <c:when test="${9 eq user.auth}">
                                               <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
                                                      class="label label-pill label-danger"
-                                                     value="삭제(관리자)" id="delete_btn" name="delete_btn" />
+                                                     value="삭제" id="delete_btn" name="delete_btn" />
                                               <input type="button" style="margin:0.2em; height: 30px; width: 100px; text-align:center;" 
-                                                     class="label label-pill label-danger" value="수정(관리자)"
+                                                     class="label label-pill label-danger" value="수정"
                                                      id="update_btn" name="update_btn" />
                                            </c:when>
                                          </c:choose>
