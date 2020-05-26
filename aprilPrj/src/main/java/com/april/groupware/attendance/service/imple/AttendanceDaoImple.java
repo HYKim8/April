@@ -531,6 +531,33 @@ public class AttendanceDaoImple implements AttendanceDao {
 //		return flag;
 	}
 
+	public int doAttendCheck(DTO dto) {
+		LOG.debug("=====================");
+		LOG.debug("=AttendanceDao doAttendCheck=");
+		LOG.debug("=====================");
+		
+		int cnt = 0;
+		//Param
+		AttendanceVO inVO = (AttendanceVO) dto;
+		LOG.debug("=====================");
+		LOG.debug("=AttendanceDao inVO= : "+inVO);
+		LOG.debug("=====================");
+
+		//SQL-Query
+		String statement = NAMESPACE+".doAttendCount";
+		LOG.debug("=====================");
+		LOG.debug("=doSelectOne statement= : "+statement);
+		LOG.debug("=====================");
+
+		//Call
+		cnt = this.sqlSessionTemplate.selectOne(statement, inVO);
+		LOG.debug("=====================");
+		LOG.debug("=doSelectOne cnt= : "+cnt);
+		LOG.debug("=====================");
+
+		return cnt;
+	}
+	
 	@Override
 	public DTO doSelectOne(DTO dto) {
 		LOG.debug("=====================");

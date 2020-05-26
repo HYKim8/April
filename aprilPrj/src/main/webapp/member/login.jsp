@@ -72,6 +72,17 @@
                                 <button type="button" class="btn login-form__btn submit w-100" id="member_login" size="20">
 									Login
 								</button>
+								
+								<!-- 출근 -->
+								<form action="${aprilContext}/attend/do_insert.do" name="attend_form" method="post">
+                               		<input type="hidden" name="attendTime" id="attendTime" value="">
+                               		<input type="hidden" name="attendYN" id="attendYN" value="1">
+                               		<input type="hidden" name="leaveYN" id="leaveYN" value="0">
+                               		<input type="hidden" name="state" id="state" value="0">
+                               		<input type="hidden" name="regId" id="regId" >
+                               		<input type="hidden" name="modId" id="modId" >
+                               	</form>
+                               	<!-- //출근 -->
                                 <p class="mt-5 login-form__footer"> <a href="#" class="text-primary">비밀번호 찾기</a> </p>
                             </div>
                         </div>
@@ -99,14 +110,15 @@
 		if (id == 'admin' || id == 'ADMIN') {
 				location.href = "${hContext}/dash/do_selectone.do";
 			} else {
-				location.href = "${hContext}/attend/do_select_one.do?id=" + id;
+				//location.href = "${hContext}/views/attendance.jsp";
+				location.href = "${hContext}/attend/do_select_one.do";
 			}
 		}
 
 		$("#member_login").on("click", function() {
 			console.log("member_login");
 			//  document.login_form.submit();
-
+			
 			var id = $("#id").val().trim();
 			if (null == id || id.length <= 1) {
 				$("#id").focus();
@@ -121,15 +133,65 @@
 				return;
 			}
 
+			//출근 시간 넘기기
+			var date = new Date();
+			var attendTime = date.getHours();
+			
 			$.ajax({
 				type : "POST",
 				url : "${hContext}/login/login.do",
 				dataType : "html",
 				data : {
 					"id" : $("#id").val(),
-					"password" : $("#password").val()
+					"password" : $("#password").val(),
+					"seq" : "",
+					"attendTime" : attendTime,
+					"attendYN" : $("#attendYN").val(),
+					"leaveYN" : $("#leaveYN").val(),
+					"state" : $("#state").val(),
+					"regId" : $("#id").val(),
+					"modId" : $("#id").val()
 				},
 				success : function(data) { //성공
+
+					//출근 ajax
+					//$.ajax({
+					//	type:"POST",
+					//	url:"${aprilContext}/attend/do_insert.do",
+					//	dataType:"html",
+			        //    data:{
+			        //    	"seq" : "",
+		            //        "id" : $("#id").val(),
+					//		"attendTime" : attendTime,
+					//		"attendYN" : $("#attendYN").val(),
+					//		"leaveYN" : $("#leaveYN").val(),
+					//		"state" : $("#state").val(),
+					//		"regId" : $("#id").val(),
+					//		"modId" : $("#id").val()
+			        //    },
+					//	success:function(data) {
+					//		console.log("data : "+data);
+					//		
+					//		var parseData = $.parseJSON(data);
+					//		//성공
+					//		if(parseData.msgId=="1") {
+					//			//alert(parseData.msgMsg);
+					//		//실패 - 이미 출근 버튼을 누름
+					//		} else if(parseData.msgId=="2") {
+					//			//alert(parseData.msgMsg);
+					//		//실패
+					//		} else {
+					//			//alert(parseData.msgMsg);
+					//		}
+					//	},
+					//	error:function(xhr, status, error) {
+					//		console.log("error:"+error);
+					//	},
+					//	complete:function(data) {
+					//		
+					//	}
+					//}); //--출근 ajax
+					
 					var jData = JSON.parse(data);
 					if (null != jData && jData.msgId == "30") {
 						alert(jData.msgMsg);
@@ -137,7 +199,6 @@
 						goRetrieve(id);
 					} else {
 						alert(jData.msgMsg);
-
 					}
 
 				},
@@ -149,6 +210,11 @@
 				}
 
 			});//--ajax
+
+			
+			
+			
+			
 
 		});
 	</script>

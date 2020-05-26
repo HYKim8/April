@@ -175,8 +175,8 @@
 		                                    	</tr>
 	                                    	</table>
                                     	</form>
-                                    	<input type="hidden" name="getYear" id="getYear" value="${attendanceVO.year}" />
-						    			<input type="hidden" name="getMonth" id="getMonth" value="${attendanceVO.month}" />
+                                    	<input type="hidden" name="getYear" id="getYear" value="${attendanceVO.get(attendanceVO.size()-1).year}" />
+						    			<input type="hidden" name="getMonth" id="getMonth" value="${attendanceVO.get(attendanceVO.size()-1).month}" />
 						    			<!-- //월별 근태 조회 -->
                                     
                                     <!-- table-striped -->

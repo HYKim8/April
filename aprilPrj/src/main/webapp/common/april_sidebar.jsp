@@ -32,8 +32,15 @@
 			        <i class="icon-speedometer menu-icon"></i><span class="nav-text">관리자페이지</span>
 			    </a>
 			    <ul aria-expanded="false">
-			        <li><a href="${hContext}/dash/do_selectone.do">대시보드</a></li>
-			        <li><a href="${hContext}/admin/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">조직데이터</a></li>
+				    <c:set var="orgId" value="${user.id}" />
+		               <c:choose>
+		                  <c:when test="${orgId eq 'admin'}">
+		                     <li><a href="${hContext}/dash/do_selectone.do">대시보드</a></li>
+		                     <li><a href="${hContext}/admin/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">조직데이터</a></li>
+		                  </c:when>
+		               </c:choose>
+			        <%-- <li><a href="${hContext}/dash/do_selectone.do">대시보드</a></li>
+			        <li><a href="${hContext}/admin/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=">조직데이터</a></li> --%>
 			    </ul>
 			</li>
 			<!-- 관리자페이지 네비게이션 끝 -->
@@ -78,8 +85,8 @@
 			        <i class="icon-notebook menu-icon"></i><span class="nav-text">마이페이지</span>
 			    </a>
 			    <ul aria-expanded="false">
-			        <li><a href="${hContext}/org/do_select_one.do?id=kimjh1">개인 정보 수정</a></li>
-			        <li><a href="${hContext}/attend/do_select_one.do?id=kimjh1">근태 관리</a></li>
+			        <li><a href="${hContext}/org/do_select_one.do">개인 정보 수정</a></li>
+			        <li><a href="${hContext}/attend/do_select_one.do">근태 관리</a></li>
 			    </ul>
 			</li>
 			<!-- 마이페이지 네비게이션 끝 -->

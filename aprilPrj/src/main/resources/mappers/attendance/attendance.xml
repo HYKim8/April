@@ -33,6 +33,14 @@
 		)
 	</insert>
 	
+	<!-- 출근 Count -->
+	<select id="doAttendCount" parameterType="AttendanceVO" resultType="java.lang.Integer">
+		SELECT COUNT(*)
+		FROM attendance
+		WHERE id = #{id}
+		AND TO_DATE(reg_date, 'YYYY/MM/DD') = TO_DATE(sysdate, 'YYYY/MM/DD')
+	</select>
+	
 	<!-- Update : 수정 -->
 	<!-- <update id="doUpdate" parameterType="AttendanceVO">
 		UPDATE attendance	
