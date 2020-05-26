@@ -142,7 +142,7 @@
                                     	
                                     	<!-- 출근, 조퇴, 퇴근 버튼 -->
                                         <!-- <a href="#" data-toggle="modal" data-target="#add-category" class="btn btn-primary btn-block"><i class="ti-plus f-s-12 m-r-5"></i> Create New</a> -->
-                                    	<button type="button" name="attenance_btn" id="attenance_btn" class="btn btn-outline-primary">출근</button>
+                                    	<%-- <button type="button" name="attenance_btn" id="attenance_btn" class="btn btn-outline-primary">출근</button> --%>
                                     	<button type="button" name="early_leave_btn" id="early_leave_btn" class="btn btn-outline-primary">조퇴</button>
                                     	<button type="button" name="leave_work_btn" id="leave_work_btn" class="btn btn-outline-primary">퇴근</button>
                                     	<!--// 출근, 조퇴, 퇴근 버튼 -->
@@ -182,7 +182,7 @@
                                     <!-- table-striped -->
                                     <table class="table table-bordered verticle-middle table-hover">
 						    		    <!-- hidden-sm hidden-xs 숨기기 -->
-						    			<thead>
+						    			<thead class="bg-primary" style="text-align: center; color:white;">
 						    				<th style="display:none;">순서</th>
 						    				<th style="display:none;">아이디</th>
 						    				<th class="text-center">출근일</th>
@@ -510,52 +510,52 @@
 
 		//출근 버튼 : 하루에 한 번만 누를 수 있어야 함
 		//state : 0-디폴트, 1-지각
-		$("#attenance_btn").on("click", function(){
-			console.log("#attenance_btn");
-
-			var date = new Date();
-			var attendTime = date.getHours();
-			
-			//ajax
-			$.ajax({
-				type:"POST",
-				url:"${aprilContext}/attend/do_insert.do",
-				dataType:"html",
-	            data:{
-	            	"seq" : "",
-                    "id" : $("#id").val(),
-					"attendTime" : attendTime,
-					"attendYN" : $("#attendYN").val(),
-					"leaveYN" : $("#leaveYN").val(),
-					"state" : $("#state").val(),
-					"regId" : $("#id").val(),
-					"modId" : $("#id").val()
-	            },
-				success:function(data) {
-					console.log("data : "+data);
-					goAttend();
-					
-					var parseData = $.parseJSON(data);
-					//성공
-					if(parseData.msgId=="1") {
-						alert(parseData.msgMsg);
-						doRetrieve();
-					//실패 - 이미 출근 버튼을 누름
-					} else if(parseData.msgId=="2") {
-						alert(parseData.msgMsg);
-					//실패
-					} else {
-						alert(parseData.msgMsg);
-					}
-				},
-				error:function(xhr, status, error) {
-					console.log("error:"+error);
-				},
-				complete:function(data) {
-					
-				}
-			}); //--ajax
-		});
+		//$("#attenance_btn").on("click", function(){
+		//	console.log("#attenance_btn");
+        //
+		//	var date = new Date();
+		//	var attendTime = date.getHours();
+		//	
+		//	//ajax
+		//	$.ajax({
+		//		type:"POST",
+		//		url:"${aprilContext}/attend/do_insert.do",
+		//		dataType:"html",
+	    //        data:{
+	    //        	"seq" : "",
+        //            "id" : $("#id").val(),
+		//			"attendTime" : attendTime,
+		//			"attendYN" : $("#attendYN").val(),
+		//			"leaveYN" : $("#leaveYN").val(),
+		//			"state" : $("#state").val(),
+		//			"regId" : $("#id").val(),
+		//			"modId" : $("#id").val()
+	    //        },
+		//		success:function(data) {
+		//			console.log("data : "+data);
+		//			goAttend();
+		//			
+		//			var parseData = $.parseJSON(data);
+		//			//성공
+		//			if(parseData.msgId=="1") {
+		//				alert(parseData.msgMsg);
+		//				doRetrieve();
+		//			//실패 - 이미 출근 버튼을 누름
+		//			} else if(parseData.msgId=="2") {
+		//				alert(parseData.msgMsg);
+		//			//실패
+		//			} else {
+		//				alert(parseData.msgMsg);
+		//			}
+		//		},
+		//		error:function(xhr, status, error) {
+		//			console.log("error:"+error);
+		//		},
+		//		complete:function(data) {
+		//			
+		//		}
+		//	}); //--ajax
+		//});
 		
 		//실시간 시계
 		function realtimeClock() {

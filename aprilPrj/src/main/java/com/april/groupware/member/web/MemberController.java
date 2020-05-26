@@ -138,50 +138,50 @@ public class MemberController {
 				}
 				/**--지은 출근 기록*/
 				
-				/**민지 메일 알림*/
-				//---------------민지 alarm part Start
-				LOG.debug("3=====민지 alarm part Start=====");
-				SearchVO search = new SearchVO();
-				search.setSearchWord(userInfo.getId());
-				//알림용 list
-				List<MailVO> alarmList = (List<MailVO>) this.mailService.getAll(search);
-				
-				//알림용 image
-				String img = "";
-						
-				//안읽은 건수
-				int totalCntNotRead = 0;
-				
-				for(MailVO vo:alarmList) {
-					LOG.debug("** alarmList : "+vo);
-					if(vo.getRead().equals("0")) {
-						totalCntNotRead++;
-						
-						MailVO imgVO = (MailVO)this.mailService.doSelectImage(vo);
-						img = "/groupware/"+ imgVO.getSaveFileName();
-						vo.setSaveFileName(img);
-						LOG.debug("** alarmList(SaveFileName) : "+vo);
-					}
-				}
-				
-				session.setAttribute("alarmList", alarmList);
-				
-				LOG.debug("** totalCntNotRead : "+totalCntNotRead);
-				
-				//조회결과 화면 전달
-				session.setAttribute("totalCntNotRead", totalCntNotRead);
-				LOG.debug("3=====민지 alarm part End=====");
-				//---------------민지 alarm part End
-				
-				LOG.debug("4=====민지 Count Start=====");
-				//Count Start
-				int count = this.mailService.getAllCount(search);
-				LOG.debug("** count : "+ count);
-				session.setAttribute("count", count);
-				//Count End
-				LOG.debug("4=====민지 Count End=====");
-				/**--민지 메일 알림*/
 			}
+			/**민지 메일 알림*/
+			//---------------민지 alarm part Start
+			LOG.debug("3=====민지 alarm part Start=====");
+			SearchVO search = new SearchVO();
+			search.setSearchWord(userInfo.getId());
+			//알림용 list
+			List<MailVO> alarmList = (List<MailVO>) this.mailService.getAll(search);
+			
+			//알림용 image
+			String img = "";
+			
+			//안읽은 건수
+			int totalCntNotRead = 0;
+			
+			for(MailVO vo:alarmList) {
+				LOG.debug("** alarmList : "+vo);
+				if(vo.getRead().equals("0")) {
+					totalCntNotRead++;
+					
+					MailVO imgVO = (MailVO)this.mailService.doSelectImage(vo);
+					img = "/groupware/"+ imgVO.getSaveFileName();
+					vo.setSaveFileName(img);
+					LOG.debug("** alarmList(SaveFileName) : "+vo);
+				}
+			}
+			
+			session.setAttribute("alarmList", alarmList);
+			
+			LOG.debug("** totalCntNotRead : "+totalCntNotRead);
+			
+			//조회결과 화면 전달
+			session.setAttribute("totalCntNotRead", totalCntNotRead);
+			LOG.debug("3=====민지 alarm part End=====");
+			//---------------민지 alarm part End
+			
+			LOG.debug("4=====민지 Count Start=====");
+			//Count Start
+			int count = this.mailService.getAllCount(search);
+			LOG.debug("** count : "+ count);
+			session.setAttribute("count", count);
+			//Count End
+			LOG.debug("4=====민지 Count End=====");
+			/**--민지 메일 알림*/
 			
 		}
 			

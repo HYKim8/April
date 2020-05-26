@@ -420,12 +420,12 @@
                                                     <input type="checkbox" class="css-control-input" id="val-terms" name="val-terms" value="1"> <span class="css-control-indicator"></span> I agree to the terms</label>
                                             </div>
                                         </div> -->
-                                        <div class="form-group row">
-                                            <div class="col-lg-8 ml-auto">
-                                                <button type="submit" name="update_btn" id="update_btn" class="btn btn-primary">저장</button>
-                                                <button type="button" name="cancel_btn" id="cancel_btn" class="btn btn-outline-primary">취소</button>
-                                            </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-8 ml-auto">
+                                            <button type="submit" name="update_btn" id="update_btn" class="btn btn-primary">저장</button>
+                                            <button type="button" name="cancel_btn" id="cancel_btn" class="btn btn-outline-primary">취소</button>
                                         </div>
+                                    </div>
                                     </form>
                                 </div>
                             </div>
@@ -616,11 +616,15 @@
  
 		//정보 수정 버튼
 		$("#update_btn").on("click", function(){
+			console.log("#update_btn");
 			//org_form
-			var form = $('form')[0]; //Form data read, 폼 태그 중에 1번째 폼을 불러옴
-	        var formData = new FormData(form);
+			//var form = $('form')[0]; //Form data read, 폼 태그 중에 1번째 폼을 불러옴
+	        //var formData = new FormData(form);
 
-            if(confirm("수정하시겠습니까?") == true) {
+			if(confirm("수정하시겠습니까?") == true) {
+
+			var form = document.org_form;
+	        form.submit();
                 
             //버튼으로 submit할 경우 form과 ajax가 두 번 동작해서 form으로만 돌리고 controller에서 리디렉션함
 	            //$.ajax({
