@@ -11,19 +11,29 @@ import com.april.groupware.cmn.DTO;
  */
 public class NBAnswerVO extends DTO {
 	
-	int	awNo			; /*	댓글번호	*/
-	int	nbNo			; /*	게시글순번	*/
-	String	awContents	; /*	내용	*/
-	String	regId		; /*	작성자	*/
-	String	modId		; /*	수정자	*/
-	String	regDate		; /*	작성일	*/
-	String	modDate		; /*	수정일	*/
-	String	id			; /*	작성자 아이디	*/
-	String	name		; /*	작성자 이름	*/
-	String	deptNm		; /*	작성자 부서	*/
-	String	position	; /*	작성자 직급	*/
+	private int	awNo			; /*	댓글번호	*/
+	private int	nbNo			; /*	게시글순번	*/
+	private String	awContents	; /*	내용	*/
+	private String	regId		; /*	작성자	*/
+	private String	modId		; /*	수정자	*/
+	private String	regDate		; /*	작성일	*/
+	private String	modDate		; /*	수정일	*/
+	private String	id			; /*	작성자 아이디	*/
+	private String	name		; /*	작성자 이름	*/
+	private String	deptNm		; /*	작성자 부서	*/
+	private String	position	; /*	작성자 직급	*/
+	
+	private int pageSize 		; /*	페이지 사이즈	*/
 	
 	
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 	public String getId() {
 		return id;
 	}
