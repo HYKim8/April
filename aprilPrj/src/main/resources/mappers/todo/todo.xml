@@ -87,7 +87,7 @@
 		    task_contents = #{taskContents},
 		    area =    #{area},
 		    working_form =   #{workingForm},
-		    mod_id =  #{id, jdbcType=VARCHAR},
+		    mod_id =  #{modId, jdbcType=VARCHAR},
 		    mod_date =  sysdate
 		WHERE id = #{id}  
     </update>
@@ -119,7 +119,7 @@
 		SELECT
 		    <include refid="todoColumns"/>
 		FROM todo
-		WHERE id = #{id}
+		WHERE id = #{id} 
     </select>
 
 
