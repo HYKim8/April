@@ -29,7 +29,7 @@ public class OrgUpdateController {
 	private final Logger LOG = LoggerFactory.getLogger(OrgUpdateController.class);
 	
 	//파일 저장 경로 : JIEUN 부분 -> sist
-	private final String PROFILE_UPLOAD_PATH ="C:\\Users\\JIEUN\\git\\April\\aprilPrj\\src\\main\\webapp\\resources\\file_upload_img";
+	private final String PROFILE_UPLOAD_PATH ="C:\\Users\\kimjh\\git\\April\\aprilPrj\\src\\main\\webapp\\resources\\file_upload_img";
 	
 	@Autowired
 	OrgUpdateDao orgUpdateDao;
@@ -224,7 +224,7 @@ public class OrgUpdateController {
 		
 //		return "/views/mypage_org";
 //		return "redirect:/org/do_select_one.do?id=kimjh1";
-		return "redirect:/org/do_select_one.do?id="+userInfo.getId();
+		return "redirect:/org/do_select_one.do";
 	}
 
 	@RequestMapping(value="org/do_select_one.do", method=RequestMethod.GET, produces="application/json; charset=UTF-8")

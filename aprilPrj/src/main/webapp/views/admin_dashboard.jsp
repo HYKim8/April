@@ -11,9 +11,9 @@
   *
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
-  
   * dash/do_selectone.do
 --%>
+<%@page import="com.april.groupware.dash.service.DashDeptVO"%>
 <%@page import="com.april.groupware.dash.service.DashTodoVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -47,17 +47,46 @@
 	<!--A:인디고, B주황, C핑크,D블루 -->
     <script>
         jQuery(document).ready(function($) {
+
+    		/* 인사부서 */
+        	var hr01 = $("#hr01").val();
+        	var hr02 = $("#hr02").val();
+        	var hr03 = $("#hr03").val();
+        	var hr04 = $("#hr04").val();
+        	var hr05 = $("#hr05").val();
+        	
+        	/* 영업 부서 */
+        	var salse01 = $("#salse01").val();
+        	var salse02 = $("#salse02").val();
+        	var salse03 = $("#salse03").val();
+        	var salse04 = $("#salse04").val();
+        	var salse05 = $("#salse05").val();
+        	
+        	/* 운영 부서 */
+        	var oper01 = $("#oper01").val();
+        	var oper02 = $("#oper02").val();
+        	var oper03 = $("#oper03").val();
+        	var oper04 = $("#oper04").val();
+        	var oper05 = $("#oper05").val();
+
+        	/* 개발 부서 */
+        	var dev01 = $("#dev01").val();
+        	var dev02 = $("#dev02").val();
+        	var dev03 = $("#dev03").val();
+        	var dev04 = $("#dev04").val();
+        	var dev05 = $("#dev05").val();
+            
             Morris.Area({
                 element: 'area-chart',
                 data: [
-                    { y: '2020-01', 인사: 7,  영업: 1 ,개발: 3 ,운영: 1},
-                    { y: '2020-02', 인사: 4,  영업: 4 ,개발: 4 ,운영: 1},
-                    { y: '2020-03', 인사: 1,  영업: 9 ,개발: 5 ,운영: 3},
-                    { y: '2020-04', 인사: 2,  영업: 4 ,개발: 6 ,운영: 4},
-                    { y: '2020-05', 인사: 3,  영업: 10 ,개발: 4 ,운영: 6}
+                    { y: '2020-01', 인사: hr01,  영업: salse01 ,개발: oper01 ,운영: dev01},
+                    { y: '2020-02', 인사: hr02,  영업: salse02 ,개발: oper02 ,운영: dev02},
+                    { y: '2020-03', 인사: hr03,  영업: salse03 ,개발: oper03 ,운영: dev03},
+                    { y: '2020-04', 인사: hr04,  영업: salse04 ,개발: oper04 ,운영: dev04},
+                    { y: '2020-05', 인사: hr05,  영업: salse05 ,개발: oper05 ,운영: dev05}
                 ],
                 xkey: 'y',
-                ykeys: ['인사', '영업', '개발', '운영'],
+                ykeys:  ['인사', '영업', '개발', '운영'],
                 labels: ['인사팀', '영업팀','개발팀','운영팀'],
           /*   fillOpacity: 0.9, */
             resize: true,
@@ -116,17 +145,18 @@
         <!--**********************************
             Nav header start
         ***********************************-->
-         <div class="nav-header">
-            <div class="brand-logo">
-                <a href="${hContext}/views/index.html">
-                    <b class="logo-abbr"><img src="${hContext}/views/images/logo.png" alt=""> </b>
-                    <span class="logo-compact"><img src="${hContext}/views/images/logo-compact.png" alt=""></span>
-                    <span class="brand-title">
-                        <img src="${hContext}/views/images/logo-text.png" alt="">
-                    </span>
-                </a>
-            </div>
-        </div>
+      		<div class="nav-header">
+			<div class="brand-logo">
+				<a> <b class="logo-abbr"><img
+						src="${hContext}/views/images/logo.png" alt=""> </b> <span
+					class="logo-compact"><img
+						src="${hContext}/views/images/logo-compact.png" alt=""></span> <span
+					class="brand-title"> <img
+						src="${hContext}/views/images/april_logo.png" alt="">
+				</span>
+				</a>
+			</div>
+		</div>
         <!--**********************************
             Nav header end
         ***********************************-->
@@ -207,73 +237,55 @@
                         </div>
                     </div>
                 </div>
+					
+				<!-- 인사부서 -->	
+				<input type="hidden" name="hr01" id="hr01" value="${dhrVO.jan}" />
+				<input type="hidden" name="hr02" id="hr02" value="${dhrVO.feb}" />
+				<input type="hidden" name="hr03" id="hr03" value="${dhrVO.mar}" />
+				<input type="hidden" name="hr04" id="hr04" value="${dhrVO.apr}" />
+				<input type="hidden" name="hr05" id="hr05" value="${dhrVO.may}" />
+				
+				<!-- 영업부서 -->	
+				<input type="hidden" name="salse01" id="salse01" value="${dsalseVO.jan}" />
+				<input type="hidden" name="salse02" id="salse02" value="${dsalseVO.feb}" />
+				<input type="hidden" name="salse03" id="salse03" value="${dsalseVO.mar}" />
+				<input type="hidden" name="salse04" id="salse04" value="${dsalseVO.apr}" />
+				<input type="hidden" name="salse05" id="salse05" value="${dsalseVO.may}" />
+				
+				
+				<!-- 운영 부서 -->	
+				<input type="hidden" name="oper01" id="oper01" value="${doperVO.jan}" />
+				<input type="hidden" name="oper02" id="oper02" value="${doperVO.feb}" />
+				<input type="hidden" name="oper03" id="oper03" value="${doperVO.mar}" />
+				<input type="hidden" name="oper04" id="oper04" value="${doperVO.apr}" />
+				<input type="hidden" name="oper05" id="oper05" value="${doperVO.may}" />
+				
+				
+				<!-- 개발부서 -->	
+				<input type="hidden" name="dev01" id="dev01"  value="${ddevVO.jan}" />
+				<input type="hidden" name="dev02" id="dev02"  value="${ddevVO.feb}" />
+				<input type="hidden" name="dev03" id="dev03" value="${ddevVO.mar}" />
+				<input type="hidden" name="dev04" id="dev04" value="${ddevVO.apr}" />
+				<input type="hidden" name="dev05" id="dev05" value="${ddevVO.may}" />
+				
 
 
 				<div class="row">
-
 					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
 								<h4 class="card-title" align="center">부서 별 업무 지원 현황</h4>
 
+								<!-- 그래프 데이터 세팅 -->
 								<div id="area-chart"></div>
+							
 
 							</div>
+							
 						</div>
 					</div>
 				</div>
-
-				<div class="row">
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="${hContext}/views/images/users/8.jpg" class="rounded-circle" alt="">
-                                    <h5 class="mt-3 mb-1">Ana Liem</h5>
-                                    <p class="m-0">Senior Manager</p>
-                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="${hContext}/views/images/users/5.jpg" class="rounded-circle" alt="">
-                                    <h5 class="mt-3 mb-1">John Abraham</h5>
-                                    <p class="m-0">Store Manager</p>
-                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="${hContext}/views/images/users/7.jpg" class="rounded-circle" alt="">
-                                    <h5 class="mt-3 mb-1">John Doe</h5>
-                                    <p class="m-0">Sales Man</p>
-                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="text-center">
-                                    <img src="${hContext}/views/images/users/1.jpg" class="rounded-circle" alt="">
-                                    <h5 class="mt-3 mb-1">Mehedi Titas</h5>
-                                    <p class="m-0">Online Marketer</p>
-                                    <!-- <a href="javascript:void()" class="btn btn-sm btn-warning">Send Message</a> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+				
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -282,121 +294,37 @@
                                 <div class="active-member">
                                     <div class="table-responsive">
                                         <table class="table table-xs mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th>Customers</th>
-                                                    <th>Product</th>
-                                                    <th>Country</th>
-                                                    <th>Status</th>
-                                                    <th>Payment Method</th>
-                                                    <th>Activity</th>
+                                            <thead class="bg-primary" style="text-align: center; color:white;">
+                                            
+                                            <h4 class="card-title" align="center">전사 게시판</h4>
+                                                <tr style="text-align: center">
+                                                    <th>글번호</th>
+                                                    <th>분류</th>
+                                                    <th>제목</th>
+                                                    <th>등록자</th>
+                                                    <th>등록일</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td><img src="${hContext}/views/images/avatar/1.jpg" class=" rounded-circle mr-3" alt="">Sarah Smith</td>
-                                                    <td>iPhone X</td>
-                                                    <td>
-                                                        <span>United States</span>
-                                                    </td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-success" style="width: 50%"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
-                                                    <td>
-                                                        <span>Last Login</span>
-                                                        <span class="m-0 pl-3">10 sec ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><img src="${hContext}/views/images/avatar/2.jpg" class=" rounded-circle mr-3" alt="">Walter R.</td>
-                                                    <td>Pixel 2</td>
-                                                    <td><span>Canada</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-success" style="width: 50%"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
-                                                    <td>
-                                                        <span>Last Login</span>
-                                                        <span class="m-0 pl-3">50 sec ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><img src="${hContext}/views/images/avatar/3.jpg" class=" rounded-circle mr-3" alt="">Andrew D.</td>
-                                                    <td>OnePlus</td>
-                                                    <td><span>Germany</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><i class="fa fa-circle-o text-warning  mr-2"></i> Pending</td>
-                                                    <td>
-                                                        <span>Last Login</span>
-                                                        <span class="m-0 pl-3">10 sec ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><img src="${hContext}/views/images/avatar/6.jpg" class=" rounded-circle mr-3" alt=""> Megan S.</td>
-                                                    <td>Galaxy</td>
-                                                    <td><span>Japan</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-success" style="width: 50%"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
-                                                    <td>
-                                                        <span>Last Login</span>
-                                                        <span class="m-0 pl-3">10 sec ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><img src="${hContext}/views/images/avatar/4.jpg" class=" rounded-circle mr-3" alt=""> Doris R.</td>
-                                                    <td>Moto Z2</td>
-                                                    <td><span>England</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-success" style="width: 50%"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><i class="fa fa-circle-o text-success  mr-2"></i> Paid</td>
-                                                    <td>
-                                                        <span>Last Login</span>
-                                                        <span class="m-0 pl-3">10 sec ago</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td><img src="${hContext}/views/images/avatar/5.jpg" class=" rounded-circle mr-3" alt="">Elizabeth W.</td>
-                                                    <td>Notebook Asus</td>
-                                                    <td><span>China</span></td>
-                                                    <td>
-                                                        <div>
-                                                            <div class="progress" style="height: 6px">
-                                                                <div class="progress-bar bg-warning" style="width: 50%"></div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td><i class="fa fa-circle-o text-warning  mr-2"></i> Pending</td>
-                                                    <td>
-                                                        <span>Last Login</span>
-                                                        <span class="m-0 pl-3">10 sec ago</span>
-                                                    </td>
-                                                </tr>
+                                                <c:choose>
+												    <c:when test="${dashNbList.size()>0 }">
+												        <c:forEach var="vo" items="${dashNbList }">
+												            <tr>
+												                <td class="text-center hidden-sm hidden-xs"> <c:out value="${vo.nbNo }" /></td>
+												                <td class="text-center"><c:out value="${vo.nbCategory }" /></td>
+												                <td class="text-left"><c:out value="${vo.nbTitle }" /></td>
+												                <td class="text-center"><c:out value="${vo.regId }" /></td>
+												                <td class="text-center hidden-sm hidden-xs  "><c:out value="${vo.regDate }" /></td>
+												            </tr>
+												        </c:forEach>
+												    </c:when>
+												    <c:otherwise>
+												        <tr>
+												            <td class="text-center">No data found.</td>
+												        </tr>
+												    </c:otherwise>
+												</c:choose>
+                                           
                                             </tbody>
                                         </table>
                                     </div>
@@ -429,19 +357,19 @@
                         <div class="col-lg-3 col-sm-6">
                             <div class="card">
                                 <div class="social-graph-wrapper widget-facebook">
-                                    <span class="s-icon"><i class="fa fa-facebook"></i></span>
+                                    <a class="s-icon" style="font-size: 20px">인사팀 출근현황</a>
                                 </div>
                                 <div class="row">
                                     <div class="col-6 border-right">
                                         <div class="pt-3 pb-3 pl-0 pr-0 text-center">
-                                            <h4 class="m-1">89k</h4>
-                                            <p class="m-0">Friends</p>
+                                            <h4 class="m-1">근무 인원</h4>
+                                            <p class="m-0"> 5 명</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="pt-3 pb-3 pl-0 pr-0 text-center">
-                                            <h4 class="m-1">119k</h4>
-                                            <p class="m-0">Followers</p>
+                                            <h4 class="m-1">총 인원</h4>
+                                            <p class="m-0">5 명</p>
                                         </div>
                                     </div>
                                 </div>
@@ -450,19 +378,19 @@
                         <div class="col-lg-3 col-sm-6">
                             <div class="card">
                                 <div class="social-graph-wrapper widget-linkedin">
-                                    <span class="s-icon"><i class="fa fa-linkedin"></i></span>
+                                      <a class="s-icon" style="font-size: 20px">영업팀 출근현황</a>
                                 </div>
                                 <div class="row">
                                     <div class="col-6 border-right">
                                         <div class="pt-3 pb-3 pl-0 pr-0 text-center">
-                                            <h4 class="m-1">89k</h4>
-                                            <p class="m-0">Friends</p>
+                                            <h4 class="m-1">근무 인원</h4>
+                                            <p class="m-0"> 4 명</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="pt-3 pb-3 pl-0 pr-0 text-center">
-                                            <h4 class="m-1">119k</h4>
-                                            <p class="m-0">Followers</p>
+                                            <h4 class="m-1">총 인원</h4>
+                                            <p class="m-0">5 명</p>
                                         </div>
                                     </div>
                                 </div>
@@ -471,19 +399,19 @@
                         <div class="col-lg-3 col-sm-6">
                             <div class="card">
                                 <div class="social-graph-wrapper widget-googleplus">
-                                    <span class="s-icon"><i class="fa fa-google-plus"></i></span>
+                                      <a class="s-icon" style="font-size: 20px">운영팀 출근현황</a>
                                 </div>
                                 <div class="row">
                                     <div class="col-6 border-right">
                                         <div class="pt-3 pb-3 pl-0 pr-0 text-center">
-                                            <h4 class="m-1">89k</h4>
-                                            <p class="m-0">Friends</p>
+                                            <h4 class="m-1">근무 인원</h4>
+                                            <p class="m-0"> 3 명</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="pt-3 pb-3 pl-0 pr-0 text-center">
-                                            <h4 class="m-1">119k</h4>
-                                            <p class="m-0">Followers</p>
+                                            <h4 class="m-1">총 인원</h4>
+                                            <p class="m-0">5 명</p>
                                         </div>
                                     </div>
                                 </div>
@@ -492,19 +420,19 @@
                         <div class="col-lg-3 col-sm-6">
                             <div class="card">
                                 <div class="social-graph-wrapper widget-twitter">
-                                    <span class="s-icon"><i class="fa fa-twitter"></i></span>
+                                       <a class="s-icon" style="font-size: 20px">개발팀 출근현황</a>
                                 </div>
                                 <div class="row">
                                     <div class="col-6 border-right">
                                         <div class="pt-3 pb-3 pl-0 pr-0 text-center">
-                                            <h4 class="m-1">89k</h4>
-                                            <p class="m-0">Friends</p>
+                                            <h4 class="m-1">근무 인원</h4>
+                                            <p class="m-0"> 5 명</p>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="pt-3 pb-3 pl-0 pr-0 text-center">
-                                            <h4 class="m-1">119k</h4>
-                                            <p class="m-0">Followers</p>
+                                            <h4 class="m-1">총 인원</h4>
+                                            <p class="m-0">5 명</p>
                                         </div>
                                     </div>
                                 </div>

@@ -11,6 +11,11 @@ public class DashDeptVO extends DTO{
 	private String apr;
 	private String may;
 	
+	public DashDeptVO() {
+		
+		
+	}
+	
 	
 	public DashDeptVO(String deptNm, String jan, String feb, String mar, String apr, String may) {
 		super();

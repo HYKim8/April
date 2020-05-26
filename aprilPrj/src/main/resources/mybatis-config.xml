@@ -29,8 +29,10 @@
         <typeAlias type="com.april.groupware.member.service.UserVO" alias="UserVO"/>
         
         
-        <!-- 대시보드 -->
+         <!-- 대시보드 -->
 		<typeAlias type="com.april.groupware.dash.service.DashTodoVO" alias="DashTodoVO"/>
+		<typeAlias type="com.april.groupware.dash.service.DashDeptVO" alias="DashDeptVO"/>
+		<typeAlias type="com.april.groupware.dash.service.DashNBoardVO" alias="DashNBoardVO"/>
 	
     </typeAliases>
 
