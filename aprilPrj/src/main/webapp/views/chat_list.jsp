@@ -81,7 +81,8 @@ if (null != search) {
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Quixlab - Bootstrap Admin Dashboard Template by Themefisher.com</title>
+<title>Quixlab - Bootstrap Admin Dashboard Template by
+	Themefisher.com</title>
 <!-- Favicon icon -->
 <link rel="icon" type="image/png" sizes="16x16"
 	href="${hContext}/views/images/favicon.png">
@@ -115,12 +116,12 @@ if (null != search) {
         ***********************************-->
 		<div class="nav-header">
 			<div class="brand-logo">
-				<a href="${hContext}/views/index.html"> <b class="logo-abbr"><img
-						src="${hContext}/views/images/logo.png" alt=""> </b> <span
+				<a href="index.html"> <b class="logo-abbr"><img
+						src="${aprilContext}/views/images/logo.png" alt=""> </b> <span
 					class="logo-compact"><img
-						src="${hContext}/views/images/logo-compact.png" alt=""></span> <span
-					class="brand-title"> <img
-						src="${hContext}/views/images/logo-text.png" alt="">
+						src="${aprilContext}/views/images/logo-compact.png" alt=""></span>
+					<span class="brand-title"> <img
+						src="${aprilContext}/views/images/logo-text.png" alt="">
 				</span>
 				</a>
 			</div>
@@ -128,28 +129,30 @@ if (null != search) {
 		<!--**********************************
             Nav header end
         ***********************************-->
+
 		<!--**********************************
             Header start
         ***********************************-->
-		<div class="header">    
-            <%@ include file="/common/april_header.jsp" %>
-        </div>
+		<div class="header">
+			<%@ include file="/common/april_header.jsp"%>
+		</div>
 		<!--**********************************
             Header end ti-comment-alt
         ***********************************-->
+
 		<!--**********************************
             Sidebar start
         ***********************************-->
-		<div class="nk-sidebar">           
-             <%@ include file="/common/april_sidebar.jsp" %>
-        </div>
+		<div class="nk-sidebar">
+			<%@ include file="/common/april_sidebar.jsp"%>
+		</div>
 		<!--**********************************
             Sidebar end
         ***********************************-->
 		<!--**********************************
             Content body start
         ***********************************-->
-		
+
 		<div class="content-body">
 			<div class="row page-titles mx-0">
 				<div class="col p-md-0">
@@ -163,13 +166,12 @@ if (null != search) {
 			<!-- row -->
 			<div class="container-fluid">
 				<div class="row">
-					<!-- 본인 정보란 -->	
+					<!-- 본인 정보란 -->
 					<div class="col-lg-6">
-						<div class="card">
+						<div class="card" style="margin-bottom: 0px;">
 							<div class="card-body"
-								style="padding: 20px; padding-bottom: 0px;">
-								<div class="media align-items-center mb-4"
-									style="padding-left: 20px; margin-bottom: 5px;">
+								style="padding: 20px; padding-bottom: 38px;">
+								<div class="media align-items-center mb-4" style="padding-left: 20px; margin-bottom: 0px;">
 									<img class="mr-3" src="${hContext}/views/images/avatar/11.png"
 										width="80" height="80" alt="">
 									<div class="media-body" style="padding-left: 20px;">
@@ -194,20 +196,33 @@ if (null != search) {
 						</div>
 					</div>
 					<!-- /본인 정보란 -->
-					<!-- 채팅방 01 이동버튼 -->
-					<div class="col-lg-6">
-						<div class="card text-center" >
+					<!-- 채팅방 -->
+					<div class="col-lg-3">
+						<div class="card text-center">
 							<div class="card-body">
-								<h5 class="card-title">Chat room 01</h5>
-								<p class="card-text">단체방. 테스트 중</p>
-								<a href="${hContext}/chat/chat.do" class="btn btn-primary">참여하기</a>
+								<h5 class="card-title">인사팀</h5>
+								<p class="card-text">인사팀 채팅방입니다</p>
+								<a href="${hContext}/chat/groupchat02.do"
+									class="btn btn-primary">참여하기</a>
 							</div>
 						</div>
 					</div>
-					<!-- //채팅방 01 -->
+					<!-- //채팅방  -->
+					<!-- 채팅방 -->
+					<div class="col-lg-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<h5 class="card-title">인사팀</h5>
+								<p class="card-text">인사팀 채팅방입니다</p>
+								<a href="${hContext}/chat/groupcha02t.do"
+									class="btn btn-primary">참여하기</a>
+							</div>
+						</div>
+					</div>
+					<!-- //채팅방  -->
 				</div>
-				<!-- /row -->	
-				
+				<!-- /row -->
+
 				<!-- /부서검색박스 -->
 				<div class="row">
 					<div class="col-lg-6">
@@ -226,70 +241,119 @@ if (null != search) {
 								</form>
 								<!-- /부서검색박스 -->
 								<!-- 사원목록테이블 -->
-									<div class="table-responsive">
-										<table id="listTable" 
-											class="table header-border table-hover verticle-middle" >
-											<!-- hidden-sm hidden-xs 숨기기 -->
-											<thead>
-							                   <tr>     
-							                       <th class="text-center">이름</th>
-							                       <th class="text-center">부서</th>
-							                       <th class="text-center">직급</th>
-							                   </tr>
-							               </thead>
-											<tbody>
-												<c:choose>
-													<c:when test="${list.size()>0 }">
-														<c:forEach var="vo" items="${list }">
-															<tr style="text-align: center;">
-																<%-- <td class="text-center hidden-sm hidden-xs"><c:out value="${vo.id }" /> --%>
-																<td style="display: none;"><c:out value="${vo.id}" />
-																	<input type="hidden" id="id" name="id" value="${vo.id}" />
-																<td class="text-center"><c:out value="${vo.name }" />
-																<td class="text-center"><c:out value="${vo.dept_Nm }" />
-																<td class="text-center hidden-sm hidden-xs  "><c:out value="${vo.position }" />	
-															</tr>
-														</c:forEach>
-													</c:when>
-													<c:otherwise>
-														<tr>
-															<td class="text-center">No data found.</td>
+								<div class="table-responsive">
+									<table id="listTable"
+										class="table header-border table-hover verticle-middle">
+										<!-- hidden-sm hidden-xs 숨기기 -->
+										<thead>
+											<tr>
+												<th class="text-center">이름</th>
+												<th class="text-center">부서</th>
+												<th class="text-center">직급</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:choose>
+												<c:when test="${list.size()>0 }">
+													<c:forEach var="vo" items="${list }">
+														<tr style="text-align: center;">
+														    <input type="hidden" id="id" name="id" value="${vo.id}" />
+															<td style="display: none;"><c:out value="${vo.id}" />
+															<td class="text-center"><c:out value="${vo.name }" />
+															<td class="text-center"><c:out value="${vo.dept_Nm }" />
+															<td class="text-center hidden-sm hidden-xs  "><c:out value="${vo.position }" />
 														</tr>
-													</c:otherwise>
-												</c:choose>
-											</tbody>
-										</table>
-									</div>
-									<!-- pagenation -->
-									<nav>
-										<ul class="pagination justify-content-center">
-											<div class="text-center"
-												style="margin-top: 10px; margin-bottom: 10px;">
-												<%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName)%>
-											</div>
-										</ul>
-									</nav>
-									<!--// pagenation -->
+													</c:forEach>
+												</c:when>
+												<c:otherwise>
+													<tr>
+														<td class="text-center">No data found.</td>
+													</tr>
+												</c:otherwise>
+											</c:choose>
+										</tbody>
+									</table>
 								</div>
+								<!-- pagenation -->
+								<nav>
+									<ul class="pagination justify-content-center">
+										<div class="text-center"
+											style="margin-top: 10px; margin-bottom: 10px;">
+											<%=StringUtil.renderPaging(maxNum, currPageNo, rowPerPage, bottomCount, url, scriptName)%>
+										</div>
+									</ul>
+								</nav>
+								<!--// pagenation -->
 							</div>
-							<!-- /사원목록테이블 -->
-						</div>		
+						</div>
+						<!-- /사원목록테이블 -->
 					</div>
-					<!-- //row2 -->	
-				</div>		
+
+					<!-- 채팅방 -->
+					<div class="col-lg-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<h5 class="card-title">인사팀</h5>
+								<p class="card-text">인사팀 채팅방입니다</p>
+								<a href="${hContext}/chat/groupchat02.do"
+									class="btn btn-primary">참여하기</a>
+							</div>
+						</div>
+						<div class="card text-center">
+							<div class="card-body">
+								<h5 class="card-title">스쿠버다이빙 동호회</h5>
+								<p class="card-text">바다를 사랑하는 사람들</p>
+								<a href="${hContext}/chat/groupchat03.do"
+									class="btn btn-success text-white">참여하기</a>
+							</div>
+						</div>
+						<div class="card text-center">
+							<div class="card-body">
+								<h5 class="card-title">사이클링 동호회</h5>
+								<p class="card-text">서울 위주에서 모이며 소규모로 모여 달리는 사이클링 모임입니다</p>
+								<a href="${hContext}/chat/groupchat03.do"
+									class="btn btn-success text-white">참여하기</a>
+							</div>
+						</div>
+					</div>
+					<!-- //채팅방  -->
+					<!-- 채팅방 -->
+					<div class="col-lg-3">
+						<div class="card text-center">
+							<div class="card-body">
+								<h5 class="card-title">인사팀</h5>
+								<p class="card-text">인사팀 채팅방입니다</p>
+								<a href="${hContext}/chat/groupchat02.do"
+									class="btn btn-primary">참여하기</a>
+							</div>
+						</div>
+						<div class="card text-center">
+							<div class="card-body">
+								<h5 class="card-title">문사모</h5>
+								<p class="card-text">문화를 사랑하는 사람들이 삼삼오오 모여 연극, 뮤지컬, 공연을 즐기는
+									모임입니다</p>
+								<a href="${hContext}/chat/groupchat03.do"
+									class="btn btn-success text-white">참여하기</a>
+							</div>
+						</div>
+					</div>
+					<!-- //채팅방  -->
+				</div>
+				<!-- //row2 -->
 			</div>
-				<!-- #/ container -->
-			</div>
-		<!--**********************************
+		</div>
+		<!-- #/ container -->
+	</div>
+	<!--**********************************
             Content body end
         ***********************************-->
-		<!--**********************************
+	<!--**********************************
             Footer start
         ***********************************-->
-		<div class="footer">
-            <%@ include file="/common/april_footer.jsp" %>
-        </div>
-		<!--**********************************
+	<div class="footer">
+		<%@ include file="/common/april_footer.jsp"%>
+	</div>
+	<!--**********************************
             Footer end
         ***********************************-->
 	<!--**********************************
@@ -306,6 +370,9 @@ if (null != search) {
 	<%-- <script src="${hContext}/views/js/swiper.jquery.js"></script> --%>
 
 	<script type="text/javascript">
+
+	
+	
 		//--셀렉트박스 list 중 하나 선택했을 때 메일 읽기 페이지로 넘어가기
 		function doRetrieve() {
 			//console.log($("#dNameList option:selected").val());

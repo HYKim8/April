@@ -1,8 +1,8 @@
 <%--
 /**
   * Class Name : chat_list
-  * Description : 단체 채팅방 01
-  * http://localhost:8080/groupware/chat/chat.do
+  * Description : 1:1 채티방
+  * http://localhost:8080/groupware/chat/chat.do 
   * Modification Information
   *
   *   수정일                   수정자                      수정내용
@@ -14,7 +14,6 @@
   * Copyright (C) 2009 by KandJang  All right reserved.
   */
 --%>
-<%@page import="com.april.groupware.chat.service.ChatVO"%>
 <%@page import="com.april.groupware.member.service.UserVO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -60,42 +59,43 @@
 		<!--**********************************
             Nav header start
         ***********************************-->
-		<div class="nav-header">
-			<div class="brand-logo">
-				<a href="${hContext}/views/index.html"> <b class="logo-abbr"><img
-						src="${hContext}/views/images/logo.png" alt=""> </b> <span
-					class="logo-compact"><img
-						src="${hContext}/views/images/logo-compact.png" alt=""></span> <span
-					class="brand-title"> <img
-						src="${hContext}/views/images/logo-text.png" alt="">
-				</span>
-				</a>
-			</div>
-		</div>
-		<!--**********************************
+        <div class="nav-header">
+            <div class="brand-logo">
+                <a href="index.html">
+                    <b class="logo-abbr"><img src="${aprilContext}/views/images/logo.png" alt=""> </b>
+                    <span class="logo-compact"><img src="${aprilContext}/views/images/logo-compact.png" alt=""></span>
+                    <span class="brand-title">
+                        <img src="${aprilContext}/views/images/logo-text.png" alt="">
+                    </span>
+                </a>
+            </div>
+        </div>
+        <!--**********************************
             Nav header end
         ***********************************-->
-		<!--**********************************
+
+        <!--**********************************
             Header start
         ***********************************-->
-		<div class="header">    
+        <div class="header">    
             <%@ include file="/common/april_header.jsp" %>
-        </div>
-		<!--**********************************
+		</div>
+        <!--**********************************
             Header end ti-comment-alt
         ***********************************-->
-		<!--**********************************
+
+        <!--**********************************
             Sidebar start
         ***********************************-->
-		<div class="nk-sidebar">           
-             <%@ include file="/common/april_sidebar.jsp" %>
+        <div class="nk-sidebar">           
+			 <%@ include file="/common/april_sidebar.jsp" %>
         </div>
-		<!--**********************************
+        <!--**********************************
             Sidebar end
         ***********************************-->
 		<!--**********************************
             Content body start
-        ***********************************-->
+        ***********************************-->	
 		<div class="content-body">
 			<div class="row page-titles mx-0">
 				<div class="col p-md-0">
@@ -106,25 +106,26 @@
 					</ol>
 				</div>
 			</div>
-			<!-- row -->		
+			<!-- row -->
+			
 			<div class="container-fluid">
 				<div class="row-center" >	
 					<div class="col-lg-8" >
 						<div class="card text-center" >
 							<div class="card-body" style="padding-left:60px; padding-right:60px; ">
-								<h5 class="card-title">상대방 아이디</h5>
+								<h5 class="card-title"><c:out value="${vo.name }"></c:out>
+														<input type="hidden" value="${vo.id }"> </h5>
  								 <br/>
 								 <fieldset>								
 						        	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-left: 0px; padding-right: 0px;">
 										<textarea class="form-control" name="messageBox" id="messageBox" 
-												  readonly="true" rows="18" >${vo.contents}
+												  readonly="true" rows="21" >
 										</textarea>
 									</div>
                                 	<hr/>
-                                    	<input type="text" id="inputMessage" value="${vo.name}" class="form-control bg-transparent" >
+                                    	<input onkeyup="enterkey();" type="text" id="inputMessage" class="form-control bg-transparent" >
                                     <br/><br/>
                                     <input type="submit" onclick="send()" class="btn btn-primary" value="보내기"  />
-                                    <input type="hidden" id="userName" value="${user.name }">
 							     </fieldset>
 							</div>
 						</div>
@@ -134,6 +135,7 @@
 		</div>
 		<!-- #/ container -->
 		</div>
+
 		<!--**********************************
             Content body end
         ***********************************-->
@@ -145,7 +147,7 @@
         </div>
 		<!--**********************************
             Footer end
-        ***********************************-->      
+        ***********************************-->
 	<!--**********************************
         Main wrapper end
     ***********************************-->
@@ -173,7 +175,7 @@
       onMessage(event)
     };
     function onMessage(event) {
-        textarea.value += "상대 : " + event.data + "\n";
+        textarea.value += "${vo.name } 님 : " + event.data + "\n";
     }
     function onOpen(event) {
         //textarea.value += userName+" 님이 대화에 참여하셨습니다 \n";
@@ -190,6 +192,13 @@
         webSocket.send(inputMessage.value);
         inputMessage.value = "";
     }
+
+    //엔터키 누르면 바로 메세지 보내기
+    function enterkey() {
+        if (window.event.keyCode == 13) {
+        	send();
+        }
+	}
 
   </script>
   

@@ -31,11 +31,9 @@ public class ChatController {
 	@Autowired
 	CodeService codeService;
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	//1:1 방
 	@RequestMapping(value = "/chat/chat.do", method = RequestMethod.GET)
-	public String chat(Locale locale, Model model) {
+	public String chat01(Locale locale, Model model) {
 		LOG.debug(" 채팅방01 활성화 {}.", locale);
 		
 		Date date = new Date();
@@ -44,7 +42,33 @@ public class ChatController {
 		String formattedDate = dateFormat.format(date);
 		model.addAttribute("serverTime", formattedDate);
 	
-		return "views/chat_room";
+		return "views/chat_p2p";
+	}
+	//부서별 방
+	@RequestMapping(value = "/chat/groupchat02.do", method = RequestMethod.GET)
+	public String chat02(Locale locale, Model model) {
+		LOG.debug(" 채팅방02 활성화 {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+	
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("serverTime", formattedDate);
+	
+		return "views/chat_group02";
+	}
+	//동호회 방
+	@RequestMapping(value = "/chat/groupchat03.do", method = RequestMethod.GET)
+	public String chat03(Locale locale, Model model) {
+		LOG.debug(" 채팅방03 활성화 {}.", locale);
+		
+		Date date = new Date();
+		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
+	
+		String formattedDate = dateFormat.format(date);
+		model.addAttribute("serverTime", formattedDate);
+	
+		return "views/chat_group03";
 	}
 	
 	
@@ -112,10 +136,6 @@ public class ChatController {
 		LOG.debug("1=param="+user);
 		LOG.debug("1=================");
 		
-//		if( null == user.getId()) {		
-//			throw new IllegalArgumentException("사용자 ID를 확인 하세요.");			
-//		}
-		
 		ChatVO outVO =(ChatVO) this.chatService.doSelectOne(user);
 		LOG.debug("1.1.=================");
 		LOG.debug("1.1=outVO="+outVO);
@@ -123,7 +143,7 @@ public class ChatController {
 		model.addAttribute("vo", outVO);
 		
 		//여기에 자동으로 /+
-		return "views/chat_room_p2p"; //원하는 채팅 화면으로 이동 jsp경로라거나 아니면 controller 
+		return "views/chat_p2p"; //원하는 채팅 화면으로 이동 jsp경로라거나 아니면 controller 
 	
 	}
 

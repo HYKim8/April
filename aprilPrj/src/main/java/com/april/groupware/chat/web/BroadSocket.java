@@ -12,6 +12,7 @@ import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
  
 @ServerEndpoint("/broadcasting.do")
+//p2p 채팅방
 public class BroadSocket {
     private static Set<Session> clients = Collections.synchronizedSet(new HashSet<Session>());
     
