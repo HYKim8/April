@@ -349,6 +349,59 @@ public class MailController {
 		return "views/email_sentbox";// "/board/board_list.jsp
 		
 	}
+	
+	/**
+	 * Method Name : doRetrieveTrash 
+	 * 작성일: 2020. 5. 21. 
+	 * 작성자: MINJI 
+	 * 설명: 메일 목록 조회
+	 * 
+	 * @throws java.lang.Exception
+	 */
+	@RequestMapping(value = "mail/do_retrieveTrash.do",method = RequestMethod.GET)
+	public String doRetrieveTrash(SearchVO search, Model model) {
+		
+		LOG.debug("=====MailController [doRetrieveTrash] Start=====");
+		//param 기본값 처리
+		if(search.getPageNum()==0) {
+			search.setPageNum(1);
+		}
+		
+		if(search.getPageSize()==0) {
+			search.setPageSize(10);
+		}
+		
+		//검색구분
+		search.setSearchDiv(StringUtil.nvl(search.getSearchDiv()));
+		//검색어
+		search.setSearchWord(StringUtil.nvl(search.getSearchWord().trim()));
+		
+		LOG.debug("** param : "+search);
+		//검색조건 화면으로 전달.
+		model.addAttribute("vo", search);
+		
+		List<MailVO> list = (List<MailVO>) this.mailService.doRetrieveTrash(search);
+		//조회결과 화면 전달
+		model.addAttribute("list", list);
+		for(MailVO vo:list) {
+			LOG.debug("** list : "+vo);
+		}
+		
+		//총건수
+		int totalCnt = 0;
+		if(null !=list &&  list.size()>0) {
+			totalCnt = list.get(0).getTotalCnt();
+		}
+		LOG.debug("** totalCnt : "+totalCnt);
+		
+		//조회결과 화면 전달
+		model.addAttribute("totalCnt", totalCnt);
+		
+		LOG.debug("=====MailController [doRetrieveTrash] End=====");
+		
+		return "views/email_trashbox";// "/board/board_list.jsp
+		
+	}
 }
 
 
