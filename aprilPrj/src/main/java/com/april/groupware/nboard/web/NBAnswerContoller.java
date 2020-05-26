@@ -143,11 +143,11 @@ public class NBAnswerContoller {
 		
 		if( 0 == board.getNbNo()) {		
 
-			throw new IllegalArgumentException("nbNo를 확인 하세요.");			
+			throw new IllegalArgumentException("게시글 번호를 확인 하세요.");			
 		}	
 		if( 0 == board.getAwNo()) {		
 
-			throw new IllegalArgumentException("awNo를 확인 하세요.");			
+			throw new IllegalArgumentException("댓글 번호를 확인 하세요.");			
 		}
 		
 		int flag = this.answerService.doDelete(board);
@@ -159,7 +159,7 @@ public class NBAnswerContoller {
 		//실패	
 		}else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("삭제 실패.");			
+			message.setMsgMsg("삭제에 실패하였습니다.");			
 		}
 		
 		Gson gson=new Gson();
@@ -189,10 +189,10 @@ public class NBAnswerContoller {
 		
 		if(flag>0) {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 성공.");
+			message.setMsgMsg("성공적으로 등록되었습니다.");
 		}else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 실패.");			
+			message.setMsgMsg("등록에 실패하였습니다.");			
 		}
 		
 		Gson gson=new Gson();

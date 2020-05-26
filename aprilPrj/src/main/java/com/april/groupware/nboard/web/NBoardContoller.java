@@ -116,7 +116,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 				
 		if( 0 == board.getNbNo()) {		
 
-			throw new IllegalArgumentException("nbNo를 확인 하세요.");			
+			throw new IllegalArgumentException("게시글 번호를 확인 하세요.");			
 		}
 		
 		int flag = this.boardService.doUpdate(board);
@@ -125,10 +125,10 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		
 		if(flag>0) {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("수정 성공.");
+			message.setMsgMsg("성공적으로 수정되었습니다.");
 		}else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("수정 실패.");			
+			message.setMsgMsg("수정에 실패하였습니다.");			
 		}
 		
 		Gson gson=new Gson();
@@ -153,7 +153,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		
 		if( 0 == board.getNbNo()) {		
 
-			throw new IllegalArgumentException("nbNo를 확인 하세요.");			
+			throw new IllegalArgumentException("게시글 번호를 확인 하세요.");			
 		}		
 		
 		int flag = this.boardService.doDelete(board);
@@ -165,7 +165,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		//실패	
 		}else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("삭제 실패.");			
+			message.setMsgMsg("삭제에 실패하였습니다.");			
 		}
 		
 		Gson gson=new Gson();
@@ -189,7 +189,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		
 		if( 0 == board.getNbNo()) {		
 
-			throw new IllegalArgumentException("nbNo를 확인 하세요.");			
+			throw new IllegalArgumentException("게시글 번호를 확인 하세요.");			
 		}
 		
 		NBoardVO  outVO =(NBoardVO) this.boardService.doSelectOne(board);
@@ -255,7 +255,7 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 			
 			if( 0 == board.getNbNo()) {		
 
-				throw new IllegalArgumentException("nbNo를 확인 하세요.");			
+				throw new IllegalArgumentException("게시글 번호를 확인 하세요.");			
 			}
 			
 			NBoardVO  outVO =(NBoardVO) this.boardService.doSelectOne(board);
@@ -292,10 +292,10 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		
 		if(flag>0) {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 성공.");
+			message.setMsgMsg("성공적으로 등록되었습니다.");
 		}else {
 			message.setMsgId(String.valueOf(flag));
-			message.setMsgMsg("등록 실패.");			
+			message.setMsgMsg("등록에 실패하였습니다.");			
 		}
 		
 		Gson gson=new Gson();

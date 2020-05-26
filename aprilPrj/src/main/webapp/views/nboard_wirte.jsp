@@ -157,30 +157,6 @@
                                                       id="regId" name="regId" placeholder="등록자를 입력하세요." value="${vo.regId }"> --%>
                                             </div>
                                         </form>
-                                        <!-- 첨부파일 -->
-                                        <h5 class="m-b-20"><i class="fa fa-paperclip m-r-5 f-s-18"></i> 첨부파일</h5>
-                                        <form action="#" class="dropzone">
-                                            <div class="form-group">
-                                                <div class="fallback">
-                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <form action="#" class="dropzone">
-                                            <div class="form-group">
-                                                <div class="fallback">
-                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <form action="#" class="dropzone">
-                                            <div class="form-group">
-                                                <div class="fallback">
-                                                    <input class="l-border-1" name="file" type="file" multiple="multiple">
-                                                </div>
-                                            </div>
-                                        </form>
-                                        <!-- // 첨부파일 -->
                                         
                                     </div>
                                     <div class="text-center m-t-15">

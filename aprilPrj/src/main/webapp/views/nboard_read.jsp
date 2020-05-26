@@ -190,15 +190,6 @@
                                        <h5 class="m-b-15">${vo.nbContents }</h5> --%>
                                         <hr>
                                       <!-- // 게시글 내용 영역 -->
-                                        <h6 class="p-t-15"><i class="fa fa-download mb-2"></i> Attachments <span>(3)</span></h6>
-                                        <div class="row m-b-30">
-                                            <div class="col-auto"><a href="#" class="text-muted">My-Photo.png</a>
-                                            </div>
-                                            <div class="col-auto"><a href="#" class="text-muted">My-File.docx</a>
-                                            </div>
-                                            <div class="col-auto"><a href="#" class="text-muted">My-Resume.pdf</a>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
