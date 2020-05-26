@@ -79,6 +79,7 @@
                                		<input type="hidden" name="attendYN" id="attendYN" value="1">
                                		<input type="hidden" name="leaveYN" id="leaveYN" value="0">
                                		<input type="hidden" name="state" id="state" value="0">
+                               		<input type="hidden" name="workTime" id="workTime" value="0">
                                		<input type="hidden" name="regId" id="regId" >
                                		<input type="hidden" name="modId" id="modId" >
                                	</form>
@@ -149,6 +150,7 @@
 					"attendYN" : $("#attendYN").val(),
 					"leaveYN" : $("#leaveYN").val(),
 					"state" : $("#state").val(),
+					"workTime" : $("#workTime").val(),
 					"regId" : $("#id").val(),
 					"modId" : $("#id").val()
 				},

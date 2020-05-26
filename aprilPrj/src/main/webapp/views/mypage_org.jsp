@@ -589,7 +589,7 @@
 			//입력 초기화
 			$("#profile_after").val("");
 			$("#password").val("");
-			$("#confirm-password").val("");
+			$("#confirm_password").val("");
 			$("#hiredate").val("");
 			$("#deptNm").val("");
 			$("#position").val("");

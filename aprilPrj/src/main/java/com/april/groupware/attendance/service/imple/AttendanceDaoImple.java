@@ -89,6 +89,7 @@ public class AttendanceDaoImple implements AttendanceDao {
 		//javascript var attendTime = date.getHours();
 		String attendTimeStr = inVO.getAttendTime();
 		int attendTime = Integer.parseInt(attendTimeStr);
+		LOG.debug("=AttendanceDao attendTime= : "+attendTime);
 		
 		int flag = 0;
 		
@@ -247,11 +248,32 @@ public class AttendanceDaoImple implements AttendanceDao {
 		LOG.debug("=workTime= : "+workTime);
 		LOG.debug("=====================");
 		
-		//9시 ~ 18시 
-		if(9 <= leaveTime && leaveTime <= 18) {
+		//15시 ~ 18시 조퇴 
+		if (15 <= leaveTime && leaveTime <= 18) {
 			//조퇴
 			attendVO.setState("2");	
-			//근무 시간
+			//근무 시간 : 근무 시간 - 점심 시간 1시간
+			attendVO.setWorkTime(workTime);
+			
+			//SQL-Query
+			statement = NAMESPACE+".leaveUpdate";
+			LOG.debug("=====================");
+			LOG.debug("=doLeaveUpdate statement= : "+statement);
+			LOG.debug("=====================");
+			
+			//Call
+			flag = this.sqlSessionTemplate.update(statement, attendVO);
+			LOG.debug("=====================");
+			LOG.debug("=doLeaveUpdate flag= : "+flag);
+			LOG.debug("=====================");
+			
+			return flag;
+		//9시 ~ 14시 조퇴 
+		} else if(9 <= leaveTime && leaveTime <= 14) {
+			//조퇴
+			attendVO.setState("2");	
+			//근무 시간(점심 시간 1시간 안 뺌)
+			workTime = String.valueOf(workTimeNum+1);
 			attendVO.setWorkTime(workTime);
 			
 			//SQL-Query

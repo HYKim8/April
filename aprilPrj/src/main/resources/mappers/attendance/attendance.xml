@@ -16,6 +16,7 @@
 		    attend_yn,          
 		    lv_ffc_yn,          
 		    state,          
+		    work_time,
 		    reg_id,
 		    mod_id,
 		    reg_date,
@@ -23,8 +24,9 @@
 		) VALUES (              
 		    ATTEND_SEQ.NEXTVAL,                  
 		    #{id},                  
-		    #{state},          
 		    '0',                  
+		    '0',
+		    #{state},          
 		    '0',                  
 		    #{regId},                  
 		    #{modId},                  
