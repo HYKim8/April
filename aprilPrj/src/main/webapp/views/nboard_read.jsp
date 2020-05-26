@@ -181,7 +181,7 @@
                                         </div>
                                             <c:choose>
                                                 <c:when test="${vo.modId != null}">     
-                                                    <p class="m-b-2" > 수정자 ${vo.regId} 수정일 ${vo.modDate }</p>
+                                                    <p class="m-b-2" > 수정자 ${vo.modId} 수정일 ${vo.modDate }</p>
                                                 </c:when>
                                              </c:choose>
                                         <hr>
