@@ -230,7 +230,8 @@ Logger  LOG = LoggerFactory.getLogger(this.getClass());
 		//총건수
 		int totalCnt = 0;
 		if(null !=list &&  list.size()>0) {
-			totalCnt = list.get(0).getTotalCnt();
+//			totalCnt = list.get(0).getTotalCnt();
+			
 		}
 		LOG.debug("** totalCnt : "+totalCnt);
 		
