@@ -212,8 +212,8 @@ if (null != search) {
 					<div class="col-lg-3">
 						<div class="card text-center">
 							<div class="card-body">
-								<h5 class="card-title">인사팀</h5>
-								<p class="card-text">인사팀 채팅방입니다</p>
+								<h5 class="card-title">개발팀</h5>
+								<p class="card-text">테스트 중입니다</p>
 								<a href="${hContext}/chat/groupcha02t.do"
 									class="btn btn-primary">참여하기</a>
 							</div>
@@ -293,8 +293,8 @@ if (null != search) {
 					<div class="col-lg-3">
 						<div class="card text-center">
 							<div class="card-body">
-								<h5 class="card-title">인사팀</h5>
-								<p class="card-text">인사팀 채팅방입니다</p>
+								<h5 class="card-title">운영팀</h5>
+								<p class="card-text">운영팀 채팅방입니다</p>
 								<a href="${hContext}/chat/groupchat02.do"
 									class="btn btn-primary">참여하기</a>
 							</div>
@@ -321,8 +321,8 @@ if (null != search) {
 					<div class="col-lg-3">
 						<div class="card text-center">
 							<div class="card-body">
-								<h5 class="card-title">인사팀</h5>
-								<p class="card-text">인사팀 채팅방입니다</p>
+								<h5 class="card-title">영업팀</h5>
+								<p class="card-text">영업팀 채팅방입니다</p>
 								<a href="${hContext}/chat/groupchat02.do"
 									class="btn btn-primary">참여하기</a>
 							</div>
