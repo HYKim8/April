@@ -24,8 +24,17 @@ public class NBAnswerVO extends DTO {
 	private String	position	; /*	작성자 직급	*/
 	
 	private int pageSize 		; /*	페이지 사이즈	*/
+	private int pageNum 		; /*	페이지 	*/
 	
 	
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
 	public int getPageSize() {
 		return pageSize;
 	}
