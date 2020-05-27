@@ -62,8 +62,9 @@
 			        <i class="icon-envelope menu-icon"></i><span class="nav-text">메일</span>
 			    </a>
 			    <ul aria-expanded="false">
-			        <li><a href="http://localhost:8080/groupware/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">받은 메일함</a></li>
-			        <li><a href="http://localhost:8080/groupware/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">보낸 메일함</a></li>
+			        <li><a href="${hContext}/mail/do_retrieve.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">받은 메일함</a></li>
+			        <li><a href="${hContext}/mail/do_retrieveSent.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">보낸 메일함</a></li>
+			        <li><a href="${hContext}/mail/do_retrieveTrash.do?pageNum=1&pageSize=10&searchDiv=&searchWord=${user.id}">휴지통 </a></li>
 			    </ul>
 			</li>
 			<!-- 이메일페이지 네비게이션 끝 -->
