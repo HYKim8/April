@@ -295,9 +295,10 @@
 	
 	//--checkbox(나에게) 클릭시 이벤트 발생 Start
 	$("#checkMe").change(function(){
+		var name = ${user.name};
 		if($("#checkMe").is(":checked")){
 			//alert("checkbox check!");
-			$("#recipient").val("김민지");
+			$("#recipient").val(name);
 		}else{
 			//alert("checkbox uncheck!");
 			$("#recipient").val("");

@@ -182,7 +182,7 @@
 
 	<script type="text/javascript">
         var textarea = document.getElementById("messageBox");
-        var webSocket = new WebSocket('ws://localhost:8080/groupware/groupchat03.do');
+        var webSocket = new WebSocket('ws://211.238.142.146:8080/groupware/groupchat03.do');
         var inputMessage = document.getElementById('inputMessage');
 
         

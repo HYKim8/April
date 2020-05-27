@@ -3,7 +3,6 @@ package com.april.groupware.chat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.After;

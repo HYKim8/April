@@ -17,8 +17,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.april.groupware.nboard.service.NBAnswerService;
 import com.april.groupware.nboard.service.NBAnswerVO;
-import com.april.groupware.nboard.service.NBoardService;
-import com.april.groupware.nboard.service.NBoardVO;
 import com.april.groupware.nboard.service.imple.NBoardDaoImple;
 
 

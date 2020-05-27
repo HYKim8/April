@@ -3,10 +3,8 @@ package com.april.groupware.chat.web;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServlet;
 import javax.websocket.OnClose;

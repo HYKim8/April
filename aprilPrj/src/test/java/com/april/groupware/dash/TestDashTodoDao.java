@@ -8,7 +8,6 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -24,7 +23,6 @@ import com.april.groupware.dash.service.DashDeptVO;
 import com.april.groupware.dash.service.DashNBoardVO;
 import com.april.groupware.dash.service.DashTodoService;
 import com.april.groupware.dash.service.DashTodoVO;
-import com.april.groupware.org.service.OrgVO;
 
 @WebAppConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)

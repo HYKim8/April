@@ -21,8 +21,6 @@ package com.april.groupware.mail;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
-import java.util.List;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -36,7 +34,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.april.groupware.cmn.SearchVO;
 import com.april.groupware.mail.service.MailService;
 import com.april.groupware.mail.service.MailVO;
 
